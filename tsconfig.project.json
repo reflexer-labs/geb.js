@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["es2015", "es5", "dom"],
+    "lib": [
+      "es2015",
+      "es5",
+      "dom"
+    ],
     "preserveWatchOutput": true,
     "pretty": false
   },
@@ -13,6 +17,9 @@
     },
     {
       "path": "./packages/rai-typechain"
+    },
+    {
+      "path": "./packages/haha"
     }
   ],
   "files": []

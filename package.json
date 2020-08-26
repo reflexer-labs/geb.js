@@ -8,7 +8,8 @@
     "bootstrap": "lerna bootstrap --hoist",
     "publish": "lerna publish",
     "build": "tsc --build ./tsconfig.project.json",
-    "clean": "tsc --build --clean ./tsconfig.project.json"
+    "clean": "tsc --build --clean ./tsconfig.project.json",
+    "add-package": "node ./scripts/add_package.js"
   },
   "repository": {
     "type": "git",
