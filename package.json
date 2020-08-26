@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bootstrap": "lerna bootstrap --hoist",
-    "publish": "lerna publish"
+    "publish": "lerna publish",
+    "build": "tsc --build ./tsconfig.project.json",
+    "clean": "tsc --build --clean ./tsconfig.project.json"
   },
   "repository": {
     "type": "git",
