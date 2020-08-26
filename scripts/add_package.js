@@ -1,14 +1,14 @@
-const fs = require("fs");
-const { loadJson, resolve, saveJson } = require("./src/utils");
+const fs = require('fs')
+const { loadJson, resolve, saveJson } = require('./src/utils')
 
 if (process.argv.length < 3) {
-  console.error("Give a name to the package");
-  process.exit(1);
+    console.error('Give a name to the package')
+    process.exit(1)
 }
 
-const name = process.argv[2];
+const name = process.argv[2]
 
-fs.mkdirSync(`packages/${name}/src`, { recursive: true });
+fs.mkdirSync(`packages/${name}/src`, { recursive: true })
 
 const packageJson = `
 {
@@ -22,12 +22,12 @@ const packageJson = `
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
     "license": "ISC"
   }
-`;
+`
 
 fs.writeFileSync(
-  resolve(__dirname, `../packages/${name}/package.json`),
-  packageJson
-);
+    resolve(__dirname, `../packages/${name}/package.json`),
+    packageJson
+)
 
 const tsconf = `
 {
@@ -39,17 +39,17 @@ const tsconf = `
     "include": ["./src/*.ts"],
     "exclude": []
   }
-`;
+`
 
 fs.writeFileSync(
-  resolve(__dirname, `../packages/${name}/tsconfig.json`),
-  tsconf
-);
-fs.writeFileSync(resolve(__dirname, `../packages/${name}/src/index.ts`), "");
+    resolve(__dirname, `../packages/${name}/tsconfig.json`),
+    tsconf
+)
+fs.writeFileSync(resolve(__dirname, `../packages/${name}/src/index.ts`), '')
 
-let path = resolve("../tsconfig.project.json");
-let projectConfig = loadJson(path);
+let path = resolve('../tsconfig.project.json')
+let projectConfig = loadJson(path)
 
-projectConfig.references.push({ path: `./packages/${name}` });
-saveJson(path, projectConfig);
-console.log(name);
+projectConfig.references.push({ path: `./packages/${name}` })
+saveJson(path, projectConfig)
+console.log(name)

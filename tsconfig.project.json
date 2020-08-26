@@ -1,26 +1,19 @@
 {
-  "compilerOptions": {
-    "lib": [
-      "es2015",
-      "es5",
-      "dom"
+    "compilerOptions": {
+        "lib": ["es2015", "es5", "dom"],
+        "preserveWatchOutput": true,
+        "pretty": false
+    },
+    "references": [
+        {
+            "path": "./packages/rai"
+        },
+        {
+            "path": "./packages/rai-contract-api"
+        },
+        {
+            "path": "./packages/rai-typechain"
+        }
     ],
-    "preserveWatchOutput": true,
-    "pretty": false
-  },
-  "references": [
-    {
-      "path": "./packages/rai"
-    },
-    {
-      "path": "./packages/rai-contract-api"
-    },
-    {
-      "path": "./packages/rai-typechain"
-    },
-    {
-      "path": "./packages/haha"
-    }
-  ],
-  "files": []
+    "files": []
 }

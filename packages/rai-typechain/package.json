@@ -1,14 +1,14 @@
 {
-  "name": "@reflexer-finance/rai-typechain",
-  "version": "0.0.1",
-  "description": "",
-  "main": "./lib/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Guillaume Felley <guillaume@reflexer.finance>",
-  "license": "ISC",
-  "dependencies": {
-    "typechain": "^2.0.0"
-  }
+    "name": "@reflexer-finance/rai-typechain",
+    "version": "0.0.1",
+    "description": "",
+    "main": "./lib/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Guillaume Felley <guillaume@reflexer.finance>",
+    "license": "ISC",
+    "dependencies": {
+        "typechain": "^2.0.0"
+    }
 }

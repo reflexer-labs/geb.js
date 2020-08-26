@@ -1,40 +1,41 @@
-"use strict";
+'use strict'
 
-const fs = require("fs");
-const _resolve = require("path").resolve;
+const fs = require('fs')
+const _resolve = require('path').resolve
 
 function getDate(date) {
     return [
         date.getFullYear(),
         zpad(date.getMonth() + 1),
-        zpad(date.getDate())
-    ].join("-");
+        zpad(date.getDate()),
+    ].join('-')
 }
 
 function getDateTime(date) {
-    return getDate(date) + " " + [
-        zpad(date.getHours()) ,
-        zpad(date.getMinutes() + 1)
-    ].join(":");
+    return (
+        getDate(date) +
+        ' ' +
+        [zpad(date.getHours()), zpad(date.getMinutes() + 1)].join(':')
+    )
 }
 
 function today() {
-    return getDate(new Date());
+    return getDate(new Date())
 }
 
 function loadJson(filename) {
-    return JSON.parse(fs.readFileSync(filename).toString());
+    return JSON.parse(fs.readFileSync(filename).toString())
 }
 
 function saveJson(filename, json) {
-    fs.writeFileSync(filename, JSON.stringify(json, null, 2) + "\n");
+    fs.writeFileSync(filename, JSON.stringify(json, null, 2) + '\n')
 }
 
 function resolve(...args) {
-    args = args.slice();
-    args.unshift("..");
-    args.unshift(__dirname);
-    return _resolve.apply(null, args);
+    args = args.slice()
+    args.unshift('..')
+    args.unshift(__dirname)
+    return _resolve.apply(null, args)
 }
 
 module.exports = {
@@ -44,5 +45,5 @@ module.exports = {
     saveJson: saveJson,
     today: today,
     getDate: getDate,
-    getDateTime: getDateTime
+    getDateTime: getDateTime,
 }
