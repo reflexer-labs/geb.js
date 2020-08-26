@@ -1,0 +1,14 @@
+{
+  "name": "@reflexer-finance/rai-contract-api",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Guillaume Felley <guillaume@reflexer.finance>",
+  "license": "ISC",
+  "devDependencies": {
+    "@reflexer-finance/rai-typechain": "0.0.1"
+  }
+}
