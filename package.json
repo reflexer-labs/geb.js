@@ -1,50 +1,51 @@
 {
-  "name": "rai",
-  "version": "0.0.1",
-  "description": "Javascript client for the Rai refelx bond.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "bootstrap": "lerna bootstrap --hoist",
-    "publish": "lerna publish",
-    "build": "tsc --build ./tsconfig.project.json",
-    "clean": "tsc --build --clean ./tsconfig.project.json",
-    "add-package": "node ./scripts/add_package.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/reflexer-labs/rai.js.git"
-  },
-  "keywords": [
-    "rai",
-    "blockchain",
-    "ethereum",
-    "flx",
-    "reflexer",
-    "labs"
-  ],
-  "author": "Guillaume Felley <guillaume@reflexer.finance>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/reflexer-labs/rai.js/issues"
-  },
-  "homepage": "https://github.com/reflexer-labs/rai.js#readme",
-  "devDependencies": {
-    "@types/mocha": "^8.0.3",
-    "@types/node": "^14.6.0",
-    "husky": "^4.2.5",
-    "lerna": "^3.22.1",
-    "lint-staged": "^10.2.13",
-    "mocha": "^8.1.2",
-    "prettier": "^2.1.1",
-    "typescript": "^4.0.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
+    "name": "rai",
+    "version": "0.0.1",
+    "description": "Javascript client for the Rai refelx bond.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "bootstrap": "lerna bootstrap --hoist",
+        "publish": "lerna publish",
+        "build": "tsc --build ./tsconfig.project.json",
+        "clean": "tsc --build --clean ./tsconfig.project.json",
+        "add-package": "node ./scripts/add_package.js",
+        "prettier": "prettier --write \"{,**/*.{ts,json,js,md}}\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/reflexer-labs/rai.js.git"
+    },
+    "keywords": [
+        "rai",
+        "blockchain",
+        "ethereum",
+        "flx",
+        "reflexer",
+        "labs"
+    ],
+    "author": "Guillaume Felley <guillaume@reflexer.finance>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/reflexer-labs/rai.js/issues"
+    },
+    "homepage": "https://github.com/reflexer-labs/rai.js#readme",
+    "devDependencies": {
+        "@types/mocha": "^8.0.3",
+        "@types/node": "^14.6.0",
+        "husky": "^4.2.5",
+        "lerna": "^3.22.1",
+        "lint-staged": "^10.2.13",
+        "mocha": "^8.1.2",
+        "prettier": "^2.1.1",
+        "typescript": "^4.0.2"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js,md,json,ts}": "prettier --write"
     }
-  },
-  "lint-staged": {
-    "*.{js,md,json,ts}": "prettier --write"
-  }
 }
