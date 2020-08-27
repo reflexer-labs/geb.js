@@ -13,6 +13,9 @@
         },
         {
             "path": "./packages/rai-typechain"
+        },
+        {
+            "path": "./packages/rai-provider"
         }
     ],
     "files": []
