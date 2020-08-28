@@ -16,6 +16,9 @@
         },
         {
             "path": "./packages/geb-provider"
+        },
+        {
+            "path": "./packages/geb-ethers-provider"
         }
     ],
     "files": []
