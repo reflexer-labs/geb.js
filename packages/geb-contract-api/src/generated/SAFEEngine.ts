@@ -7,23 +7,34 @@ import { BaseContractAPI } from '@reflexer-finance/geb-provider'
 
 export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
     addAuthorization(account: string): TX_OBJ {
-        return this.chainProvider.ethSend('addAuthorization', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('addAuthorization', {
+            account,
+        })
     }
 
     approveSAFEModification(account: string): TX_OBJ {
-        return this.chainProvider.ethSend('approveSAFEModification', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('approveSAFEModification', {
+            account,
+        })
     }
 
     authorizedAccounts(arg0: string): Promise<BigNumber> {
-        return this.chainProvider.ethCall('authorizedAccounts', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethCall('authorizedAccounts', {
+            arg0,
+        })
     }
 
     canModifySAFE(safe: string, account: string): Promise<boolean> {
-        return this.chainProvider.ethCall('canModifySAFE', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethCall('canModifySAFE', {
+            safe,
+            account,
+        })
     }
 
     coinBalance(arg0: string): Promise<BigNumber> {
-        return this.chainProvider.ethCall('coinBalance', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethCall('coinBalance', {
+            arg0,
+        })
     }
 
     collateralTypes(
@@ -36,7 +47,9 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         debtFloor: BigNumber
         liquidationPrice: BigNumber
     }> {
-        return this.chainProvider.ethCall('collateralTypes', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethCall('collateralTypes', {
+            arg0,
+        })
     }
 
     confiscateSAFECollateralAndDebt(
@@ -47,11 +60,18 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         deltaCollateral: BigNumberish,
         deltaDebt: BigNumberish
     ): TX_OBJ {
-        return this.chainProvider.ethSend('confiscateSAFECollateralAndDebt', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('confiscateSAFECollateralAndDebt', {
+            collateralType,
+            safe,
+            collateralCounterparty,
+            debtCounterparty,
+            deltaCollateral,
+            deltaDebt,
+        })
     }
 
     contractEnabled(): Promise<BigNumber> {
-        return this.chainProvider.ethCall('contractEnabled', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethCall('contractEnabled', {})
     }
 
     createUnbackedDebt(
@@ -59,35 +79,45 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         coinDestination: string,
         rad: BigNumberish
     ): TX_OBJ {
-        return this.chainProvider.ethSend('createUnbackedDebt', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('createUnbackedDebt', {
+            debtDestination,
+            coinDestination,
+            rad,
+        })
     }
 
     debtBalance(arg0: string): Promise<BigNumber> {
-        return this.chainProvider.ethCall('debtBalance', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethCall('debtBalance', {
+            arg0,
+        })
     }
 
     denySAFEModification(account: string): TX_OBJ {
-        return this.chainProvider.ethSend('denySAFEModification', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('denySAFEModification', {
+            account,
+        })
     }
 
     disableContract(): TX_OBJ {
-        return this.chainProvider.ethSend('disableContract', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('disableContract', {})
     }
 
     globalDebt(): Promise<BigNumber> {
-        return this.chainProvider.ethCall('globalDebt', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethCall('globalDebt', {})
     }
 
     globalDebtCeiling(): Promise<BigNumber> {
-        return this.chainProvider.ethCall('globalDebtCeiling', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethCall('globalDebtCeiling', {})
     }
 
     globalUnbackedDebt(): Promise<BigNumber> {
-        return this.chainProvider.ethCall('globalUnbackedDebt', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethCall('globalUnbackedDebt', {})
     }
 
     initializeCollateralType(collateralType: BytesLike): TX_OBJ {
-        return this.chainProvider.ethSend('initializeCollateralType', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('initializeCollateralType', {
+            collateralType,
+        })
     }
 
     modifyCollateralBalance(
@@ -95,7 +125,11 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         account: string,
         wad: BigNumberish
     ): TX_OBJ {
-        return this.chainProvider.ethSend('modifyCollateralBalance', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('modifyCollateralBalance', {
+            collateralType,
+            account,
+            wad,
+        })
     }
 
     modifyParameters(
@@ -103,7 +137,11 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         parameter: BytesLike,
         data: BigNumberish
     ): TX_OBJ {
-        return this.chainProvider.ethSend('modifyParameters', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('modifyParameters', {
+            collateralType,
+            parameter,
+            data,
+        })
     }
 
     modifySAFECollateralization(
@@ -114,15 +152,27 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         deltaCollateral: BigNumberish,
         deltaDebt: BigNumberish
     ): TX_OBJ {
-        return this.chainProvider.ethSend('modifySAFECollateralization', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('modifySAFECollateralization', {
+            collateralType,
+            safe,
+            collateralSource,
+            debtDestination,
+            deltaCollateral,
+            deltaDebt,
+        })
     }
 
     removeAuthorization(account: string): TX_OBJ {
-        return this.chainProvider.ethSend('removeAuthorization', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('removeAuthorization', {
+            account,
+        })
     }
 
     safeRights(arg0: string, arg1: string): Promise<BigNumber> {
-        return this.chainProvider.ethCall('safeRights', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethCall('safeRights', {
+            arg0,
+            arg1,
+        })
     }
 
     safes(
@@ -132,15 +182,23 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         lockedCollateral: BigNumber
         generatedDebt: BigNumber
     }> {
-        return this.chainProvider.ethCall('safes', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethCall('safes', {
+            arg0,
+            arg1,
+        })
     }
 
     settleDebt(rad: BigNumberish): TX_OBJ {
-        return this.chainProvider.ethSend('settleDebt', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('settleDebt', {
+            rad,
+        })
     }
 
     tokenCollateral(arg0: BytesLike, arg1: string): Promise<BigNumber> {
-        return this.chainProvider.ethCall('tokenCollateral', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethCall('tokenCollateral', {
+            arg0,
+            arg1,
+        })
     }
 
     transferCollateral(
@@ -149,11 +207,20 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         dst: string,
         wad: BigNumberish
     ): TX_OBJ {
-        return this.chainProvider.ethSend('transferCollateral', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('transferCollateral', {
+            collateralType,
+            src,
+            dst,
+            wad,
+        })
     }
 
     transferInternalCoins(src: string, dst: string, rad: BigNumberish): TX_OBJ {
-        return this.chainProvider.ethSend('transferInternalCoins', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('transferInternalCoins', {
+            src,
+            dst,
+            rad,
+        })
     }
 
     transferSAFECollateralAndDebt(
@@ -163,7 +230,13 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         deltaCollateral: BigNumberish,
         deltaDebt: BigNumberish
     ): TX_OBJ {
-        return this.chainProvider.ethSend('transferSAFECollateralAndDebt', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('transferSAFECollateralAndDebt', {
+            collateralType,
+            src,
+            dst,
+            deltaCollateral,
+            deltaDebt,
+        })
     }
 
     updateAccumulatedRate(
@@ -171,6 +244,10 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         surplusDst: string,
         rateMultiplier: BigNumberish
     ): TX_OBJ {
-        return this.chainProvider.ethSend('updateAccumulatedRate', {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.ethSend('updateAccumulatedRate', {
+            collateralType,
+            surplusDst,
+            rateMultiplier,
+        })
     }
 }

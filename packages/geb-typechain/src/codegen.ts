@@ -27,18 +27,14 @@ export function codegenForFunctions(
 }
 
 function codegenForSingleFunction(fn: FunctionDeclaration): string {
+    // prettier-ignore
     return `
     ${generateFunctionDocumentation(fn.documentation)}
-    ${fn.name}(${generateInputTypes(fn.inputs)}): ${
-        fn.stateMutability === 'view'
-            ? `Promise<${generateOutputTypes(fn.outputs)}>`
-            : 'TX_OBJ'
+    ${fn.name}(${generateInputTypes(fn.inputs)}): ${fn.stateMutability === 'view'? `Promise<${generateOutputTypes(fn.outputs)}>`: 'TX_OBJ'
     } {
-        return this.chainProvider.${
-            fn.stateMutability === 'view' ? 'ethCall' : 'ethSend'
-        }("${
-        fn.name
-    }", {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+        return this.chainProvider.${fn.stateMutability === 'view' ? 'ethCall' : 'ethSend'}("${fn.name}", {
+            ${fn.inputs.map((input, index) => input.name || `arg${index}` )}
+        })
     }
     `
 }

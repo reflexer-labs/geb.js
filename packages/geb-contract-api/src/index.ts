@@ -1,5 +1,3 @@
-// import { SafeEngine} from './generated/SAFEEngine'
+import { SafeEngine } from './generated/SAFEEngine'
 
-// export {
-//     SafeEngine
-// }
+export { SafeEngine }
