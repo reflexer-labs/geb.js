@@ -2,7 +2,16 @@
     "extends": "../../tsconfig.package.json",
     "compilerOptions": {
         "rootDir": "./src",
-        "outDir": "./lib/"
+        "outDir": "./lib/",
+        "declaration": true,
+        "lib": ["ES2018"],
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "strict": true,
+        "target": "ES2018",
+        "sourceMap": true,
+        "composite": true,
+        "incremental": true
     },
     "include": ["./src/*.ts"],
     "exclude": []

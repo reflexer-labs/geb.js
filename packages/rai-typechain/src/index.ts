@@ -1,1 +1,3 @@
-export const LOL = 'lol'
+import { ContractAPIGenerator } from './typechain'
+
+export default ContractAPIGenerator

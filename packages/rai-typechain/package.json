@@ -3,12 +3,17 @@
     "version": "0.0.1",
     "description": "",
     "main": "./lib/index.js",
+    "module": "./lib/index.js",
+    "types": "./lib/index.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
     "license": "ISC",
     "dependencies": {
+        "@types/lodash": "^4.14.160",
+        "lodash": "^4.17.20",
+        "ts-generator": "0.0.8",
         "typechain": "^2.0.0"
     }
 }
