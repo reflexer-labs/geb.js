@@ -10,7 +10,8 @@
         "build": "tsc --build ./tsconfig.project.json",
         "clean": "tsc --build --clean ./tsconfig.project.json",
         "add-package": "node ./scripts/add_package.js",
-        "prettier": "prettier --write \"{,**/*.{ts,json,js,md}}\""
+        "prettier": "prettier --write \"{,**/*.{ts,json,js,md}}\"",
+        "api-codegen": "npm run codegen --prefix packages/geb-contract-api"
     },
     "repository": {
         "type": "git",

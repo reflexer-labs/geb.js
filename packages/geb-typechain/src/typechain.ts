@@ -6,7 +6,7 @@ import { join, resolve } from 'path'
 
 import { codegenContract } from './codegen'
 
-const DEFAULT_OUT_PATH = './types/web3-v1-contracts/'
+const DEFAULT_OUT_PATH = './src/generated'
 
 interface IWeb3Cfg {
     outDir?: string
@@ -38,7 +38,7 @@ export class ContractAPIGenerator extends TsGeneratorPlugin {
         const contract = parse(abi, name, documentation)
 
         return {
-            path: join(this.outDirAbs, `${name}.d.ts`),
+            path: join(this.outDirAbs, `${name}.ts`),
             contents: codegenContract(contract),
         }
     }

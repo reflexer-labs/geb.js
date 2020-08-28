@@ -1,23 +1,16 @@
-import {
-    Contract,
-    FunctionDeclaration,
-    FunctionDocumentation,
-    AbiParameter,
-    AbiOutputParameter,
-    EvmType,
-    EvmOutputType,
-    TupleType,
-    getSignatureForFn,
-} from 'typechain'
+import { Contract, FunctionDeclaration, FunctionDocumentation } from 'typechain'
 
 import { values } from 'lodash'
 import { Dictionary } from 'ts-essentials'
+import { generateInputTypes, generateOutputTypes } from './types'
 
 export function codegenContract(contract: Contract) {
     return `
-    export const TEST = 'TEST'
-    
-    export class ${contract.name} {
+    import { BytesLike } from "@ethersproject/bytes"
+    import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
+    import { BaseContractAPI } from '@reflexer-finance/geb-provider'
+
+    export class ${contract.name}<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         ${codegenForFunctions(contract.functions)}
     }
     `
@@ -28,37 +21,26 @@ export function codegenForFunctions(
 ): string {
     return values(fns)
         .map((fns) => {
-            if (fns.length === 1) {
-                return codegenForSingleFunction(fns[0])
-            } else {
-                return codegenForOverloadedFunctions(fns)
-            }
+            return codegenForSingleFunction(fns[0])
         })
         .join('\n')
 }
 
-function codegenForOverloadedFunctions(fns: FunctionDeclaration[]): string {
-    return fns
-        .map((f) => codegenForSingleFunction(f, `"${getSignatureForFn(f)}"`))
-        .join('\n')
-}
-
-function codegenForSingleFunction(
-    fn: FunctionDeclaration,
-    overloadedName?: string
-): string {
+function codegenForSingleFunction(fn: FunctionDeclaration): string {
     return `
     ${generateFunctionDocumentation(fn.documentation)}
-    ${overloadedName ?? fn.name}(${codegenInputTypes(
-        fn.inputs
-    )}): ${getTransactionObject(fn)}<${codegenOutputTypes(fn.outputs)}>;
-  `
-}
-
-function getTransactionObject(fn: FunctionDeclaration): string {
-    return fn.stateMutability === 'payable'
-        ? 'PayableTransactionObject'
-        : 'NonPayableTransactionObject'
+    ${fn.name}(${generateInputTypes(fn.inputs)}): ${
+        fn.stateMutability === 'view'
+            ? `Promise<${generateOutputTypes(fn.outputs)}>`
+            : 'TX_OBJ'
+    } {
+        return this.chainProvider.${
+            fn.stateMutability === 'view' ? 'ethCall' : 'ethSend'
+        }("${
+        fn.name
+    }", {}) // TODO: Spread args here (maybe we need to use the overload thing..)
+    }
+    `
 }
 
 function generateFunctionDocumentation(doc?: FunctionDocumentation): string {
@@ -80,93 +62,4 @@ function generateFunctionDocumentation(doc?: FunctionDocumentation): string {
     docString += '\n */'
 
     return docString
-}
-
-function codegenInputTypes(input: AbiParameter[]): string {
-    if (input.length === 0) {
-        return ''
-    }
-    return (
-        input
-            .map(
-                (input, index) =>
-                    `${input.name || `arg${index}`}: ${codegenInputType(
-                        input.type
-                    )}`
-            )
-            .join(', ') + ', '
-    )
-}
-
-export function codegenOutputTypes(outputs: AbiOutputParameter[]): string {
-    if (outputs.length === 1) {
-        return codegenOutputType(outputs[0].type)
-    } else {
-        return `{
-        ${outputs
-            .map((t) => t.name && `${t.name}: ${codegenOutputType(t.type)}, `)
-            .join('')}
-        ${outputs
-            .map((t, i) => `${i}: ${codegenOutputType(t.type)}`)
-            .join(', ')}
-      }`
-    }
-}
-
-function codegenInputType(evmType: EvmType): string {
-    switch (evmType.type) {
-        case 'integer':
-        case 'uinteger':
-            return 'number | string'
-        case 'address':
-            return 'string'
-        case 'bytes':
-        case 'dynamic-bytes':
-            return 'string | number[]'
-        case 'array':
-            return `(${codegenInputType(evmType.itemType)})[]`
-        case 'boolean':
-            return 'boolean'
-        case 'string':
-            return 'string'
-        case 'tuple':
-            return codegenTupleType(evmType, codegenInputType)
-    }
-}
-
-function codegenOutputType(evmType: EvmOutputType): string {
-    switch (evmType.type) {
-        case 'integer':
-            return 'string'
-        case 'uinteger':
-            return 'string'
-        case 'address':
-            return 'string'
-        case 'void':
-            return 'void'
-        case 'bytes':
-        case 'dynamic-bytes':
-            return 'string'
-        case 'array':
-            return `(${codegenOutputType(evmType.itemType)})[]`
-        case 'boolean':
-            return 'boolean'
-        case 'string':
-            return 'string'
-        case 'tuple':
-            return codegenTupleType(evmType, codegenOutputType)
-    }
-}
-
-function codegenTupleType(
-    tuple: TupleType,
-    generator: (evmType: EvmType) => string
-) {
-    return (
-        '[' +
-        tuple.components
-            .map((component) => generator(component.type))
-            .join(', ') +
-        ']'
-    )
 }

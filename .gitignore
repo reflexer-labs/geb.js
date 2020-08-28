@@ -1,5 +1,4 @@
 node_modules
 lib
-generated
 
 packages/*/tsconfig.tsbuildinfo
