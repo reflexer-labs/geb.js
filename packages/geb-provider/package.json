@@ -1,5 +1,5 @@
 {
-    "name": "@reflexer-finance/rai",
+    "name": "@reflexer-finance/geb-provider",
     "version": "0.0.1",
     "description": "",
     "main": "./lib/index.js",

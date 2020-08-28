@@ -1,16 +1,16 @@
 {
-    "name": "@reflexer-finance/rai-contract-api",
+    "name": "@reflexer-finance/geb-contract-api",
     "version": "0.0.1",
     "description": "",
     "main": "./lib/index.js",
     "scripts": {
         "postinstall": "npm run codegen",
-        "codegen": "typechain --target=./../rai-typechain/lib abis/*.json"
+        "codegen": "typechain --target=./../geb-typechain/lib abis/*.json"
     },
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
     "license": "ISC",
     "dependencies": {
-        "@reflexer-finance/rai-typechain": "0.0.1",
+        "@reflexer-finance/geb-typechain": "0.0.1",
         "typechain": "^2.0.0"
     }
 }

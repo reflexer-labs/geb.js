@@ -13,7 +13,7 @@ interface IWeb3Cfg {
 }
 
 export class ContractAPIGenerator extends TsGeneratorPlugin {
-    public name = 'rai'
+    public name = 'geb'
 
     private readonly outDirAbs: string
 

@@ -1,7 +1,7 @@
 {
-    "name": "rai",
+    "name": "geb",
     "version": "0.0.1",
-    "description": "Javascript client for the Rai refelx bond.",
+    "description": "Javascript client for the Geb reflex bond.",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,10 +14,11 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/reflexer-labs/rai.js.git"
+        "url": "git+https://github.com/reflexer-labs/geb.js.git"
     },
     "keywords": [
         "rai",
+        "geb",
         "blockchain",
         "ethereum",
         "flx",
@@ -27,9 +28,9 @@
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/reflexer-labs/rai.js/issues"
+        "url": "https://github.com/reflexer-labs/geb.js/issues"
     },
-    "homepage": "https://github.com/reflexer-labs/rai.js#readme",
+    "homepage": "https://github.com/reflexer-labs/geb.js#readme",
     "devDependencies": {
         "@types/mocha": "^8.0.3",
         "@types/node": "^14.6.0",

@@ -6,16 +6,16 @@
     },
     "references": [
         {
-            "path": "./packages/rai"
+            "path": "./packages/geb"
         },
         {
-            "path": "./packages/rai-contract-api"
+            "path": "./packages/geb-contract-api"
         },
         {
-            "path": "./packages/rai-typechain"
+            "path": "./packages/geb-typechain"
         },
         {
-            "path": "./packages/rai-provider"
+            "path": "./packages/geb-provider"
         }
     ],
     "files": []
