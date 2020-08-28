@@ -7,5 +7,14 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "@reflexer-finance/geb-provider": "0.0.1"
+    },
+    "devDependencies": {
+        "ethers": "^5.0.9"
+    },
+    "peerDependencies": {
+        "ethers": "5.x"
+    }
 }
