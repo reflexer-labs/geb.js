@@ -4,11 +4,13 @@
     "description": "",
     "main": "./lib/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "postinstall": "npm run codegen",
+        "codegen": "typechain --target=./../rai-typechain/lib abis/*.json"
     },
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
     "license": "ISC",
-    "devDependencies": {
-        "@reflexer-finance/rai-typechain": "0.0.1"
+    "dependencies": {
+        "@reflexer-finance/rai-typechain": "0.0.1",
+        "typechain": "^2.0.0"
     }
 }
