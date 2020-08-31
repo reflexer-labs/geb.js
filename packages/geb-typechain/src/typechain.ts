@@ -39,7 +39,7 @@ export class ContractAPIGenerator extends TsGeneratorPlugin {
 
         return {
             path: join(this.outDirAbs, `${name}.ts`),
-            contents: codegenContract(contract),
+            contents: codegenContract(contract, abi),
         }
     }
 }

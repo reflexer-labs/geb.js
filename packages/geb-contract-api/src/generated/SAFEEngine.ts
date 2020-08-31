@@ -6,35 +6,44 @@ import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { BaseContractAPI } from '@reflexer-finance/geb-provider'
 
 export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
-    addAuthorization(account: string): TX_OBJ {
-        return this.chainProvider.ethSend('addAuthorization', {
-            account,
-        })
+    addAuthorization(account: string): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"addAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [account])
     }
 
-    approveSAFEModification(account: string): TX_OBJ {
-        return this.chainProvider.ethSend('approveSAFEModification', {
-            account,
-        })
+    approveSAFEModification(account: string): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"approveSAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [account])
     }
 
     authorizedAccounts(arg0: string): Promise<BigNumber> {
-        return this.chainProvider.ethCall('authorizedAccounts', {
-            arg0,
-        })
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.chainProvider.ethCall(this.address, abi, [arg0])
     }
 
     canModifySAFE(safe: string, account: string): Promise<boolean> {
-        return this.chainProvider.ethCall('canModifySAFE', {
-            safe,
-            account,
-        })
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"safe","type":"address"},{"internalType":"address","name":"account","type":"address"}],"name":"canModifySAFE","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
+
+        return this.chainProvider.ethCall(this.address, abi, [safe, account])
     }
 
     coinBalance(arg0: string): Promise<BigNumber> {
-        return this.chainProvider.ethCall('coinBalance', {
-            arg0,
-        })
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"coinBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.chainProvider.ethCall(this.address, abi, [arg0])
     }
 
     collateralTypes(
@@ -47,9 +56,11 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         debtFloor: BigNumber
         liquidationPrice: BigNumber
     }> {
-        return this.chainProvider.ethCall('collateralTypes', {
-            arg0,
-        })
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"collateralTypes","outputs":[{"internalType":"uint256","name":"debtAmount","type":"uint256"},{"internalType":"uint256","name":"accumulatedRate","type":"uint256"},{"internalType":"uint256","name":"safetyPrice","type":"uint256"},{"internalType":"uint256","name":"debtCeiling","type":"uint256"},{"internalType":"uint256","name":"debtFloor","type":"uint256"},{"internalType":"uint256","name":"liquidationPrice","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.chainProvider.ethCall(this.address, abi, [arg0])
     }
 
     confiscateSAFECollateralAndDebt(
@@ -59,89 +70,131 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         debtCounterparty: string,
         deltaCollateral: BigNumberish,
         deltaDebt: BigNumberish
-    ): TX_OBJ {
-        return this.chainProvider.ethSend('confiscateSAFECollateralAndDebt', {
+    ): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"safe","type":"address"},{"internalType":"address","name":"collateralCounterparty","type":"address"},{"internalType":"address","name":"debtCounterparty","type":"address"},{"internalType":"int256","name":"deltaCollateral","type":"int256"},{"internalType":"int256","name":"deltaDebt","type":"int256"}],"name":"confiscateSAFECollateralAndDebt","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [
             collateralType,
             safe,
             collateralCounterparty,
             debtCounterparty,
             deltaCollateral,
             deltaDebt,
-        })
+        ])
     }
 
     contractEnabled(): Promise<BigNumber> {
-        return this.chainProvider.ethCall('contractEnabled', {})
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.chainProvider.ethCall(this.address, abi, [])
     }
 
     createUnbackedDebt(
         debtDestination: string,
         coinDestination: string,
         rad: BigNumberish
-    ): TX_OBJ {
-        return this.chainProvider.ethSend('createUnbackedDebt', {
+    ): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"debtDestination","type":"address"},{"internalType":"address","name":"coinDestination","type":"address"},{"internalType":"uint256","name":"rad","type":"uint256"}],"name":"createUnbackedDebt","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [
             debtDestination,
             coinDestination,
             rad,
-        })
+        ])
     }
 
     debtBalance(arg0: string): Promise<BigNumber> {
-        return this.chainProvider.ethCall('debtBalance', {
-            arg0,
-        })
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"debtBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.chainProvider.ethCall(this.address, abi, [arg0])
     }
 
-    denySAFEModification(account: string): TX_OBJ {
-        return this.chainProvider.ethSend('denySAFEModification', {
-            account,
-        })
+    denySAFEModification(account: string): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"denySAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [account])
     }
 
-    disableContract(): TX_OBJ {
-        return this.chainProvider.ethSend('disableContract', {})
+    disableContract(): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"disableContract","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [])
     }
 
     globalDebt(): Promise<BigNumber> {
-        return this.chainProvider.ethCall('globalDebt', {})
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"globalDebt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.chainProvider.ethCall(this.address, abi, [])
     }
 
     globalDebtCeiling(): Promise<BigNumber> {
-        return this.chainProvider.ethCall('globalDebtCeiling', {})
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"globalDebtCeiling","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.chainProvider.ethCall(this.address, abi, [])
     }
 
     globalUnbackedDebt(): Promise<BigNumber> {
-        return this.chainProvider.ethCall('globalUnbackedDebt', {})
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"globalUnbackedDebt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.chainProvider.ethCall(this.address, abi, [])
     }
 
-    initializeCollateralType(collateralType: BytesLike): TX_OBJ {
-        return this.chainProvider.ethSend('initializeCollateralType', {
-            collateralType,
-        })
+    initializeCollateralType(collateralType: BytesLike): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"initializeCollateralType","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [collateralType])
     }
 
     modifyCollateralBalance(
         collateralType: BytesLike,
         account: string,
         wad: BigNumberish
-    ): TX_OBJ {
-        return this.chainProvider.ethSend('modifyCollateralBalance', {
+    ): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"account","type":"address"},{"internalType":"int256","name":"wad","type":"int256"}],"name":"modifyCollateralBalance","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [
             collateralType,
             account,
             wad,
-        })
+        ])
     }
 
     modifyParameters(
         collateralType: BytesLike,
         parameter: BytesLike,
         data: BigNumberish
-    ): TX_OBJ {
-        return this.chainProvider.ethSend('modifyParameters', {
+    ): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [
             collateralType,
             parameter,
             data,
-        })
+        ])
     }
 
     modifySAFECollateralization(
@@ -151,28 +204,35 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         debtDestination: string,
         deltaCollateral: BigNumberish,
         deltaDebt: BigNumberish
-    ): TX_OBJ {
-        return this.chainProvider.ethSend('modifySAFECollateralization', {
+    ): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"safe","type":"address"},{"internalType":"address","name":"collateralSource","type":"address"},{"internalType":"address","name":"debtDestination","type":"address"},{"internalType":"int256","name":"deltaCollateral","type":"int256"},{"internalType":"int256","name":"deltaDebt","type":"int256"}],"name":"modifySAFECollateralization","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [
             collateralType,
             safe,
             collateralSource,
             debtDestination,
             deltaCollateral,
             deltaDebt,
-        })
+        ])
     }
 
-    removeAuthorization(account: string): TX_OBJ {
-        return this.chainProvider.ethSend('removeAuthorization', {
-            account,
-        })
+    removeAuthorization(account: string): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"removeAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [account])
     }
 
     safeRights(arg0: string, arg1: string): Promise<BigNumber> {
-        return this.chainProvider.ethCall('safeRights', {
-            arg0,
-            arg1,
-        })
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"safeRights","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.chainProvider.ethCall(this.address, abi, [arg0, arg1])
     }
 
     safes(
@@ -182,23 +242,27 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         lockedCollateral: BigNumber
         generatedDebt: BigNumber
     }> {
-        return this.chainProvider.ethCall('safes', {
-            arg0,
-            arg1,
-        })
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"safes","outputs":[{"internalType":"uint256","name":"lockedCollateral","type":"uint256"},{"internalType":"uint256","name":"generatedDebt","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.chainProvider.ethCall(this.address, abi, [arg0, arg1])
     }
 
-    settleDebt(rad: BigNumberish): TX_OBJ {
-        return this.chainProvider.ethSend('settleDebt', {
-            rad,
-        })
+    settleDebt(rad: BigNumberish): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"rad","type":"uint256"}],"name":"settleDebt","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [rad])
     }
 
     tokenCollateral(arg0: BytesLike, arg1: string): Promise<BigNumber> {
-        return this.chainProvider.ethCall('tokenCollateral', {
-            arg0,
-            arg1,
-        })
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"tokenCollateral","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.chainProvider.ethCall(this.address, abi, [arg0, arg1])
     }
 
     transferCollateral(
@@ -206,21 +270,29 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         src: string,
         dst: string,
         wad: BigNumberish
-    ): TX_OBJ {
-        return this.chainProvider.ethSend('transferCollateral', {
+    ): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"transferCollateral","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [
             collateralType,
             src,
             dst,
             wad,
-        })
+        ])
     }
 
-    transferInternalCoins(src: string, dst: string, rad: BigNumberish): TX_OBJ {
-        return this.chainProvider.ethSend('transferInternalCoins', {
-            src,
-            dst,
-            rad,
-        })
+    transferInternalCoins(
+        src: string,
+        dst: string,
+        rad: BigNumberish
+    ): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"rad","type":"uint256"}],"name":"transferInternalCoins","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [src, dst, rad])
     }
 
     transferSAFECollateralAndDebt(
@@ -229,25 +301,33 @@ export class SafeEngine<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         dst: string,
         deltaCollateral: BigNumberish,
         deltaDebt: BigNumberish
-    ): TX_OBJ {
-        return this.chainProvider.ethSend('transferSAFECollateralAndDebt', {
+    ): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"int256","name":"deltaCollateral","type":"int256"},{"internalType":"int256","name":"deltaDebt","type":"int256"}],"name":"transferSAFECollateralAndDebt","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [
             collateralType,
             src,
             dst,
             deltaCollateral,
             deltaDebt,
-        })
+        ])
     }
 
     updateAccumulatedRate(
         collateralType: BytesLike,
         surplusDst: string,
         rateMultiplier: BigNumberish
-    ): TX_OBJ {
-        return this.chainProvider.ethSend('updateAccumulatedRate', {
+    ): Promise<TX_OBJ> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"surplusDst","type":"address"},{"internalType":"int256","name":"rateMultiplier","type":"int256"}],"name":"updateAccumulatedRate","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.chainProvider.ethSend(this.address, abi, [
             collateralType,
             surplusDst,
             rateMultiplier,
-        })
+        ])
     }
 }

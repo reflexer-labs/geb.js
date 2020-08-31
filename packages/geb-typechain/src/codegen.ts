@@ -1,40 +1,72 @@
-import { Contract, FunctionDeclaration, FunctionDocumentation } from 'typechain'
+import {
+    Contract,
+    FunctionDeclaration,
+    FunctionDocumentation,
+    RawAbiDefinition,
+} from 'typechain'
 
 import { values } from 'lodash'
 import { Dictionary } from 'ts-essentials'
 import { generateInputTypes, generateOutputTypes } from './types'
 
-export function codegenContract(contract: Contract) {
+export function codegenContract(contract: Contract, abi: RawAbiDefinition[]) {
     return `
     import { BytesLike } from "@ethersproject/bytes"
     import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
     import { BaseContractAPI } from '@reflexer-finance/geb-provider'
 
     export class ${contract.name}<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
-        ${codegenForFunctions(contract.functions)}
+        ${codegenForFunctions(contract.functions, abi)}
     }
     `
 }
 
 export function codegenForFunctions(
-    fns: Dictionary<FunctionDeclaration[]>
+    fns: Dictionary<FunctionDeclaration[]>,
+    abi: RawAbiDefinition[]
 ): string {
     return values(fns)
         .map((fns) => {
-            return codegenForSingleFunction(fns[0])
+            return codegenForSingleFunction(fns[0], getABIFragment(fns[0], abi))
         })
         .join('\n')
 }
 
-function codegenForSingleFunction(fn: FunctionDeclaration): string {
+function getABIFragment(
+    fn: FunctionDeclaration,
+    abi: RawAbiDefinition[]
+): RawAbiDefinition {
+    for (let fragment of abi) {
+        if (
+            fragment.name === fn.name &&
+            fn.inputs.length === fragment.inputs.length &&
+            fn.inputs.map(
+                (input, i) =>
+                    input.type.originalType === fragment.inputs[i].type
+            )
+        ) {
+            return fragment
+        }
+    }
+
+    throw new Error('ABI type not matching parsed version')
+}
+function codegenForSingleFunction(
+    fn: FunctionDeclaration,
+    abiFragment: RawAbiDefinition
+): string {
     // prettier-ignore
     return `
     ${generateFunctionDocumentation(fn.documentation)}
-    ${fn.name}(${generateInputTypes(fn.inputs)}): ${fn.stateMutability === 'view'? `Promise<${generateOutputTypes(fn.outputs)}>`: 'TX_OBJ'
-    } {
-        return this.chainProvider.${fn.stateMutability === 'view' ? 'ethCall' : 'ethSend'}("${fn.name}", {
+    ${fn.name}(${generateInputTypes(fn.inputs)}): Promise<${fn.stateMutability === 'view'? `${generateOutputTypes(fn.outputs)}`: 'TX_OBJ'}> {
+        
+        // prettier-ignore 
+        // @ts-ignore
+        const abi = ${JSON.stringify(abiFragment)}
+        
+        return this.chainProvider.${fn.stateMutability === 'view' ? 'ethCall' : 'ethSend'}(this.address, abi, [
             ${fn.inputs.map((input, index) => input.name || `arg${index}` )}
-        })
+        ])
     }
     `
 }
