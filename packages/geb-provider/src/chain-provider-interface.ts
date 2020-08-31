@@ -29,4 +29,6 @@ export interface ChainProviderInterface<TX_OBJ> {
         abiFragment: AbiDefinition,
         params: Inputs
     ): Promise<TX_OBJ>
+
+    decodeError(error: any): string
 }

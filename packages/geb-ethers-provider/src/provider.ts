@@ -42,4 +42,22 @@ export class EthersProvider
 
         return contract.populateTransaction[abi.name](...params)
     }
+
+    decodeError(error: any): string {
+        let data = error.data as string
+
+        if (data.startsWith('Reverted 0x08c379a0')) {
+            data = data.slice(19)
+        } else if (data.startsWith('0x08c379a0')) {
+            data = data.slice(10)
+        } else if (data === 'Reverted') {
+            return 'Reverted with no reason'
+        } else {
+            throw new Error('Could not decode error')
+        }
+
+        return decodeURIComponent(data.slice(2).replace(/[0-9a-f]{2}/g, '%$&'))
+            .replace(/\0/g, '')
+            .slice(2)
+    }
 }
