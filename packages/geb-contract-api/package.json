@@ -4,7 +4,7 @@
     "description": "",
     "main": "./lib/index.js",
     "scripts": {
-        "codegen": "typechain --target=./../geb-typechain/lib abis/*.json"
+        "codegen": "typechain --target=./../geb-typechain/lib 'abis/*.json'"
     },
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
     "license": "ISC",
