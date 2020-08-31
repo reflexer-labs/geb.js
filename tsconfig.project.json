@@ -6,12 +6,6 @@
     },
     "references": [
         {
-            "path": "./packages/geb"
-        },
-        {
-            "path": "./packages/geb-contract-api"
-        },
-        {
             "path": "./packages/geb-typechain"
         },
         {
@@ -19,6 +13,15 @@
         },
         {
             "path": "./packages/geb-ethers-provider"
+        },
+        {
+            "path": "./packages/geb-contract-api"
+        },
+        {
+            "path": "./packages/geb"
+        },
+        {
+            "path": "./packages/geb-test"
         }
     ],
     "files": []

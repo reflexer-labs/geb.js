@@ -4,14 +4,16 @@
     "description": "Javascript client for the Geb reflex bond.",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "postinstall": "npm run bootstrap",
         "bootstrap": "lerna bootstrap --hoist",
         "publish": "lerna publish",
         "build": "tsc --build ./tsconfig.project.json",
         "clean": "tsc --build --clean ./tsconfig.project.json",
         "add-package": "node ./scripts/add_package.js",
         "prettier": "prettier --write \"{,**/*.{ts,json,js,md}}\"",
-        "api-codegen": "npm run codegen --prefix packages/geb-contract-api"
+        "api-codegen": "npm run codegen --prefix packages/geb-contract-api",
+        "test-node": "mocha ./packages/geb-test/lib/test-*.js",
+        "test": "npm run build && npm run bootstrap && npm run test-node"
     },
     "repository": {
         "type": "git",

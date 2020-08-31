@@ -1,0 +1,17 @@
+{
+    "name": "@reflexer-finance/geb-test",
+    "version": "0.0.1",
+    "description": "",
+    "main": "./lib/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Guillaume Felley <guillaume@reflexer.finance>",
+    "license": "ISC",
+    "dependencies": {
+        "@reflexer-finance/geb-contract-api": "0.0.1",
+        "@reflexer-finance/geb-ethers-provider": "0.0.1",
+        "@types/mocha": "^8.0.3",
+        "mocha": "^8.1.3"
+    }
+}
