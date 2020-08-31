@@ -1,0 +1,623 @@
+{
+    "abi": [
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "safeEngine_",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "accountingEngine_",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "coinJoin_",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "AddAuthorization",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [],
+            "name": "DisableContract",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "rad",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "expensesAccumulator",
+                    "type": "uint256"
+                }
+            ],
+            "name": "GiveFunds",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "addr",
+                    "type": "address"
+                }
+            ],
+            "name": "ModifyParameters",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "val",
+                    "type": "uint256"
+                }
+            ],
+            "name": "ModifyParameters",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "sender",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "dstAccount",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "token",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "rad",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "expensesAccumulator",
+                    "type": "uint256"
+                }
+            ],
+            "name": "PullFunds",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "RemoveAuthorization",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "rad",
+                    "type": "uint256"
+                }
+            ],
+            "name": "SetPerBlockAllowance",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "rad",
+                    "type": "uint256"
+                }
+            ],
+            "name": "SetTotalAllowance",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "rad",
+                    "type": "uint256"
+                }
+            ],
+            "name": "TakeFunds",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "accountingEngine",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "fundsToTransfer",
+                    "type": "uint256"
+                }
+            ],
+            "name": "TransferSurplusFunds",
+            "type": "event"
+        },
+        {
+            "inputs": [],
+            "name": "accountingEngine",
+            "outputs": [
+                { "internalType": "address", "name": "", "type": "address" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "accumulatorTag",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "addAuthorization",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "address", "name": "", "type": "address" }
+            ],
+            "name": "authorizedAccounts",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "coinJoin",
+            "outputs": [
+                {
+                    "internalType": "contract CoinJoinLike",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "contractEnabled",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "disableContract",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "expensesAccumulator",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "expensesMultiplier",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "getAllowance",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" },
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                },
+                { "internalType": "uint256", "name": "rad", "type": "uint256" }
+            ],
+            "name": "giveFunds",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "latestSurplusTransferTime",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "minimumFundsRequired",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                { "internalType": "address", "name": "addr", "type": "address" }
+            ],
+            "name": "modifyParameters",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                { "internalType": "uint256", "name": "val", "type": "uint256" }
+            ],
+            "name": "modifyParameters",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "dstAccount",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "token",
+                    "type": "address"
+                },
+                { "internalType": "uint256", "name": "wad", "type": "uint256" }
+            ],
+            "name": "pullFunds",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "address", "name": "", "type": "address" },
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "name": "pulledPerBlock",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "removeAuthorization",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "safeEngine",
+            "outputs": [
+                {
+                    "internalType": "contract SAFEEngineLike",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                },
+                { "internalType": "uint256", "name": "rad", "type": "uint256" }
+            ],
+            "name": "setPerBlockAllowance",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                },
+                { "internalType": "uint256", "name": "rad", "type": "uint256" }
+            ],
+            "name": "setTotalAllowance",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "surplusTransferDelay",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "systemCoin",
+            "outputs": [
+                {
+                    "internalType": "contract SystemCoinLike",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                },
+                { "internalType": "uint256", "name": "rad", "type": "uint256" }
+            ],
+            "name": "takeFunds",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "transferSurplusFunds",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "treasuryCapacity",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ],
+    "devdoc": {
+        "methods": {
+            "addAuthorization(address)": {
+                "params": { "account": "Account to add auth to" }
+            },
+            "giveFunds(address,uint256)": {
+                "params": {
+                    "account": "Address to transfer SF to",
+                    "rad": "Amount of internal system coins to transfer (a number with 45 decimals)"
+                }
+            },
+            "modifyParameters(bytes32,address)": {
+                "params": {
+                    "addr": "New address for the contract",
+                    "parameter": "The name of the contract whose address will be changed"
+                }
+            },
+            "modifyParameters(bytes32,uint256)": {
+                "params": {
+                    "parameter": "The name of the parameter to modify",
+                    "val": "New parameter value"
+                }
+            },
+            "pullFunds(address,address,uint256)": {
+                "params": {
+                    "dstAccount": "Address to transfer funds to",
+                    "token": "Address of the token to transfer (in this case it must be the address of the ERC20 system coin).             Used only to adhere to a standard for automated, on-chain treasuries",
+                    "wad": "Amount of system coins (SF) to transfer (expressed as an 18 decimal number but the contract will transfer internal system coins that have 18 decimals)"
+                }
+            },
+            "removeAuthorization(address)": {
+                "params": { "account": "Account to remove auth from" }
+            },
+            "setPerBlockAllowance(address,uint256)": {
+                "params": {
+                    "account": "The approved address",
+                    "rad": "The per block approved amount of SF to withdraw (number with 45 decimals)"
+                }
+            },
+            "setTotalAllowance(address,uint256)": {
+                "params": {
+                    "account": "The approved address",
+                    "rad": "The total approved amount of SF to withdraw (number with 45 decimals)"
+                }
+            },
+            "takeFunds(address,uint256)": {
+                "params": {
+                    "account": "Address to take system coins from",
+                    "rad": "Amount of internal system coins to take from the account (a number with 45 decimals)"
+                }
+            }
+        }
+    },
+    "userdoc": {
+        "methods": {
+            "addAuthorization(address)": { "notice": "Add auth to an account" },
+            "disableContract()": {
+                "notice": "Disable this contract (normally called by GlobalSettlement)"
+            },
+            "giveFunds(address,uint256)": {
+                "notice": "Governance transfers SF to an address"
+            },
+            "modifyParameters(bytes32,address)": {
+                "notice": "Modify contract addresses"
+            },
+            "modifyParameters(bytes32,uint256)": {
+                "notice": "Modify uint256 parameters"
+            },
+            "pullFunds(address,address,uint256)": {
+                "notice": "Pull stability fees from the treasury (if your allowance permits)"
+            },
+            "removeAuthorization(address)": {
+                "notice": "Remove auth from an account"
+            },
+            "setPerBlockAllowance(address,uint256)": {
+                "notice": "Modify an address' per block allowance in order to withdraw SF from the treasury"
+            },
+            "setTotalAllowance(address,uint256)": {
+                "notice": "Modify an address' total allowance in order to withdraw SF from the treasury"
+            },
+            "takeFunds(address,uint256)": {
+                "notice": "Governance takes funds from an address"
+            },
+            "transferSurplusFunds()": {
+                "notice": "Tranfer surplus stability fees to the AccountingEngine. This is here to make sure that the treasury doesn't accumulate too many fees that it doesn't even need in order to pay for allowances. It ensures that there are enough funds left in the treasury to account for projected expenses (latest expenses multiplied by an expense multiplier)"
+            }
+        }
+    }
+}

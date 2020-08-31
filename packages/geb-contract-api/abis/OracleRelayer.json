@@ -1,0 +1,473 @@
+{
+    "abi": [
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "safeEngine_",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "AddAuthorization",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [],
+            "name": "DisableContract",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "addr",
+                    "type": "address"
+                }
+            ],
+            "name": "ModifyParameters",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "data",
+                    "type": "uint256"
+                }
+            ],
+            "name": "ModifyParameters",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "data",
+                    "type": "uint256"
+                }
+            ],
+            "name": "ModifyParameters",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "RemoveAuthorization",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "priceFeedValue",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "safetyPrice",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "liquidationPrice",
+                    "type": "uint256"
+                }
+            ],
+            "name": "UpdateCollateralPrice",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "redemptionPrice",
+                    "type": "uint256"
+                }
+            ],
+            "name": "UpdateRedemptionPrice",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "addAuthorization",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "address", "name": "", "type": "address" }
+            ],
+            "name": "authorizedAccounts",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "bytes32", "name": "", "type": "bytes32" }
+            ],
+            "name": "collateralTypes",
+            "outputs": [
+                {
+                    "internalType": "contract OracleLike",
+                    "name": "orcl",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "safetyCRatio",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "liquidationCRatio",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "contractEnabled",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "disableContract",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "liquidationCRatio",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                { "internalType": "address", "name": "addr", "type": "address" }
+            ],
+            "name": "modifyParameters",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                { "internalType": "uint256", "name": "data", "type": "uint256" }
+            ],
+            "name": "modifyParameters",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                { "internalType": "uint256", "name": "data", "type": "uint256" }
+            ],
+            "name": "modifyParameters",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "orcl",
+            "outputs": [
+                { "internalType": "address", "name": "", "type": "address" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "redemptionPrice",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "redemptionPriceUpdateTime",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "redemptionRate",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "removeAuthorization",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "safeEngine",
+            "outputs": [
+                {
+                    "internalType": "contract SAFEEngineLike",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "safetyCRatio",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "updateCollateralPrice",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ],
+    "devdoc": {
+        "methods": {
+            "addAuthorization(address)": {
+                "params": { "account": "Account to add auth to" }
+            },
+            "liquidationCRatio(bytes32)": {
+                "params": {
+                    "collateralType": "The collateral price we want the liquidation CRatio for"
+                }
+            },
+            "modifyParameters(bytes32,bytes32,address)": {
+                "params": {
+                    "addr": "New oracle address",
+                    "collateralType": "Collateral who's oracle we change",
+                    "parameter": "Name of the parameter"
+                }
+            },
+            "modifyParameters(bytes32,bytes32,uint256)": {
+                "params": {
+                    "collateralType": "Collateral who's parameters we change",
+                    "data": "New param value",
+                    "parameter": "Name of the parameter"
+                }
+            },
+            "modifyParameters(bytes32,uint256)": {
+                "params": {
+                    "data": "New param value",
+                    "parameter": "Name of the parameter"
+                }
+            },
+            "orcl(bytes32)": {
+                "params": {
+                    "collateralType": "The collateral price we want the oracle price feed for"
+                }
+            },
+            "removeAuthorization(address)": {
+                "params": { "account": "Account to remove auth from" }
+            },
+            "safetyCRatio(bytes32)": {
+                "params": {
+                    "collateralType": "The collateral price we want the safety CRatio for"
+                }
+            },
+            "updateCollateralPrice(bytes32)": {
+                "params": {
+                    "collateralType": "The collateral we want to update prices (safety and liquidation prices) for"
+                }
+            }
+        }
+    },
+    "userdoc": {
+        "methods": {
+            "addAuthorization(address)": { "notice": "Add auth to an account" },
+            "disableContract()": {
+                "notice": "Disable this contract (normally called by GlobalSettlement)"
+            },
+            "liquidationCRatio(bytes32)": {
+                "notice": "Fetch the liquidation CRatio of a specific collateral type"
+            },
+            "modifyParameters(bytes32,bytes32,address)": {
+                "notice": "Modify oracle price feed addresses"
+            },
+            "modifyParameters(bytes32,bytes32,uint256)": {
+                "notice": "Modify CRatio related parameters"
+            },
+            "modifyParameters(bytes32,uint256)": {
+                "notice": "Modify redemption related parameters"
+            },
+            "orcl(bytes32)": {
+                "notice": "Fetch the oracle price feed of a specific collateral type"
+            },
+            "redemptionPrice()": {
+                "notice": "Fetch the latest redemption price by first updating it"
+            },
+            "removeAuthorization(address)": {
+                "notice": "Remove auth from an account"
+            },
+            "safetyCRatio(bytes32)": {
+                "notice": "Fetch the safety CRatio of a specific collateral type"
+            },
+            "updateCollateralPrice(bytes32)": {
+                "notice": "Update the collateral price inside the system (inside SAFEEngine)"
+            }
+        }
+    }
+}

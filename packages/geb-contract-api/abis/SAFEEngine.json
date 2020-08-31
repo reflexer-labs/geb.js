@@ -1,932 +1,1144 @@
-[
-    { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "account",
-                "type": "address"
+{
+    "abi": [
+        {
+            "inputs": [],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "AddAuthorization",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "sender",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "ApproveSAFEModification",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "safe",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "collateralCounterparty",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "debtCounterparty",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "int256",
+                    "name": "deltaCollateral",
+                    "type": "int256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "int256",
+                    "name": "deltaDebt",
+                    "type": "int256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "globalUnbackedDebt",
+                    "type": "uint256"
+                }
+            ],
+            "name": "ConfiscateSAFECollateralAndDebt",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "debtDestination",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "coinDestination",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "rad",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "debtDstBalance",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "coinDstBalance",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "globalUnbackedDebt",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "globalDebt",
+                    "type": "uint256"
+                }
+            ],
+            "name": "CreateUnbackedDebt",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "sender",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "DenySAFEModification",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [],
+            "name": "DisableContract",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "InitializeCollateralType",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "int256",
+                    "name": "wad",
+                    "type": "int256"
+                }
+            ],
+            "name": "ModifyCollateralBalance",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "data",
+                    "type": "uint256"
+                }
+            ],
+            "name": "ModifyParameters",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "data",
+                    "type": "uint256"
+                }
+            ],
+            "name": "ModifyParameters",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "safe",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "collateralSource",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "debtDestination",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "int256",
+                    "name": "deltaCollateral",
+                    "type": "int256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "int256",
+                    "name": "deltaDebt",
+                    "type": "int256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "lockedCollateral",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "generatedDebt",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "globalDebt",
+                    "type": "uint256"
+                }
+            ],
+            "name": "ModifySAFECollateralization",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "RemoveAuthorization",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "rad",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "debtBalance",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "coinBalance",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "globalUnbackedDebt",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "globalDebt",
+                    "type": "uint256"
+                }
+            ],
+            "name": "SettleDebt",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "src",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "dst",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "wad",
+                    "type": "uint256"
+                }
+            ],
+            "name": "TransferCollateral",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "src",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "dst",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "rad",
+                    "type": "uint256"
+                }
+            ],
+            "name": "TransferInternalCoins",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "src",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "dst",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "int256",
+                    "name": "deltaCollateral",
+                    "type": "int256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "int256",
+                    "name": "deltaDebt",
+                    "type": "int256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "srcLockedCollateral",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "srcGeneratedDebt",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "dstLockedCollateral",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "dstGeneratedDebt",
+                    "type": "uint256"
+                }
+            ],
+            "name": "TransferSAFECollateralAndDebt",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "surplusDst",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "int256",
+                    "name": "rateMultiplier",
+                    "type": "int256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "dstCoinBalance",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "globalDebt",
+                    "type": "uint256"
+                }
+            ],
+            "name": "UpdateAccumulatedRate",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "addAuthorization",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "approveSAFEModification",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "address", "name": "", "type": "address" }
+            ],
+            "name": "authorizedAccounts",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "safe",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "canModifySAFE",
+            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "address", "name": "", "type": "address" }
+            ],
+            "name": "coinBalance",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "bytes32", "name": "", "type": "bytes32" }
+            ],
+            "name": "collateralTypes",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "debtAmount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "accumulatedRate",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "safetyPrice",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "debtCeiling",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "debtFloor",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "liquidationPrice",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "internalType": "address",
+                    "name": "safe",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "collateralCounterparty",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "debtCounterparty",
+                    "type": "address"
+                },
+                {
+                    "internalType": "int256",
+                    "name": "deltaCollateral",
+                    "type": "int256"
+                },
+                {
+                    "internalType": "int256",
+                    "name": "deltaDebt",
+                    "type": "int256"
+                }
+            ],
+            "name": "confiscateSAFECollateralAndDebt",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "contractEnabled",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "debtDestination",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "coinDestination",
+                    "type": "address"
+                },
+                { "internalType": "uint256", "name": "rad", "type": "uint256" }
+            ],
+            "name": "createUnbackedDebt",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "address", "name": "", "type": "address" }
+            ],
+            "name": "debtBalance",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "denySAFEModification",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "disableContract",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "globalDebt",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "globalDebtCeiling",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "globalUnbackedDebt",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "initializeCollateralType",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                },
+                { "internalType": "int256", "name": "wad", "type": "int256" }
+            ],
+            "name": "modifyCollateralBalance",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                { "internalType": "uint256", "name": "data", "type": "uint256" }
+            ],
+            "name": "modifyParameters",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "parameter",
+                    "type": "bytes32"
+                },
+                { "internalType": "uint256", "name": "data", "type": "uint256" }
+            ],
+            "name": "modifyParameters",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "internalType": "address",
+                    "name": "safe",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "collateralSource",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "debtDestination",
+                    "type": "address"
+                },
+                {
+                    "internalType": "int256",
+                    "name": "deltaCollateral",
+                    "type": "int256"
+                },
+                {
+                    "internalType": "int256",
+                    "name": "deltaDebt",
+                    "type": "int256"
+                }
+            ],
+            "name": "modifySAFECollateralization",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "removeAuthorization",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "address", "name": "", "type": "address" },
+                { "internalType": "address", "name": "", "type": "address" }
+            ],
+            "name": "safeRights",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "bytes32", "name": "", "type": "bytes32" },
+                { "internalType": "address", "name": "", "type": "address" }
+            ],
+            "name": "safes",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "lockedCollateral",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "generatedDebt",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "uint256", "name": "rad", "type": "uint256" }
+            ],
+            "name": "settleDebt",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "bytes32", "name": "", "type": "bytes32" },
+                { "internalType": "address", "name": "", "type": "address" }
+            ],
+            "name": "tokenCollateral",
+            "outputs": [
+                { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                { "internalType": "address", "name": "src", "type": "address" },
+                { "internalType": "address", "name": "dst", "type": "address" },
+                { "internalType": "uint256", "name": "wad", "type": "uint256" }
+            ],
+            "name": "transferCollateral",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                { "internalType": "address", "name": "src", "type": "address" },
+                { "internalType": "address", "name": "dst", "type": "address" },
+                { "internalType": "uint256", "name": "rad", "type": "uint256" }
+            ],
+            "name": "transferInternalCoins",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                { "internalType": "address", "name": "src", "type": "address" },
+                { "internalType": "address", "name": "dst", "type": "address" },
+                {
+                    "internalType": "int256",
+                    "name": "deltaCollateral",
+                    "type": "int256"
+                },
+                {
+                    "internalType": "int256",
+                    "name": "deltaDebt",
+                    "type": "int256"
+                }
+            ],
+            "name": "transferSAFECollateralAndDebt",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "collateralType",
+                    "type": "bytes32"
+                },
+                {
+                    "internalType": "address",
+                    "name": "surplusDst",
+                    "type": "address"
+                },
+                {
+                    "internalType": "int256",
+                    "name": "rateMultiplier",
+                    "type": "int256"
+                }
+            ],
+            "name": "updateAccumulatedRate",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ],
+    "devdoc": {
+        "methods": {
+            "addAuthorization(address)": {
+                "params": { "account": "Account to add auth to" }
+            },
+            "approveSAFEModification(address)": {
+                "params": { "account": "Account to give SAFE permissions to" }
+            },
+            "confiscateSAFECollateralAndDebt(bytes32,address,address,address,int256,int256)": {
+                "params": {
+                    "collateralCounterparty": "Who we take/give collateral to",
+                    "collateralType": "Collateral type the SAFE has locked inside",
+                    "debtCounterparty": "Who we take/give debt to",
+                    "deltaCollateral": "Amount of collateral taken/added into the SAFE (wad)",
+                    "deltaDebt": "Amount of collateral taken/added into the SAFE (wad)",
+                    "safe": "Target SAFE"
+                }
+            },
+            "createUnbackedDebt(address,address,uint256)": {
+                "params": {
+                    "coinDestination": "Usually CoinSavingsAccount who passes the new coins to depositors",
+                    "debtDestination": "Usually AccountingEngine that can settle dent with surplus",
+                    "rad": "Amount of debt to create"
+                }
+            },
+            "denySAFEModification(address)": {
+                "params": { "account": "Account to give SAFE permissions to" }
+            },
+            "initializeCollateralType(bytes32)": {
+                "params": {
+                    "collateralType": "Collateral type name (e.g ETH-A, TBTC-B)"
+                }
+            },
+            "modifyCollateralBalance(bytes32,address,int256)": {
+                "params": {
+                    "account": "Account that gets credited/debited",
+                    "collateralType": "Collateral type we join/exit",
+                    "wad": "Amount of collateral"
+                }
+            },
+            "modifyParameters(bytes32,bytes32,uint256)": {
+                "params": {
+                    "collateralType": "Collateral type we modify params for",
+                    "data": "New value for the parameter",
+                    "parameter": "The name of the parameter modified"
+                }
+            },
+            "modifyParameters(bytes32,uint256)": {
+                "params": {
+                    "data": "New value for the parameter",
+                    "parameter": "The name of the parameter modified"
+                }
+            },
+            "modifySAFECollateralization(bytes32,address,address,address,int256,int256)": {
+                "params": {
+                    "collateralSource": "Account we take collateral from/put collateral into",
+                    "collateralType": "Type of collateral to withdraw/deposit in and from the SAFE",
+                    "debtDestination": "Account from which we credit/debit coins and debt",
+                    "deltaCollateral": "Amount of collateral added/extract from the SAFE (wad)",
+                    "deltaDebt": "Amount of debt to generate/repay (wad)",
+                    "safe": "Target SAFE"
+                }
+            },
+            "removeAuthorization(address)": {
+                "params": { "account": "Account to remove auth from" }
+            },
+            "settleDebt(uint256)": {
+                "params": { "rad": "Amount of debt & coins to destroy" }
+            },
+            "transferCollateral(bytes32,address,address,uint256)": {
+                "params": {
+                    "collateralType": "Collateral type transferred",
+                    "dst": "Collateral destination",
+                    "src": "Collateral source",
+                    "wad": "Amount of collateral transferred"
+                }
+            },
+            "transferInternalCoins(address,address,uint256)": {
+                "params": {
+                    "dst": "Coins destination",
+                    "rad": "Amount of coins transferred",
+                    "src": "Coins source"
+                }
+            },
+            "transferSAFECollateralAndDebt(bytes32,address,address,int256,int256)": {
+                "params": {
+                    "collateralType": "Collateral type transferred between SAFEs",
+                    "deltaCollateral": "Amount of collateral to take/add into src and give/take from dst (wad)",
+                    "deltaDebt": "Amount of debt to take/add into src and give/take from dst (wad)",
+                    "dst": "Destination SAFE",
+                    "src": "Source SAFE"
+                }
+            },
+            "updateAccumulatedRate(bytes32,address,int256)": {
+                "params": {
+                    "collateralType": "Collateral type we accrue interest for",
+                    "rateMultiplier": "Multiplier applied to the debtAmount in order to calculate the surplus [ray]",
+                    "surplusDst": "Destination for amount of surplus created by applying the interest rate to debt created by SAFEs with 'collateralType'"
+                }
             }
-        ],
-        "name": "AddAuthorization",
-        "type": "event"
+        }
     },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "sender",
-                "type": "address"
+    "userdoc": {
+        "methods": {
+            "addAuthorization(address)": { "notice": "Add auth to an account" },
+            "approveSAFEModification(address)": {
+                "notice": "Allow an address to modify your SAFE"
             },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "account",
-                "type": "address"
+            "canModifySAFE(address,address)": {
+                "notice": "Checks whether msg.sender has the right to modify a SAFE*"
+            },
+            "confiscateSAFECollateralAndDebt(bytes32,address,address,address,int256,int256)": {
+                "notice": "Normally used by the LiquidationEngine in order to confiscate collateral and debt from a SAFE and give them to someone else"
+            },
+            "createUnbackedDebt(address,address,uint256)": {
+                "notice": "Usually called by CoinSavingsAccount in order to create unbacked debt"
+            },
+            "denySAFEModification(address)": {
+                "notice": "Deny an address the rights to modify your SAFE"
+            },
+            "disableContract()": {
+                "notice": "Disable this contract (normally called by GlobalSettlement)"
+            },
+            "initializeCollateralType(bytes32)": {
+                "notice": "Creates a brand new collateral type"
+            },
+            "modifyCollateralBalance(bytes32,address,int256)": {
+                "notice": "Join/exit collateral into and and out of the system"
+            },
+            "modifyParameters(bytes32,bytes32,uint256)": {
+                "notice": "Modify collateral specific params"
+            },
+            "modifyParameters(bytes32,uint256)": {
+                "notice": "Modify general uint params"
+            },
+            "modifySAFECollateralization(bytes32,address,address,address,int256,int256)": {
+                "notice": "Add/remove collateral or put back/generate more debt in a SAFE"
+            },
+            "removeAuthorization(address)": {
+                "notice": "Remove auth from an account"
+            },
+            "settleDebt(uint256)": {
+                "notice": "Nullify an amount of coins with an equal amount of debt"
+            },
+            "transferCollateral(bytes32,address,address,uint256)": {
+                "notice": "Transfer collateral between accounts"
+            },
+            "transferInternalCoins(address,address,uint256)": {
+                "notice": "Transfer internal coins (does not affect external balances from Coin.sol)"
+            },
+            "transferSAFECollateralAndDebt(bytes32,address,address,int256,int256)": {
+                "notice": "Transfer collateral and/or debt between SAFEs"
+            },
+            "updateAccumulatedRate(bytes32,address,int256)": {
+                "notice": "Usually called by TaxCollector in order to accrue interest on a specific collateral type"
             }
-        ],
-        "name": "ApproveSAFEModification",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "safe",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "collateralCounterparty",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "debtCounterparty",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "int256",
-                "name": "deltaCollateral",
-                "type": "int256"
-            },
-            {
-                "indexed": false,
-                "internalType": "int256",
-                "name": "deltaDebt",
-                "type": "int256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "globalUnbackedDebt",
-                "type": "uint256"
-            }
-        ],
-        "name": "ConfiscateSAFECollateralAndDebt",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "debtDestination",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "coinDestination",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "rad",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "debtDstBalance",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "coinDstBalance",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "globalUnbackedDebt",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "globalDebt",
-                "type": "uint256"
-            }
-        ],
-        "name": "CreateUnbackedDebt",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "sender",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "account",
-                "type": "address"
-            }
-        ],
-        "name": "DenySAFEModification",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [],
-        "name": "DisableContract",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            }
-        ],
-        "name": "InitializeCollateralType",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "account",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "int256",
-                "name": "wad",
-                "type": "int256"
-            }
-        ],
-        "name": "ModifyCollateralBalance",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "parameter",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "data",
-                "type": "uint256"
-            }
-        ],
-        "name": "ModifyParameters",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "parameter",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "data",
-                "type": "uint256"
-            }
-        ],
-        "name": "ModifyParameters",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "safe",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "collateralSource",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "debtDestination",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "int256",
-                "name": "deltaCollateral",
-                "type": "int256"
-            },
-            {
-                "indexed": false,
-                "internalType": "int256",
-                "name": "deltaDebt",
-                "type": "int256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "lockedCollateral",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "generatedDebt",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "globalDebt",
-                "type": "uint256"
-            }
-        ],
-        "name": "ModifySAFECollateralization",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "account",
-                "type": "address"
-            }
-        ],
-        "name": "RemoveAuthorization",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "rad",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "debtBalance",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "coinBalance",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "globalUnbackedDebt",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "globalDebt",
-                "type": "uint256"
-            }
-        ],
-        "name": "SettleDebt",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "src",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "dst",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "wad",
-                "type": "uint256"
-            }
-        ],
-        "name": "TransferCollateral",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "src",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "dst",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "rad",
-                "type": "uint256"
-            }
-        ],
-        "name": "TransferInternalCoins",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "src",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "dst",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "int256",
-                "name": "deltaCollateral",
-                "type": "int256"
-            },
-            {
-                "indexed": false,
-                "internalType": "int256",
-                "name": "deltaDebt",
-                "type": "int256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "srcLockedCollateral",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "srcGeneratedDebt",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "dstLockedCollateral",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "dstGeneratedDebt",
-                "type": "uint256"
-            }
-        ],
-        "name": "TransferSAFECollateralAndDebt",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "surplusDst",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "int256",
-                "name": "rateMultiplier",
-                "type": "int256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "dstCoinBalance",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "globalDebt",
-                "type": "uint256"
-            }
-        ],
-        "name": "UpdateAccumulatedRate",
-        "type": "event"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "account", "type": "address" }
-        ],
-        "name": "addAuthorization",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "account", "type": "address" }
-        ],
-        "name": "approveSAFEModification",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-        ],
-        "name": "authorizedAccounts",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "safe", "type": "address" },
-            { "internalType": "address", "name": "account", "type": "address" }
-        ],
-        "name": "canModifySAFE",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-        ],
-        "name": "coinBalance",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "bytes32", "name": "", "type": "bytes32" }
-        ],
-        "name": "collateralTypes",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "debtAmount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "accumulatedRate",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "safetyPrice",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "debtCeiling",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "debtFloor",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "liquidationPrice",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            { "internalType": "address", "name": "safe", "type": "address" },
-            {
-                "internalType": "address",
-                "name": "collateralCounterparty",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "debtCounterparty",
-                "type": "address"
-            },
-            {
-                "internalType": "int256",
-                "name": "deltaCollateral",
-                "type": "int256"
-            },
-            { "internalType": "int256", "name": "deltaDebt", "type": "int256" }
-        ],
-        "name": "confiscateSAFECollateralAndDebt",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "contractEnabled",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "debtDestination",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "coinDestination",
-                "type": "address"
-            },
-            { "internalType": "uint256", "name": "rad", "type": "uint256" }
-        ],
-        "name": "createUnbackedDebt",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-        ],
-        "name": "debtBalance",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "account", "type": "address" }
-        ],
-        "name": "denySAFEModification",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "disableContract",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "globalDebt",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "globalDebtCeiling",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "globalUnbackedDebt",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            }
-        ],
-        "name": "initializeCollateralType",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            { "internalType": "address", "name": "account", "type": "address" },
-            { "internalType": "int256", "name": "wad", "type": "int256" }
-        ],
-        "name": "modifyCollateralBalance",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "parameter",
-                "type": "bytes32"
-            },
-            { "internalType": "uint256", "name": "data", "type": "uint256" }
-        ],
-        "name": "modifyParameters",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "parameter",
-                "type": "bytes32"
-            },
-            { "internalType": "uint256", "name": "data", "type": "uint256" }
-        ],
-        "name": "modifyParameters",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            { "internalType": "address", "name": "safe", "type": "address" },
-            {
-                "internalType": "address",
-                "name": "collateralSource",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "debtDestination",
-                "type": "address"
-            },
-            {
-                "internalType": "int256",
-                "name": "deltaCollateral",
-                "type": "int256"
-            },
-            { "internalType": "int256", "name": "deltaDebt", "type": "int256" }
-        ],
-        "name": "modifySAFECollateralization",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "account", "type": "address" }
-        ],
-        "name": "removeAuthorization",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "", "type": "address" },
-            { "internalType": "address", "name": "", "type": "address" }
-        ],
-        "name": "safeRights",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "bytes32", "name": "", "type": "bytes32" },
-            { "internalType": "address", "name": "", "type": "address" }
-        ],
-        "name": "safes",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "lockedCollateral",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "generatedDebt",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "uint256", "name": "rad", "type": "uint256" }
-        ],
-        "name": "settleDebt",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "bytes32", "name": "", "type": "bytes32" },
-            { "internalType": "address", "name": "", "type": "address" }
-        ],
-        "name": "tokenCollateral",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            { "internalType": "address", "name": "src", "type": "address" },
-            { "internalType": "address", "name": "dst", "type": "address" },
-            { "internalType": "uint256", "name": "wad", "type": "uint256" }
-        ],
-        "name": "transferCollateral",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "src", "type": "address" },
-            { "internalType": "address", "name": "dst", "type": "address" },
-            { "internalType": "uint256", "name": "rad", "type": "uint256" }
-        ],
-        "name": "transferInternalCoins",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            { "internalType": "address", "name": "src", "type": "address" },
-            { "internalType": "address", "name": "dst", "type": "address" },
-            {
-                "internalType": "int256",
-                "name": "deltaCollateral",
-                "type": "int256"
-            },
-            { "internalType": "int256", "name": "deltaDebt", "type": "int256" }
-        ],
-        "name": "transferSAFECollateralAndDebt",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "address",
-                "name": "surplusDst",
-                "type": "address"
-            },
-            {
-                "internalType": "int256",
-                "name": "rateMultiplier",
-                "type": "int256"
-            }
-        ],
-        "name": "updateAccumulatedRate",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
+        }
     }
-]
+}
