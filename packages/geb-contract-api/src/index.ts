@@ -23,8 +23,22 @@ import { SafeEngine } from './generated/SAFEEngine'
 import { SettlementSurplusAuctioneer } from './generated/SettlementSurplusAuctioneer'
 import { StabilityFeeTreasury } from './generated/StabilityFeeTreasury'
 import { TaxCollector } from './generated/TaxCollector'
+import { Weth } from './generated/WETH'
+import {
+    ContractApis,
+    ContractAddresses,
+    ContractList,
+    ContractKey,
+} from './contract-apis'
+import { KOVAN_ADDRESSES, MAINNET_ADDRESSES } from './addresses'
 
 export {
+    // Address lists
+    KOVAN_ADDRESSES,
+    MAINNET_ADDRESSES,
+    // Factory
+    ContractApis,
+    // Individual contracts
     AccountingEngine,
     BasicCollateralJoin,
     CoinJoin,
@@ -50,4 +64,9 @@ export {
     SettlementSurplusAuctioneer,
     StabilityFeeTreasury,
     TaxCollector,
+    Weth,
+    // Misc
+    ContractAddresses,
+    ContractList,
+    ContractKey,
 }
