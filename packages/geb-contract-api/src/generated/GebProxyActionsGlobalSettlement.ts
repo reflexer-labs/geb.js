@@ -5,8 +5,6 @@ import { BytesLike } from '@ethersproject/bytes'
 
 import { BigNumberish } from '@ethersproject/bignumber'
 
-import { BigNumber } from '@ethersproject/bignumber'
-
 import { BaseContractAPI } from '@reflexer-finance/geb-provider'
 
 export class GebProxyActionsGlobalSettlement<TX_OBJ> extends BaseContractAPI<

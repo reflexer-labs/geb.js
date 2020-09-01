@@ -22,9 +22,6 @@
         },
         {
             "path": "./packages/geb-test"
-        },
-        {
-            "path": "./packages/--timeout"
         }
     ],
     "files": []

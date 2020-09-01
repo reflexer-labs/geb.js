@@ -18,7 +18,12 @@ export function codegenContract(contract: Contract, abi: RawAbiDefinition[]) {
     }
     `
 
-    if (template.includes('BigNumber')) {
+    if (
+        template.includes('BigNumber)') ||
+        template.includes('BigNumber ') ||
+        template.includes('BigNumber\n') ||
+        template.includes('BigNumber>')
+    ) {
         template =
             `   
     import { BigNumber } from '@ethersproject/bignumber'

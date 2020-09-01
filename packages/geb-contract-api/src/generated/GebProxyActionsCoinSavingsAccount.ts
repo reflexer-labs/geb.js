@@ -3,8 +3,6 @@
 
 import { BigNumberish } from '@ethersproject/bignumber'
 
-import { BigNumber } from '@ethersproject/bignumber'
-
 import { BaseContractAPI } from '@reflexer-finance/geb-provider'
 
 export class GebProxyActionsCoinSavingsAccount<TX_OBJ> extends BaseContractAPI<
