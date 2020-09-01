@@ -10,10 +10,15 @@ import { Dictionary } from 'ts-essentials'
 import { generateInputTypes, generateOutputTypes } from './types'
 
 export function codegenContract(contract: Contract, abi: RawAbiDefinition[]) {
+    const isERCO20 =
+        contract.name === 'Weth' || contract.name === 'Coin' ? true : false
+
+    // prettier-ignore
     let template = `
     import { BaseContractAPI } from '@reflexer-finance/geb-provider'
-
-    export class ${contract.name}<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
+    ${isERCO20 ? `import { ERC20 } from '@reflexer-finance/geb-provider'` : ''}
+    
+    export class ${contract.name}<TX_OBJ> extends BaseContractAPI<TX_OBJ>${isERCO20 ? ' implements ERC20<TX_OBJ>' : ''} {
         ${codegenForFunctions(contract.functions, abi)}
     }
     `

@@ -8,8 +8,11 @@ import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 import { BaseContractAPI } from '@reflexer-finance/geb-provider'
+import { ERC20 } from '@reflexer-finance/geb-provider'
 
-export class Coin<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
+export class Coin<TX_OBJ>
+    extends BaseContractAPI<TX_OBJ>
+    implements ERC20<TX_OBJ> {
     DOMAIN_SEPARATOR(): Promise<string> {
         // prettier-ignore
         // @ts-ignore

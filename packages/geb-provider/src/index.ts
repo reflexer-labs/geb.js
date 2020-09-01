@@ -4,5 +4,6 @@ import {
     Inputs,
 } from './chain-provider-interface'
 import { BaseContractAPI } from './base-contract-api'
+import { ERC20 } from './erc20-interface'
 
-export { ChainProviderInterface, BaseContractAPI, AbiDefinition, Inputs }
+export { ChainProviderInterface, BaseContractAPI, AbiDefinition, Inputs, ERC20 }
