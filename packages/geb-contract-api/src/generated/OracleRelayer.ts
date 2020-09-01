@@ -2,7 +2,9 @@
 /* tslint:disable */
 
 import { BytesLike } from '@ethersproject/bytes'
-import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
+
+import { BigNumber } from '@ethersproject/bignumber'
+
 import { BaseContractAPI } from '@reflexer-finance/geb-provider'
 
 export class OracleRelayer<TX_OBJ> extends BaseContractAPI<TX_OBJ> {

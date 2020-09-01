@@ -10,15 +10,36 @@ import { Dictionary } from 'ts-essentials'
 import { generateInputTypes, generateOutputTypes } from './types'
 
 export function codegenContract(contract: Contract, abi: RawAbiDefinition[]) {
-    return `
-    import { BytesLike } from "@ethersproject/bytes"
-    import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
+    let template = `
     import { BaseContractAPI } from '@reflexer-finance/geb-provider'
 
     export class ${contract.name}<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
         ${codegenForFunctions(contract.functions, abi)}
     }
     `
+
+    if (template.includes('BigNumber')) {
+        template =
+            `   
+    import { BigNumber } from '@ethersproject/bignumber'
+    ` + template
+    }
+
+    if (template.includes('BigNumberish')) {
+        template =
+            `   
+    import { BigNumberish } from '@ethersproject/bignumber'
+    ` + template
+    }
+
+    if (template.includes('BytesLike')) {
+        template =
+            `   
+        import { BytesLike } from "@ethersproject/bytes"
+       ` + template
+    }
+
+    return template
 }
 
 export function codegenForFunctions(

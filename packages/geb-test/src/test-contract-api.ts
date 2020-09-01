@@ -24,7 +24,6 @@ describe('Test contract API', async () => {
             )
             gebProvider = new EthersProvider(provider)
             safeEngine = new SafeEngine(
-                'SafeEngine',
                 '0xc06e2cc879F306Ae1ad3eAAa450B6aA57cd6798C',
                 gebProvider
             )
