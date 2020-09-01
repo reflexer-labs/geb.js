@@ -1,3 +1,15 @@
 [submodule "deps/geb"]
 	path = deps/geb
 	url = https://github.com/reflexer-labs/geb
+[submodule "deps/geb-safe-manager"]
+	path = deps/geb-safe-manager
+	url = https://github.com/reflexer-labs/geb-safe-manager
+[submodule "deps/geb-proxy-registry"]
+	path = deps/geb-proxy-registry
+	url = https://github.com/reflexer-labs/geb-proxy-registry
+[submodule "deps/geb-proxy-actions"]
+	path = deps/geb-proxy-actions
+	url = https://github.com/reflexer-labs/geb-proxy-actions
+[submodule "deps/ds-proxy"]
+	path = deps/ds-proxy
+	url = https://github.com/reflexer-labs/ds-proxy
