@@ -1,6 +1,6 @@
 {
     "name": "@reflexer-finance/geb-ethers-provider",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "",
     "main": "./lib/index.js",
     "scripts": {
@@ -9,7 +9,7 @@
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
     "license": "ISC",
     "dependencies": {
-        "@reflexer-finance/geb-provider": "0.0.0"
+        "@reflexer-finance/geb-provider": "^0.0.1"
     },
     "devDependencies": {
         "ethers": "^5.0.9"
