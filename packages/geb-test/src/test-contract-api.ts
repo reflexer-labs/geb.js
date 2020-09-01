@@ -1,7 +1,11 @@
 import assert from 'assert'
 
 import { ethers } from 'ethers'
-import { SafeEngine, OracleRelayer } from '@reflexer-finance/geb-contract-api'
+import {
+    SafeEngine,
+    OracleRelayer,
+    ContractApis,
+} from '@reflexer-finance/geb-contract-api'
 import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
 
 const NULL_ADDRESS = '0x0000000000000000000000000000000000000000'
@@ -109,6 +113,17 @@ describe('Test contract API', async () => {
 
             const rate = await oracleRelayer.redemptionRate()
             assert.ok(rate.gt(ethers.BigNumber.from('10').pow(27)))
+        })
+
+        it('Test with contract API factory', async () => {
+            const contracts = new ContractApis('kovan', gebProvider)
+            const debHouseExpect = '0x0E742BDF585e3EC1Bf0B7A2a52562EC3D17D7adC'
+
+            assert.equal(contracts.debtAuctionHouse.address, debHouseExpect)
+
+            const debtHouse = await contracts.accountingEngine.debtAuctionHouse()
+
+            assert.equal(debtHouse, debHouseExpect)
         })
     })
 })
