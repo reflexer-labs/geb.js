@@ -1,7 +1,7 @@
 import assert from 'assert'
 
 import { ethers } from 'ethers'
-import { SafeEngine } from '@reflexer-finance/geb-contract-api'
+import { SafeEngine, OracleRelayer } from '@reflexer-finance/geb-contract-api'
 import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
 
 const NULL_ADDRESS = '0x0000000000000000000000000000000000000000'
@@ -20,7 +20,7 @@ describe('Test contract API', async () => {
         beforeEach(() => {
             // TODO: move to testchain
             provider = new ethers.providers.JsonRpcProvider(
-                'https://kovan.infura.io/v3/7a5c8172af0d41fd896a18dd1d866f87'
+                'https://parity0.kovan.makerfoundation.com:8545'
             )
             gebProvider = new EthersProvider(provider)
             safeEngine = new SafeEngine(
@@ -99,6 +99,16 @@ describe('Test contract API', async () => {
                     'SAFEEngine/not-allowed'
                 )
             }
+        })
+
+        it('Test Oracle relayer', async () => {
+            const oracleRelayer = new OracleRelayer(
+                '0x896A6203F4Df153B5F233740346Aa61B98dF7E61',
+                gebProvider
+            )
+
+            const rate = await oracleRelayer.redemptionRate()
+            assert.ok(rate.gt(ethers.BigNumber.from('10').pow(27)))
         })
     })
 })
