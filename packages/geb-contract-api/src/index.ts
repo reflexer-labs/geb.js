@@ -4,9 +4,16 @@ import { CoinJoin } from './generated/CoinJoin'
 import { CoinSavingsAccount } from './generated/CoinSavingsAccount'
 import { Coin } from './generated/Coin'
 import { DebtAuctionHouse } from './generated/DebtAuctionHouse'
+import { DsProxy } from './generated/DSProxy'
 import { EnglishCollateralAuctionHouse } from './generated/EnglishCollateralAuctionHouse'
 import { EthJoin } from './generated/ETHJoin'
 import { FixedDiscountCollateralAuctionHouse } from './generated/FixedDiscountCollateralAuctionHouse'
+import { GebProxyActionsCoinSavingsAccount } from './generated/GebProxyActionsCoinSavingsAccount'
+import { GebProxyActionsGlobalSettlement } from './generated/GebProxyActionsGlobalSettlement'
+import { GebProxyActions } from './generated/GebProxyActions'
+import { GebProxyRegistry } from './generated/GebProxyRegistry'
+import { GebSafeManager } from './generated/GebSafeManager'
+import { GetSafes } from './generated/GetSafes'
 import { GlobalSettlement } from './generated/GlobalSettlement'
 import { LiquidationEngine } from './generated/LiquidationEngine'
 import { OracleRelayer } from './generated/OracleRelayer'
@@ -24,9 +31,16 @@ export {
     CoinSavingsAccount,
     Coin,
     DebtAuctionHouse,
+    DsProxy,
     EnglishCollateralAuctionHouse,
     EthJoin,
     FixedDiscountCollateralAuctionHouse,
+    GebProxyActionsCoinSavingsAccount,
+    GebProxyActionsGlobalSettlement,
+    GebProxyActions,
+    GebProxyRegistry,
+    GebSafeManager,
+    GetSafes,
     GlobalSettlement,
     LiquidationEngine,
     OracleRelayer,
