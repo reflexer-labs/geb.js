@@ -1,6 +1,6 @@
 {
     "name": "geb",
-    "version": "0.0.1",
+    "version": "0.0.0",
     "description": "Javascript client for the Geb reflex bond.",
     "main": "index.js",
     "scripts": {

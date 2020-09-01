@@ -13,7 +13,7 @@ fs.mkdirSync(`packages/${name}/src`, { recursive: true })
 const packageJson = `
 {
     "name": "@reflexer-finance/${name}",
-    "version": "0.0.1",
+    "version": "0.0.0",
     "description": "",
     "main": "./lib/index.js",
     "scripts": {
