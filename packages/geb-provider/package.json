@@ -7,5 +7,8 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "@ethersproject/bignumber": "5.x"
+    }
 }
