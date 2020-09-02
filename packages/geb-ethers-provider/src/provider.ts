@@ -2,11 +2,11 @@ import {
     ChainProviderInterface,
     AbiDefinition,
     Inputs,
+    TransactionRequest,
 } from '@reflexer-finance/geb-provider'
-import { Contract, providers, PopulatedTransaction } from 'ethers'
+import { Contract, providers } from 'ethers'
 
-export class EthersProvider
-    implements ChainProviderInterface<PopulatedTransaction> {
+export class EthersProvider implements ChainProviderInterface {
     constructor(public provider: providers.Provider) {}
 
     async ethCall(
@@ -33,14 +33,25 @@ export class EthersProvider
     }
 
     // @ts-ignore TODO: Remove
-    ethSend(
+    async ethSend(
         address: string,
         abi: AbiDefinition,
         params: Inputs
-    ): Promise<PopulatedTransaction> {
+    ): Promise<TransactionRequest> {
         const contract = new Contract(address, [abi], this.provider)
 
-        return contract.populateTransaction[abi.name](...params)
+        const results = await contract.populateTransaction[abi.name](...params)
+
+        return {
+            from: results.from,
+            to: results.to,
+            data: results.data?.toString(),
+            value: results.value?.toString(),
+            gasLimit: results.gasLimit?.toString(),
+            gasPrice: results.gasPrice?.toString(),
+            chainId: results.chainId,
+            nonce: results.nonce,
+        }
     }
 
     decodeError(error: any): string {
