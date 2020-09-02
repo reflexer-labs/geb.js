@@ -4,7 +4,7 @@ import {
     Inputs,
     TransactionRequest,
 } from '@reflexer-finance/geb-provider'
-import { Contract, providers } from 'ethers'
+import { Contract, providers, BigNumber } from 'ethers'
 
 export class EthersProvider implements ChainProviderInterface {
     constructor(public provider: providers.Provider) {}
@@ -70,5 +70,19 @@ export class EthersProvider implements ChainProviderInterface {
         return decodeURIComponent(data.slice(2).replace(/[0-9a-f]{2}/g, '%$&'))
             .replace(/\0/g, '')
             .slice(2)
+    }
+
+    async estimateGas(transaction: TransactionRequest): Promise<BigNumber> {
+        let result: BigNumber
+        try {
+            result = await this.provider.estimateGas(transaction)
+        } catch (err) {
+            console.error(`Error ! run this command to understand your error`)
+            console.log(
+                `seth call ${transaction.to} ${transaction.data} 2>&1 >/dev/null | grep "Reverted\ 0x" | cut -c 50-241 | xxd -p -r`
+            )
+        }
+
+        return result
     }
 }

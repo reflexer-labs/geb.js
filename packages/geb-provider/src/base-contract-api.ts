@@ -21,11 +21,14 @@ export class BaseContractAPI {
         public chainProvider: ChainProviderInterface
     ) {}
 
-    ethCall(abiFragment: AbiDefinition, params: Inputs): Promise<any> {
+    protected ethCall(
+        abiFragment: AbiDefinition,
+        params: Inputs
+    ): Promise<any> {
         return this.chainProvider.ethCall(this.address, abiFragment, params)
     }
 
-    ethSend(
+    protected ethSend(
         abiFragment: AbiDefinition,
         params: Inputs
     ): Promise<TransactionRequest> {

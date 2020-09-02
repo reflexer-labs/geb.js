@@ -1,4 +1,5 @@
 import { TransactionRequest } from './base-contract-api'
+import { BigNumber } from '@ethersproject/bignumber'
 
 export interface AbiDefinition {
     name: string
@@ -33,4 +34,6 @@ export interface ChainProviderInterface {
     ): Promise<TransactionRequest>
 
     decodeError(error: any): string
+
+    estimateGas(transaction: TransactionRequest): Promise<BigNumber>
 }
