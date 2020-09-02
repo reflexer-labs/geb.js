@@ -49,28 +49,28 @@ export declare type ContractAddresses = 'mainnet' | 'kovan' | ContractList
 
 // Container class instantiate most GEB contracts
 // prettier-ignore
-export class ContractApis<TX_OBJ> {
-    public accountingEngine: AccountingEngine<TX_OBJ>
-    public taxCollector: TaxCollector<TX_OBJ>
-    public liquidationEngine: LiquidationEngine<TX_OBJ>
-    public oracleRelayer: OracleRelayer<TX_OBJ>
-    public globalSettlement: GlobalSettlement<TX_OBJ>
-    public debtAuctionHouse: DebtAuctionHouse<TX_OBJ>
-    public preSettlementSurplusAuctionHouse: PreSettlementSurplusAuctionHouse<TX_OBJ>
-    public postSettlementSurplusAuctionHouse: PostSettlementSurplusAuctionHouse<TX_OBJ>
-    public settlementSurplusAuctioneer: SettlementSurplusAuctioneer<TX_OBJ>
-    public safeManager: GebSafeManager<TX_OBJ>
-    public getSafes: GetSafes<TX_OBJ>
-    public joinETH_A: BasicCollateralJoin<TX_OBJ>
-    public joinCoin: CoinJoin<TX_OBJ>
-    public coin: Coin<TX_OBJ>
-    public proxyRegistry: GebProxyRegistry<TX_OBJ>
-    public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse<TX_OBJ> | EnglishCollateralAuctionHouse<TX_OBJ>
-    public weth: Weth<TX_OBJ>
+export class ContractApis {
+    public accountingEngine: AccountingEngine
+    public taxCollector: TaxCollector
+    public liquidationEngine: LiquidationEngine
+    public oracleRelayer: OracleRelayer
+    public globalSettlement: GlobalSettlement
+    public debtAuctionHouse: DebtAuctionHouse
+    public preSettlementSurplusAuctionHouse: PreSettlementSurplusAuctionHouse
+    public postSettlementSurplusAuctionHouse: PostSettlementSurplusAuctionHouse
+    public settlementSurplusAuctioneer: SettlementSurplusAuctioneer
+    public safeManager: GebSafeManager
+    public getSafes: GetSafes
+    public joinETH_A: BasicCollateralJoin
+    public joinCoin: CoinJoin
+    public coin: Coin
+    public proxyRegistry: GebProxyRegistry
+    public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse | EnglishCollateralAuctionHouse
+    public weth: Weth
 
     constructor(
         network: ContractAddresses,
-        public chainProvider: ChainProviderInterface<TX_OBJ>
+        public chainProvider: ChainProviderInterface
     )
     {
         // Set the address list

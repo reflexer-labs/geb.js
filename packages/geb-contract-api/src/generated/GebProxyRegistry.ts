@@ -2,21 +2,22 @@
 /* tslint:disable */
 
 import { BaseContractAPI } from '@reflexer-finance/geb-provider'
+import { TransactionRequest } from '@reflexer-finance/geb-provider'
 
-export class GebProxyRegistry<TX_OBJ> extends BaseContractAPI<TX_OBJ> {
-    build(): Promise<TX_OBJ> {
+export class GebProxyRegistry extends BaseContractAPI {
+    build(): Promise<TransactionRequest> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"build","outputs":[{"internalType":"address payable","name":"proxy","type":"address"}],"stateMutability":"nonpayable","type":"function"}
 
-        return this.chainProvider.ethSend(this.address, abi, [])
+        return this.ethSend(abi, [])
     }
 
-    proxies(arg0: string): Promise<string> {
+    proxies(address: string): Promise<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"proxies","outputs":[{"internalType":"contract DSProxy","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.chainProvider.ethCall(this.address, abi, [arg0])
+        return this.ethCall(abi, [address])
     }
 }
