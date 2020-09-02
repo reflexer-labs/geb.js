@@ -1,8 +1,34 @@
-import { ChainProviderInterface } from './chain-provider-interface'
+import {
+    ChainProviderInterface,
+    AbiDefinition,
+    Inputs,
+} from './chain-provider-interface'
 
-export abstract class BaseContractAPI<TX_OBJ> {
+export declare type TransactionRequest = {
+    to?: string
+    from?: string
+    nonce?: number
+    gasLimit?: string
+    gasPrice?: string
+    data?: string
+    value?: string
+    chainId?: number
+}
+
+export class BaseContractAPI {
     constructor(
         public address: string,
-        public chainProvider: ChainProviderInterface<TX_OBJ>
+        public chainProvider: ChainProviderInterface
     ) {}
+
+    ethCall(abiFragment: AbiDefinition, params: Inputs): Promise<any> {
+        return this.chainProvider.ethCall(this.address, abiFragment, params)
+    }
+
+    ethSend(
+        abiFragment: AbiDefinition,
+        params: Inputs
+    ): Promise<TransactionRequest> {
+        return this.chainProvider.ethSend(this.address, abiFragment, params)
+    }
 }

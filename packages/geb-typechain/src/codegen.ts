@@ -7,22 +7,30 @@ import {
 
 import { values } from 'lodash'
 import { Dictionary } from 'ts-essentials'
-import { generateInputTypes, generateOutputTypes } from './types'
+import {
+    generateInputTypes,
+    generateOutputTypes,
+    generateInputNames,
+} from './types'
 
 export function codegenContract(contract: Contract, abi: RawAbiDefinition[]) {
+    // Implements the ERC20 interface for the contracts that are ERC20
     const isERCO20 =
         contract.name === 'Weth' || contract.name === 'Coin' ? true : false
 
     // prettier-ignore
     let template = `
-    import { BaseContractAPI } from '@reflexer-finance/geb-provider'
-    ${isERCO20 ? `import { ERC20 } from '@reflexer-finance/geb-provider'` : ''}
     
-    export class ${contract.name}<TX_OBJ> extends BaseContractAPI<TX_OBJ>${isERCO20 ? ' implements ERC20<TX_OBJ>' : ''} {
+    export class ${contract.name} extends BaseContractAPI${isERCO20 ? ' implements ERC20' : ''} {
         ${codegenForFunctions(contract.functions, abi)}
     }
     `
+    template = addImports(template, isERCO20)
 
+    return template
+}
+
+function addImports(template: string, isERC20: boolean): string {
     if (
         template.includes('BigNumber)') ||
         template.includes('BigNumber ') ||
@@ -31,24 +39,38 @@ export function codegenContract(contract: Contract, abi: RawAbiDefinition[]) {
     ) {
         template =
             `   
-    import { BigNumber } from '@ethersproject/bignumber'
-    ` + template
+            import { BigNumber } from '@ethersproject/bignumber'` + template
     }
 
     if (template.includes('BigNumberish')) {
         template =
             `   
-    import { BigNumberish } from '@ethersproject/bignumber'
-    ` + template
+            import { BigNumberish } from '@ethersproject/bignumber'` + template
     }
 
     if (template.includes('BytesLike')) {
         template =
             `   
-        import { BytesLike } from "@ethersproject/bytes"
-       ` + template
+            import { BytesLike } from "@ethersproject/bytes"` + template
     }
 
+    if (isERC20) {
+        template =
+            `
+            import { ERC20 } from '@reflexer-finance/geb-provider'` + template
+    }
+
+    if (template.includes('TransactionRequest')) {
+        template =
+            `
+        import { TransactionRequest } from '@reflexer-finance/geb-provider'` +
+            template
+    }
+
+    template =
+        `
+        import { BaseContractAPI } from '@reflexer-finance/geb-provider'` +
+        template
     return template
 }
 
@@ -86,17 +108,19 @@ function codegenForSingleFunction(
     fn: FunctionDeclaration,
     abiFragment: RawAbiDefinition
 ): string {
+    const processedInputName = generateInputNames(fn.inputs)
+
     // prettier-ignore
     return `
     ${generateFunctionDocumentation(fn.documentation)}
-    ${fn.name}(${generateInputTypes(fn.inputs)}): Promise<${fn.stateMutability === 'view'? `${generateOutputTypes(fn.outputs)}`: 'TX_OBJ'}> {
+    ${fn.name}(${generateInputTypes(fn.inputs)}): Promise<${fn.stateMutability === 'view'? `${generateOutputTypes(fn.outputs)}`: 'TransactionRequest'}> {
         
         // prettier-ignore 
         // @ts-ignore
         const abi = ${JSON.stringify(abiFragment)}
         
-        return this.chainProvider.${fn.stateMutability === 'view' ? 'ethCall' : 'ethSend'}(this.address, abi, [
-            ${fn.inputs.map((input, index) => input.name || `arg${index}` )}
+        return this.${fn.stateMutability === 'view' ? 'ethCall' : 'ethSend'}(abi, [
+            ${processedInputName.join(", ")}
         ])
     }
     `

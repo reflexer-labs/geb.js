@@ -1,3 +1,5 @@
+import { TransactionRequest } from './base-contract-api'
+
 export interface AbiDefinition {
     name: string
     // constant: boolean;
@@ -18,7 +20,7 @@ export interface Inputs extends ReadonlyArray<any> {
     readonly [key: string]: any
 }
 
-export interface ChainProviderInterface<TX_OBJ> {
+export interface ChainProviderInterface {
     ethCall(
         address: string,
         abiFragment: AbiDefinition,
@@ -28,7 +30,7 @@ export interface ChainProviderInterface<TX_OBJ> {
         address: string,
         abiFragment: AbiDefinition,
         params: Inputs
-    ): Promise<TX_OBJ>
+    ): Promise<TransactionRequest>
 
     decodeError(error: any): string
 }
