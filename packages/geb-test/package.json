@@ -11,6 +11,7 @@
     "dependencies": {
         "@reflexer-finance/geb-contract-api": "^0.0.2",
         "@reflexer-finance/geb-ethers-provider": "^0.0.2",
+        "@reflexer-finance/geb-provider": "^0.0.2",
         "@types/mocha": "^8.0.3",
         "mocha": "^8.1.3"
     }

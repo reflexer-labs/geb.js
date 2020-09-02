@@ -5,30 +5,20 @@ import {
     SafeEngine,
     OracleRelayer,
     ContractApis,
+    KOVAN_ADDRESSES,
 } from '@reflexer-finance/geb-contract-api'
-import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
+import { ChainProviderInterface } from '@reflexer-finance/geb-provider'
+import { NULL_ADDRESS, ETH_A, ONE_ADDRESS } from './../const'
 
-const NULL_ADDRESS = '0x0000000000000000000000000000000000000000'
-const ONE_ADDRESS = '0x0000000000000000000000000000000000000001'
-const DUMMY_PRIVATE_KEY =
-    '0x0000000000000000000000000000000000000000000000000000000000000001'
-const ETH_A =
-    '0x4554482d41000000000000000000000000000000000000000000000000000000'
-
-describe('Test contract API', async () => {
-    let provider: ethers.providers.Provider
-    describe('using ethers', async () => {
-        let gebProvider: EthersProvider
-        let safeEngine: SafeEngine<ethers.PopulatedTransaction>
+export const testsWithGenericGebProvider = (
+    gebProvider: ChainProviderInterface
+) => {
+    describe('Using a provider (Ethers OR web3)', async () => {
+        let safeEngine: SafeEngine
 
         beforeEach(() => {
-            // TODO: move to testchain
-            provider = new ethers.providers.JsonRpcProvider(
-                'https://parity0.kovan.makerfoundation.com:8545'
-            )
-            gebProvider = new EthersProvider(provider)
             safeEngine = new SafeEngine(
-                '0xc06e2cc879F306Ae1ad3eAAa450B6aA57cd6798C',
+                KOVAN_ADDRESSES.GEB_SAFE_ENGINE,
                 gebProvider
             )
         })
@@ -63,7 +53,7 @@ describe('Test contract API', async () => {
             assert(tx.data.length >= 8) // Should at least have the function selector
 
             // Estimate the gas cost which emulate the transaction on the node
-            const gasEstimate = await provider.estimateGas(tx)
+            const gasEstimate = await gebProvider.estimateGas(tx)
             assert(gasEstimate.gte(20000))
         })
 
@@ -77,31 +67,10 @@ describe('Test contract API', async () => {
             tx.from = NULL_ADDRESS
 
             try {
-                await provider.estimateGas(tx)
+                await gebProvider.estimateGas(tx)
                 assert.fail('Address 0x0 should have no balance')
             } catch (err) {
                 assert.equal(err.error.data, 'Reverted')
-            }
-        })
-
-        it('Test send with signer (fail)', async () => {
-            const tx = await safeEngine.transferInternalCoins(
-                NULL_ADDRESS,
-                ONE_ADDRESS,
-                '0'
-            )
-
-            const wallet = new ethers.Wallet(DUMMY_PRIVATE_KEY, provider)
-
-            try {
-                await wallet.call(tx)
-                assert.fail('This dummy Address should have no balance')
-            } catch (err) {
-                // This random address should have no balance
-                assert.equal(
-                    gebProvider.decodeError(err.error),
-                    'SAFEEngine/not-allowed'
-                )
             }
         })
 
@@ -126,4 +95,4 @@ describe('Test contract API', async () => {
             assert.equal(debtHouse, debHouseExpect)
         })
     })
-})
+}

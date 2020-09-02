@@ -8,9 +8,6 @@ import { DsProxy } from './generated/DSProxy'
 import { EnglishCollateralAuctionHouse } from './generated/EnglishCollateralAuctionHouse'
 import { EthJoin } from './generated/ETHJoin'
 import { FixedDiscountCollateralAuctionHouse } from './generated/FixedDiscountCollateralAuctionHouse'
-import { GebProxyActionsCoinSavingsAccount } from './generated/GebProxyActionsCoinSavingsAccount'
-import { GebProxyActionsGlobalSettlement } from './generated/GebProxyActionsGlobalSettlement'
-import { GebProxyActions } from './generated/GebProxyActions'
 import { GebProxyRegistry } from './generated/GebProxyRegistry'
 import { GebSafeManager } from './generated/GebSafeManager'
 import { GetSafes } from './generated/GetSafes'
@@ -31,6 +28,7 @@ import {
     ContractKey,
 } from './contract-apis'
 import { KOVAN_ADDRESSES, MAINNET_ADDRESSES } from './addresses'
+import { GebProxyActions, GebProxyActionsGlobalSettlement } from './proxy'
 
 export {
     // Address lists
@@ -49,9 +47,6 @@ export {
     EnglishCollateralAuctionHouse,
     EthJoin,
     FixedDiscountCollateralAuctionHouse,
-    GebProxyActionsCoinSavingsAccount,
-    GebProxyActionsGlobalSettlement,
-    GebProxyActions,
     GebProxyRegistry,
     GebSafeManager,
     GetSafes,
@@ -65,6 +60,9 @@ export {
     StabilityFeeTreasury,
     TaxCollector,
     Weth,
+    // Wrapped Proxies
+    GebProxyActions,
+    GebProxyActionsGlobalSettlement,
     // Misc
     ContractAddresses,
     ContractList,
