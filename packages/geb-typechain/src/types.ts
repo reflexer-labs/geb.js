@@ -10,16 +10,42 @@ export function generateInputTypes(input: Array<AbiParameter>): string {
     if (input.length === 0) {
         return ''
     }
+
+    const processedInputName = generateInputNames(input)
+
     return (
         input
             .map(
                 (input, index) =>
-                    `${input.name || `arg${index}`}: ${generateInputType(
+                    `${processedInputName[index]}: ${generateInputType(
                         input.type
                     )}`
             )
             .join(', ') + ', '
     )
+}
+
+export function generateInputNames(input: Array<AbiParameter>): string[] {
+    // Use the type for the name of anonymous variables
+    let name = input.map((i) => i.name || i.type.type)
+
+    let findDuplicates = (arr: string[]) =>
+        arr.filter((item, index) => arr.indexOf(item) != index)
+
+    // Suffixes the the variable name that are duplicated with a number
+    // i.g: allowance(address,address) => allowance(address1,address2)
+    let duplicates = [...new Set(findDuplicates(name))]
+    for (let d of duplicates) {
+        let count = 1
+        for (let l in name) {
+            if (name[l] === d) {
+                name[l] = name[l] + count.toString()
+                count++
+            }
+        }
+    }
+
+    return name
 }
 
 export function generateOutputTypes(
