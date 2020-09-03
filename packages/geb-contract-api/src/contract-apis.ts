@@ -17,6 +17,8 @@ import {
     EnglishCollateralAuctionHouse,
     FixedDiscountCollateralAuctionHouse,
     Weth,
+    SafeEngine,
+    EthJoin,
 } from '.'
 import { ChainProviderInterface } from '@reflexer-finance/geb-provider'
 import { getAddressList } from './utils'
@@ -82,6 +84,7 @@ export declare type ContractAddresses = 'mainnet' | 'kovan' | ContractList
 // Container class instantiate most GEB contracts
 // prettier-ignore
 export class ContractApis {
+    public safeEngine: SafeEngine
     public accountingEngine: AccountingEngine
     public taxCollector: TaxCollector
     public liquidationEngine: LiquidationEngine
@@ -93,7 +96,7 @@ export class ContractApis {
     public settlementSurplusAuctioneer: SettlementSurplusAuctioneer
     public safeManager: GebSafeManager
     public getSafes: GetSafes
-    public joinETH_A: BasicCollateralJoin
+    public joinETH_A: EthJoin
     public joinCoin: CoinJoin
     public coin: Coin
     public proxyRegistry: GebProxyRegistry
@@ -108,6 +111,7 @@ export class ContractApis {
         // Set the address list
         let addressList = getAddressList(network)
 
+        this.safeEngine = new SafeEngine(addressList.GEB_SAFE_ENGINE, this.chainProvider)
         this.accountingEngine = new AccountingEngine(addressList.GEB_ACCOUNTING_ENGINE, this.chainProvider)
         this.taxCollector = new TaxCollector(addressList.GEB_TAX_COLLECTOR, this.chainProvider)
         this.liquidationEngine = new LiquidationEngine(addressList.GEB_LIQUIDATION_ENGINE, this.chainProvider)
@@ -119,7 +123,7 @@ export class ContractApis {
         this.settlementSurplusAuctioneer = new SettlementSurplusAuctioneer(addressList.GEB_SETTLEMENT_SURPLUS_AUCTIONEER, this.chainProvider)
         this.safeManager = new GebSafeManager(addressList.SAFE_MANAGER, this.chainProvider)
         this.getSafes = new GetSafes(addressList.GET_SAFES, this.chainProvider)
-        this.joinETH_A = new BasicCollateralJoin(addressList.GEB_JOIN_ETH_A, this.chainProvider)
+        this.joinETH_A = new EthJoin(addressList.GEB_JOIN_ETH_A, this.chainProvider)
         this.joinCoin = new CoinJoin(addressList.GEB_COIN_JOIN, this.chainProvider)
         this.coin = new Coin(addressList.GEB_COIN, this.chainProvider)
         this.proxyRegistry = new GebProxyRegistry(addressList.PROXY_REGISTRY, this.chainProvider)

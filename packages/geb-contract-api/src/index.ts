@@ -29,6 +29,7 @@ import {
 } from './contract-apis'
 import { KOVAN_ADDRESSES, MAINNET_ADDRESSES } from './addresses'
 import { GebProxyActions, GebProxyActionsGlobalSettlement } from './proxy'
+import { ETH_A } from './const'
 
 export {
     // Address lists
@@ -67,4 +68,5 @@ export {
     ContractAddresses,
     ContractList,
     ContractKey,
+    ETH_A,
 }

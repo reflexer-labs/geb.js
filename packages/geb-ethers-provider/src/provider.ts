@@ -69,7 +69,7 @@ export class EthersProvider implements ChainProviderInterface {
         } else if (data.startsWith('0x08c379a0')) {
             data = data.slice(10)
         } else if (data === 'Reverted') {
-            return 'Reverted with no reason'
+            return 'Reverted'
         } else if (data === 'Reverted 0x') {
             return '0x'
         } else {
