@@ -18,8 +18,9 @@ import { getAddressList } from './utils'
 
 export class GebProxyActions extends GebProxyActionsGenerated {
     public proxy: DsProxy
-    private proxyActionAddress: string
+    public proxyActionAddress: string
     private addressList: ContractList
+
     constructor(
         public proxyAddress: string,
         network: ContractAddresses,
@@ -29,6 +30,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         this.addressList = getAddressList(network)
         this.proxy = new DsProxy(proxyAddress, this.chainProvider)
         this.proxyActionAddress = this.addressList.PROXY_ACTIONS
+        this.address = proxyAddress
     }
 
     // Override ETH send to use proxy
@@ -49,6 +51,14 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         }
 
         return this.proxy.execute(ethValue, this.proxyActionAddress, data)
+    }
+
+    async ethCall(abiFragment: AbiDefinition, params: Inputs): Promise<any> {
+        return this.chainProvider.ethCall(
+            this.proxyActionAddress,
+            abiFragment,
+            params
+        )
     }
 
     allowHandler(usr: string, ok: BigNumberish): Promise<TransactionRequest> {

@@ -40,11 +40,10 @@ export const testsProxyActionWithGenericGebProvider = (
         it('Test basic asserts', async () => {
             assert.equal(proxy.proxyAddress, KOVAN_ADDRESSES.PROXY_DEPLOYER)
             assert.equal(
-                // @ts-ignore For test purposes, access private members
                 proxy.proxyActionAddress,
                 KOVAN_ADDRESSES.PROXY_ACTIONS
             )
-            assert.equal(proxy.address, KOVAN_ADDRESSES.PROXY_ACTIONS)
+            assert.equal(proxy.address, KOVAN_ADDRESSES.PROXY_DEPLOYER)
             assert.equal(await proxy.proxy.owner(), KOVAN_ADDRESSES.ETH_FROM)
         })
 
