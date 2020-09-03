@@ -1,5 +1,5 @@
 import {
-    ChainProviderInterface,
+    GebProviderInterface,
     AbiDefinition,
     Inputs,
 } from './chain-provider-interface'
@@ -19,7 +19,7 @@ export declare type TransactionRequest = {
 export class BaseContractAPI {
     constructor(
         public address: string,
-        public chainProvider: ChainProviderInterface
+        public chainProvider: GebProviderInterface
     ) {}
 
     protected ethCall(

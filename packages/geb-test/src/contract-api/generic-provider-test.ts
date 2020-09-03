@@ -7,11 +7,11 @@ import {
     ContractApis,
     KOVAN_ADDRESSES,
 } from '@reflexer-finance/geb-contract-api'
-import { ChainProviderInterface } from '@reflexer-finance/geb-provider'
+import { GebProviderInterface } from '@reflexer-finance/geb-provider'
 import { NULL_ADDRESS, ETH_A, ONE_ADDRESS } from './../const'
 
 export const testsWithGenericGebProvider = (
-    gebProvider: ChainProviderInterface
+    gebProvider: GebProviderInterface
 ) => {
     describe('Using a provider (Ethers OR web3)', async () => {
         let safeEngine: SafeEngine

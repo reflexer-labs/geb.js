@@ -19,7 +19,7 @@ import {
     Weth,
     SafeEngine,
 } from '.'
-import { ChainProviderInterface } from '@reflexer-finance/geb-provider'
+import { GebProviderInterface } from '@reflexer-finance/geb-provider'
 import { getAddressList } from './utils'
 
 export type ContractKey =
@@ -104,7 +104,7 @@ export class ContractApis {
 
     constructor(
         network: ContractAddresses,
-        public chainProvider: ChainProviderInterface
+        public chainProvider: GebProviderInterface
     )
     {
         // Set the address list

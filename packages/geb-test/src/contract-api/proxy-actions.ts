@@ -6,11 +6,11 @@ import {
     GebProxyActions,
     ContractApis,
 } from '@reflexer-finance/geb-contract-api'
-import { ChainProviderInterface } from '@reflexer-finance/geb-provider'
+import { GebProviderInterface } from '@reflexer-finance/geb-provider'
 import { NULL_ADDRESS, ETH_A, ONE_ADDRESS, WAD } from './../const'
 
 export const testsProxyActionWithGenericGebProvider = (
-    gebProvider: ChainProviderInterface
+    gebProvider: GebProviderInterface
 ) => {
     describe('Using a provider (Ethers OR web3)', async () => {
         // let proxyAction: GebProxyActions

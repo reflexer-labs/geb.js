@@ -10,7 +10,6 @@
     "license": "ISC",
     "dependencies": {
         "@ethersproject/bignumber": "5.x",
-        "@ethersproject/bytes": "5.x",
         "@reflexer-finance/geb-provider": "^0.0.4"
     },
     "devDependencies": {

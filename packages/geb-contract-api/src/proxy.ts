@@ -1,6 +1,6 @@
 import { DsProxy, ContractAddresses } from '.'
 import {
-    ChainProviderInterface,
+    GebProviderInterface,
     AbiDefinition,
     Inputs,
     TransactionRequest,
@@ -17,7 +17,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
     constructor(
         public proxyAddress: string,
         network: ContractAddresses,
-        chainProvider: ChainProviderInterface
+        chainProvider: GebProviderInterface
     ) {
         super(getAddressList(network).PROXY_ACTIONS, chainProvider)
         this.proxy = new DsProxy(proxyAddress, this.chainProvider)
@@ -51,7 +51,7 @@ export class GebProxyActionsGlobalSettlement extends GebProxyActionsGlobalSettle
     constructor(
         public proxyAddress: string,
         network: ContractAddresses,
-        chainProvider: ChainProviderInterface
+        chainProvider: GebProviderInterface
     ) {
         super(getAddressList(network).PROXY_ACTIONS, chainProvider)
         this.proxy = new DsProxy(proxyAddress, this.chainProvider)

@@ -21,7 +21,7 @@ export interface Inputs extends ReadonlyArray<any> {
     readonly [key: string]: any
 }
 
-export interface ChainProviderInterface {
+export interface GebProviderInterface {
     ethCall(
         address: string,
         abiFragment: AbiDefinition,

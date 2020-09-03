@@ -1,12 +1,12 @@
 import {
-    ChainProviderInterface,
+    GebProviderInterface,
     AbiDefinition,
     Inputs,
     TransactionRequest,
 } from '@reflexer-finance/geb-provider'
 import { Contract, providers, BigNumber } from 'ethers'
 
-export class EthersProvider implements ChainProviderInterface {
+export class EthersProvider implements GebProviderInterface {
     constructor(public provider: providers.Provider) {}
 
     async ethCall(
