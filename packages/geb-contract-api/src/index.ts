@@ -21,6 +21,9 @@ import { SettlementSurplusAuctioneer } from './generated/SettlementSurplusAuctio
 import { StabilityFeeTreasury } from './generated/StabilityFeeTreasury'
 import { TaxCollector } from './generated/TaxCollector'
 import { Weth } from './generated/WETH'
+import { GebProxyActions } from './generated/GebProxyActions'
+import { GebProxyActionsGlobalSettlement } from './generated/GebProxyActionsGlobalSettlement'
+
 import {
     ContractApis,
     ContractAddresses,
@@ -28,7 +31,6 @@ import {
     ContractKey,
 } from './contract-apis'
 import { KOVAN_ADDRESSES, MAINNET_ADDRESSES } from './addresses'
-import { GebProxyActions, GebProxyActionsGlobalSettlement } from './proxy'
 import { ETH_A } from './const'
 
 export {
@@ -61,7 +63,6 @@ export {
     StabilityFeeTreasury,
     TaxCollector,
     Weth,
-    // Wrapped Proxies
     GebProxyActions,
     GebProxyActionsGlobalSettlement,
     // Misc

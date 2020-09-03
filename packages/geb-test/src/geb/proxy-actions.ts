@@ -3,11 +3,10 @@ import assert from 'assert'
 import {
     KOVAN_ADDRESSES,
     GebProxyRegistry,
-    GebProxyActions,
-    ContractApis,
 } from '@reflexer-finance/geb-contract-api'
 import { GebProviderInterface } from '@reflexer-finance/geb-provider'
-import { NULL_ADDRESS, ETH_A, ONE_ADDRESS, WAD } from './../const'
+import { GebProxyActions } from 'geb.js'
+import { NULL_ADDRESS, ETH_A, ONE_ADDRESS, WAD } from '../const'
 
 export const testsProxyActionWithGenericGebProvider = (
     gebProvider: GebProviderInterface
@@ -77,12 +76,7 @@ export const testsProxyActionWithGenericGebProvider = (
             })
 
             it('Test simple proxy action function', async () => {
-                const contracts = new ContractApis('kovan', gebProvider)
-                const tx = await proxy.openSAFE(
-                    contracts.safeManager.address,
-                    ETH_A,
-                    ONE_ADDRESS
-                )
+                const tx = await proxy.openSAFE(ETH_A, ONE_ADDRESS)
                 tx['from'] = KOVAN_ADDRESSES.ETH_FROM
 
                 try {
@@ -93,13 +87,8 @@ export const testsProxyActionWithGenericGebProvider = (
             })
 
             it('Test complex payable proxy action function', async () => {
-                const contracts = new ContractApis('kovan', gebProvider)
                 const tx = await proxy.openLockETHAndGenerateDebt(
                     WAD,
-                    contracts.safeManager.address,
-                    contracts.taxCollector.address,
-                    contracts.joinETH_A.address,
-                    contracts.joinCoin.address,
                     ETH_A,
                     WAD.mul(20)
                 )
