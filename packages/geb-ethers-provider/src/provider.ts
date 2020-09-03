@@ -55,7 +55,14 @@ export class EthersProvider implements ChainProviderInterface {
     }
 
     decodeError(error: any): string {
-        let data = error.data as string
+        let data: string
+        if (error.data) {
+            data = error.data
+        } else if (error?.error?.data) {
+            data = error.error.data
+        } else {
+            throw new Error('Could not find error information')
+        }
 
         if (data.startsWith('Reverted 0x08c379a0')) {
             data = data.slice(19)
@@ -63,6 +70,8 @@ export class EthersProvider implements ChainProviderInterface {
             data = data.slice(10)
         } else if (data === 'Reverted') {
             return 'Reverted with no reason'
+        } else if (data === 'Reverted 0x') {
+            return '0x'
         } else {
             throw new Error('Could not decode error')
         }
@@ -73,16 +82,26 @@ export class EthersProvider implements ChainProviderInterface {
     }
 
     async estimateGas(transaction: TransactionRequest): Promise<BigNumber> {
-        let result: BigNumber
-        try {
-            result = await this.provider.estimateGas(transaction)
-        } catch (err) {
-            console.error(`Error ! run this command to understand your error`)
-            console.log(
-                `seth call ${transaction.to} ${transaction.data} 2>&1 >/dev/null | grep "Reverted\ 0x" | cut -c 50-241 | xxd -p -r`
-            )
-        }
+        return await this.provider.estimateGas(transaction)
+    }
 
+    async ethCallRequest(transaction: TransactionRequest): Promise<any> {
+        let result: string
+
+        try {
+            result = await this.provider.call(transaction)
+        } catch (err) {
+            // console.error(`Error ! run this command to understand your error`)
+            // console.log(
+            //     `seth call ${transaction.to} ${transaction.data} 2>&1 >/dev/null | grep "Reverted\ 0x" | cut -c 50-241 | xxd -p -r`
+            // )
+
+            throw err
+        }
         return result
+    }
+
+    async chainId(): Promise<number> {
+        return (await this.provider.getNetwork()).chainId
     }
 }

@@ -1,4 +1,3 @@
-import { KOVAN_ADDRESSES, MAINNET_ADDRESSES } from './addresses'
 import {
     AccountingEngine,
     TaxCollector,

@@ -7,7 +7,7 @@ import {
     ContractApis,
 } from '@reflexer-finance/geb-contract-api'
 import { ChainProviderInterface } from '@reflexer-finance/geb-provider'
-import { NULL_ADDRESS, ETH_A, ONE_ADDRESS } from './../const'
+import { NULL_ADDRESS, ETH_A, ONE_ADDRESS, WAD } from './../const'
 
 export const testsProxyActionWithGenericGebProvider = (
     gebProvider: ChainProviderInterface
@@ -26,7 +26,7 @@ export const testsProxyActionWithGenericGebProvider = (
 
         const proxy = new GebProxyActions(
             KOVAN_ADDRESSES.PROXY_DEPLOYER,
-            KOVAN_ADDRESSES.PROXY_ACTIONS,
+            'kovan',
             gebProvider
         )
 
@@ -41,6 +41,7 @@ export const testsProxyActionWithGenericGebProvider = (
         it('Test proxy wrapper', async () => {
             assert.equal(proxy.proxyAddress, KOVAN_ADDRESSES.PROXY_DEPLOYER)
             assert.equal(
+                // @ts-ignore For test purposes, access private members
                 proxy.proxyActionAddress,
                 KOVAN_ADDRESSES.PROXY_ACTIONS
             )
@@ -51,7 +52,7 @@ export const testsProxyActionWithGenericGebProvider = (
             let tx = await proxy.proxy.setOwner(NULL_ADDRESS)
             tx['from'] = KOVAN_ADDRESSES.ETH_FROM
             try {
-                await gebProvider.estimateGas(tx)
+                await gebProvider.ethCallRequest(tx)
             } catch {
                 assert.fail('Set Owner')
             }
@@ -59,10 +60,13 @@ export const testsProxyActionWithGenericGebProvider = (
             // Can't transfer proxy ownership
             tx['from'] = NULL_ADDRESS
             try {
-                await gebProvider.estimateGas(tx)
+                await gebProvider.ethCallRequest(tx)
                 assert.fail()
             } catch (err) {
-                assert.ok(err)
+                assert.equal(
+                    gebProvider.decodeError(err),
+                    'ds-auth-unauthorized'
+                )
             }
 
             // Try a proxy action function
@@ -73,30 +77,34 @@ export const testsProxyActionWithGenericGebProvider = (
                 ONE_ADDRESS
             )
             tx['from'] = KOVAN_ADDRESSES.ETH_FROM
-            console.log('TX', tx)
+
             try {
-                await gebProvider.estimateGas(tx)
-            } catch (err) {}
+                await gebProvider.ethCallRequest(tx)
+            } catch (err) {
+                assert.fail('openSAFE: ' + gebProvider.decodeError(err))
+            }
 
-            // tx = await proxy.openLockETHAndGenerateDebt(
-            //     contracts.safeManager.address,
-            //     contracts.taxCollector.address,
-            //     contracts.joinETH_A.address,
-            //     contracts.joinCoin.address,
-            //     ETH_A,
-            //     WAD.mul(1)
-            // )
+            // Try another one more complicated
+            tx = await proxy.openLockETHAndGenerateDebt(
+                contracts.safeManager.address,
+                contracts.taxCollector.address,
+                contracts.joinETH_A.address,
+                contracts.joinCoin.address,
+                ETH_A,
+                WAD.mul(20)
+            )
 
-            // tx['from'] = KOVAN_ADDRESSES.ETH_FROM
-            // tx['value'] = WAD.toString()
-            // console.log(tx)
+            tx['from'] = KOVAN_ADDRESSES.ETH_FROM
+            tx['value'] = WAD.mul(1).toString()
 
-            // try {
-            //     await gebProvider.estimateGas(tx)
-            // } catch (err) {
-            //     console.log(err.error)
-            //     console.log(gebProvider.decodeError(err.error))
-            // }
+            try {
+                await gebProvider.ethCallRequest(tx)
+            } catch (err) {
+                assert.fail(
+                    'openLockETHAndGenerateDebt: ' +
+                        gebProvider.decodeError(err)
+                )
+            }
         })
     })
 }

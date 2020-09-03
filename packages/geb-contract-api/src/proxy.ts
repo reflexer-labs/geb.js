@@ -65,3 +65,9 @@ export class GebProxyActionsGlobalSettlement extends GebProxyActionsGlobalSettle
         return this.proxy.execute(this.proxyActionAddress, data)
     }
 }
+
+// declare type ret = <T>(...args: T[]) => Promise<TransactionRequest>
+
+// const a: <T extends ret>(calls: T[]) => Promise<TransactionRequest[]> = {
+//     return [{}]
+// }

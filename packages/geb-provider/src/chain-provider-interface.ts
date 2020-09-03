@@ -36,4 +36,8 @@ export interface ChainProviderInterface {
     decodeError(error: any): string
 
     estimateGas(transaction: TransactionRequest): Promise<BigNumber>
+
+    ethCallRequest(transaction: TransactionRequest): Promise<any>
+
+    chainId(): Promise<number>
 }
