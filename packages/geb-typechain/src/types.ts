@@ -4,16 +4,30 @@ import {
     TupleType,
     AbiParameter,
     AbiOutputParameter,
+    StateMutability,
 } from 'typechain'
 
-export function generateInputTypes(input: Array<AbiParameter>): string {
+export function generateInputTypes(
+    input: Array<AbiParameter>,
+    stateMutability: StateMutability
+): string {
+    let ret = ''
+
+    if (stateMutability === 'payable') {
+        if (input.map((x) => x.name).some((x) => x === 'ethValue')) {
+            throw new Error('Payable contracts with variable named ethValue')
+        }
+
+        ret = 'ethValue: BigNumberish, '
+    }
+
     if (input.length === 0) {
-        return ''
+        return ret
     }
 
     const processedInputName = generateInputNames(input)
 
-    return (
+    ret +=
         input
             .map(
                 (input, index) =>
@@ -22,7 +36,8 @@ export function generateInputTypes(input: Array<AbiParameter>): string {
                     )}`
             )
             .join(', ') + ', '
-    )
+
+    return ret
 }
 
 export function generateInputNames(input: Array<AbiParameter>): string[] {

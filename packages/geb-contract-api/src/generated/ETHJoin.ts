@@ -78,12 +78,12 @@ export class EthJoin extends BaseContractAPI {
      * Join ETH in the system
      * @param account Account that will receive the ETH representation inside the system*
      */
-    join(account: string): Promise<TransactionRequest> {
+    join(ethValue: BigNumberish, account: string): Promise<TransactionRequest> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"join","outputs":[],"stateMutability":"payable","type":"function"}
 
-        return this.ethSend(abi, [account])
+        return this.ethSend(abi, [account], BigNumber.from(ethValue))
     }
 
     /**

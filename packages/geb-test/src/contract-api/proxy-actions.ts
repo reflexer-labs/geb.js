@@ -38,7 +38,7 @@ export const testsProxyActionWithGenericGebProvider = (
             )
         })
 
-        it('Test proxy wrapper', async () => {
+        it('Test basic asserts', async () => {
             assert.equal(proxy.proxyAddress, KOVAN_ADDRESSES.PROXY_DEPLOYER)
             assert.equal(
                 // @ts-ignore For test purposes, access private members
@@ -47,64 +47,74 @@ export const testsProxyActionWithGenericGebProvider = (
             )
             assert.equal(proxy.address, KOVAN_ADDRESSES.PROXY_ACTIONS)
             assert.equal(await proxy.proxy.owner(), KOVAN_ADDRESSES.ETH_FROM)
+        })
 
-            // Transfer proxy ownership
-            let tx = await proxy.proxy.setOwner(NULL_ADDRESS)
-            tx['from'] = KOVAN_ADDRESSES.ETH_FROM
-            try {
-                await gebProvider.ethCallRequest(tx)
-            } catch {
-                assert.fail('Set Owner')
-            }
+        describe('Test proxy wraper', async () => {
+            it('Test transfer proxy ownership', async () => {
+                // Transfer proxy ownership
+                let tx = await proxy.proxy.setOwner(NULL_ADDRESS)
+                tx['from'] = KOVAN_ADDRESSES.ETH_FROM
+                try {
+                    await gebProvider.ethCallRequest(tx)
+                } catch {
+                    assert.fail('Set Owner')
+                }
+            })
 
-            // Can't transfer proxy ownership
-            tx['from'] = NULL_ADDRESS
-            try {
-                await gebProvider.ethCallRequest(tx)
-                assert.fail()
-            } catch (err) {
-                assert.equal(
-                    gebProvider.decodeError(err),
-                    'ds-auth-unauthorized'
+            it('Test transfer proxy ownership failed', async () => {
+                let tx = await proxy.proxy.setOwner(NULL_ADDRESS)
+                // Not the owner
+                tx['from'] = NULL_ADDRESS
+                try {
+                    await gebProvider.ethCallRequest(tx)
+                    assert.fail()
+                } catch (err) {
+                    assert.equal(
+                        gebProvider.decodeError(err),
+                        'ds-auth-unauthorized'
+                    )
+                }
+            })
+
+            it('Test simple proxy action function', async () => {
+                const contracts = new ContractApis('kovan', gebProvider)
+                const tx = await proxy.openSAFE(
+                    contracts.safeManager.address,
+                    ETH_A,
+                    ONE_ADDRESS
                 )
-            }
+                tx['from'] = KOVAN_ADDRESSES.ETH_FROM
 
-            // Try a proxy action function
-            const contracts = new ContractApis('kovan', gebProvider)
-            tx = await proxy.openSAFE(
-                contracts.safeManager.address,
-                ETH_A,
-                ONE_ADDRESS
-            )
-            tx['from'] = KOVAN_ADDRESSES.ETH_FROM
+                try {
+                    await gebProvider.ethCallRequest(tx)
+                } catch (err) {
+                    assert.fail('openSAFE: ' + gebProvider.decodeError(err))
+                }
+            })
 
-            try {
-                await gebProvider.ethCallRequest(tx)
-            } catch (err) {
-                assert.fail('openSAFE: ' + gebProvider.decodeError(err))
-            }
-
-            // Try another one more complicated
-            tx = await proxy.openLockETHAndGenerateDebt(
-                contracts.safeManager.address,
-                contracts.taxCollector.address,
-                contracts.joinETH_A.address,
-                contracts.joinCoin.address,
-                ETH_A,
-                WAD.mul(20)
-            )
-
-            tx['from'] = KOVAN_ADDRESSES.ETH_FROM
-            tx['value'] = WAD.mul(1).toString()
-
-            try {
-                await gebProvider.ethCallRequest(tx)
-            } catch (err) {
-                assert.fail(
-                    'openLockETHAndGenerateDebt: ' +
-                        gebProvider.decodeError(err)
+            it('Test complex payable proxy action function', async () => {
+                const contracts = new ContractApis('kovan', gebProvider)
+                const tx = await proxy.openLockETHAndGenerateDebt(
+                    WAD,
+                    contracts.safeManager.address,
+                    contracts.taxCollector.address,
+                    contracts.joinETH_A.address,
+                    contracts.joinCoin.address,
+                    ETH_A,
+                    WAD.mul(20)
                 )
-            }
+
+                tx['from'] = KOVAN_ADDRESSES.ETH_FROM
+
+                try {
+                    await gebProvider.ethCallRequest(tx)
+                } catch (err) {
+                    assert.fail(
+                        'openLockETHAndGenerateDebt: ' +
+                            gebProvider.decodeError(err)
+                    )
+                }
+            })
         })
     })
 }

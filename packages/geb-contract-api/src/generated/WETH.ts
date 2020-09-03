@@ -84,12 +84,12 @@ export class Weth extends BaseContractAPI implements ERC20 {
         return this.ethSend(abi, [dst, wad])
     }
 
-    deposit(): Promise<TransactionRequest> {
+    deposit(ethValue: BigNumberish): Promise<TransactionRequest> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"constant":false,"inputs":[],"name":"deposit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"}
 
-        return this.ethSend(abi, [])
+        return this.ethSend(abi, [], BigNumber.from(ethValue))
     }
 
     allowance(address1: string, address2: string): Promise<BigNumber> {

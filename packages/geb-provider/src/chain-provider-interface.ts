@@ -30,7 +30,8 @@ export interface ChainProviderInterface {
     ethSend(
         address: string,
         abiFragment: AbiDefinition,
-        params: Inputs
+        params: Inputs,
+        ethValue?: BigNumber
     ): Promise<TransactionRequest>
 
     decodeError(error: any): string

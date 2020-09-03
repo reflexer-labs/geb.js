@@ -5,6 +5,7 @@ import { BaseContractAPI } from '@reflexer-finance/geb-provider'
 import { TransactionRequest } from '@reflexer-finance/geb-provider'
 import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
+import { BigNumber } from '@ethersproject/bignumber'
 
 export class GebProxyActions extends BaseContractAPI {
     allowHandler(
@@ -78,12 +79,16 @@ export class GebProxyActions extends BaseContractAPI {
         return this.ethSend(abi, [manager, src, safe])
     }
 
-    ethJoin_join(apt: string, safe: string): Promise<TransactionRequest> {
+    ethJoin_join(
+        ethValue: BigNumberish,
+        apt: string,
+        safe: string
+    ): Promise<TransactionRequest> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"apt","type":"address"},{"internalType":"address","name":"safe","type":"address"}],"name":"ethJoin_join","outputs":[],"stateMutability":"payable","type":"function"}
 
-        return this.ethSend(abi, [apt, safe])
+        return this.ethSend(abi, [apt, safe], BigNumber.from(ethValue))
     }
 
     exitETH(
@@ -177,6 +182,7 @@ export class GebProxyActions extends BaseContractAPI {
     }
 
     lockETH(
+        ethValue: BigNumberish,
         manager: string,
         ethJoin: string,
         safe: BigNumberish
@@ -185,10 +191,15 @@ export class GebProxyActions extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"}],"name":"lockETH","outputs":[],"stateMutability":"payable","type":"function"}
 
-        return this.ethSend(abi, [manager, ethJoin, safe])
+        return this.ethSend(
+            abi,
+            [manager, ethJoin, safe],
+            BigNumber.from(ethValue)
+        )
     }
 
     lockETHAndGenerateDebt(
+        ethValue: BigNumberish,
         manager: string,
         taxCollector: string,
         ethJoin: string,
@@ -200,14 +211,11 @@ export class GebProxyActions extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"deltaWad","type":"uint256"}],"name":"lockETHAndGenerateDebt","outputs":[],"stateMutability":"payable","type":"function"}
 
-        return this.ethSend(abi, [
-            manager,
-            taxCollector,
-            ethJoin,
-            coinJoin,
-            safe,
-            deltaWad,
-        ])
+        return this.ethSend(
+            abi,
+            [manager, taxCollector, ethJoin, coinJoin, safe, deltaWad],
+            BigNumber.from(ethValue)
+        )
     }
 
     lockTokenCollateral(
@@ -320,6 +328,7 @@ export class GebProxyActions extends BaseContractAPI {
     }
 
     openLockETHAndGenerateDebt(
+        ethValue: BigNumberish,
         manager: string,
         taxCollector: string,
         ethJoin: string,
@@ -331,17 +340,22 @@ export class GebProxyActions extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"deltaWad","type":"uint256"}],"name":"openLockETHAndGenerateDebt","outputs":[{"internalType":"uint256","name":"safe","type":"uint256"}],"stateMutability":"payable","type":"function"}
 
-        return this.ethSend(abi, [
-            manager,
-            taxCollector,
-            ethJoin,
-            coinJoin,
-            collateralType,
-            deltaWad,
-        ])
+        return this.ethSend(
+            abi,
+            [
+                manager,
+                taxCollector,
+                ethJoin,
+                coinJoin,
+                collateralType,
+                deltaWad,
+            ],
+            BigNumber.from(ethValue)
+        )
     }
 
     openLockETHGenerateDebtAndProtectSAFE(
+        ethValue: BigNumberish,
         manager: string,
         taxCollector: string,
         ethJoin: string,
@@ -355,16 +369,20 @@ export class GebProxyActions extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"deltaWad","type":"uint256"},{"internalType":"address","name":"liquidationEngine","type":"address"},{"internalType":"address","name":"saviour","type":"address"}],"name":"openLockETHGenerateDebtAndProtectSAFE","outputs":[{"internalType":"uint256","name":"safe","type":"uint256"}],"stateMutability":"payable","type":"function"}
 
-        return this.ethSend(abi, [
-            manager,
-            taxCollector,
-            ethJoin,
-            coinJoin,
-            collateralType,
-            deltaWad,
-            liquidationEngine,
-            saviour,
-        ])
+        return this.ethSend(
+            abi,
+            [
+                manager,
+                taxCollector,
+                ethJoin,
+                coinJoin,
+                collateralType,
+                deltaWad,
+                liquidationEngine,
+                saviour,
+            ],
+            BigNumber.from(ethValue)
+        )
     }
 
     openLockGNTAndGenerateDebt(
@@ -622,6 +640,7 @@ export class GebProxyActions extends BaseContractAPI {
     }
 
     safeLockETH(
+        ethValue: BigNumberish,
         manager: string,
         ethJoin: string,
         safe: BigNumberish,
@@ -631,7 +650,11 @@ export class GebProxyActions extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"address","name":"owner","type":"address"}],"name":"safeLockETH","outputs":[],"stateMutability":"payable","type":"function"}
 
-        return this.ethSend(abi, [manager, ethJoin, safe, owner])
+        return this.ethSend(
+            abi,
+            [manager, ethJoin, safe, owner],
+            BigNumber.from(ethValue)
+        )
     }
 
     safeLockTokenCollateral(

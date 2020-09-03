@@ -4,6 +4,8 @@
 import { BaseContractAPI } from '@reflexer-finance/geb-provider'
 import { TransactionRequest } from '@reflexer-finance/geb-provider'
 import { BytesLike } from '@ethersproject/bytes'
+import { BigNumberish } from '@ethersproject/bignumber'
+import { BigNumber } from '@ethersproject/bignumber'
 
 export class DsProxy extends BaseContractAPI {
     authority(): Promise<string> {
@@ -22,12 +24,16 @@ export class DsProxy extends BaseContractAPI {
         return this.ethCall(abi, [])
     }
 
-    execute(_target: string, _data: BytesLike): Promise<TransactionRequest> {
+    execute(
+        ethValue: BigNumberish,
+        _target: string,
+        _data: BytesLike
+    ): Promise<TransactionRequest> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"_target","type":"address"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"execute","outputs":[{"internalType":"bytes","name":"response","type":"bytes"}],"stateMutability":"payable","type":"function"}
 
-        return this.ethSend(abi, [_target, _data])
+        return this.ethSend(abi, [_target, _data], BigNumber.from(ethValue))
     }
 
     owner(): Promise<string> {

@@ -36,19 +36,19 @@ export class EthersProvider implements ChainProviderInterface {
     async ethSend(
         address: string,
         abi: AbiDefinition,
-        params: Inputs
+        params: Inputs,
+        ethValue?: BigNumber
     ): Promise<TransactionRequest> {
         const contract = new Contract(address, [abi], this.provider)
 
         const results = await contract.populateTransaction[abi.name](...params)
-
         return {
             from: results.from,
             to: results.to,
             data: results.data?.toString(),
-            value: results.value?.toString(),
-            gasLimit: results.gasLimit?.toString(),
-            gasPrice: results.gasPrice?.toString(),
+            value: ethValue,
+            gasLimit: results.gasLimit,
+            gasPrice: results.gasPrice,
             chainId: results.chainId,
             nonce: results.nonce,
         }
@@ -56,12 +56,14 @@ export class EthersProvider implements ChainProviderInterface {
 
     decodeError(error: any): string {
         let data: string
-        if (error.data) {
+        if (error?.data) {
             data = error.data
         } else if (error?.error?.data) {
             data = error.error.data
+        } else if (error?.error?.stack) {
+            return error.error.stack.split('\n')[0]
         } else {
-            throw new Error('Could not find error information')
+            throw new Error('Unknown error format')
         }
 
         if (data.startsWith('Reverted 0x08c379a0')) {
@@ -73,7 +75,7 @@ export class EthersProvider implements ChainProviderInterface {
         } else if (data === 'Reverted 0x') {
             return '0x'
         } else {
-            throw new Error('Could not decode error')
+            return data
         }
 
         return decodeURIComponent(data.slice(2).replace(/[0-9a-f]{2}/g, '%$&'))

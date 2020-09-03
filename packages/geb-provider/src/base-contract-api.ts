@@ -3,15 +3,16 @@ import {
     AbiDefinition,
     Inputs,
 } from './chain-provider-interface'
+import { BigNumber } from '@ethersproject/bignumber'
 
 export declare type TransactionRequest = {
     to?: string
     from?: string
     nonce?: number
-    gasLimit?: string
-    gasPrice?: string
+    gasLimit?: BigNumber
+    gasPrice?: BigNumber
     data?: string
-    value?: string
+    value?: BigNumber
     chainId?: number
 }
 
@@ -30,8 +31,14 @@ export class BaseContractAPI {
 
     protected ethSend(
         abiFragment: AbiDefinition,
-        params: Inputs
+        params: Inputs,
+        ethValue?: BigNumber
     ): Promise<TransactionRequest> {
-        return this.chainProvider.ethSend(this.address, abiFragment, params)
+        return this.chainProvider.ethSend(
+            this.address,
+            abiFragment,
+            params,
+            ethValue
+        )
     }
 }

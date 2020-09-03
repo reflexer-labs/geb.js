@@ -35,6 +35,7 @@ function addImports(template: string, isERC20: boolean): string {
         template.includes('BigNumber)') ||
         template.includes('BigNumber ') ||
         template.includes('BigNumber\n') ||
+        template.includes('BigNumber.') ||
         template.includes('BigNumber>')
     ) {
         template =
@@ -113,7 +114,7 @@ function codegenForSingleFunction(
     // prettier-ignore
     return `
     ${generateFunctionDocumentation(fn.documentation)}
-    ${fn.name}(${generateInputTypes(fn.inputs)}): Promise<${fn.stateMutability === 'view'? `${generateOutputTypes(fn.outputs)}`: 'TransactionRequest'}> {
+    ${fn.name}(${generateInputTypes(fn.inputs, fn.stateMutability)}): Promise<${fn.stateMutability === 'view'? `${generateOutputTypes(fn.outputs)}`: 'TransactionRequest'}> {
         
         // prettier-ignore 
         // @ts-ignore
@@ -121,7 +122,7 @@ function codegenForSingleFunction(
         
         return this.${fn.stateMutability === 'view' ? 'ethCall' : 'ethSend'}(abi, [
             ${processedInputName.join(", ")}
-        ])
+        ]${fn.stateMutability === 'payable' ? ', BigNumber.from(ethValue)' : ''})
     }
     `
 }

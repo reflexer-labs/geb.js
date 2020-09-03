@@ -8,6 +8,7 @@ import {
 import { GebProxyActions as GebProxyActionsGenerated } from './generated/GebProxyActions'
 import { GebProxyActionsGlobalSettlement as GebProxyActionsGlobalSettlementGenerated } from './generated/GebProxyActionsGlobalSettlement'
 import { getAddressList } from './utils'
+import { BigNumber } from '@ethersproject/bignumber'
 
 // Helper class that abstract away the proxy
 export class GebProxyActions extends GebProxyActionsGenerated {
@@ -26,15 +27,21 @@ export class GebProxyActions extends GebProxyActionsGenerated {
     // Override ETH send to use proxy
     async ethSend(
         abiFragment: AbiDefinition,
-        params: Inputs
+        params: Inputs,
+        ethValue?: BigNumber
     ): Promise<TransactionRequest> {
         let { data } = await this.chainProvider.ethSend(
             this.proxyActionAddress,
             abiFragment,
-            params
+            params,
+            ethValue
         )
 
-        return this.proxy.execute(this.proxyActionAddress, data)
+        if (!ethValue) {
+            ethValue = BigNumber.from('0')
+        }
+
+        return this.proxy.execute(ethValue, this.proxyActionAddress, data)
     }
 }
 
@@ -54,15 +61,17 @@ export class GebProxyActionsGlobalSettlement extends GebProxyActionsGlobalSettle
     // Override ETH send to use proxy
     async ethSend(
         abiFragment: AbiDefinition,
-        params: Inputs
+        params: Inputs,
+        ethValue?: BigNumber
     ): Promise<TransactionRequest> {
         let { data } = await this.chainProvider.ethSend(
             this.proxyActionAddress,
             abiFragment,
-            params
+            params,
+            ethValue
         )
 
-        return this.proxy.execute(this.proxyActionAddress, data)
+        return this.proxy.execute(ethValue, this.proxyActionAddress, data)
     }
 }
 
