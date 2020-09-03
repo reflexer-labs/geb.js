@@ -1,4 +1,4 @@
-import { DsProxy } from '.'
+import { DsProxy, ContractAddresses } from '.'
 import {
     ChainProviderInterface,
     AbiDefinition,
@@ -7,17 +7,20 @@ import {
 } from '@reflexer-finance/geb-provider'
 import { GebProxyActions as GebProxyActionsGenerated } from './generated/GebProxyActions'
 import { GebProxyActionsGlobalSettlement as GebProxyActionsGlobalSettlementGenerated } from './generated/GebProxyActionsGlobalSettlement'
+import { getAddressList } from './utils'
 
 // Helper class that abstract away the proxy
 export class GebProxyActions extends GebProxyActionsGenerated {
     public proxy: DsProxy
+    private proxyActionAddress: string
     constructor(
         public proxyAddress: string,
-        public proxyActionAddress: string,
+        network: ContractAddresses,
         chainProvider: ChainProviderInterface
     ) {
-        super(proxyActionAddress, chainProvider)
+        super(getAddressList(network).PROXY_ACTIONS, chainProvider)
         this.proxy = new DsProxy(proxyAddress, this.chainProvider)
+        this.proxyActionAddress = getAddressList(network).PROXY_ACTIONS
     }
 
     // Override ETH send to use proxy
@@ -37,9 +40,15 @@ export class GebProxyActions extends GebProxyActionsGenerated {
 
 export class GebProxyActionsGlobalSettlement extends GebProxyActionsGlobalSettlementGenerated {
     public proxy: DsProxy
-    constructor(address: string, chainProvider: ChainProviderInterface) {
-        super(address, chainProvider)
-        this.proxy = new DsProxy(this.address, this.chainProvider)
+    private proxyActionAddress: string
+    constructor(
+        public proxyAddress: string,
+        network: ContractAddresses,
+        chainProvider: ChainProviderInterface
+    ) {
+        super(getAddressList(network).PROXY_ACTIONS, chainProvider)
+        this.proxy = new DsProxy(proxyAddress, this.chainProvider)
+        this.proxyActionAddress = getAddressList(network).PROXY_ACTIONS
     }
 
     // Override ETH send to use proxy
@@ -47,11 +56,12 @@ export class GebProxyActionsGlobalSettlement extends GebProxyActionsGlobalSettle
         abiFragment: AbiDefinition,
         params: Inputs
     ): Promise<TransactionRequest> {
-        let { to, data } = await this.chainProvider.ethSend(
-            this.address,
+        let { data } = await this.chainProvider.ethSend(
+            this.proxyActionAddress,
             abiFragment,
             params
         )
-        return this.proxy.execute(to, data)
+
+        return this.proxy.execute(this.proxyActionAddress, data)
     }
 }

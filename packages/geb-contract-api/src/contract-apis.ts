@@ -20,6 +20,7 @@ import {
     Weth,
 } from '.'
 import { ChainProviderInterface } from '@reflexer-finance/geb-provider'
+import { getAddressList } from './utils'
 
 export type ContractKey =
     | 'ETH_FROM'
@@ -106,14 +107,7 @@ export class ContractApis {
     )
     {
         // Set the address list
-        let addressList: ContractList
-        if (network === 'kovan') {
-            addressList = KOVAN_ADDRESSES
-        } else if (network === 'mainnet') {
-            addressList = MAINNET_ADDRESSES
-        } else {
-            addressList = network
-        }
+        let addressList = getAddressList(network)
 
         this.accountingEngine = new AccountingEngine(addressList.GEB_ACCOUNTING_ENGINE, this.chainProvider)
         this.taxCollector = new TaxCollector(addressList.GEB_TAX_COLLECTOR, this.chainProvider)
