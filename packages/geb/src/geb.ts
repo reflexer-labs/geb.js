@@ -1,13 +1,16 @@
 import {
     ContractApis,
     ContractAddresses,
+    ETH_A,
 } from '@reflexer-finance/geb-contract-api'
 import { GebProviderInterface } from '@reflexer-finance/geb-provider'
 import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import { ethers } from 'ethers'
-import { NULL_ADDRESS } from './const'
 import { GebError, GebErrorTypes } from './errors'
 import { GebProxyActions } from './proxy-action'
+import { NULL_ADDRESS } from './utils'
+import { isNumber } from 'util'
+import { Safe } from './schema/safe'
 
 export class Geb {
     public contracts: ContractApis
@@ -33,7 +36,11 @@ export class Geb {
         this.contracts = new ContractApis(network, this.provider)
     }
 
-    async getProxyAction(ownerAddress: string) {
+    /**
+     * Given an address returns the Proxy Action object
+     * @param ownerAddress
+     */
+    public async getProxyAction(ownerAddress: string) {
         const address = await this.contracts.proxyRegistry.proxies(ownerAddress)
 
         if (address === NULL_ADDRESS) {
@@ -42,7 +49,44 @@ export class Geb {
         return new GebProxyActions(address, this.network, this.provider)
     }
 
-    async deployProxy() {
+    /**
+     * Deploy a new proxy owned by the sender
+     */
+    public async deployProxy() {
         return await this.contracts.proxyRegistry.build()
+    }
+
+    /**
+     * Get the safe object
+     * @param idOrHandler Safe Id or Safe handler
+     */
+    public async getSafe(idOrHandler: string | number) {
+        let handler: string
+        let isManaged: boolean
+        let safeData: {
+            lockedCollateral: ethers.BigNumber
+            generatedDebt: ethers.BigNumber
+        }
+
+        if (isNumber(idOrHandler)) {
+            // TODO: multicall
+            handler = await this.contracts.safeManager.safes(idOrHandler)
+            isManaged = true
+            safeData = await this.contracts.safeEngine.safes(ETH_A, handler)
+        } else {
+            handler = idOrHandler
+            safeData = await this.contracts.safeEngine.safes(ETH_A, handler)
+            isManaged = !!(await this.contracts.safeEngine.safeRights(
+                handler,
+                this.contracts.safeManager.address
+            ))
+        }
+        return new Safe(
+            handler,
+            safeData.generatedDebt,
+            safeData.lockedCollateral,
+            ETH_A,
+            isManaged
+        )
     }
 }

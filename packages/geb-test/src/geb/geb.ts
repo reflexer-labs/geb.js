@@ -1,35 +1,102 @@
 import { ethers } from 'ethers'
 import assert from 'assert'
 
-import { MAKER_KOVAN_NODE } from '../const'
+import { ETH_A, NULL_ADDRESS } from '../const'
 import { Geb } from 'geb.js'
-import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import { KOVAN_ADDRESSES } from '@reflexer-finance/geb-contract-api'
+import { sethCall } from '../utils'
+import { GebProviderInterface } from '@reflexer-finance/geb-provider'
 
-export const testsGeb = () => {
+export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
     describe('Using a provider (Ethers OR web3)', async () => {
-        const provider = new ethers.providers.JsonRpcProvider(MAKER_KOVAN_NODE)
+        let geb: Geb
+
+        beforeEach(async () => {
+            geb = new Geb('kovan', gebProvider)
+        })
 
         it('Create geb with ethers', async () => {
-            const geb = new Geb('kovan', provider)
+            const provider = new ethers.providers.JsonRpcProvider(node)
+            geb = new Geb('kovan', provider)
 
             const rate = await geb.contracts.oracleRelayer.redemptionRate()
             assert.ok(rate)
         })
 
-        it('Create geb with gebProvider', async () => {
-            const gebProvider = new EthersProvider(provider)
-            const geb = new Geb('kovan', gebProvider)
+        it('Create geb with gebProvider and test redemption Rate', async () => {
+            const value = await geb.contracts.oracleRelayer.redemptionRate()
+            const expected = await sethCall(
+                node,
+                KOVAN_ADDRESSES.GEB_ORACLE_RELAYER,
+                'redemptionRate()(uint256)'
+            )
+            assert.equal(value.toString(), expected[0])
+        })
 
-            const rate = await geb.contracts.oracleRelayer.redemptionRate()
-            assert.ok(rate)
+        it('Test collateral types', async () => {
+            const value = await geb.contracts.safeEngine.collateralTypes(ETH_A)
+            const expected = await sethCall(
+                node,
+                KOVAN_ADDRESSES.GEB_SAFE_ENGINE,
+                'collateralTypes(bytes32)(uint256,uint256,uint256,uint256,uint256,uint256)',
+                [ETH_A]
+            )
+
+            assert.equal(value.debtAmount, expected[0])
+            assert.equal(value.accumulatedRate, expected[1])
+            assert.equal(value.safetyPrice, expected[2])
+            assert.equal(value.debtCeiling, expected[3])
+            assert.equal(value.debtFloor, expected[4])
+            assert.equal(value.liquidationPrice, expected[5])
+        })
+
+        it('Check a safe debt/collateral', async () => {
+            const value = await geb.contracts.safeEngine.safes(
+                ETH_A,
+                NULL_ADDRESS
+            )
+            const expected = await sethCall(
+                node,
+                KOVAN_ADDRESSES.GEB_SAFE_ENGINE,
+                'safes(bytes32,address)(uint256,uint256)',
+                [ETH_A, NULL_ADDRESS]
+            )
+
+            assert.equal(value.lockedCollateral, expected[0])
+            assert.equal(value.generatedDebt, expected[1])
         })
 
         it('Get proxy with geb', async () => {
-            const geb = new Geb('kovan', provider)
-
             const proxy = await geb.getProxyAction(KOVAN_ADDRESSES.ETH_FROM)
             assert.equal(proxy.proxyAddress, KOVAN_ADDRESSES.PROXY_DEPLOYER)
+        })
+
+        it('Get safe owner by manager with id', async () => {
+            const safe = await geb.getSafe(1)
+
+            assert.equal(safe.collateralType, ETH_A)
+            assert.equal(safe.handler, await geb.contracts.safeManager.safes(1))
+            const expected = await geb.contracts.safeEngine.safes(
+                ETH_A,
+                safe.handler
+            )
+            assert.equal(safe.debt.toString(), expected.generatedDebt)
+            assert.equal(safe.collateral.toString(), expected.lockedCollateral)
+        })
+
+        it('Get safe owner by manager with handler', async () => {
+            const handler = await geb.contracts.safeManager.safes(1)
+
+            const safe = await geb.getSafe(handler)
+
+            assert.equal(safe.collateralType, ETH_A)
+            assert.equal(safe.handler, handler, 'handler')
+            const expected = await geb.contracts.safeEngine.safes(
+                ETH_A,
+                safe.handler
+            )
+            assert.equal(safe.debt.toString(), expected.generatedDebt)
+            assert.equal(safe.collateral.toString(), expected.lockedCollateral)
         })
     })
 }

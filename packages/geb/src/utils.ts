@@ -5,7 +5,6 @@ import {
     MAINNET_ADDRESSES,
 } from '@reflexer-finance/geb-contract-api'
 import { BigNumberish, BigNumber, FixedNumber } from '@ethersproject/bignumber'
-import { WAD } from './const'
 
 export const getAddressList = (network: ContractAddresses): ContractList => {
     if (network === 'kovan') {

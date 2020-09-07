@@ -9,5 +9,6 @@ describe('Test Geb', async () => {
     const gebProvider = new EthersProvider(provider)
 
     testsProxyActionWithGenericGebProvider(gebProvider)
-    testsGeb()
+    testsGeb(gebProvider, MAKER_KOVAN_NODE)
+    // testsGeb(gebProvider, INFURA_KOVAN)
 })
