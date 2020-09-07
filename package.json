@@ -11,7 +11,8 @@
         "clean": "tsc --build --clean ./tsconfig.project.json",
         "add-package": "node ./scripts/add_package.js",
         "prettier": "prettier --write \"{,**/*.{ts,json,js,md}}\"",
-        "api-codegen": "node ./scripts/load_abis.js && npm run codegen --prefix packages/geb-contract-api && prettier --write packages/geb-contract-api/*/*.json packages/geb-contract-api/src/generated/*.ts",
+        "api-codegen": "npm run codegen --prefix packages/geb-contract-api && prettier --write packages/geb-contract-api/*/*.json packages/geb-contract-api/src/generated/*.ts && git apply packages/geb-contract-api/src/patches/*.patch",
+        "abi-codegen": "node ./scripts/load_abis.js",
         "test-node": "mocha --timeout 5000 ./packages/geb-test/lib/*/*.js --grep",
         "test": "npm run build && npm run test-node",
         "dev": "npm run build && npm run bootstrap"

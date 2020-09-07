@@ -15,6 +15,13 @@ export class EthersProvider implements GebProviderInterface {
         params: Inputs
     ): Promise<any> {
         const contract = new Contract(address, [abi], this.provider)
+
+        // Special case where we are calling a non-view function as a static call (used only to read the redemption price)
+        if (abi.stateMutability !== 'view') {
+            const results = await contract.callStatic[abi.name](...params)
+            return results
+        }
+
         const results = await contract.functions[abi.name](...params)
 
         if (results.length === 0) {

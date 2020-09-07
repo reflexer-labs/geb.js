@@ -113,6 +113,14 @@ export class OracleRelayer extends BaseContractAPI {
         return this.ethSend(abi, [])
     }
 
+    redemptionPrice_readOnly(): Promise<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"redemptionPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
+
+        return this.ethCall(abi, [])
+    }
+
     redemptionPriceUpdateTime(): Promise<BigNumber> {
         // prettier-ignore
         // @ts-ignore

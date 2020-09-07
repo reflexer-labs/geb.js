@@ -84,12 +84,22 @@ export const testsWithGenericGebProvider = (
 
         it('Test Oracle relayer', async () => {
             const oracleRelayer = new OracleRelayer(
-                '0x896A6203F4Df153B5F233740346Aa61B98dF7E61',
+                KOVAN_ADDRESSES.GEB_ORACLE_RELAYER,
                 gebProvider
             )
 
             const rate = await oracleRelayer.redemptionRate()
             assert.ok(rate.gt(ethers.BigNumber.from('10').pow(27)))
+        })
+
+        it('Test Oracle relayer redemptionPrice_readOnly', async () => {
+            const oracleRelayer = new OracleRelayer(
+                KOVAN_ADDRESSES.GEB_ORACLE_RELAYER,
+                gebProvider
+            )
+
+            const rate = await oracleRelayer.redemptionPrice_readOnly()
+            assert.ok(rate.gt(0))
         })
 
         it('Test with contract API factory', async () => {
