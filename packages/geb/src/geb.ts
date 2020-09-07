@@ -1,14 +1,13 @@
 import {
     ContractApis,
     ContractAddresses,
-    ETH_A,
 } from '@reflexer-finance/geb-contract-api'
 import { GebProviderInterface } from '@reflexer-finance/geb-provider'
 import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import { ethers } from 'ethers'
 import { GebError, GebErrorTypes } from './errors'
 import { GebProxyActions } from './proxy-action'
-import { NULL_ADDRESS } from './utils'
+import { NULL_ADDRESS, ETH_A } from './utils'
 import { isNumber } from 'util'
 import { Safe } from './schema/safe'
 
@@ -90,4 +89,44 @@ export class Geb {
             isManaged
         )
     }
+
+    //     public async multiCall<I1, O1>(
+    //         calls: [((...args: [I1]) => Promise<O1>)],
+    //         params: [I1],
+    //         contractAddress: string[]
+    //     ): Promise<[O1]> {
+    //         const multicall = new Multicall(
+    //             KOVAN_ADDRESSES.MULTICALL,
+    //             this.provider
+    //         )
+
+    //         class MultiCallContractApi extends BaseContractAPI {
+    //             ethCall(abiFragment: AbiDefinition, params: Inputs): Promise<any> {
+    //                 return this.chainProvider.ethSend(
+    //                     this.address,
+    //                     abiFragment,
+    //                     params
+    //                 )
+    //             }
+
+    //             ethSend(
+    //                 abiFragment: AbiDefinition,
+    //                 params: Inputs,
+    //                 ethValue?: BigNumber
+    //             ): Promise<TransactionRequest> {
+    //                 throw new GebError(GebErrorTypes.NO_ETHSEND_WITH_MULTICALL)
+    //             }
+    //         }
+
+    //         const promises = calls.map((call, i) => {
+    //             const newBase = new MultiCallContractApi(contractAddress[i], this.provider)
+    //             return call.apply(newBase, params[i])
+    //         })
+
+    //         let txs = await Promise.all(promises)
+
+    //         txs = txs.map((x, i) => {return {target: contractAddress[i], callData: x.data}})
+
+    //         return multicall.aggregate(txs)
+    //     }
 }

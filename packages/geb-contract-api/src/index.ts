@@ -32,6 +32,7 @@ import {
 } from './contract-apis'
 import { KOVAN_ADDRESSES, MAINNET_ADDRESSES } from './addresses'
 import { ETH_A } from './const'
+import { Multicall } from './generated/Multicall'
 
 export {
     // Address lists
@@ -65,6 +66,7 @@ export {
     Weth,
     GebProxyActions,
     GebProxyActionsGlobalSettlement,
+    Multicall,
     // Misc
     ContractAddresses,
     ContractList,
