@@ -98,5 +98,23 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             assert.equal(safe.debt.toString(), expected.generatedDebt)
             assert.equal(safe.collateral.toString(), expected.lockedCollateral)
         })
+
+        it('Get CRatio and Liquidation ratio', async () => {
+            // This safe has no collateral and debt because it was liquidated in deployment script.
+            const safe = await geb.getSafe(1)
+            const cRatio = await safe.getCRatio()
+            const lRatio = await safe.getLRatio()
+            assert.ok(cRatio.isZero())
+            assert.ok(cRatio.isZero())
+
+            // Always true for cdp 1 but it the way it should be
+            assert.ok(cRatio.toUnsafeFloat() >= lRatio.toUnsafeFloat())
+        })
+
+        it('Liquidation Price', async () => {
+            const safe = await geb.getSafe(1)
+            const liqPrice = await safe.liquidationPrice()
+            assert.ok(liqPrice.isZero())
+        })
     })
 }

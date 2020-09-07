@@ -82,6 +82,7 @@ export class Geb {
             ))
         }
         return new Safe(
+            this.contracts,
             handler,
             safeData.generatedDebt,
             safeData.lockedCollateral,
