@@ -5,7 +5,7 @@ import { ETH_A, NULL_ADDRESS } from '../const'
 import { Geb } from 'geb.js'
 import { KOVAN_ADDRESSES } from '@reflexer-finance/geb-contract-api'
 import { sethCall } from '../utils'
-import { GebProviderInterface } from '@reflexer-finance/geb-provider'
+import { GebProviderInterface } from '@reflexer-finance/geb-contract-base'
 import { RAD } from 'geb.js/lib/utils'
 
 export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {

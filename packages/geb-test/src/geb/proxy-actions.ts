@@ -4,7 +4,7 @@ import {
     KOVAN_ADDRESSES,
     GebProxyRegistry,
 } from '@reflexer-finance/geb-contract-api'
-import { GebProviderInterface } from '@reflexer-finance/geb-provider'
+import { GebProviderInterface } from '@reflexer-finance/geb-contract-base'
 import { GebProxyActions } from 'geb.js'
 import { NULL_ADDRESS, ETH_A, ONE_ADDRESS, WAD } from '../const'
 

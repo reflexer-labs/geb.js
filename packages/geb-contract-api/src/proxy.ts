@@ -4,7 +4,7 @@
 //     AbiDefinition,
 //     Inputs,
 //     TransactionRequest,
-// } from '@reflexer-finance/geb-provider'
+// } from '@reflexer-finance/geb-contract-base'
 // import { GebProxyActions as GebProxyActionsGenerated } from './generated/GebProxyActions'
 // import { GebProxyActionsGlobalSettlement as GebProxyActionsGlobalSettlementGenerated } from './generated/GebProxyActionsGlobalSettlement'
 // import { getAddressList } from './utils'

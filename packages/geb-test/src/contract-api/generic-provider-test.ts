@@ -7,7 +7,7 @@ import {
     ContractApis,
     KOVAN_ADDRESSES,
 } from '@reflexer-finance/geb-contract-api'
-import { GebProviderInterface } from '@reflexer-finance/geb-provider'
+import { GebProviderInterface } from '@reflexer-finance/geb-contract-base'
 import { NULL_ADDRESS, ETH_A, ONE_ADDRESS } from './../const'
 
 export const testsWithGenericGebProvider = (

@@ -1,5 +1,5 @@
 {
-    "name": "@reflexer-finance/geb-provider",
+    "name": "@reflexer-finance/geb-contract-base",
     "version": "0.0.5",
     "description": "",
     "main": "./lib/index.js",

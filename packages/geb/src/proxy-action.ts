@@ -2,8 +2,8 @@ import {
     GebProviderInterface,
     AbiDefinition,
     Inputs,
-} from '@reflexer-finance/geb-provider'
-import { TransactionRequest } from '@reflexer-finance/geb-provider'
+} from '@reflexer-finance/geb-contract-base'
+import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
 import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'

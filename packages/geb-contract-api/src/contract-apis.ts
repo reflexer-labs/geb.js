@@ -19,7 +19,7 @@ import {
     Weth,
     SafeEngine,
 } from '.'
-import { GebProviderInterface } from '@reflexer-finance/geb-provider'
+import { GebProviderInterface } from '@reflexer-finance/geb-contract-base'
 import { getAddressList } from './utils'
 
 export type ContractKey =

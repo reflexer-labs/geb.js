@@ -4,7 +4,7 @@ import {
     Inputs,
     Outputs,
     TransactionRequest,
-} from '@reflexer-finance/geb-provider'
+} from '@reflexer-finance/geb-contract-base'
 import { providers, utils } from 'ethers'
 import { Result } from 'ethers/lib/utils'
 import { isNumber } from 'util'

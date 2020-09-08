@@ -9,7 +9,7 @@
             "path": "./packages/geb-typechain"
         },
         {
-            "path": "./packages/geb-provider"
+            "path": "./packages/geb-contract-base"
         },
         {
             "path": "./packages/geb-ethers-provider"

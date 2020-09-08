@@ -6,7 +6,7 @@ import {
 import {
     GebProviderInterface,
     MulticallRequest,
-} from '@reflexer-finance/geb-provider'
+} from '@reflexer-finance/geb-contract-base'
 import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import { ethers } from 'ethers'
 import { GebError, GebErrorTypes } from './errors'

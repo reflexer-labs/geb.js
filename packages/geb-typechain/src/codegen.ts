@@ -58,26 +58,27 @@ function addImports(template: string, isERC20: boolean): string {
     if (isERC20) {
         template =
             `
-            import { ERC20 } from '@reflexer-finance/geb-provider'` + template
+            import { ERC20 } from '@reflexer-finance/geb-contract-base'` +
+            template
     }
 
     if (template.includes('TransactionRequest')) {
         template =
             `
-        import { TransactionRequest } from '@reflexer-finance/geb-provider'` +
+        import { TransactionRequest } from '@reflexer-finance/geb-contract-base'` +
             template
     }
 
     if (template.includes('MulticallRequest')) {
         template =
             `
-        import { MulticallRequest } from '@reflexer-finance/geb-provider'` +
+        import { MulticallRequest } from '@reflexer-finance/geb-contract-base'` +
             template
     }
 
     template =
         `
-        import { BaseContractAPI } from '@reflexer-finance/geb-provider'` +
+        import { BaseContractAPI } from '@reflexer-finance/geb-contract-base'` +
         template
     return template
 }
