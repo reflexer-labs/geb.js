@@ -31,6 +31,38 @@ export class Multicall extends BaseContractAPI {
         return this.getTransactionRequest(abi, [calls])
     }
 
+    aggregate_readOnly(
+        calls: { target: string; callData: BytesLike }[]
+    ): Promise<{
+        blockNumber: BigNumber
+        returnData: string[]
+    }>
+    aggregate_readOnly(
+        calls: { target: string; callData: BytesLike }[],
+        multicall: true
+    ): MulticallRequest<{
+        blockNumber: BigNumber
+        returnData: string[]
+    }>
+    aggregate_readOnly(
+        calls: { target: string; callData: BytesLike }[],
+        multicall?: true
+    ):
+        | Promise<{
+              blockNumber: BigNumber
+              returnData: string[]
+          }>
+        | MulticallRequest<{
+              blockNumber: BigNumber
+              returnData: string[]
+          }> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"constant":false,"inputs":[{"components":[{"name":"target","type":"address"},{"name":"callData","type":"bytes"}],"name":"calls","type":"tuple[]"}],"name":"aggregate","outputs":[{"name":"blockNumber","type":"uint256"},{"name":"returnData","type":"bytes[]"}],"payable":false,"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [calls], multicall)
+    }
+
     getLastBlockHash(): Promise<string>
     getLastBlockHash(multicall: true): MulticallRequest<string>
     getLastBlockHash(

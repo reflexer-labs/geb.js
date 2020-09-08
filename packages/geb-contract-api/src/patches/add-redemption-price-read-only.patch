@@ -1,19 +1,23 @@
 diff --git a/packages/geb-contract-api/src/generated/OracleRelayer.ts b/packages/geb-contract-api/src/generated/OracleRelayer.ts
-index 95b551a..57f62bf 100644
+index 1eb65c2..0fa40b9 100644
 --- a/packages/geb-contract-api/src/generated/OracleRelayer.ts
 +++ b/packages/geb-contract-api/src/generated/OracleRelayer.ts
-@@ -113,6 +113,14 @@ export class OracleRelayer extends BaseContractAPI {
-         return this.ethSend(abi, [])
+@@ -169,6 +169,18 @@ export class OracleRelayer extends BaseContractAPI {
+         return this.getTransactionRequest(abi, [])
      }
  
-+    redemptionPrice_readOnly(): Promise<BigNumber> {
++    redemptionPrice_readOnly(): Promise<BigNumber>
++    redemptionPrice_readOnly(multicall: true): MulticallRequest<BigNumber>
++    redemptionPrice_readOnly(
++        multicall?: true
++    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
 +        // prettier-ignore
 +        // @ts-ignore
 +        const abi = {"inputs":[],"name":"redemptionPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
 +
-+        return this.ethCall(abi, [])
++        return this.ethCallOrMulticall(abi, [], multicall)
 +    }
 +
-     redemptionPriceUpdateTime(): Promise<BigNumber> {
-         // prettier-ignore
-         // @ts-ignore
+     redemptionPriceUpdateTime(): Promise<BigNumber>
+     redemptionPriceUpdateTime(multicall: true): MulticallRequest<BigNumber>
+     redemptionPriceUpdateTime(
