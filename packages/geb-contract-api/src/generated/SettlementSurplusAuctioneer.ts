@@ -2,12 +2,17 @@
 /* tslint:disable */
 
 import { BaseContractAPI } from '@reflexer-finance/geb-provider'
+import { MulticallRequest } from '@reflexer-finance/geb-provider'
 import { TransactionRequest } from '@reflexer-finance/geb-provider'
 import { BytesLike } from '@ethersproject/bytes'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class SettlementSurplusAuctioneer extends BaseContractAPI {
-    accountingEngine(): Promise<string> {
+    accountingEngine(): Promise<string>
+    accountingEngine(multicall: true): MulticallRequest<string>
+    accountingEngine(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"accountingEngine","outputs":[{"internalType":"contract AccountingEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
@@ -19,26 +24,36 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
      * Add auth to an account
      * @param account Account to add auth to
      */
-    addAuthorization(account: string): Promise<TransactionRequest> {
+
+    addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"addAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [account])
+        return this.getTransactionRequest(abi, [account])
     }
 
     /**
      * Auction stability fees. The process is very similar to how the AccountingEngine would do it. The contract even reads surplus auction parameters from the AccountingEngine and uses them to start a new auction.
      */
-    auctionSurplus(): Promise<TransactionRequest> {
+
+    auctionSurplus(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"auctionSurplus","outputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [])
+        return this.getTransactionRequest(abi, [])
     }
 
-    authorizedAccounts(address: string): Promise<BigNumber> {
+    authorizedAccounts(address: string): Promise<BigNumber>
+    authorizedAccounts(
+        address: string,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    authorizedAccounts(
+        address: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -46,7 +61,11 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
         return this.ethCall(abi, [address])
     }
 
-    lastSurplusAuctionTime(): Promise<BigNumber> {
+    lastSurplusAuctionTime(): Promise<BigNumber>
+    lastSurplusAuctionTime(multicall: true): MulticallRequest<BigNumber>
+    lastSurplusAuctionTime(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"lastSurplusAuctionTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -59,30 +78,31 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
      * @param addr New address for the contract
      * @param parameter The name of the contract whose address will be changed
      */
-    modifyParameters(
-        parameter: BytesLike,
-        addr: string
-    ): Promise<TransactionRequest> {
+
+    modifyParameters(parameter: BytesLike, addr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"addr","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [parameter, addr])
+        return this.getTransactionRequest(abi, [parameter, addr])
     }
 
     /**
      * Remove auth from an account
      * @param account Account to remove auth from
      */
-    removeAuthorization(account: string): Promise<TransactionRequest> {
+
+    removeAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"removeAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [account])
+        return this.getTransactionRequest(abi, [account])
     }
 
-    safeEngine(): Promise<string> {
+    safeEngine(): Promise<string>
+    safeEngine(multicall: true): MulticallRequest<string>
+    safeEngine(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
@@ -90,7 +110,11 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
         return this.ethCall(abi, [])
     }
 
-    surplusAuctionHouse(): Promise<string> {
+    surplusAuctionHouse(): Promise<string>
+    surplusAuctionHouse(multicall: true): MulticallRequest<string>
+    surplusAuctionHouse(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"surplusAuctionHouse","outputs":[{"internalType":"contract SurplusAuctionHouseLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}

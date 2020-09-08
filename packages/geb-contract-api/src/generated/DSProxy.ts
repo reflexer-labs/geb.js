@@ -2,13 +2,16 @@
 /* tslint:disable */
 
 import { BaseContractAPI } from '@reflexer-finance/geb-provider'
+import { MulticallRequest } from '@reflexer-finance/geb-provider'
 import { TransactionRequest } from '@reflexer-finance/geb-provider'
 import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class DsProxy extends BaseContractAPI {
-    authority(): Promise<string> {
+    authority(): Promise<string>
+    authority(multicall: true): MulticallRequest<string>
+    authority(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"authority","outputs":[{"internalType":"contract DSAuthority","name":"","type":"address"}],"stateMutability":"view","type":"function"}
@@ -16,7 +19,9 @@ export class DsProxy extends BaseContractAPI {
         return this.ethCall(abi, [])
     }
 
-    cache(): Promise<string> {
+    cache(): Promise<string>
+    cache(multicall: true): MulticallRequest<string>
+    cache(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"cache","outputs":[{"internalType":"contract DSProxyCache","name":"","type":"address"}],"stateMutability":"view","type":"function"}
@@ -28,15 +33,21 @@ export class DsProxy extends BaseContractAPI {
         ethValue: BigNumberish,
         _target: string,
         _data: BytesLike
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"_target","type":"address"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"execute","outputs":[{"internalType":"bytes","name":"response","type":"bytes"}],"stateMutability":"payable","type":"function"}
 
-        return this.ethSend(abi, [_target, _data], BigNumber.from(ethValue))
+        return this.getTransactionRequest(
+            abi,
+            [_target, _data],
+            BigNumber.from(ethValue)
+        )
     }
 
-    owner(): Promise<string> {
+    owner(): Promise<string>
+    owner(multicall: true): MulticallRequest<string>
+    owner(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
@@ -44,27 +55,27 @@ export class DsProxy extends BaseContractAPI {
         return this.ethCall(abi, [])
     }
 
-    setAuthority(authority_: string): Promise<TransactionRequest> {
+    setAuthority(authority_: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"contract DSAuthority","name":"authority_","type":"address"}],"name":"setAuthority","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [authority_])
+        return this.getTransactionRequest(abi, [authority_])
     }
 
-    setCache(_cacheAddr: string): Promise<TransactionRequest> {
+    setCache(_cacheAddr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"_cacheAddr","type":"address"}],"name":"setCache","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [_cacheAddr])
+        return this.getTransactionRequest(abi, [_cacheAddr])
     }
 
-    setOwner(owner_: string): Promise<TransactionRequest> {
+    setOwner(owner_: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"owner_","type":"address"}],"name":"setOwner","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [owner_])
+        return this.getTransactionRequest(abi, [owner_])
     }
 }

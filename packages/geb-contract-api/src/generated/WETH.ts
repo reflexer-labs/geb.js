@@ -2,13 +2,16 @@
 /* tslint:disable */
 
 import { BaseContractAPI } from '@reflexer-finance/geb-provider'
+import { MulticallRequest } from '@reflexer-finance/geb-provider'
 import { TransactionRequest } from '@reflexer-finance/geb-provider'
 import { ERC20 } from '@reflexer-finance/geb-provider'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class Weth extends BaseContractAPI implements ERC20 {
-    name(): Promise<string> {
+    name(): Promise<string>
+    name(multicall: true): MulticallRequest<string>
+    name(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}
@@ -16,15 +19,19 @@ export class Weth extends BaseContractAPI implements ERC20 {
         return this.ethCall(abi, [])
     }
 
-    approve(guy: string, wad: BigNumberish): Promise<TransactionRequest> {
+    approve(guy: string, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"constant":false,"inputs":[{"name":"guy","type":"address"},{"name":"wad","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [guy, wad])
+        return this.getTransactionRequest(abi, [guy, wad])
     }
 
-    totalSupply(): Promise<BigNumber> {
+    totalSupply(): Promise<BigNumber>
+    totalSupply(multicall: true): MulticallRequest<BigNumber>
+    totalSupply(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
@@ -36,23 +43,25 @@ export class Weth extends BaseContractAPI implements ERC20 {
         src: string,
         dst: string,
         wad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"constant":false,"inputs":[{"name":"src","type":"address"},{"name":"dst","type":"address"},{"name":"wad","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [src, dst, wad])
+        return this.getTransactionRequest(abi, [src, dst, wad])
     }
 
-    withdraw(wad: BigNumberish): Promise<TransactionRequest> {
+    withdraw(wad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"constant":false,"inputs":[{"name":"wad","type":"uint256"}],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [wad])
+        return this.getTransactionRequest(abi, [wad])
     }
 
-    decimals(): Promise<number> {
+    decimals(): Promise<number>
+    decimals(multicall: true): MulticallRequest<number>
+    decimals(multicall?: true): Promise<number> | MulticallRequest<number> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"}
@@ -60,7 +69,12 @@ export class Weth extends BaseContractAPI implements ERC20 {
         return this.ethCall(abi, [])
     }
 
-    balanceOf(address: string): Promise<BigNumber> {
+    balanceOf(address: string): Promise<BigNumber>
+    balanceOf(address: string, multicall: true): MulticallRequest<BigNumber>
+    balanceOf(
+        address: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
@@ -68,7 +82,9 @@ export class Weth extends BaseContractAPI implements ERC20 {
         return this.ethCall(abi, [address])
     }
 
-    symbol(): Promise<string> {
+    symbol(): Promise<string>
+    symbol(multicall: true): MulticallRequest<string>
+    symbol(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}
@@ -76,23 +92,33 @@ export class Weth extends BaseContractAPI implements ERC20 {
         return this.ethCall(abi, [])
     }
 
-    transfer(dst: string, wad: BigNumberish): Promise<TransactionRequest> {
+    transfer(dst: string, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"constant":false,"inputs":[{"name":"dst","type":"address"},{"name":"wad","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [dst, wad])
+        return this.getTransactionRequest(abi, [dst, wad])
     }
 
-    deposit(ethValue: BigNumberish): Promise<TransactionRequest> {
+    deposit(ethValue: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"constant":false,"inputs":[],"name":"deposit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"}
 
-        return this.ethSend(abi, [], BigNumber.from(ethValue))
+        return this.getTransactionRequest(abi, [], BigNumber.from(ethValue))
     }
 
-    allowance(address1: string, address2: string): Promise<BigNumber> {
+    allowance(address1: string, address2: string): Promise<BigNumber>
+    allowance(
+        address1: string,
+        address2: string,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    allowance(
+        address1: string,
+        address2: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}

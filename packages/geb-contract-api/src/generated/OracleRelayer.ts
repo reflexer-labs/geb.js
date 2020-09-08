@@ -2,6 +2,7 @@
 /* tslint:disable */
 
 import { BaseContractAPI } from '@reflexer-finance/geb-provider'
+import { MulticallRequest } from '@reflexer-finance/geb-provider'
 import { TransactionRequest } from '@reflexer-finance/geb-provider'
 import { BytesLike } from '@ethersproject/bytes'
 import { BigNumber } from '@ethersproject/bignumber'
@@ -11,15 +12,24 @@ export class OracleRelayer extends BaseContractAPI {
      * Add auth to an account
      * @param account Account to add auth to
      */
-    addAuthorization(account: string): Promise<TransactionRequest> {
+
+    addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"addAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [account])
+        return this.getTransactionRequest(abi, [account])
     }
 
-    authorizedAccounts(address: string): Promise<BigNumber> {
+    authorizedAccounts(address: string): Promise<BigNumber>
+    authorizedAccounts(
+        address: string,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    authorizedAccounts(
+        address: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -33,7 +43,29 @@ export class OracleRelayer extends BaseContractAPI {
         orcl: string
         safetyCRatio: BigNumber
         liquidationCRatio: BigNumber
-    }> {
+    }>
+    collateralTypes(
+        bytes: BytesLike,
+        multicall: true
+    ): MulticallRequest<{
+        orcl: string
+        safetyCRatio: BigNumber
+        liquidationCRatio: BigNumber
+    }>
+    collateralTypes(
+        bytes: BytesLike,
+        multicall?: true
+    ):
+        | Promise<{
+              orcl: string
+              safetyCRatio: BigNumber
+              liquidationCRatio: BigNumber
+          }>
+        | MulticallRequest<{
+              orcl: string
+              safetyCRatio: BigNumber
+              liquidationCRatio: BigNumber
+          }> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"collateralTypes","outputs":[{"internalType":"contract OracleLike","name":"orcl","type":"address"},{"internalType":"uint256","name":"safetyCRatio","type":"uint256"},{"internalType":"uint256","name":"liquidationCRatio","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -41,7 +73,11 @@ export class OracleRelayer extends BaseContractAPI {
         return this.ethCall(abi, [bytes])
     }
 
-    contractEnabled(): Promise<BigNumber> {
+    contractEnabled(): Promise<BigNumber>
+    contractEnabled(multicall: true): MulticallRequest<BigNumber>
+    contractEnabled(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -52,19 +88,28 @@ export class OracleRelayer extends BaseContractAPI {
     /**
      * Disable this contract (normally called by GlobalSettlement)
      */
-    disableContract(): Promise<TransactionRequest> {
+
+    disableContract(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"disableContract","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [])
+        return this.getTransactionRequest(abi, [])
     }
 
     /**
      * Fetch the liquidation CRatio of a specific collateral type
      * @param collateralType The collateral price we want the liquidation CRatio for
      */
-    liquidationCRatio(collateralType: BytesLike): Promise<BigNumber> {
+    liquidationCRatio(collateralType: BytesLike): Promise<BigNumber>
+    liquidationCRatio(
+        collateralType: BytesLike,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    liquidationCRatio(
+        collateralType: BytesLike,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"liquidationCRatio","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -78,23 +123,33 @@ export class OracleRelayer extends BaseContractAPI {
      * @param collateralType Collateral who's oracle we change
      * @param parameter Name of the parameter
      */
+
     modifyParameters(
         collateralType: BytesLike,
         parameter: BytesLike,
         addr: string
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"addr","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [collateralType, parameter, addr])
+        return this.getTransactionRequest(abi, [
+            collateralType,
+            parameter,
+            addr,
+        ])
     }
 
     /**
      * Fetch the oracle price feed of a specific collateral type
      * @param collateralType The collateral price we want the oracle price feed for
      */
-    orcl(collateralType: BytesLike): Promise<string> {
+    orcl(collateralType: BytesLike): Promise<string>
+    orcl(collateralType: BytesLike, multicall: true): MulticallRequest<string>
+    orcl(
+        collateralType: BytesLike,
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"orcl","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
@@ -105,23 +160,20 @@ export class OracleRelayer extends BaseContractAPI {
     /**
      * Fetch the latest redemption price by first updating it
      */
-    redemptionPrice(): Promise<TransactionRequest> {
+
+    redemptionPrice(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"redemptionPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [])
+        return this.getTransactionRequest(abi, [])
     }
 
-    redemptionPrice_readOnly(): Promise<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"redemptionPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
-
-        return this.ethCall(abi, [])
-    }
-
-    redemptionPriceUpdateTime(): Promise<BigNumber> {
+    redemptionPriceUpdateTime(): Promise<BigNumber>
+    redemptionPriceUpdateTime(multicall: true): MulticallRequest<BigNumber>
+    redemptionPriceUpdateTime(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"redemptionPriceUpdateTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -129,7 +181,11 @@ export class OracleRelayer extends BaseContractAPI {
         return this.ethCall(abi, [])
     }
 
-    redemptionRate(): Promise<BigNumber> {
+    redemptionRate(): Promise<BigNumber>
+    redemptionRate(multicall: true): MulticallRequest<BigNumber>
+    redemptionRate(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"redemptionRate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -141,15 +197,18 @@ export class OracleRelayer extends BaseContractAPI {
      * Remove auth from an account
      * @param account Account to remove auth from
      */
-    removeAuthorization(account: string): Promise<TransactionRequest> {
+
+    removeAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"removeAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [account])
+        return this.getTransactionRequest(abi, [account])
     }
 
-    safeEngine(): Promise<string> {
+    safeEngine(): Promise<string>
+    safeEngine(multicall: true): MulticallRequest<string>
+    safeEngine(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
@@ -161,7 +220,15 @@ export class OracleRelayer extends BaseContractAPI {
      * Fetch the safety CRatio of a specific collateral type
      * @param collateralType The collateral price we want the safety CRatio for
      */
-    safetyCRatio(collateralType: BytesLike): Promise<BigNumber> {
+    safetyCRatio(collateralType: BytesLike): Promise<BigNumber>
+    safetyCRatio(
+        collateralType: BytesLike,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    safetyCRatio(
+        collateralType: BytesLike,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"safetyCRatio","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -173,13 +240,12 @@ export class OracleRelayer extends BaseContractAPI {
      * Update the collateral price inside the system (inside SAFEEngine)
      * @param collateralType The collateral we want to update prices (safety and liquidation prices) for
      */
-    updateCollateralPrice(
-        collateralType: BytesLike
-    ): Promise<TransactionRequest> {
+
+    updateCollateralPrice(collateralType: BytesLike): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"updateCollateralPrice","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [collateralType])
+        return this.getTransactionRequest(abi, [collateralType])
     }
 }

@@ -11,12 +11,12 @@ export class GebProxyActionsGlobalSettlement extends BaseContractAPI {
         apt: string,
         safeHandler: string,
         wad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"apt","type":"address"},{"internalType":"address","name":"safeHandler","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"coinJoin_join","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [apt, safeHandler, wad])
+        return this.getTransactionRequest(abi, [apt, safeHandler, wad])
     }
 
     freeETH(
@@ -24,12 +24,17 @@ export class GebProxyActionsGlobalSettlement extends BaseContractAPI {
         ethJoin: string,
         globalSettlement: string,
         safe: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"globalSettlement","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"}],"name":"freeETH","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [manager, ethJoin, globalSettlement, safe])
+        return this.getTransactionRequest(abi, [
+            manager,
+            ethJoin,
+            globalSettlement,
+            safe,
+        ])
     }
 
     freeTokenCollateral(
@@ -37,12 +42,12 @@ export class GebProxyActionsGlobalSettlement extends BaseContractAPI {
         collateralJoin: string,
         globalSettlement: string,
         safe: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"collateralJoin","type":"address"},{"internalType":"address","name":"globalSettlement","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"}],"name":"freeTokenCollateral","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [
+        return this.getTransactionRequest(abi, [
             manager,
             collateralJoin,
             globalSettlement,
@@ -54,12 +59,16 @@ export class GebProxyActionsGlobalSettlement extends BaseContractAPI {
         coinJoin: string,
         globalSettlement: string,
         wad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"globalSettlement","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"prepareCoinsForRedeeming","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [coinJoin, globalSettlement, wad])
+        return this.getTransactionRequest(abi, [
+            coinJoin,
+            globalSettlement,
+            wad,
+        ])
     }
 
     redeemETH(
@@ -67,12 +76,12 @@ export class GebProxyActionsGlobalSettlement extends BaseContractAPI {
         globalSettlement: string,
         collateralType: BytesLike,
         wad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"globalSettlement","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"redeemETH","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [
+        return this.getTransactionRequest(abi, [
             ethJoin,
             globalSettlement,
             collateralType,
@@ -85,12 +94,12 @@ export class GebProxyActionsGlobalSettlement extends BaseContractAPI {
         globalSettlement: string,
         collateralType: BytesLike,
         wad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"collateralJoin","type":"address"},{"internalType":"address","name":"globalSettlement","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"redeemTokenCollateral","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [
+        return this.getTransactionRequest(abi, [
             collateralJoin,
             globalSettlement,
             collateralType,

@@ -2,13 +2,18 @@
 /* tslint:disable */
 
 import { BaseContractAPI } from '@reflexer-finance/geb-provider'
+import { MulticallRequest } from '@reflexer-finance/geb-provider'
 import { TransactionRequest } from '@reflexer-finance/geb-provider'
 import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class LiquidationEngine extends BaseContractAPI {
-    accountingEngine(): Promise<string> {
+    accountingEngine(): Promise<string>
+    accountingEngine(multicall: true): MulticallRequest<string>
+    accountingEngine(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"accountingEngine","outputs":[{"internalType":"contract AccountingEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
@@ -20,15 +25,24 @@ export class LiquidationEngine extends BaseContractAPI {
      * Add auth to an account
      * @param account Account to add auth to
      */
-    addAuthorization(account: string): Promise<TransactionRequest> {
+
+    addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"addAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [account])
+        return this.getTransactionRequest(abi, [account])
     }
 
-    authorizedAccounts(address: string): Promise<BigNumber> {
+    authorizedAccounts(address: string): Promise<BigNumber>
+    authorizedAccounts(
+        address: string,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    authorizedAccounts(
+        address: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -36,7 +50,17 @@ export class LiquidationEngine extends BaseContractAPI {
         return this.ethCall(abi, [address])
     }
 
-    chosenSAFESaviour(bytes: BytesLike, address: string): Promise<string> {
+    chosenSAFESaviour(bytes: BytesLike, address: string): Promise<string>
+    chosenSAFESaviour(
+        bytes: BytesLike,
+        address: string,
+        multicall: true
+    ): MulticallRequest<string>
+    chosenSAFESaviour(
+        bytes: BytesLike,
+        address: string,
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"chosenSAFESaviour","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
@@ -50,7 +74,29 @@ export class LiquidationEngine extends BaseContractAPI {
         collateralAuctionHouse: string
         liquidationPenalty: BigNumber
         liquidationQuantity: BigNumber
-    }> {
+    }>
+    collateralTypes(
+        bytes: BytesLike,
+        multicall: true
+    ): MulticallRequest<{
+        collateralAuctionHouse: string
+        liquidationPenalty: BigNumber
+        liquidationQuantity: BigNumber
+    }>
+    collateralTypes(
+        bytes: BytesLike,
+        multicall?: true
+    ):
+        | Promise<{
+              collateralAuctionHouse: string
+              liquidationPenalty: BigNumber
+              liquidationQuantity: BigNumber
+          }>
+        | MulticallRequest<{
+              collateralAuctionHouse: string
+              liquidationPenalty: BigNumber
+              liquidationQuantity: BigNumber
+          }> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"collateralTypes","outputs":[{"internalType":"address","name":"collateralAuctionHouse","type":"address"},{"internalType":"uint256","name":"liquidationPenalty","type":"uint256"},{"internalType":"uint256","name":"liquidationQuantity","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -62,15 +108,20 @@ export class LiquidationEngine extends BaseContractAPI {
      * Authed function to add contracts that can save SAFEs from liquidation
      * @param saviour SAFE saviour contract to be whitelisted*
      */
-    connectSAFESaviour(saviour: string): Promise<TransactionRequest> {
+
+    connectSAFESaviour(saviour: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"saviour","type":"address"}],"name":"connectSAFESaviour","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [saviour])
+        return this.getTransactionRequest(abi, [saviour])
     }
 
-    contractEnabled(): Promise<BigNumber> {
+    contractEnabled(): Promise<BigNumber>
+    contractEnabled(multicall: true): MulticallRequest<BigNumber>
+    contractEnabled(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -78,7 +129,11 @@ export class LiquidationEngine extends BaseContractAPI {
         return this.ethCall(abi, [])
     }
 
-    currentOnAuctionSystemCoins(): Promise<BigNumber> {
+    currentOnAuctionSystemCoins(): Promise<BigNumber>
+    currentOnAuctionSystemCoins(multicall: true): MulticallRequest<BigNumber>
+    currentOnAuctionSystemCoins(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"currentOnAuctionSystemCoins","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -89,24 +144,26 @@ export class LiquidationEngine extends BaseContractAPI {
     /**
      * Disable this contract (normally called by GlobalSettlement)
      */
-    disableContract(): Promise<TransactionRequest> {
+
+    disableContract(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"disableContract","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [])
+        return this.getTransactionRequest(abi, [])
     }
 
     /**
      * Governance used function to remove contracts that can save SAFEs from liquidation
      * @param saviour SAFE saviour contract to be removed*
      */
-    disconnectSAFESaviour(saviour: string): Promise<TransactionRequest> {
+
+    disconnectSAFESaviour(saviour: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"saviour","type":"address"}],"name":"disconnectSAFESaviour","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [saviour])
+        return this.getTransactionRequest(abi, [saviour])
     }
 
     /**
@@ -114,15 +171,13 @@ export class LiquidationEngine extends BaseContractAPI {
      * @param collateralType The SAFE's collateral type
      * @param safe The SAFE's address
      */
-    liquidateSAFE(
-        collateralType: BytesLike,
-        safe: string
-    ): Promise<TransactionRequest> {
+
+    liquidateSAFE(collateralType: BytesLike, safe: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"safe","type":"address"}],"name":"liquidateSAFE","outputs":[{"internalType":"uint256","name":"auctionId","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [collateralType, safe])
+        return this.getTransactionRequest(abi, [collateralType, safe])
     }
 
     /**
@@ -131,19 +186,34 @@ export class LiquidationEngine extends BaseContractAPI {
      * @param data New address for the integration contract
      * @param parameter The name of the integration modified
      */
+
     modifyParameters(
         collateralType: BytesLike,
         parameter: BytesLike,
         data: string
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [collateralType, parameter, data])
+        return this.getTransactionRequest(abi, [
+            collateralType,
+            parameter,
+            data,
+        ])
     }
 
-    mutex(bytes: BytesLike, address: string): Promise<number> {
+    mutex(bytes: BytesLike, address: string): Promise<number>
+    mutex(
+        bytes: BytesLike,
+        address: string,
+        multicall: true
+    ): MulticallRequest<number>
+    mutex(
+        bytes: BytesLike,
+        address: string,
+        multicall?: true
+    ): Promise<number> | MulticallRequest<number> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"mutex","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"}
@@ -151,7 +221,11 @@ export class LiquidationEngine extends BaseContractAPI {
         return this.ethCall(abi, [bytes, address])
     }
 
-    onAuctionSystemCoinLimit(): Promise<BigNumber> {
+    onAuctionSystemCoinLimit(): Promise<BigNumber>
+    onAuctionSystemCoinLimit(multicall: true): MulticallRequest<BigNumber>
+    onAuctionSystemCoinLimit(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"onAuctionSystemCoinLimit","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -165,39 +239,43 @@ export class LiquidationEngine extends BaseContractAPI {
      * @param safe The SAFE's address
      * @param saviour The chosen saviour
      */
+
     protectSAFE(
         collateralType: BytesLike,
         safe: string,
         saviour: string
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"safe","type":"address"},{"internalType":"address","name":"saviour","type":"address"}],"name":"protectSAFE","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [collateralType, safe, saviour])
+        return this.getTransactionRequest(abi, [collateralType, safe, saviour])
     }
 
     /**
      * Remove auth from an account
      * @param account Account to remove auth from
      */
-    removeAuthorization(account: string): Promise<TransactionRequest> {
+
+    removeAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"removeAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [account])
+        return this.getTransactionRequest(abi, [account])
     }
 
-    removeCoinsFromAuction(rad: BigNumberish): Promise<TransactionRequest> {
+    removeCoinsFromAuction(rad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"rad","type":"uint256"}],"name":"removeCoinsFromAuction","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethSend(abi, [rad])
+        return this.getTransactionRequest(abi, [rad])
     }
 
-    safeEngine(): Promise<string> {
+    safeEngine(): Promise<string>
+    safeEngine(multicall: true): MulticallRequest<string>
+    safeEngine(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
@@ -205,7 +283,12 @@ export class LiquidationEngine extends BaseContractAPI {
         return this.ethCall(abi, [])
     }
 
-    safeSaviours(address: string): Promise<BigNumber> {
+    safeSaviours(address: string): Promise<BigNumber>
+    safeSaviours(address: string, multicall: true): MulticallRequest<BigNumber>
+    safeSaviours(
+        address: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"safeSaviours","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
