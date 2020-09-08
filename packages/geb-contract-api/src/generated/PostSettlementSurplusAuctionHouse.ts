@@ -18,7 +18,7 @@ export class PostSettlementSurplusAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"AUCTION_HOUSE_TYPE","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -43,7 +43,7 @@ export class PostSettlementSurplusAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"auctionsStarted","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     authorizedAccounts(address: string): Promise<BigNumber>
@@ -59,7 +59,7 @@ export class PostSettlementSurplusAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     bidDuration(): Promise<number>
@@ -69,7 +69,7 @@ export class PostSettlementSurplusAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"bidDuration","outputs":[{"internalType":"uint48","name":"","type":"uint48"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     bidIncrease(): Promise<BigNumber>
@@ -81,7 +81,7 @@ export class PostSettlementSurplusAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"bidIncrease","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     bids(
@@ -125,7 +125,7 @@ export class PostSettlementSurplusAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"bids","outputs":[{"internalType":"uint256","name":"bidAmount","type":"uint256"},{"internalType":"uint256","name":"amountToSell","type":"uint256"},{"internalType":"address","name":"highBidder","type":"address"},{"internalType":"uint48","name":"bidExpiry","type":"uint48"},{"internalType":"uint48","name":"auctionDeadline","type":"uint48"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [uinteger])
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
     /**
@@ -173,7 +173,7 @@ export class PostSettlementSurplusAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"protocolToken","outputs":[{"internalType":"contract TokenLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -209,7 +209,7 @@ export class PostSettlementSurplusAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -251,6 +251,6 @@ export class PostSettlementSurplusAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"totalAuctionLength","outputs":[{"internalType":"uint48","name":"","type":"uint48"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 }

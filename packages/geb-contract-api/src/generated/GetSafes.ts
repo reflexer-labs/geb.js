@@ -42,7 +42,7 @@ export class GetSafes extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"guy","type":"address"}],"name":"getSafesAsc","outputs":[{"internalType":"uint256[]","name":"ids","type":"uint256[]"},{"internalType":"address[]","name":"safes","type":"address[]"},{"internalType":"bytes32[]","name":"collateralTypes","type":"bytes32[]"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [manager, guy])
+        return this.ethCallOrMulticall(abi, [manager, guy], multicall)
     }
 
     getSafesDesc(
@@ -81,6 +81,6 @@ export class GetSafes extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"guy","type":"address"}],"name":"getSafesDesc","outputs":[{"internalType":"uint256[]","name":"ids","type":"uint256[]"},{"internalType":"address[]","name":"safes","type":"address[]"},{"internalType":"bytes32[]","name":"collateralTypes","type":"bytes32[]"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [manager, guy])
+        return this.ethCallOrMulticall(abi, [manager, guy], multicall)
     }
 }

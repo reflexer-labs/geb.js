@@ -34,7 +34,7 @@ export class CoinJoin extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     contractEnabled(): Promise<BigNumber>
@@ -46,7 +46,7 @@ export class CoinJoin extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     decimals(): Promise<BigNumber>
@@ -58,7 +58,7 @@ export class CoinJoin extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"decimals","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -123,7 +123,7 @@ export class CoinJoin extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     systemCoin(): Promise<string>
@@ -133,6 +133,6 @@ export class CoinJoin extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"systemCoin","outputs":[{"internalType":"contract DSTokenLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 }

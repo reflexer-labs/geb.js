@@ -61,7 +61,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     /**
@@ -86,7 +86,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     debtAuctionBidSize(): Promise<BigNumber>
@@ -98,7 +98,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"debtAuctionBidSize","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     debtAuctionHouse(): Promise<string>
@@ -110,7 +110,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"debtAuctionHouse","outputs":[{"internalType":"contract DebtAuctionHouseLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     debtQueue(uinteger: BigNumberish): Promise<BigNumber>
@@ -126,7 +126,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"debtQueue","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [uinteger])
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
     /**
@@ -151,7 +151,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"disableCooldown","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     disableTimestamp(): Promise<BigNumber>
@@ -163,7 +163,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"disableTimestamp","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     initialDebtAuctionMintedTokens(): Promise<BigNumber>
@@ -175,7 +175,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"initialDebtAuctionMintedTokens","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     lastSurplusAuctionTime(): Promise<BigNumber>
@@ -187,7 +187,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"lastSurplusAuctionTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -213,7 +213,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"popDebtDelay","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -238,7 +238,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"postSettlementSurplusDrain","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     protocolTokenAuthority(): Promise<string>
@@ -250,7 +250,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"protocolTokenAuthority","outputs":[{"internalType":"contract ProtocolTokenAuthorityLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -287,7 +287,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -313,7 +313,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"surplusAuctionAmountToSell","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     surplusAuctionDelay(): Promise<BigNumber>
@@ -325,7 +325,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"surplusAuctionDelay","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     surplusAuctionHouse(): Promise<string>
@@ -337,7 +337,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"surplusAuctionHouse","outputs":[{"internalType":"contract SurplusAuctionHouseLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     surplusBuffer(): Promise<BigNumber>
@@ -349,7 +349,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"surplusBuffer","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     totalOnAuctionDebt(): Promise<BigNumber>
@@ -361,7 +361,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"totalOnAuctionDebt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     totalQueuedDebt(): Promise<BigNumber>
@@ -373,7 +373,7 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"totalQueuedDebt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -398,6 +398,6 @@ export class AccountingEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"unqueuedUnauctionedDebt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 }

@@ -18,7 +18,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"accountingEngine","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     accumulatorTag(): Promise<BigNumber>
@@ -30,7 +30,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"accumulatorTag","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -59,7 +59,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     coinJoin(): Promise<string>
@@ -69,7 +69,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"coinJoin","outputs":[{"internalType":"contract CoinJoinLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     contractEnabled(): Promise<BigNumber>
@@ -81,7 +81,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -105,7 +105,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"expensesAccumulator","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     expensesMultiplier(): Promise<BigNumber>
@@ -117,7 +117,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"expensesMultiplier","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     getAllowance(account: string): Promise<{}>
@@ -130,7 +130,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"getAllowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [account])
+        return this.ethCallOrMulticall(abi, [account], multicall)
     }
 
     /**
@@ -156,7 +156,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"latestSurplusTransferTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     minimumFundsRequired(): Promise<BigNumber>
@@ -168,7 +168,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"minimumFundsRequired","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -219,7 +219,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"pulledPerBlock","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address, uinteger])
+        return this.ethCallOrMulticall(abi, [address, uinteger], multicall)
     }
 
     /**
@@ -242,7 +242,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -285,7 +285,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"surplusTransferDelay","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     systemCoin(): Promise<string>
@@ -295,7 +295,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"systemCoin","outputs":[{"internalType":"contract SystemCoinLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -333,6 +333,6 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"treasuryCapacity","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 }

@@ -16,7 +16,7 @@ export class DsProxy extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"authority","outputs":[{"internalType":"contract DSAuthority","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     cache(): Promise<string>
@@ -26,7 +26,7 @@ export class DsProxy extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"cache","outputs":[{"internalType":"contract DSProxyCache","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     execute(
@@ -52,7 +52,7 @@ export class DsProxy extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     setAuthority(authority_: string): TransactionRequest {

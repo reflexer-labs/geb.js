@@ -34,7 +34,7 @@ export class EthJoin extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     collateralType(): Promise<string>
@@ -46,7 +46,7 @@ export class EthJoin extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"collateralType","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     contractEnabled(): Promise<BigNumber>
@@ -58,7 +58,7 @@ export class EthJoin extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     decimals(): Promise<BigNumber>
@@ -70,7 +70,7 @@ export class EthJoin extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"decimals","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -135,6 +135,6 @@ export class EthJoin extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 }

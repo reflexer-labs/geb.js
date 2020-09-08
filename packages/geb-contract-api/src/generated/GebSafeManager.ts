@@ -42,7 +42,7 @@ export class GebSafeManager extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"collateralTypes","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [uinteger])
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
     enterSystem(src: string, safe: BigNumberish): TransactionRequest {
@@ -63,7 +63,7 @@ export class GebSafeManager extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"firstSAFEID","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     handlerCan(address1: string, address2: string): Promise<BigNumber>
@@ -81,7 +81,7 @@ export class GebSafeManager extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"handlerCan","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address1, address2])
+        return this.ethCallOrMulticall(abi, [address1, address2], multicall)
     }
 
     lastSAFEID(address: string): Promise<BigNumber>
@@ -94,7 +94,7 @@ export class GebSafeManager extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"lastSAFEID","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     modifySAFECollateralization(
@@ -139,7 +139,7 @@ export class GebSafeManager extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"ownsSAFE","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [uinteger])
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
     protectSAFE(
@@ -187,7 +187,11 @@ export class GebSafeManager extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"}],"name":"safeCan","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address1, uinteger, address2])
+        return this.ethCallOrMulticall(
+            abi,
+            [address1, uinteger, address2],
+            multicall
+        )
     }
 
     safeCount(address: string): Promise<BigNumber>
@@ -200,7 +204,7 @@ export class GebSafeManager extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"safeCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     safeEngine(): Promise<string>
@@ -210,7 +214,7 @@ export class GebSafeManager extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     safeList(
@@ -242,7 +246,7 @@ export class GebSafeManager extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"safeList","outputs":[{"internalType":"uint256","name":"prev","type":"uint256"},{"internalType":"uint256","name":"next","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [uinteger])
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
     safei(): Promise<BigNumber>
@@ -252,7 +256,7 @@ export class GebSafeManager extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safei","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     safes(uinteger: BigNumberish): Promise<string>
@@ -265,7 +269,7 @@ export class GebSafeManager extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"safes","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [uinteger])
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
     transferCollateral(

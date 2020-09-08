@@ -18,7 +18,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"accountingEngine","outputs":[{"internalType":"contract AccountingEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     addAuthorization(account: string): TransactionRequest {
@@ -42,7 +42,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     calculateCashPrice(collateralType: BytesLike): TransactionRequest {
@@ -63,7 +63,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"coinBag","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     coinSavingsAccount(): Promise<string>
@@ -75,7 +75,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"coinSavingsAccount","outputs":[{"internalType":"contract CoinSavingsAccountLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     coinsUsedToRedeem(bytes: BytesLike, address: string): Promise<BigNumber>
@@ -93,7 +93,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"coinsUsedToRedeem","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [bytes, address])
+        return this.ethCallOrMulticall(abi, [bytes, address], multicall)
     }
 
     collateralCashPrice(bytes: BytesLike): Promise<BigNumber>
@@ -109,7 +109,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"collateralCashPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [bytes])
+        return this.ethCallOrMulticall(abi, [bytes], multicall)
     }
 
     collateralShortfall(bytes: BytesLike): Promise<BigNumber>
@@ -125,7 +125,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"collateralShortfall","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [bytes])
+        return this.ethCallOrMulticall(abi, [bytes], multicall)
     }
 
     collateralTotalDebt(bytes: BytesLike): Promise<BigNumber>
@@ -141,7 +141,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"collateralTotalDebt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [bytes])
+        return this.ethCallOrMulticall(abi, [bytes], multicall)
     }
 
     contractEnabled(): Promise<BigNumber>
@@ -153,7 +153,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     fastTrackAuction(
@@ -180,7 +180,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"finalCoinPerCollateralPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [bytes])
+        return this.ethCallOrMulticall(abi, [bytes], multicall)
     }
 
     freeCollateral(collateralType: BytesLike): TransactionRequest {
@@ -208,7 +208,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"liquidationEngine","outputs":[{"internalType":"contract LiquidationEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     modifyParameters(parameter: BytesLike, data: string): TransactionRequest {
@@ -228,7 +228,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"oracleRelayer","outputs":[{"internalType":"contract OracleRelayerLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     outstandingCoinSupply(): Promise<BigNumber>
@@ -240,7 +240,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"outstandingCoinSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     prepareCoinsForRedeeming(coinAmount: BigNumberish): TransactionRequest {
@@ -285,7 +285,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     setOutstandingCoinSupply(): TransactionRequest {
@@ -305,7 +305,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"shutdownCooldown","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     shutdownSystem(): TransactionRequest {
@@ -325,7 +325,7 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"shutdownTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     stabilityFeeTreasury(): Promise<string>
@@ -337,6 +337,6 @@ export class GlobalSettlement extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"stabilityFeeTreasury","outputs":[{"internalType":"contract StabilityFeeTreasuryLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 }

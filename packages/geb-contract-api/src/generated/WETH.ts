@@ -16,7 +16,7 @@ export class Weth extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     approve(guy: string, wad: BigNumberish): TransactionRequest {
@@ -36,7 +36,7 @@ export class Weth extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     transferFrom(
@@ -66,7 +66,7 @@ export class Weth extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     balanceOf(address: string): Promise<BigNumber>
@@ -79,7 +79,7 @@ export class Weth extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     symbol(): Promise<string>
@@ -89,7 +89,7 @@ export class Weth extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     transfer(dst: string, wad: BigNumberish): TransactionRequest {
@@ -123,6 +123,6 @@ export class Weth extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address1, address2])
+        return this.ethCallOrMulticall(abi, [address1, address2], multicall)
     }
 }

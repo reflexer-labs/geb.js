@@ -18,7 +18,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"AUCTION_HOUSE_TYPE","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     AUCTION_TYPE(): Promise<string>
@@ -28,7 +28,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"AUCTION_TYPE","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -57,7 +57,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"amountToRaise","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [id])
+        return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
     auctionsStarted(): Promise<BigNumber>
@@ -69,7 +69,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"auctionsStarted","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     authorizedAccounts(address: string): Promise<BigNumber>
@@ -85,7 +85,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     bidAmount(id: BigNumberish): Promise<BigNumber>
@@ -98,7 +98,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"bidAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [id])
+        return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
     bids(
@@ -150,7 +150,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"bids","outputs":[{"internalType":"uint256","name":"raisedAmount","type":"uint256"},{"internalType":"uint256","name":"soldAmount","type":"uint256"},{"internalType":"uint256","name":"amountToSell","type":"uint256"},{"internalType":"uint256","name":"amountToRaise","type":"uint256"},{"internalType":"uint48","name":"auctionDeadline","type":"uint48"},{"internalType":"address","name":"forgoneCollateralReceiver","type":"address"},{"internalType":"address","name":"auctionIncomeRecipient","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [uinteger])
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
     /**
@@ -176,7 +176,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"collateralMedian","outputs":[{"internalType":"contract OracleLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     collateralOSM(): Promise<string>
@@ -188,7 +188,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"collateralOSM","outputs":[{"internalType":"contract OracleLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     collateralType(): Promise<string>
@@ -200,7 +200,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"collateralType","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     discount(): Promise<BigNumber>
@@ -212,7 +212,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"discount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     forgoneCollateralReceiver(id: BigNumberish): Promise<string>
@@ -228,7 +228,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"forgoneCollateralReceiver","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [id])
+        return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
     /**
@@ -275,7 +275,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"liquidationEngine","outputs":[{"internalType":"contract LiquidationEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     lowerCollateralMedianDeviation(): Promise<BigNumber>
@@ -287,7 +287,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"lowerCollateralMedianDeviation","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     lowerSystemCoinMedianDeviation(): Promise<BigNumber>
@@ -299,7 +299,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"lowerSystemCoinMedianDeviation","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     minSystemCoinMedianDeviation(): Promise<BigNumber>
@@ -311,7 +311,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"minSystemCoinMedianDeviation","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     minimumBid(): Promise<BigNumber>
@@ -323,7 +323,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"minimumBid","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -349,7 +349,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"oracleRelayer","outputs":[{"internalType":"contract OracleRelayerLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     remainingAmountToSell(id: BigNumberish): Promise<BigNumber>
@@ -365,7 +365,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"remainingAmountToSell","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [id])
+        return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
     /**
@@ -388,7 +388,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -442,7 +442,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"systemCoinOracle","outputs":[{"internalType":"contract OracleLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -467,7 +467,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"totalAuctionLength","outputs":[{"internalType":"uint48","name":"","type":"uint48"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     upperCollateralMedianDeviation(): Promise<BigNumber>
@@ -479,7 +479,7 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"upperCollateralMedianDeviation","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     upperSystemCoinMedianDeviation(): Promise<BigNumber>
@@ -491,6 +491,6 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"upperSystemCoinMedianDeviation","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 }

@@ -143,9 +143,9 @@ function codegenForSingleFunction(
         // @ts-ignore
         const abi = ${JSON.stringify(abiFragment)}
         
-        return this.${isView ? 'ethCall' : 'getTransactionRequest'}(abi, [
+        return this.${isView ? 'ethCallOrMulticall' : 'getTransactionRequest'}(abi, [
             ${processedInputName.join(", ")}
-        ]${fn.stateMutability === 'payable' ? ', BigNumber.from(ethValue)' : ''})
+        ]${fn.stateMutability === 'payable' ? ', BigNumber.from(ethValue)' : isView? ', multicall' : ''})
     }
     `
 }

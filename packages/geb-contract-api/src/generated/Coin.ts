@@ -19,7 +19,7 @@ export class Coin extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"inputs":[],"name":"DOMAIN_SEPARATOR","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     PERMIT_TYPEHASH(): Promise<string>
@@ -31,7 +31,7 @@ export class Coin extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"inputs":[],"name":"PERMIT_TYPEHASH","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     addAuthorization(account: string): TransactionRequest {
@@ -57,7 +57,7 @@ export class Coin extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address1, address2])
+        return this.ethCallOrMulticall(abi, [address1, address2], multicall)
     }
 
     approve(usr: string, amount: BigNumberish): TransactionRequest {
@@ -81,7 +81,7 @@ export class Coin extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     balanceOf(address: string): Promise<BigNumber>
@@ -94,7 +94,7 @@ export class Coin extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     burn(usr: string, amount: BigNumberish): TransactionRequest {
@@ -112,7 +112,7 @@ export class Coin extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     mint(usr: string, amount: BigNumberish): TransactionRequest {
@@ -138,7 +138,7 @@ export class Coin extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     nonces(address: string): Promise<BigNumber>
@@ -151,7 +151,7 @@ export class Coin extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"nonces","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     permit(
@@ -211,7 +211,7 @@ export class Coin extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     totalSupply(): Promise<BigNumber>
@@ -223,7 +223,7 @@ export class Coin extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     transfer(dst: string, amount: BigNumberish): TransactionRequest {
@@ -253,6 +253,6 @@ export class Coin extends BaseContractAPI implements ERC20 {
         // @ts-ignore
         const abi = {"inputs":[],"name":"version","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 }

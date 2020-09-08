@@ -18,7 +18,7 @@ export class Multicall extends BaseContractAPI {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"getCurrentBlockTimestamp","outputs":[{"name":"timestamp","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     aggregate(
@@ -40,7 +40,7 @@ export class Multicall extends BaseContractAPI {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"getLastBlockHash","outputs":[{"name":"blockHash","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     getEthBalance(addr: string): Promise<BigNumber>
@@ -53,7 +53,7 @@ export class Multicall extends BaseContractAPI {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"getEthBalance","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [addr])
+        return this.ethCallOrMulticall(abi, [addr], multicall)
     }
 
     getCurrentBlockDifficulty(): Promise<BigNumber>
@@ -65,7 +65,7 @@ export class Multicall extends BaseContractAPI {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"getCurrentBlockDifficulty","outputs":[{"name":"difficulty","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     getCurrentBlockGasLimit(): Promise<BigNumber>
@@ -77,7 +77,7 @@ export class Multicall extends BaseContractAPI {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"getCurrentBlockGasLimit","outputs":[{"name":"gaslimit","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     getCurrentBlockCoinbase(): Promise<string>
@@ -89,7 +89,7 @@ export class Multicall extends BaseContractAPI {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[],"name":"getCurrentBlockCoinbase","outputs":[{"name":"coinbase","type":"address"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     getBlockHash(blockNumber: BigNumberish): Promise<string>
@@ -105,6 +105,6 @@ export class Multicall extends BaseContractAPI {
         // @ts-ignore
         const abi = {"constant":true,"inputs":[{"name":"blockNumber","type":"uint256"}],"name":"getBlockHash","outputs":[{"name":"blockHash","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [blockNumber])
+        return this.ethCallOrMulticall(abi, [blockNumber], multicall)
     }
 }

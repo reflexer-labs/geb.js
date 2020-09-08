@@ -18,7 +18,7 @@ export class LiquidationEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"accountingEngine","outputs":[{"internalType":"contract AccountingEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -47,7 +47,7 @@ export class LiquidationEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     chosenSAFESaviour(bytes: BytesLike, address: string): Promise<string>
@@ -65,7 +65,7 @@ export class LiquidationEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"chosenSAFESaviour","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [bytes, address])
+        return this.ethCallOrMulticall(abi, [bytes, address], multicall)
     }
 
     collateralTypes(
@@ -101,7 +101,7 @@ export class LiquidationEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"collateralTypes","outputs":[{"internalType":"address","name":"collateralAuctionHouse","type":"address"},{"internalType":"uint256","name":"liquidationPenalty","type":"uint256"},{"internalType":"uint256","name":"liquidationQuantity","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [bytes])
+        return this.ethCallOrMulticall(abi, [bytes], multicall)
     }
 
     /**
@@ -126,7 +126,7 @@ export class LiquidationEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     currentOnAuctionSystemCoins(): Promise<BigNumber>
@@ -138,7 +138,7 @@ export class LiquidationEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"currentOnAuctionSystemCoins","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -218,7 +218,7 @@ export class LiquidationEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"mutex","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [bytes, address])
+        return this.ethCallOrMulticall(abi, [bytes, address], multicall)
     }
 
     onAuctionSystemCoinLimit(): Promise<BigNumber>
@@ -230,7 +230,7 @@ export class LiquidationEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"onAuctionSystemCoinLimit","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -280,7 +280,7 @@ export class LiquidationEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     safeSaviours(address: string): Promise<BigNumber>
@@ -293,6 +293,6 @@ export class LiquidationEngine extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"safeSaviours","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 }

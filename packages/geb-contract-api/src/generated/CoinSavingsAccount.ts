@@ -18,7 +18,7 @@ export class CoinSavingsAccount extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"accountingEngine","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     accumulatedRate(): Promise<BigNumber>
@@ -30,7 +30,7 @@ export class CoinSavingsAccount extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"accumulatedRate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -59,7 +59,7 @@ export class CoinSavingsAccount extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     contractEnabled(): Promise<BigNumber>
@@ -71,7 +71,7 @@ export class CoinSavingsAccount extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -108,7 +108,7 @@ export class CoinSavingsAccount extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"latestUpdateTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -137,7 +137,7 @@ export class CoinSavingsAccount extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"nextAccumulatedRate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -160,7 +160,7 @@ export class CoinSavingsAccount extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     savings(address: string): Promise<BigNumber>
@@ -173,7 +173,7 @@ export class CoinSavingsAccount extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"savings","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     savingsRate(): Promise<BigNumber>
@@ -185,7 +185,7 @@ export class CoinSavingsAccount extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"savingsRate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     totalSavings(): Promise<BigNumber>
@@ -197,7 +197,7 @@ export class CoinSavingsAccount extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"totalSavings","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**

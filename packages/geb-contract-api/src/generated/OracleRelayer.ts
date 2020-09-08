@@ -34,7 +34,7 @@ export class OracleRelayer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     collateralTypes(
@@ -70,7 +70,7 @@ export class OracleRelayer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"collateralTypes","outputs":[{"internalType":"contract OracleLike","name":"orcl","type":"address"},{"internalType":"uint256","name":"safetyCRatio","type":"uint256"},{"internalType":"uint256","name":"liquidationCRatio","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [bytes])
+        return this.ethCallOrMulticall(abi, [bytes], multicall)
     }
 
     contractEnabled(): Promise<BigNumber>
@@ -82,7 +82,7 @@ export class OracleRelayer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -114,7 +114,7 @@ export class OracleRelayer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"liquidationCRatio","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [collateralType])
+        return this.ethCallOrMulticall(abi, [collateralType], multicall)
     }
 
     /**
@@ -154,7 +154,7 @@ export class OracleRelayer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"orcl","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [collateralType])
+        return this.ethCallOrMulticall(abi, [collateralType], multicall)
     }
 
     /**
@@ -178,7 +178,7 @@ export class OracleRelayer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"redemptionPriceUpdateTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     redemptionRate(): Promise<BigNumber>
@@ -190,7 +190,7 @@ export class OracleRelayer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"redemptionRate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -213,7 +213,7 @@ export class OracleRelayer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -233,7 +233,7 @@ export class OracleRelayer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"safetyCRatio","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [collateralType])
+        return this.ethCallOrMulticall(abi, [collateralType], multicall)
     }
 
     /**

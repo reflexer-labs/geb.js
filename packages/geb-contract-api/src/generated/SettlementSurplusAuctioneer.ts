@@ -17,7 +17,7 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"accountingEngine","outputs":[{"internalType":"contract AccountingEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -58,7 +58,7 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     lastSurplusAuctionTime(): Promise<BigNumber>
@@ -70,7 +70,7 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"lastSurplusAuctionTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -107,7 +107,7 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     surplusAuctionHouse(): Promise<string>
@@ -119,6 +119,6 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"surplusAuctionHouse","outputs":[{"internalType":"contract SurplusAuctionHouseLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 }

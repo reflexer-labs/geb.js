@@ -35,7 +35,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     collateralList(uinteger: BigNumberish): Promise<string>
@@ -51,7 +51,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"collateralList","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [uinteger])
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
     /**
@@ -66,7 +66,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"collateralListLength","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     collateralTypes(
@@ -98,7 +98,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"collateralTypes","outputs":[{"internalType":"uint256","name":"stabilityFee","type":"uint256"},{"internalType":"uint256","name":"updateTime","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [bytes])
+        return this.ethCallOrMulticall(abi, [bytes], multicall)
     }
 
     /**
@@ -119,7 +119,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"start","type":"uint256"},{"internalType":"uint256","name":"end","type":"uint256"}],"name":"collectedManyTax","outputs":[{"internalType":"bool","name":"ok","type":"bool"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [start, end])
+        return this.ethCallOrMulticall(abi, [start, end], multicall)
     }
 
     globalStabilityFee(): Promise<BigNumber>
@@ -131,7 +131,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"globalStabilityFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -163,7 +163,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"_receiver","type":"uint256"}],"name":"isSecondaryReceiver","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [_receiver])
+        return this.ethCallOrMulticall(abi, [_receiver], multicall)
     }
 
     latestSecondaryReceiver(): Promise<BigNumber>
@@ -175,7 +175,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"latestSecondaryReceiver","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     maxSecondaryReceivers(): Promise<BigNumber>
@@ -187,7 +187,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"maxSecondaryReceivers","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -225,7 +225,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"primaryTaxReceiver","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     /**
@@ -248,7 +248,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     secondaryReceiverAccounts(uinteger: BigNumberish): Promise<string>
@@ -264,7 +264,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"secondaryReceiverAccounts","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [uinteger])
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
     secondaryReceiverAllotedTax(bytes: BytesLike): Promise<BigNumber>
@@ -280,7 +280,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"secondaryReceiverAllotedTax","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [bytes])
+        return this.ethCallOrMulticall(abi, [bytes], multicall)
     }
 
     secondaryReceiverNonce(): Promise<BigNumber>
@@ -292,7 +292,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"secondaryReceiverNonce","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     secondaryReceiverRevenueSources(address: string): Promise<BigNumber>
@@ -308,7 +308,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"secondaryReceiverRevenueSources","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     /**
@@ -323,7 +323,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[],"name":"secondaryReceiversAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     secondaryTaxReceivers(
@@ -358,7 +358,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"secondaryTaxReceivers","outputs":[{"internalType":"uint256","name":"canTakeBackTax","type":"uint256"},{"internalType":"uint256","name":"taxPercentage","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [bytes, uinteger])
+        return this.ethCallOrMulticall(abi, [bytes, uinteger], multicall)
     }
 
     /**
@@ -412,7 +412,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"start","type":"uint256"},{"internalType":"uint256","name":"end","type":"uint256"}],"name":"taxManyOutcome","outputs":[{"internalType":"bool","name":"ok","type":"bool"},{"internalType":"int256","name":"rad","type":"int256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [start, end])
+        return this.ethCallOrMulticall(abi, [start, end], multicall)
     }
 
     /**
@@ -445,7 +445,7 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"taxSingleOutcome","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"int256","name":"","type":"int256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [collateralType])
+        return this.ethCallOrMulticall(abi, [collateralType], multicall)
     }
 
     usedSecondaryReceiver(address: string): Promise<BigNumber>
@@ -461,6 +461,6 @@ export class TaxCollector extends BaseContractAPI {
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"usedSecondaryReceiver","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCall(abi, [address])
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 }
