@@ -35,7 +35,7 @@ export class EthersProvider implements GebProviderInterface {
 
     decodeFunctionData(data: string, abiFragment: AbiDefinition): Outputs {
         const coder = new utils.Interface([abiFragment])
-        const result = coder.decodeFunctionData(abiFragment.name, data)
+        const result = coder.decodeFunctionResult(abiFragment.name, data)
         return this.processEthersResults(result)
     }
 

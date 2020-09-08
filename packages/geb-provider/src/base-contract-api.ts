@@ -28,16 +28,18 @@ export class BaseContractAPI {
         public chainProvider: GebProviderInterface
     ) {}
 
-    protected ethCall(
+    protected async ethCall(
         abiFragment: AbiDefinition,
         params: Inputs
     ): Promise<any> {
         const data = this.chainProvider.encodeFunctionData(params, abiFragment)
 
-        return this.chainProvider.ethCall({
+        const hex = await this.chainProvider.ethCall({
             to: this.address,
             data,
         })
+
+        return this.chainProvider.decodeFunctionData(hex, abiFragment)
     }
 
     protected getTransactionRequest(
