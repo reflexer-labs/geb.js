@@ -94,13 +94,21 @@ export class Geb {
         )
     }
 
-    // Multicall overloads for typing
+    // Multicall overloads, typing support for up to 7 calls.
     // prettier-ignore
     public multiCall<O1>(calls: [MulticallRequest<O1>]): Promise<[O1]>
     // prettier-ignore
     public multiCall<O1, O2>(calls: [MulticallRequest<O1>, MulticallRequest<O2>]): Promise<[O1, O2]>
     // prettier-ignore
     public multiCall<O1, O2, O3>(calls: [MulticallRequest<O1>, MulticallRequest<O2>, MulticallRequest<O3>]): Promise<[O1, O2, O3]>
+    // prettier-ignore
+    public multiCall<O1, O2, O3, O4>(calls: [MulticallRequest<O1>, MulticallRequest<O2>, MulticallRequest<O3>, MulticallRequest<O4>]): Promise<[O1, O2, O3, O4]>
+    // prettier-ignore
+    public multiCall<O1, O2, O3, O4, O5>(calls: [MulticallRequest<O1>, MulticallRequest<O2>, MulticallRequest<O3>, MulticallRequest<O4>, MulticallRequest<O5>]): Promise<[O1, O2, O3, O4, O5]>
+    // prettier-ignore
+    public multiCall<O1, O2, O3, O4, O5, O6>(calls: [MulticallRequest<O1>, MulticallRequest<O2>, MulticallRequest<O3>, MulticallRequest<O4>, MulticallRequest<O5>, MulticallRequest<O6>]): Promise<[O1, O2, O3, O4, O5, O6]>
+    // prettier-ignore
+    public multiCall<O1, O2, O3, O4, O5, O6, O7>(calls: [MulticallRequest<O1>, MulticallRequest<O2>, MulticallRequest<O3>, MulticallRequest<O4>, MulticallRequest<O5>, MulticallRequest<O6>, MulticallRequest<O7>]): Promise<[O1, O2, O3, O4, O5, O6, O7]>
 
     public async multiCall<T>(calls: MulticallRequest<T>[]): Promise<T[]> {
         const multiCall = new Multicall(
@@ -113,10 +121,12 @@ export class Geb {
             callData: x.data,
         }))
 
-        const results = await multiCall.aggregate(send)
-        // @ts-ignore
-        return results.returnData.map((raw, i) =>
+        const results = await multiCall.aggregate_readOnly(send)
+
+        const a = results.returnData.map((raw, i) =>
             this.provider.decodeFunctionData(raw, calls[i].abi)
         )
+
+        return (a as unknown) as T[]
     }
 }

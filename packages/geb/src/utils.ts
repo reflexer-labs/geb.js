@@ -37,12 +37,12 @@ const WAD = BigNumber.from('1000000000000000000')
 /**
  * Constant 10^27
  */
-const RAY = WAD.mul('1000000000')
+const RAY = BigNumber.from('1000000000000000000000000000')
 
 /**
  * Constant 10^45
  */
-const RAD = WAD.pow(2)
+const RAD = BigNumber.from('1000000000000000000000000000000000000000000000')
 
 // ==== Utils functions ===
 

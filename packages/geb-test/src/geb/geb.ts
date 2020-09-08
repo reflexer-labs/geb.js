@@ -6,6 +6,7 @@ import { Geb } from 'geb.js'
 import { KOVAN_ADDRESSES } from '@reflexer-finance/geb-contract-api'
 import { sethCall } from '../utils'
 import { GebProviderInterface } from '@reflexer-finance/geb-provider'
+import { RAD } from 'geb.js/lib/utils'
 
 export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
     describe('Using a provider (Ethers OR web3)', async () => {
@@ -115,6 +116,48 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             const safe = await geb.getSafe(1)
             const liqPrice = await safe.liquidationPrice()
             assert.ok(liqPrice.isZero())
+        })
+
+        it('multicall with 1 call', async () => {
+            const res = await geb.multiCall([
+                geb.contracts.safeEngine.globalDebt(true),
+            ])
+
+            // More than 1 wei of global debt
+            assert.ok(res[0].gt('1'))
+        })
+
+        it('multicall with 2 calls', async () => {
+            const res = await geb.multiCall([
+                geb.contracts.safeEngine.globalDebt(true),
+                geb.contracts.safeEngine.collateralTypes(ETH_A, true),
+            ])
+
+            // More than 1 wei of global debt
+            assert.ok(res[0].gt('1'))
+
+            // debtFloor is 15
+            assert.ok(res[1].debtFloor.eq(RAD.mul(15)))
+        })
+
+        it('multicall with 3 calls', async () => {
+            const res = await geb.multiCall([
+                geb.contracts.safeEngine.globalDebt(true),
+                geb.contracts.safeEngine.collateralTypes(ETH_A, true),
+                geb.contracts.liquidationEngine.collateralTypes(ETH_A, true),
+            ])
+
+            // More than 1 wei of global debt
+            assert.ok(res[0].gt('1'))
+
+            // debtFloor is 15
+            assert.ok(res[1].debtFloor.eq(RAD.mul(15)))
+
+            // Should get the right ETH auction house
+            assert.ok(
+                res[2].collateralAuctionHouse,
+                KOVAN_ADDRESSES.GEB_COLLATERAL_AUCTION_HOUSE_ETH_A
+            )
         })
     })
 }

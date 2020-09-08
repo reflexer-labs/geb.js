@@ -43,7 +43,7 @@ export const testsWithGenericGebProvider = (
             assert(collateralInfo.debtAmount.gte(0))
         })
 
-        it('Test send + estimate gas', async () => {
+        it('Test send', async () => {
             const tx = await safeEngine.transferInternalCoins(
                 NULL_ADDRESS,
                 ONE_ADDRESS,
@@ -54,12 +54,8 @@ export const testsWithGenericGebProvider = (
 
             tx.from = NULL_ADDRESS
 
-            // Estimate the gas cost which emulate the transaction on the node
-            const gasEstimate = await gebProvider.estimateGas(tx)
-            assert(gasEstimate.gte(20000))
-
             try {
-                await gebProvider.ethCallRequest(tx)
+                await gebProvider.ethCall(tx)
             } catch (err) {
                 assert.fail(gebProvider.decodeError(err))
             }
@@ -75,7 +71,7 @@ export const testsWithGenericGebProvider = (
             tx.from = NULL_ADDRESS
 
             try {
-                await gebProvider.ethCallRequest(tx)
+                await gebProvider.ethCall(tx)
                 assert.fail('Address 0x0 should have no balance')
             } catch (err) {
                 assert.equal(gebProvider.decodeError(err), '0x')
