@@ -2,28 +2,17 @@ import {
     GebProviderInterface,
     AbiDefinition,
     Inputs,
+    Outputs,
     TransactionRequest,
 } from '@reflexer-finance/geb-provider'
-import { Contract, providers, BigNumber } from 'ethers'
+import { providers, utils } from 'ethers'
+import { Result } from 'ethers/lib/utils'
+import { isNumber } from 'util'
 
 export class EthersProvider implements GebProviderInterface {
     constructor(public provider: providers.Provider) {}
 
-    async ethCall(
-        address: string,
-        abi: AbiDefinition,
-        params: Inputs
-    ): Promise<any> {
-        const contract = new Contract(address, [abi], this.provider)
-
-        // Special case where we are calling a non-view function as a static call (used only to read the redemption price)
-        if (abi.stateMutability !== 'view') {
-            const results = await contract.callStatic[abi.name](...params)
-            return results
-        }
-
-        const results = await contract.functions[abi.name](...params)
-
+    private processEthersResults(results: Result): any {
         if (results.length === 0) {
             return []
         } else if (results.length === 1) {
@@ -31,34 +20,28 @@ export class EthersProvider implements GebProviderInterface {
         } else {
             // Do this to remove positional references
             let ret: any = {}
-            for (let i = 0; i < abi.outputs.length; i++) {
-                ret[abi.outputs[i].name] = results[i]
+            for (let key in results) {
+                if (isNumber(key)) continue
+                ret[key] = results[key]
             }
 
             return ret
         }
     }
 
-    // @ts-ignore TODO: Remove
-    async ethSend(
-        address: string,
-        abi: AbiDefinition,
-        params: Inputs,
-        ethValue?: BigNumber
-    ): Promise<TransactionRequest> {
-        const contract = new Contract(address, [abi], this.provider)
+    async ethCall(transaction: TransactionRequest): Promise<string> {
+        return this.provider.call(transaction)
+    }
 
-        const results = await contract.populateTransaction[abi.name](...params)
-        return {
-            from: results.from,
-            to: results.to,
-            data: results.data?.toString(),
-            value: ethValue,
-            gasLimit: results.gasLimit,
-            gasPrice: results.gasPrice,
-            chainId: results.chainId,
-            nonce: results.nonce,
-        }
+    decodeFunctionData(data: string, abiFragment: AbiDefinition): Outputs {
+        const coder = new utils.Interface([abiFragment])
+        const result = coder.decodeFunctionData(abiFragment.name, data)
+        return this.processEthersResults(result)
+    }
+
+    encodeFunctionData(params: Inputs[], abiFragment: AbiDefinition): string {
+        const coder = new utils.Interface([abiFragment])
+        return coder.encodeFunctionData(abiFragment.name, params)
     }
 
     decodeError(error: any): string {
@@ -88,26 +71,6 @@ export class EthersProvider implements GebProviderInterface {
         return decodeURIComponent(data.slice(2).replace(/[0-9a-f]{2}/g, '%$&'))
             .replace(/\0/g, '')
             .slice(2)
-    }
-
-    async estimateGas(transaction: TransactionRequest): Promise<BigNumber> {
-        return await this.provider.estimateGas(transaction)
-    }
-
-    async ethCallRequest(transaction: TransactionRequest): Promise<any> {
-        let result: string
-
-        try {
-            result = await this.provider.call(transaction)
-        } catch (err) {
-            // console.error(`Error ! run this command to understand your error`)
-            // console.log(
-            //     `seth call ${transaction.to} ${transaction.data} 2>&1 >/dev/null | grep "Reverted\ 0x" | cut -c 50-241 | xxd -p -r`
-            // )
-
-            throw err
-        }
-        return result
     }
 
     async chainId(): Promise<number> {

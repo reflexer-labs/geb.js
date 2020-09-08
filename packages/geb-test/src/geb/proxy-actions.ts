@@ -53,7 +53,7 @@ export const testsProxyActionWithGenericGebProvider = (
                 let tx = await proxy.proxy.setOwner(NULL_ADDRESS)
                 tx['from'] = KOVAN_ADDRESSES.ETH_FROM
                 try {
-                    await gebProvider.ethCallRequest(tx)
+                    await gebProvider.ethCall(tx)
                 } catch {
                     assert.fail('Set Owner')
                 }
@@ -64,7 +64,7 @@ export const testsProxyActionWithGenericGebProvider = (
                 // Not the owner
                 tx['from'] = NULL_ADDRESS
                 try {
-                    await gebProvider.ethCallRequest(tx)
+                    await gebProvider.ethCall(tx)
                     assert.fail()
                 } catch (err) {
                     assert.equal(
@@ -79,7 +79,7 @@ export const testsProxyActionWithGenericGebProvider = (
                 tx['from'] = KOVAN_ADDRESSES.ETH_FROM
 
                 try {
-                    await gebProvider.ethCallRequest(tx)
+                    await gebProvider.ethCall(tx)
                 } catch (err) {
                     assert.fail('openSAFE: ' + gebProvider.decodeError(err))
                 }
@@ -95,7 +95,7 @@ export const testsProxyActionWithGenericGebProvider = (
                 tx['from'] = KOVAN_ADDRESSES.ETH_FROM
 
                 try {
-                    await gebProvider.ethCallRequest(tx)
+                    await gebProvider.ethCall(tx)
                 } catch (err) {
                     assert.fail(
                         'openLockETHAndGenerateDebt: ' +

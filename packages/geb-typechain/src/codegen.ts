@@ -68,6 +68,13 @@ function addImports(template: string, isERC20: boolean): string {
             template
     }
 
+    if (template.includes('MulticallRequest')) {
+        template =
+            `
+        import { MulticallRequest } from '@reflexer-finance/geb-provider'` +
+            template
+    }
+
     template =
         `
         import { BaseContractAPI } from '@reflexer-finance/geb-provider'` +
@@ -109,18 +116,34 @@ function codegenForSingleFunction(
     fn: FunctionDeclaration,
     abiFragment: RawAbiDefinition
 ): string {
+    const isView = fn.stateMutability === 'view'
+    const inputTypes = generateInputTypes(fn.inputs, fn.stateMutability)
+    const outputType = generateOutputTypes(fn.outputs)
     const processedInputName = generateInputNames(fn.inputs)
+
+    // Example of what the template below generate for a view function:
+    // balanceOf(address: string): Promise<BigNumber>
+    // balanceOf(address: string, multicall: true): MulticallRequest<BigNumber>
+    // balanceOf(address: string, multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber>{
+    //     // prettier-ignore
+    //     // @ts-ignore
+    //     const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+    //     return this.ethCallOrMulticall(abi, [address], multicall)
+    // }
 
     // prettier-ignore
     return `
     ${generateFunctionDocumentation(fn.documentation)}
-    ${fn.name}(${generateInputTypes(fn.inputs, fn.stateMutability)}): Promise<${fn.stateMutability === 'view'? `${generateOutputTypes(fn.outputs)}`: 'TransactionRequest'}> {
+    ${isView ? `${fn.name}(${inputTypes}): Promise<${outputType}>`: ''}
+    ${isView ? `${fn.name}(${inputTypes} multicall: true): MulticallRequest<${outputType}>`: ''}
+    ${fn.name}(${inputTypes}${isView? 'multicall?: true' : ''}): ${isView ? `Promise<${outputType}> | MulticallRequest<${outputType}>`: 'TransactionRequest'} {
         
         // prettier-ignore 
         // @ts-ignore
         const abi = ${JSON.stringify(abiFragment)}
         
-        return this.${fn.stateMutability === 'view' ? 'ethCall' : 'ethSend'}(abi, [
+        return this.${isView ? 'ethCall' : 'getTransactionRequest'}(abi, [
             ${processedInputName.join(", ")}
         ]${fn.stateMutability === 'payable' ? ', BigNumber.from(ethValue)' : ''})
     }

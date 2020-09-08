@@ -1,8 +1,12 @@
 import {
     ContractApis,
     ContractAddresses,
+    Multicall,
 } from '@reflexer-finance/geb-contract-api'
-import { GebProviderInterface } from '@reflexer-finance/geb-provider'
+import {
+    GebProviderInterface,
+    MulticallRequest,
+} from '@reflexer-finance/geb-provider'
 import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import { ethers } from 'ethers'
 import { GebError, GebErrorTypes } from './errors'
@@ -51,8 +55,8 @@ export class Geb {
     /**
      * Deploy a new proxy owned by the sender
      */
-    public async deployProxy() {
-        return await this.contracts.proxyRegistry.build()
+    public deployProxy() {
+        return this.contracts.proxyRegistry.build()
     }
 
     /**
@@ -90,43 +94,29 @@ export class Geb {
         )
     }
 
-    //     public async multiCall<I1, O1>(
-    //         calls: [((...args: [I1]) => Promise<O1>)],
-    //         params: [I1],
-    //         contractAddress: string[]
-    //     ): Promise<[O1]> {
-    //         const multicall = new Multicall(
-    //             KOVAN_ADDRESSES.MULTICALL,
-    //             this.provider
-    //         )
+    // Multicall overloads for typing
+    // prettier-ignore
+    public multiCall<O1>(calls: [MulticallRequest<O1>]): Promise<[O1]>
+    // prettier-ignore
+    public multiCall<O1, O2>(calls: [MulticallRequest<O1>, MulticallRequest<O2>]): Promise<[O1, O2]>
+    // prettier-ignore
+    public multiCall<O1, O2, O3>(calls: [MulticallRequest<O1>, MulticallRequest<O2>, MulticallRequest<O3>]): Promise<[O1, O2, O3]>
 
-    //         class MultiCallContractApi extends BaseContractAPI {
-    //             ethCall(abiFragment: AbiDefinition, params: Inputs): Promise<any> {
-    //                 return this.chainProvider.ethSend(
-    //                     this.address,
-    //                     abiFragment,
-    //                     params
-    //                 )
-    //             }
+    public async multiCall<T>(calls: MulticallRequest<T>[]): Promise<T[]> {
+        const multiCall = new Multicall(
+            '0x99C7E7AA093F71a4070FD671b9Ab397EFDABA62b',
+            this.provider
+        )
 
-    //             ethSend(
-    //                 abiFragment: AbiDefinition,
-    //                 params: Inputs,
-    //                 ethValue?: BigNumber
-    //             ): Promise<TransactionRequest> {
-    //                 throw new GebError(GebErrorTypes.NO_ETHSEND_WITH_MULTICALL)
-    //             }
-    //         }
+        const send = calls.map((x) => ({
+            target: x.to,
+            callData: x.data,
+        }))
 
-    //         const promises = calls.map((call, i) => {
-    //             const newBase = new MultiCallContractApi(contractAddress[i], this.provider)
-    //             return call.apply(newBase, params[i])
-    //         })
-
-    //         let txs = await Promise.all(promises)
-
-    //         txs = txs.map((x, i) => {return {target: contractAddress[i], callData: x.data}})
-
-    //         return multicall.aggregate(txs)
-    //     }
+        const results = await multiCall.aggregate(send)
+        // @ts-ignore
+        return results.returnData.map((raw, i) =>
+            this.provider.decodeFunctionData(raw, calls[i].abi)
+        )
+    }
 }

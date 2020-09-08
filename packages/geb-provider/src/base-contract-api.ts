@@ -16,6 +16,12 @@ export declare type TransactionRequest = {
     chainId?: number
 }
 
+export declare type MulticallRequest<ReturnType> = {
+    abi: AbiDefinition
+    data: string
+    to: string
+}
+
 export class BaseContractAPI {
     constructor(
         public address: string,
@@ -26,19 +32,48 @@ export class BaseContractAPI {
         abiFragment: AbiDefinition,
         params: Inputs
     ): Promise<any> {
-        return this.chainProvider.ethCall(this.address, abiFragment, params)
+        const data = this.chainProvider.encodeFunctionData(params, abiFragment)
+
+        return this.chainProvider.ethCall({
+            to: this.address,
+            data,
+        })
     }
 
-    protected ethSend(
+    protected getTransactionRequest(
         abiFragment: AbiDefinition,
         params: Inputs,
         ethValue?: BigNumber
-    ): Promise<TransactionRequest> {
-        return this.chainProvider.ethSend(
-            this.address,
-            abiFragment,
-            params,
-            ethValue
-        )
+    ): TransactionRequest {
+        const data = this.chainProvider.encodeFunctionData(params, abiFragment)
+        return {
+            to: this.address,
+            data,
+            value: ethValue,
+        }
+    }
+
+    protected getMulticallRequest(
+        abiFragment: AbiDefinition,
+        params: Inputs
+    ): MulticallRequest<any> {
+        const data = this.chainProvider.encodeFunctionData(params, abiFragment)
+        return {
+            abi: abiFragment,
+            to: this.address,
+            data,
+        }
+    }
+
+    protected ethCallOrMulticall(
+        abiFragment: AbiDefinition,
+        params: Inputs,
+        multicall?: true
+    ): Promise<any> | MulticallRequest<any> {
+        if (multicall) {
+            return this.getMulticallRequest(abiFragment, params)
+        } else {
+            return this.ethCall(abiFragment, params)
+        }
     }
 }

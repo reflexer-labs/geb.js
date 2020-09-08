@@ -33,18 +33,13 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         this.address = proxyAddress
     }
 
-    // Override ETH send to use proxy
-    async ethSend(
+    // Override getTransactionRequest to use proxy
+    getTransactionRequest(
         abiFragment: AbiDefinition,
         params: Inputs,
         ethValue?: BigNumber
-    ): Promise<TransactionRequest> {
-        let { data } = await this.chainProvider.ethSend(
-            this.proxyActionAddress,
-            abiFragment,
-            params,
-            ethValue
-        )
+    ): TransactionRequest {
+        let data = this.chainProvider.encodeFunctionData(params, abiFragment)
 
         if (!ethValue) {
             ethValue = BigNumber.from('0')
@@ -53,15 +48,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         return this.proxy.execute(ethValue, this.proxyActionAddress, data)
     }
 
-    async ethCall(abiFragment: AbiDefinition, params: Inputs): Promise<any> {
-        return this.chainProvider.ethCall(
-            this.proxyActionAddress,
-            abiFragment,
-            params
-        )
-    }
-
-    allowHandler(usr: string, ok: BigNumberish): Promise<TransactionRequest> {
+    allowHandler(usr: string, ok: BigNumberish): TransactionRequest {
         // prettier-ignore
 
         return super.allowHandler(this.addressList.SAFE_MANAGER, usr, ok)
@@ -71,16 +58,13 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         usr: string,
         ok: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.allowSAFE(this.addressList.SAFE_MANAGER, safe, usr, ok)
     }
 
-    approveSAFEModification(
-        obj: string,
-        usr: string
-    ): Promise<TransactionRequest> {
+    approveSAFEModification(obj: string, usr: string): TransactionRequest {
         // prettier-ignore
 
         return super.approveSAFEModification(obj, usr)
@@ -90,22 +74,19 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         apt: string,
         safeHandler: string,
         wad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.coinJoin_join(apt, safeHandler, wad)
     }
 
-    denySAFEModification(
-        obj: string,
-        usr: string
-    ): Promise<TransactionRequest> {
+    denySAFEModification(obj: string, usr: string): TransactionRequest {
         // prettier-ignore
 
         return super.denySAFEModification(obj, usr)
     }
 
-    enterSystem(src: string, safe: BigNumberish): Promise<TransactionRequest> {
+    enterSystem(src: string, safe: BigNumberish): TransactionRequest {
         // prettier-ignore
 
         return super.enterSystem(this.addressList.SAFE_MANAGER, src, safe)
@@ -115,16 +96,13 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         ethValue: BigNumberish,
         apt: string,
         safe: string
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.ethJoin_join(BigNumber.from(ethValue), apt, safe)
     }
 
-    exitETH(
-        safe: BigNumberish,
-        wad: BigNumberish
-    ): Promise<TransactionRequest> {
+    exitETH(safe: BigNumberish, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
 
         return super.exitETH(this.addressList.SAFE_MANAGER, this.addressList.GEB_JOIN_ETH_A, safe, wad)
@@ -134,16 +112,13 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         collateralJoin: string,
         safe: BigNumberish,
         amt: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.exitTokenCollateral(this.addressList.SAFE_MANAGER, collateralJoin, safe, amt)
     }
 
-    freeETH(
-        safe: BigNumberish,
-        wad: BigNumberish
-    ): Promise<TransactionRequest> {
+    freeETH(safe: BigNumberish, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
 
         return super.freeETH(this.addressList.SAFE_MANAGER, this.addressList.GEB_JOIN_ETH_A, safe, wad)
@@ -153,16 +128,13 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         collateralJoin: string,
         safe: BigNumberish,
         amt: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.freeTokenCollateral(this.addressList.SAFE_MANAGER, collateralJoin, safe, amt)
     }
 
-    generateDebt(
-        safe: BigNumberish,
-        wad: BigNumberish
-    ): Promise<TransactionRequest> {
+    generateDebt(safe: BigNumberish, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
 
         return super.generateDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, this.addressList.GEB_COIN_JOIN, safe, wad)
@@ -172,16 +144,13 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         wad: BigNumberish,
         saviour: string
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.generateDebtAndProtectSAFE(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, this.addressList.GEB_COIN_JOIN, safe, wad, this.addressList.GEB_LIQUIDATION_ENGINE, saviour)
     }
 
-    lockETH(
-        ethValue: BigNumberish,
-        safe: BigNumberish
-    ): Promise<TransactionRequest> {
+    lockETH(ethValue: BigNumberish, safe: BigNumberish): TransactionRequest {
         // prettier-ignore
 
         return super.lockETH(BigNumber.from(ethValue), this.addressList.SAFE_MANAGER, this.addressList.GEB_JOIN_ETH_A, safe)
@@ -191,7 +160,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         ethValue: BigNumberish,
         safe: BigNumberish,
         deltaWad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.lockETHAndGenerateDebt(BigNumber.from(ethValue), this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, this.addressList.GEB_JOIN_ETH_A, this.addressList.GEB_COIN_JOIN, safe, deltaWad)
@@ -202,7 +171,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
     //     safe: BigNumberish,
     //     amt: BigNumberish,
     //     transferFrom: boolean
-    // ): Promise<TransactionRequest> {
+    // ): TransactionRequest {
     //     // prettier-ignore
 
     //     return super.lockTokenCollateral(this.addressList.SAFE_MANAGER, collateralJoin, safe, amt, transferFrom)
@@ -214,7 +183,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
     //     collateralAmount: BigNumberish,
     //     deltaWad: BigNumberish,
     //     transferFrom: boolean
-    // ): Promise<TransactionRequest> {
+    // ): TransactionRequest {
     //     // prettier-ignore
 
     //     return super.lockTokenCollateralAndGenerateDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, collateralJoin, this.addressList.GEB_COIN_JOIN, safe, collateralAmount, deltaWad, transferFrom)
@@ -227,13 +196,13 @@ export class GebProxyActions extends GebProxyActionsGenerated {
     //     deltaWad: BigNumberish,
     //     transferFrom: boolean,
     //     saviour: string
-    // ): Promise<TransactionRequest> {
+    // ): TransactionRequest {
     //     // prettier-ignore
 
     //     return super.lockTokenCollateralGenerateDebtAndProtectSAFE(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, collateralJoin, this.addressList.GEB_COIN_JOIN, safe, collateralAmount, deltaWad, transferFrom, this.addressList.GEB_LIQUIDATION_ENGINE, saviour)
     // }
 
-    makeCollateralBag(collateralJoin: string): Promise<TransactionRequest> {
+    makeCollateralBag(collateralJoin: string): TransactionRequest {
         // prettier-ignore
 
         return super.makeCollateralBag(collateralJoin)
@@ -243,16 +212,13 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         deltaCollateral: BigNumberish,
         deltaDebt: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.modifySAFECollateralization(this.addressList.SAFE_MANAGER, safe, deltaCollateral, deltaDebt)
     }
 
-    moveSAFE(
-        safeSrc: BigNumberish,
-        safeDst: BigNumberish
-    ): Promise<TransactionRequest> {
+    moveSAFE(safeSrc: BigNumberish, safeDst: BigNumberish): TransactionRequest {
         // prettier-ignore
 
         return super.moveSAFE(this.addressList.SAFE_MANAGER, safeSrc, safeDst)
@@ -262,7 +228,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         ethValue: BigNumberish,
         collateralType: BytesLike,
         deltaWad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.openLockETHAndGenerateDebt(BigNumber.from(ethValue), this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, this.addressList.GEB_JOIN_ETH_A, this.addressList.GEB_COIN_JOIN, collateralType, deltaWad)
@@ -273,7 +239,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         collateralType: BytesLike,
         deltaWad: BigNumberish,
         saviour: string
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.openLockETHGenerateDebtAndProtectSAFE(BigNumber.from(ethValue), this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, this.addressList.GEB_JOIN_ETH_A, this.addressList.GEB_COIN_JOIN, collateralType, deltaWad, this.addressList.GEB_LIQUIDATION_ENGINE, saviour)
@@ -284,7 +250,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         collateralType: BytesLike,
         collateralAmount: BigNumberish,
         deltaWad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.openLockGNTAndGenerateDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, gntJoin, this.addressList.GEB_COIN_JOIN, collateralType, collateralAmount, deltaWad)
@@ -296,7 +262,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         collateralAmount: BigNumberish,
         deltaWad: BigNumberish,
         saviour: string
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.openLockGNTGenerateDebtAndProtectSAFE(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, gntJoin, this.addressList.GEB_COIN_JOIN, collateralType, collateralAmount, deltaWad, this.addressList.GEB_LIQUIDATION_ENGINE, saviour)
@@ -308,7 +274,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
     //     collateralAmount: BigNumberish,
     //     deltaWad: BigNumberish,
     //     transferFrom: boolean
-    // ): Promise<TransactionRequest> {
+    // ): TransactionRequest {
     //     // prettier-ignore
 
     //     return super.openLockTokenCollateralAndGenerateDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, collateralJoin, this.addressList.GEB_COIN_JOIN, collateralType, collateralAmount, deltaWad, transferFrom)
@@ -321,37 +287,31 @@ export class GebProxyActions extends GebProxyActionsGenerated {
     //     deltaWad: BigNumberish,
     //     transferFrom: boolean,
     //     saviour: string
-    // ): Promise<TransactionRequest> {
+    // ): TransactionRequest {
     //     // prettier-ignore
 
     //     return super.openLockTokenCollateralGenerateDebtAndProtectSAFE(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, collateralJoin, this.addressList.GEB_COIN_JOIN, collateralType, collateralAmount, deltaWad, transferFrom, this.addressList.GEB_LIQUIDATION_ENGINE, saviour)
     // }
 
-    openSAFE(
-        collateralType: BytesLike,
-        usr: string
-    ): Promise<TransactionRequest> {
+    openSAFE(collateralType: BytesLike, usr: string): TransactionRequest {
         // prettier-ignore
 
         return super.openSAFE(this.addressList.SAFE_MANAGER, collateralType, usr)
     }
 
-    protectSAFE(
-        safe: BigNumberish,
-        saviour: string
-    ): Promise<TransactionRequest> {
+    protectSAFE(safe: BigNumberish, saviour: string): TransactionRequest {
         // prettier-ignore
 
         return super.protectSAFE(this.addressList.SAFE_MANAGER, safe, this.addressList.GEB_LIQUIDATION_ENGINE, saviour)
     }
 
-    quitSystem(safe: BigNumberish, dst: string): Promise<TransactionRequest> {
+    quitSystem(safe: BigNumberish, dst: string): TransactionRequest {
         // prettier-ignore
 
         return super.quitSystem(this.addressList.SAFE_MANAGER, safe, dst)
     }
 
-    repayAllDebt(safe: BigNumberish): Promise<TransactionRequest> {
+    repayAllDebt(safe: BigNumberish): TransactionRequest {
         // prettier-ignore
 
         return super.repayAllDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_COIN_JOIN, safe)
@@ -360,7 +320,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
     repayAllDebtAndFreeETH(
         safe: BigNumberish,
         collateralWad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.repayAllDebtAndFreeETH(this.addressList.SAFE_MANAGER, this.addressList.GEB_JOIN_ETH_A, this.addressList.GEB_COIN_JOIN, safe, collateralWad)
@@ -370,16 +330,13 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         collateralJoin: string,
         safe: BigNumberish,
         collateralAmount: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.repayAllDebtAndFreeTokenCollateral(this.addressList.SAFE_MANAGER, collateralJoin, this.addressList.GEB_COIN_JOIN, safe, collateralAmount)
     }
 
-    repayDebt(
-        safe: BigNumberish,
-        wad: BigNumberish
-    ): Promise<TransactionRequest> {
+    repayDebt(safe: BigNumberish, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
 
         return super.repayDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_COIN_JOIN, safe, wad)
@@ -389,7 +346,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         collateralWad: BigNumberish,
         deltaWad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.repayDebtAndFreeETH(this.addressList.SAFE_MANAGER, this.addressList.GEB_JOIN_ETH_A, this.addressList.GEB_COIN_JOIN, safe, collateralWad, deltaWad)
@@ -400,7 +357,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         collateralAmount: BigNumberish,
         deltaWad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.repayDebtAndFreeTokenCollateral(this.addressList.SAFE_MANAGER, collateralJoin, this.addressList.GEB_COIN_JOIN, safe, collateralAmount, deltaWad)
@@ -410,7 +367,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         ethValue: BigNumberish,
         safe: BigNumberish,
         owner: string
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.safeLockETH(BigNumber.from(ethValue), this.addressList.SAFE_MANAGER, this.addressList.GEB_JOIN_ETH_A, safe, owner)
@@ -422,16 +379,13 @@ export class GebProxyActions extends GebProxyActionsGenerated {
     //     amt: BigNumberish,
     //     transferFrom: boolean,
     //     owner: string
-    // ): Promise<TransactionRequest> {
+    // ): TransactionRequest {
     //     // prettier-ignore
 
     //     return super.safeLockTokenCollateral(this.addressList.SAFE_MANAGER, collateralJoin, safe, amt, transferFrom, owner)
     // }
 
-    safeRepayAllDebt(
-        safe: BigNumberish,
-        owner: string
-    ): Promise<TransactionRequest> {
+    safeRepayAllDebt(safe: BigNumberish, owner: string): TransactionRequest {
         // prettier-ignore
 
         return super.safeRepayAllDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_COIN_JOIN, safe, owner)
@@ -441,7 +395,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         wad: BigNumberish,
         owner: string
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.safeRepayDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_COIN_JOIN, safe, wad, owner)
@@ -452,7 +406,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: string,
         amt: BigNumberish,
         transferFrom: boolean
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.tokenCollateralJoin_join(apt, safe, amt, transferFrom)
@@ -462,7 +416,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         collateral: string,
         dst: string,
         amt: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.transfer(collateral, dst, amt)
@@ -472,7 +426,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         dst: string,
         wad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.transferCollateral(this.addressList.SAFE_MANAGER, safe, dst, wad)
@@ -482,16 +436,13 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         dst: string,
         rad: BigNumberish
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.transferInternalCoins(this.addressList.SAFE_MANAGER, safe, dst, rad)
     }
 
-    transferSAFEOwnership(
-        safe: BigNumberish,
-        usr: string
-    ): Promise<TransactionRequest> {
+    transferSAFEOwnership(safe: BigNumberish, usr: string): TransactionRequest {
         // prettier-ignore
 
         return super.transferSAFEOwnership(this.addressList.SAFE_MANAGER, safe, usr)
@@ -500,7 +451,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
     transferSAFEOwnershipToProxy(
         safe: BigNumberish,
         dst: string
-    ): Promise<TransactionRequest> {
+    ): TransactionRequest {
         // prettier-ignore
 
         return super.transferSAFEOwnershipToProxy(this.addressList.PROXY_REGISTRY, this.addressList.SAFE_MANAGER, safe, dst)

@@ -1,5 +1,4 @@
 import { TransactionRequest } from './base-contract-api'
-import { BigNumber } from '@ethersproject/bignumber'
 
 export interface AbiDefinition {
     name: string
@@ -10,7 +9,7 @@ export interface AbiDefinition {
     outputs: AbiParameter[]
     type: string
 }
-interface AbiParameter {
+export interface AbiParameter {
     name: string
     type: string
     internalType?: string
@@ -21,24 +20,34 @@ export interface Inputs extends ReadonlyArray<any> {
     readonly [key: string]: any
 }
 
+export interface Outputs extends ReadonlyArray<any> {
+    readonly [key: string]: any
+}
+
 export interface GebProviderInterface {
-    ethCall(
-        address: string,
-        abiFragment: AbiDefinition,
-        params: Inputs
-    ): Promise<any>
-    ethSend(
-        address: string,
-        abiFragment: AbiDefinition,
-        params: Inputs,
-        ethValue?: BigNumber
-    ): Promise<TransactionRequest>
+    /**
+     * Given a transaction request, execute it readonly through the blockchain node.
+     * @param  {TransactionRequest} transaction
+     * @returns Promise<string> Raw hexadecimal contract output
+     */
+    ethCall(transaction: TransactionRequest): Promise<string>
+
+    /**
+     * Decode a hexadecimal contract response according to a function signature
+     * @param  {string} data Raw hexadecimal contract response
+     * @param  {AbiDefinition} abiFragment Function definition as an ABI fragment
+     * @returns Outputs Smart contract output as per the ABI definition
+     */
+    decodeFunctionData(data: string, abiFragment: AbiDefinition): Outputs
+
+    /**
+     * @param  {Inputs} params Array of input parameter to the contract function
+     * @param  {AbiDefinition} abiFragment Function definition as an ABI fragment
+     * @returns string encoded hexadecimal value of the call
+     */
+    encodeFunctionData(params: Inputs, abiFragment: AbiDefinition): string
 
     decodeError(error: any): string
-
-    estimateGas(transaction: TransactionRequest): Promise<BigNumber>
-
-    ethCallRequest(transaction: TransactionRequest): Promise<any>
 
     chainId(): Promise<number>
 }

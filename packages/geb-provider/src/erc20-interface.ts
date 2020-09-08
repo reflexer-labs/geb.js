@@ -3,16 +3,16 @@ import { TransactionRequest } from './base-contract-api'
 
 export interface ERC20 {
     name(): Promise<string>
-    approve(guy: string, wad: BigNumberish): Promise<TransactionRequest>
+    approve(guy: string, wad: BigNumberish): TransactionRequest
     totalSupply(): Promise<BigNumber>
     transferFrom(
         src: string,
         dst: string,
         wad: BigNumberish
-    ): Promise<TransactionRequest>
+    ): TransactionRequest
     decimals(): Promise<number>
     balanceOf(arg0: string): Promise<BigNumber>
     symbol(): Promise<string>
-    transfer(dst: string, wad: BigNumberish): Promise<TransactionRequest>
+    transfer(dst: string, wad: BigNumberish): TransactionRequest
     allowance(arg0: string, arg1: string): Promise<BigNumber>
 }
