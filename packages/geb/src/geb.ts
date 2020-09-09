@@ -1,11 +1,10 @@
-import {
-    ContractApis,
-    ContractAddresses,
-    Multicall,
-} from '@reflexer-finance/geb-contract-api'
+import { ContractApis, Multicall } from '@reflexer-finance/geb-contract-api'
 import {
     GebProviderInterface,
     MulticallRequest,
+    getAddressList,
+    ContractList,
+    GebDeployment,
 } from '@reflexer-finance/geb-contract-base'
 import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import { ethers } from 'ethers'
@@ -18,8 +17,9 @@ import { Safe } from './schema/safe'
 export class Geb {
     public contracts: ContractApis
     private provider: GebProviderInterface
+    private addresses: ContractList
     constructor(
-        private network: ContractAddresses,
+        private network: GebDeployment,
         provider: GebProviderInterface | ethers.providers.Provider
     ) {
         if (
@@ -35,7 +35,7 @@ export class Geb {
         } else {
             this.provider = provider as GebProviderInterface
         }
-
+        this.addresses = getAddressList(network)
         this.contracts = new ContractApis(network, this.provider)
     }
 
@@ -111,10 +111,7 @@ export class Geb {
     public multiCall<O1, O2, O3, O4, O5, O6, O7>(calls: [MulticallRequest<O1>, MulticallRequest<O2>, MulticallRequest<O3>, MulticallRequest<O4>, MulticallRequest<O5>, MulticallRequest<O6>, MulticallRequest<O7>]): Promise<[O1, O2, O3, O4, O5, O6, O7]>
 
     public async multiCall<T>(calls: MulticallRequest<T>[]): Promise<T[]> {
-        const multiCall = new Multicall(
-            '0x99C7E7AA093F71a4070FD671b9Ab397EFDABA62b',
-            this.provider
-        )
+        const multiCall = new Multicall(this.addresses.MULTICALL, this.provider)
 
         const send = calls.map((x) => ({
             target: x.to,

@@ -9,11 +9,11 @@ import { ethers } from 'ethers'
 import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import {
     SafeEngine,
-    KOVAN_ADDRESSES,
     BasicCollateralJoin,
     Weth,
     ContractApis,
 } from '@reflexer-finance/geb-contract-api'
+import { KOVAN_ADDRESSES } from '@reflexer-finance/geb-contract-base'
 
 export const testsWithEthersProvider = () => {
     describe('Test made only for Ethers', () => {

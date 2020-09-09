@@ -2,6 +2,9 @@ import {
     GebProviderInterface,
     AbiDefinition,
     Inputs,
+    ContractList,
+    GebDeployment,
+    getAddressList,
 } from '@reflexer-finance/geb-contract-base'
 import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
 import { BytesLike } from '@ethersproject/bytes'
@@ -11,10 +14,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import {
     GebProxyActions as GebProxyActionsGenerated,
     DsProxy,
-    ContractAddresses,
-    ContractList,
 } from '@reflexer-finance/geb-contract-api'
-import { getAddressList } from './utils'
 
 export class GebProxyActions extends GebProxyActionsGenerated {
     public proxy: DsProxy
@@ -23,7 +23,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
 
     constructor(
         public proxyAddress: string,
-        network: ContractAddresses,
+        network: GebDeployment,
         chainProvider: GebProviderInterface
     ) {
         super(getAddressList(network).PROXY_ACTIONS, chainProvider)

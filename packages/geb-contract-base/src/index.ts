@@ -11,15 +11,33 @@ import {
     MulticallRequest,
 } from './base-contract-api'
 import { ERC20 } from './erc20-interface'
+import {
+    KOVAN_ADDRESSES,
+    MAINNET_ADDRESSES,
+    GebDeployment,
+    ContractList,
+    ContractKey,
+    getAddressList,
+} from './addreses'
 
 export {
+    // Chain provider interface
     GebProviderInterface,
-    BaseContractAPI,
     AbiDefinition,
     AbiParameter,
     Inputs,
     Outputs,
-    ERC20,
+    // Base contract API
+    BaseContractAPI,
     TransactionRequest,
     MulticallRequest,
+    // Addresses
+    KOVAN_ADDRESSES,
+    MAINNET_ADDRESSES,
+    GebDeployment,
+    ContractList,
+    ContractKey,
+    getAddressList,
+    // ERC20
+    ERC20,
 }

@@ -19,66 +19,11 @@ import {
     Weth,
     SafeEngine,
 } from '.'
-import { GebProviderInterface } from '@reflexer-finance/geb-contract-base'
-import { getAddressList } from './utils'
-
-export type ContractKey =
-    | 'ETH_FROM'
-    | 'STARTING_BLOCK_NUMBER'
-    | 'PROXY_DEPLOYER'
-    | 'COIN_TYPE'
-    | 'GOVERNANCE_TYPE'
-    | 'MULTICALL'
-    | 'FAUCET'
-    | 'GEB_MULTISIG'
-    | 'GEB_MULTISIG_PROXY'
-    | 'GEB_DEPLOY'
-    | 'GEB_PROT'
-    | 'PROTOCOL_TOKEN_AUTHORITY'
-    | 'PRINTING_PERMISSIONS_REGISTRY'
-    | 'GEB_PAUSE_AUTHORITY'
-    | 'GEB_POLLING_EMITTER'
-    | 'GEB_SAFE_ENGINE'
-    | 'GEB_TAX_COLLECTOR'
-    | 'GEB_LIQUIDATION_ENGINE'
-    | 'GEB_ACCOUNTING_ENGINE'
-    | 'GEB_COIN_JOIN'
-    | 'GEB_SETTLEMENT_SURPLUS_AUCTIONEER'
-    | 'GEB_PRE_SETTLEMENT_SURPLUS_AUCTION_HOUSE'
-    | 'GEB_POST_SETTLEMENT_SURPLUS_AUCTION_HOUSE'
-    | 'GEB_DEBT_AUCTION_HOUSE'
-    | 'GEB_PAUSE'
-    | 'GEB_PAUSE_PROXY'
-    | 'GEB_GOV_ACTIONS'
-    | 'GEB_COIN'
-    | 'GEB_ORACLE_RELAYER'
-    | 'GEB_GLOBAL_SETTLEMENT'
-    | 'GEB_ESM'
-    | 'GEB_ESM_TOKEN_BURNER'
-    | 'PROXY_ACTIONS'
-    | 'PROXY_ACTIONS_GLOBAL_SETTLEMENT'
-    | 'SAFE_MANAGER'
-    | 'GET_SAFES'
-    | 'FSM_GOV_INTERFACE'
-    | 'PROXY_FACTORY'
-    | 'PROXY_REGISTRY'
-    | 'ETH'
-    | 'MEDIANIZER_ETH'
-    | 'ORACLE_SECURITY_MODULE_ETH'
-    | 'GEB_JOIN_ETH_A'
-    | 'GEB_COLLATERAL_AUCTION_HOUSE_ETH_A'
-    | 'PROXY_PAUSE_ACTIONS'
-    | 'PROXY_DEPLOYER'
-    | 'UNISWAP_FACTORY'
-    | 'UNISWAP_ROUTER'
-    | 'GEB_DS_COMPARE'
-    | 'GEB_TX_MANAGER'
-
-export type ContractList = {
-    [key in ContractKey]: string
-}
-
-export declare type ContractAddresses = 'mainnet' | 'kovan' | ContractList
+import {
+    GebProviderInterface,
+    GebDeployment,
+    getAddressList,
+} from '@reflexer-finance/geb-contract-base'
 
 // Container class instantiate most GEB contracts
 // prettier-ignore
@@ -103,7 +48,7 @@ export class ContractApis {
     public weth: Weth
 
     constructor(
-        network: ContractAddresses,
+        network: GebDeployment,
         public chainProvider: GebProviderInterface
     )
     {

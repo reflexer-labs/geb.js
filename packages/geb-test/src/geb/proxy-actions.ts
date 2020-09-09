@@ -1,10 +1,10 @@
 import assert from 'assert'
 
+import { GebProxyRegistry } from '@reflexer-finance/geb-contract-api'
 import {
+    GebProviderInterface,
     KOVAN_ADDRESSES,
-    GebProxyRegistry,
-} from '@reflexer-finance/geb-contract-api'
-import { GebProviderInterface } from '@reflexer-finance/geb-contract-base'
+} from '@reflexer-finance/geb-contract-base'
 import { GebProxyActions } from 'geb.js'
 import { NULL_ADDRESS, ETH_A, ONE_ADDRESS, WAD } from '../const'
 
@@ -12,12 +12,6 @@ export const testsProxyActionWithGenericGebProvider = (
     gebProvider: GebProviderInterface
 ) => {
     describe('Using a provider (Ethers OR web3)', async () => {
-        // let proxyAction: GebProxyActions
-
-        // beforeEach(() => {
-        //     const proxyAction = new GebProxyActions('', gebProvider)
-        // })
-
         const registry = new GebProxyRegistry(
             KOVAN_ADDRESSES.PROXY_REGISTRY,
             gebProvider

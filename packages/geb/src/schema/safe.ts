@@ -1,6 +1,6 @@
 import { BigNumber, FixedNumber } from '@ethersproject/bignumber'
-import { ContractApis, ETH_A } from '@reflexer-finance/geb-contract-api'
-import { RAY } from '../utils'
+import { ContractApis } from '@reflexer-finance/geb-contract-api'
+import { RAY, ETH_A } from '../utils'
 
 export class Safe {
     constructor(

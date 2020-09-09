@@ -24,20 +24,10 @@ import { Weth } from './generated/WETH'
 import { GebProxyActions } from './generated/GebProxyActions'
 import { GebProxyActionsGlobalSettlement } from './generated/GebProxyActionsGlobalSettlement'
 
-import {
-    ContractApis,
-    ContractAddresses,
-    ContractList,
-    ContractKey,
-} from './contract-apis'
-import { KOVAN_ADDRESSES, MAINNET_ADDRESSES } from './addresses'
-import { ETH_A } from './const'
+import { ContractApis } from './contract-apis'
 import { Multicall } from './generated/Multicall'
 
 export {
-    // Address lists
-    KOVAN_ADDRESSES,
-    MAINNET_ADDRESSES,
     // Factory
     ContractApis,
     // Individual contracts
@@ -67,9 +57,4 @@ export {
     GebProxyActions,
     GebProxyActionsGlobalSettlement,
     Multicall,
-    // Misc
-    ContractAddresses,
-    ContractList,
-    ContractKey,
-    ETH_A,
 }
