@@ -79,7 +79,7 @@ Convenience class to call function from Proxy Action contract through a proxy re
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:33](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L33)_
+_Defined in [packages/geb/src/proxy-action.ts:33](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L33)_
 
 **Parameters:**
 
@@ -117,7 +117,7 @@ Defined in packages/geb-contract-base/lib/base-contract-api.d.ts:20
 
 • **proxy**: _DsProxy_
 
-_Defined in [packages/geb/src/proxy-action.ts:27](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L27)_
+_Defined in [packages/geb/src/proxy-action.ts:27](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L27)_
 
 Underlying proxy object. Can be use to make custom calls to the proxy using `proxy.execute()` function.
 For the details of each function
@@ -128,7 +128,7 @@ For the details of each function
 
 • **proxyActionAddress**: _string_
 
-_Defined in [packages/geb/src/proxy-action.ts:32](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L32)_
+_Defined in [packages/geb/src/proxy-action.ts:32](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L32)_
 
 Address of the proxy action contract.
 
@@ -138,7 +138,7 @@ Address of the proxy action contract.
 
 • **proxyAddress**: _string_
 
-_Defined in [packages/geb/src/proxy-action.ts:39](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L39)_
+_Defined in [packages/geb/src/proxy-action.ts:39](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L39)_
 
 Address of the underlying proxy
 
@@ -150,7 +150,7 @@ Address of the underlying proxy
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:65](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L65)_
+_Defined in [packages/geb/src/proxy-action.ts:65](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L65)_
 
 **Parameters:**
 
@@ -169,7 +169,7 @@ _Defined in [packages/geb/src/proxy-action.ts:65](https://github.com/reflexer-la
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:71](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L71)_
+_Defined in [packages/geb/src/proxy-action.ts:71](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L71)_
 
 **Parameters:**
 
@@ -189,7 +189,7 @@ _Defined in [packages/geb/src/proxy-action.ts:71](https://github.com/reflexer-la
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:81](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L81)_
+_Defined in [packages/geb/src/proxy-action.ts:81](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L81)_
 
 **Parameters:**
 
@@ -208,7 +208,7 @@ _Defined in [packages/geb/src/proxy-action.ts:81](https://github.com/reflexer-la
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:87](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L87)_
+_Defined in [packages/geb/src/proxy-action.ts:87](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L87)_
 
 **Parameters:**
 
@@ -228,7 +228,7 @@ _Defined in [packages/geb/src/proxy-action.ts:87](https://github.com/reflexer-la
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:97](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L97)_
+_Defined in [packages/geb/src/proxy-action.ts:97](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L97)_
 
 **Parameters:**
 
@@ -247,7 +247,7 @@ _Defined in [packages/geb/src/proxy-action.ts:97](https://github.com/reflexer-la
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:103](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L103)_
+_Defined in [packages/geb/src/proxy-action.ts:103](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L103)_
 
 **Parameters:**
 
@@ -266,7 +266,7 @@ _Defined in [packages/geb/src/proxy-action.ts:103](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:109](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L109)_
+_Defined in [packages/geb/src/proxy-action.ts:109](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L109)_
 
 **Parameters:**
 
@@ -286,7 +286,7 @@ _Defined in [packages/geb/src/proxy-action.ts:109](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:119](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L119)_
+_Defined in [packages/geb/src/proxy-action.ts:119](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L119)_
 
 **Parameters:**
 
@@ -305,7 +305,7 @@ _Defined in [packages/geb/src/proxy-action.ts:119](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:125](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L125)_
+_Defined in [packages/geb/src/proxy-action.ts:125](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L125)_
 
 **Parameters:**
 
@@ -325,7 +325,7 @@ _Defined in [packages/geb/src/proxy-action.ts:125](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:135](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L135)_
+_Defined in [packages/geb/src/proxy-action.ts:135](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L135)_
 
 **Parameters:**
 
@@ -344,7 +344,7 @@ _Defined in [packages/geb/src/proxy-action.ts:135](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:141](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L141)_
+_Defined in [packages/geb/src/proxy-action.ts:141](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L141)_
 
 **Parameters:**
 
@@ -364,7 +364,7 @@ _Defined in [packages/geb/src/proxy-action.ts:141](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:151](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L151)_
+_Defined in [packages/geb/src/proxy-action.ts:151](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L151)_
 
 **Parameters:**
 
@@ -383,7 +383,7 @@ _Defined in [packages/geb/src/proxy-action.ts:151](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:157](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L157)_
+_Defined in [packages/geb/src/proxy-action.ts:157](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L157)_
 
 **Parameters:**
 
@@ -403,7 +403,7 @@ _Defined in [packages/geb/src/proxy-action.ts:157](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:167](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L167)_
+_Defined in [packages/geb/src/proxy-action.ts:167](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L167)_
 
 **Parameters:**
 
@@ -422,7 +422,7 @@ _Defined in [packages/geb/src/proxy-action.ts:167](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:173](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L173)_
+_Defined in [packages/geb/src/proxy-action.ts:173](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L173)_
 
 **Parameters:**
 
@@ -516,7 +516,7 @@ Defined in packages/geb-contract-api/lib/generated/GebProxyActions.d.ts:23
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:219](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L219)_
+_Defined in [packages/geb/src/proxy-action.ts:219](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L219)_
 
 **Parameters:**
 
@@ -534,7 +534,7 @@ _Defined in [packages/geb/src/proxy-action.ts:219](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:225](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L225)_
+_Defined in [packages/geb/src/proxy-action.ts:225](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L225)_
 
 **Parameters:**
 
@@ -554,7 +554,7 @@ _Defined in [packages/geb/src/proxy-action.ts:225](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:235](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L235)_
+_Defined in [packages/geb/src/proxy-action.ts:235](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L235)_
 
 **Parameters:**
 
@@ -573,7 +573,7 @@ _Defined in [packages/geb/src/proxy-action.ts:235](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:241](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L241)_
+_Defined in [packages/geb/src/proxy-action.ts:241](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L241)_
 
 **Parameters:**
 
@@ -593,7 +593,7 @@ _Defined in [packages/geb/src/proxy-action.ts:241](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:251](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L251)_
+_Defined in [packages/geb/src/proxy-action.ts:251](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L251)_
 
 **Parameters:**
 
@@ -614,7 +614,7 @@ _Defined in [packages/geb/src/proxy-action.ts:251](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:262](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L262)_
+_Defined in [packages/geb/src/proxy-action.ts:262](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L262)_
 
 **Parameters:**
 
@@ -635,7 +635,7 @@ _Defined in [packages/geb/src/proxy-action.ts:262](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:273](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L273)_
+_Defined in [packages/geb/src/proxy-action.ts:273](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L273)_
 
 **Parameters:**
 
@@ -709,7 +709,7 @@ Defined in packages/geb-contract-api/lib/generated/GebProxyActions.d.ts:32
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:310](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L310)_
+_Defined in [packages/geb/src/proxy-action.ts:310](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L310)_
 
 **Parameters:**
 
@@ -728,7 +728,7 @@ _Defined in [packages/geb/src/proxy-action.ts:310](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:316](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L316)_
+_Defined in [packages/geb/src/proxy-action.ts:316](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L316)_
 
 **Parameters:**
 
@@ -747,7 +747,7 @@ _Defined in [packages/geb/src/proxy-action.ts:316](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:322](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L322)_
+_Defined in [packages/geb/src/proxy-action.ts:322](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L322)_
 
 **Parameters:**
 
@@ -766,7 +766,7 @@ _Defined in [packages/geb/src/proxy-action.ts:322](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:328](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L328)_
+_Defined in [packages/geb/src/proxy-action.ts:328](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L328)_
 
 **Parameters:**
 
@@ -784,7 +784,7 @@ _Defined in [packages/geb/src/proxy-action.ts:328](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:334](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L334)_
+_Defined in [packages/geb/src/proxy-action.ts:334](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L334)_
 
 **Parameters:**
 
@@ -803,7 +803,7 @@ _Defined in [packages/geb/src/proxy-action.ts:334](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:343](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L343)_
+_Defined in [packages/geb/src/proxy-action.ts:343](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L343)_
 
 **Parameters:**
 
@@ -823,7 +823,7 @@ _Defined in [packages/geb/src/proxy-action.ts:343](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:353](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L353)_
+_Defined in [packages/geb/src/proxy-action.ts:353](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L353)_
 
 **Parameters:**
 
@@ -842,7 +842,7 @@ _Defined in [packages/geb/src/proxy-action.ts:353](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:359](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L359)_
+_Defined in [packages/geb/src/proxy-action.ts:359](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L359)_
 
 **Parameters:**
 
@@ -862,7 +862,7 @@ _Defined in [packages/geb/src/proxy-action.ts:359](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:369](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L369)_
+_Defined in [packages/geb/src/proxy-action.ts:369](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L369)_
 
 **Parameters:**
 
@@ -883,7 +883,7 @@ _Defined in [packages/geb/src/proxy-action.ts:369](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:380](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L380)_
+_Defined in [packages/geb/src/proxy-action.ts:380](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L380)_
 
 **Parameters:**
 
@@ -926,7 +926,7 @@ Defined in packages/geb-contract-api/lib/generated/GebProxyActions.d.ts:43
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:402](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L402)_
+_Defined in [packages/geb/src/proxy-action.ts:402](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L402)_
 
 **Parameters:**
 
@@ -945,7 +945,7 @@ _Defined in [packages/geb/src/proxy-action.ts:402](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:408](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L408)_
+_Defined in [packages/geb/src/proxy-action.ts:408](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L408)_
 
 **Parameters:**
 
@@ -965,7 +965,7 @@ _Defined in [packages/geb/src/proxy-action.ts:408](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:418](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L418)_
+_Defined in [packages/geb/src/proxy-action.ts:418](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L418)_
 
 **Parameters:**
 
@@ -986,7 +986,7 @@ _Defined in [packages/geb/src/proxy-action.ts:418](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:429](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L429)_
+_Defined in [packages/geb/src/proxy-action.ts:429](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L429)_
 
 **Parameters:**
 
@@ -1006,7 +1006,7 @@ _Defined in [packages/geb/src/proxy-action.ts:429](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:439](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L439)_
+_Defined in [packages/geb/src/proxy-action.ts:439](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L439)_
 
 **Parameters:**
 
@@ -1026,7 +1026,7 @@ _Defined in [packages/geb/src/proxy-action.ts:439](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:449](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L449)_
+_Defined in [packages/geb/src/proxy-action.ts:449](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L449)_
 
 **Parameters:**
 
@@ -1046,7 +1046,7 @@ _Defined in [packages/geb/src/proxy-action.ts:449](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:459](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L459)_
+_Defined in [packages/geb/src/proxy-action.ts:459](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L459)_
 
 **Parameters:**
 
@@ -1065,7 +1065,7 @@ _Defined in [packages/geb/src/proxy-action.ts:459](https://github.com/reflexer-l
 
 _Overrides void_
 
-_Defined in [packages/geb/src/proxy-action.ts:465](https://github.com/reflexer-labs/geb.js/blob/fdb2fbc/packages/geb/src/proxy-action.ts#L465)_
+_Defined in [packages/geb/src/proxy-action.ts:465](https://github.com/reflexer-labs/geb.js/blob/e238565/packages/geb/src/proxy-action.ts#L465)_
 
 **Parameters:**
 
