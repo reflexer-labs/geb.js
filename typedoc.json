@@ -1,0 +1,12 @@
+{
+    "inputFiles": ["./packages/geb/src/geb.ts"],
+    "exclude": ["**/*+(index|.spec|.d).ts", "**/node_modules"],
+    "mode": "file",
+    "readme": "none",
+    "out": "docs",
+    "theme": "gitbook",
+    "categorizeByGroup": false,
+    "hideBreadcrumbs": true,
+    "excludePrivate": true,
+    "excludeProtected": true
+}
