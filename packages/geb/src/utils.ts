@@ -35,7 +35,7 @@ const RAD = BigNumber.from('1000000000000000000000000000000000000000000000')
  * @param  {BigNumberish} rad
  */
 const radToFixed = (rad: BigNumberish) => {
-    return FixedNumber.fromValue(BigNumber.from(rad), -45)
+    return FixedNumber.fromValue(BigNumber.from(rad), 45)
 }
 
 /**
@@ -43,7 +43,7 @@ const radToFixed = (rad: BigNumberish) => {
  * @param  {BigNumberish} rad
  */
 const rayToFixed = (ray: BigNumberish) => {
-    return FixedNumber.fromValue(BigNumber.from(ray), -27)
+    return FixedNumber.fromValue(BigNumber.from(ray), 27)
 }
 
 /**
@@ -51,7 +51,7 @@ const rayToFixed = (ray: BigNumberish) => {
  * @param  {BigNumberish} wad
  */
 const wadToFixed = (wad: BigNumberish) => {
-    return FixedNumber.fromValue(BigNumber.from(wad), -45)
+    return FixedNumber.fromValue(BigNumber.from(wad), 18)
 }
 
 /**

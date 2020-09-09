@@ -87,6 +87,21 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             assert.equal(safe.collateral.toString(), expected.lockedCollateral)
         })
 
+        it('Check non-empty safe with debt and collateral', async () => {
+            const safeId = 4
+            const safe = await geb.getSafe(safeId)
+            const handler = await geb.contracts.safeManager.safes(safeId)
+
+            const expected = await sethCall(
+                node,
+                KOVAN_ADDRESSES.GEB_SAFE_ENGINE,
+                'safes(bytes32,address)(uint256,uint256)',
+                [ETH_A, handler]
+            )
+            assert.equal(safe.debt.toString(), expected[1])
+            assert.equal(safe.collateral.toString(), expected[0])
+        })
+
         it('Get safe owner by manager with handler', async () => {
             const handler = await geb.contracts.safeManager.safes(1)
 
@@ -139,6 +154,7 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             assert.ok(res[0].gt('1'))
 
             // debtFloor is 15
+            res[1].debtAmount
             assert.ok(res[1].debtFloor.eq(RAD.mul(15)))
         })
 

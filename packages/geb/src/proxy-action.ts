@@ -16,12 +16,26 @@ import {
     DsProxy,
 } from '@reflexer-finance/geb-contract-api'
 
+/**
+ * Convenience class to call function from Proxy Action contract through a proxy registered in the proxy registry. These action allow to bundle non-view calls. i.g: Open a safe + Lock some ETH + draw some RAI in one single transaction.
+ */
 export class GebProxyActions extends GebProxyActionsGenerated {
+    /**
+     * Underlying proxy object. Can be use to make custom calls to the proxy using `proxy.execute()` function.
+     * For the details of each function
+     */
     public proxy: DsProxy
+
+    /**
+     * Address of the proxy action contract.
+     */
     public proxyActionAddress: string
     private addressList: ContractList
 
     constructor(
+        /**
+         * Address of the underlying proxy
+         */
         public proxyAddress: string,
         network: GebDeployment,
         chainProvider: GebProviderInterface
@@ -34,7 +48,7 @@ export class GebProxyActions extends GebProxyActionsGenerated {
     }
 
     // Override getTransactionRequest to use proxy
-    getTransactionRequest(
+    protected getTransactionRequest(
         abiFragment: AbiDefinition,
         params: Inputs,
         ethValue?: BigNumber

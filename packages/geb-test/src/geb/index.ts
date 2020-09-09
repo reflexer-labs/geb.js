@@ -3,6 +3,7 @@ import { ethers } from 'ethers'
 import { MAKER_KOVAN_NODE } from './../const'
 import { testsProxyActionWithGenericGebProvider } from './proxy-actions'
 import { testsGeb } from './geb'
+import { testsDocExamples } from './doc'
 
 describe('Test Geb', async () => {
     const provider = new ethers.providers.JsonRpcProvider(MAKER_KOVAN_NODE)
@@ -11,4 +12,6 @@ describe('Test Geb', async () => {
     testsProxyActionWithGenericGebProvider(gebProvider)
     testsGeb(gebProvider, MAKER_KOVAN_NODE)
     // testsGeb(gebProvider, INFURA_KOVAN)
+
+    testsDocExamples()
 })
