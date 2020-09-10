@@ -8,5 +8,6 @@
     "categorizeByGroup": false,
     "hideBreadcrumbs": true,
     "excludePrivate": true,
-    "excludeProtected": true
+    "excludeProtected": true,
+    "listInvalidSymbolLinks": true
 }

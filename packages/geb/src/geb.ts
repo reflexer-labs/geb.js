@@ -69,7 +69,7 @@ export class Geb {
     }
 
     /**
-     * Given an address returns a [[GebProxyAction]] object to execute bundled operations.
+     * Given an address returns a GebProxyAction object to execute bundled operations.
      * Important: This requires the address to have deployed a GEB proxy through the proxy registry contract. It will throw a `DOES_NOT_OWN_HAVE_PROXY` error if the address specified does not have a proxy. Use the [[deployProxy]] function to get a new proxy.
      * @param ownerAddress Externally owned user account, Ethereum address that owns a GEB proxy.
      */
