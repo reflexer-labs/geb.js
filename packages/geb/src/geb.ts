@@ -13,6 +13,7 @@ import { GebProxyActions } from './proxy-action'
 import { NULL_ADDRESS, ETH_A } from './utils'
 import { isNumber } from 'util'
 import { Safe } from './schema/safe'
+import { BigNumber } from '@ethersproject/bignumber'
 
 /**
  * Main object of the library instantiating all useful GEB contracts and providing all helper functions needed.
@@ -107,6 +108,20 @@ export class Geb {
             isManaged = true
             safeData = await this.contracts.safeEngine.safes(ETH_A, handler)
         } else {
+            handler = idOrHandler
+            let safeRights: BigNumber
+
+            ;[safeData, safeRights] = await this.multiCall([
+                this.contracts.safeEngine.safes(ETH_A, handler, true),
+                this.contracts.safeEngine.safeRights(
+                    handler,
+                    this.contracts.safeManager.address,
+                    true
+                ),
+            ])
+
+            // If SafeManager has right over the safe, it's a managed safe
+            isManaged = !safeRights.isZero()
             handler = idOrHandler
             safeData = await this.contracts.safeEngine.safes(ETH_A, handler)
             isManaged = !!(await this.contracts.safeEngine.safeRights(
