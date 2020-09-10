@@ -9,7 +9,7 @@ import { providers, utils } from 'ethers'
 import { Result } from 'ethers/lib/utils'
 import { isNumber } from 'util'
 
-export class EthersProvider implements GebProviderInterface {
+export class GebEthersProvider implements GebProviderInterface {
     constructor(public provider: providers.Provider) {}
 
     private processEthersResults(results: Result): any {

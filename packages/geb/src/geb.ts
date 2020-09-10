@@ -10,7 +10,7 @@ import {
     ContractList,
     GebDeployment,
 } from '@reflexer-finance/geb-contract-base'
-import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
+import { GebEthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import { ethers } from 'ethers'
 import { GebError, GebErrorTypes } from './errors'
 import { GebProxyActions } from './proxy-action'
@@ -63,7 +63,7 @@ export class Geb {
             provider.getBlock !== undefined
         ) {
             // It's an Ethers provider
-            this.provider = new EthersProvider(
+            this.provider = new GebEthersProvider(
                 provider as ethers.providers.Provider
             )
         } else {

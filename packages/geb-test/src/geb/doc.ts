@@ -3,7 +3,7 @@ import assert from 'assert'
 
 import { Geb, utils } from 'geb.js'
 import { MAKER_KOVAN_NODE, DUMMY_PRIVATE_KEY } from '../const'
-import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
+import { GebEthersProvider } from '@reflexer-finance/geb-ethers-provider'
 
 export const testsDocExamples = () => {
     describe('Test of the examples included in the documentation', async () => {
@@ -45,7 +45,7 @@ export const testsDocExamples = () => {
                 const provider = new ethers.providers.JsonRpcProvider(
                     MAKER_KOVAN_NODE
                 )
-                const gebProvider = new EthersProvider(provider)
+                const gebProvider = new GebEthersProvider(provider)
                 assert.ok(
                     gebProvider.decodeError(err).includes('Insufficient funds')
                 )

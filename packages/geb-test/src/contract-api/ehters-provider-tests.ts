@@ -6,7 +6,7 @@ import {
     MAKER_KOVAN_NODE,
 } from '../const'
 import { ethers } from 'ethers'
-import { EthersProvider } from '@reflexer-finance/geb-ethers-provider'
+import { GebEthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import {
     SafeEngine,
     BasicCollateralJoin,
@@ -18,13 +18,13 @@ import { KOVAN_ADDRESSES } from '@reflexer-finance/geb-contract-base'
 export const testsWithEthersProvider = () => {
     describe('Test made only for Ethers', () => {
         let wallet: ethers.Wallet
-        let gebProvider: EthersProvider
+        let gebProvider: GebEthersProvider
         beforeEach(() => {
             const provider = new ethers.providers.JsonRpcProvider(
                 MAKER_KOVAN_NODE
             )
             wallet = new ethers.Wallet(DUMMY_PRIVATE_KEY, provider)
-            gebProvider = new EthersProvider(provider)
+            gebProvider = new GebEthersProvider(provider)
         })
         it('Test ethers transferInternalCoins call failed', async () => {
             const safeEngine = new SafeEngine(

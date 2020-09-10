@@ -1,3 +1,3 @@
-import { EthersProvider } from './provider'
+import { GebEthersProvider } from './provider'
 
-export { EthersProvider }
+export { GebEthersProvider }
