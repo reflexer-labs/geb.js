@@ -143,13 +143,13 @@ export class Geb {
     }
 
     /**
-     * Return an object that can be use to interact with a ERC20 token.
+     * Returns an object that can be used to interact with a ERC20 token.
      * Example:
      * ```typescript
      * const USDCAddress = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
      * const USDC = geb.getErc20Contract(USDCAddress)
      *
-     * // Get deadBeef's balance
+     * // Get deadbeef's balance
      * const balance = USDC.balanceOf("0xdeadbeef..")
      *
      * // Send 1 USDC to deadbeef (Yes, USDC is 6 decimals)
