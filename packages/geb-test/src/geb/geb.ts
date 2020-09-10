@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 import assert from 'assert'
 
-import { ETH_A, NULL_ADDRESS } from '../const'
+import { ETH_A, NULL_ADDRESS, ONE_ADDRESS } from '../const'
 import { Geb } from 'geb.js'
 import { sethCall } from '../utils'
 import {
@@ -176,6 +176,38 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
                 res[2].collateralAuctionHouse,
                 KOVAN_ADDRESSES.GEB_COLLATERAL_AUCTION_HOUSE_ETH_A
             )
+        })
+
+        it('ERC20 symbol', async () => {
+            const erc20 = geb.getErc20Contract(KOVAN_ADDRESSES.GEB_COIN)
+            const symbol = await erc20.symbol()
+            assert.equal(symbol, 'RAI')
+        })
+
+        it('ERC20 balance', async () => {
+            const erc20 = geb.getErc20Contract(KOVAN_ADDRESSES.GEB_COIN)
+            const balance = await erc20.balanceOf(NULL_ADDRESS)
+            assert.equal(balance.toString(), '0')
+        })
+
+        it('ERC20 transfer', async () => {
+            const erc20 = geb.getErc20Contract(KOVAN_ADDRESSES.GEB_COIN)
+            const tx = erc20.transferFrom(NULL_ADDRESS, ONE_ADDRESS, '0')
+            await gebProvider.ethCall(tx)
+        })
+
+        it('ERC20 transfer fail', async () => {
+            const erc20 = geb.getErc20Contract(KOVAN_ADDRESSES.GEB_COIN)
+            const tx = erc20.transferFrom(NULL_ADDRESS, ONE_ADDRESS, '1')
+            try {
+                await gebProvider.ethCall(tx)
+                assert.fail()
+            } catch (err) {
+                assert.equal(
+                    'Coin/insufficient-balance',
+                    gebProvider.decodeError(err)
+                )
+            }
         })
     })
 }

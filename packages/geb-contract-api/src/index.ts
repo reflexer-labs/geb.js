@@ -23,6 +23,7 @@ import { TaxCollector } from './generated/TaxCollector'
 import { Weth } from './generated/WETH'
 import { GebProxyActions } from './generated/GebProxyActions'
 import { GebProxyActionsGlobalSettlement } from './generated/GebProxyActionsGlobalSettlement'
+import { Erc20 } from './generated/ERC20'
 
 import { ContractApis } from './contract-apis'
 import { Multicall } from './generated/Multicall'
@@ -57,4 +58,5 @@ export {
     GebProxyActions,
     GebProxyActionsGlobalSettlement,
     Multicall,
+    Erc20,
 }

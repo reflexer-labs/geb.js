@@ -1,4 +1,8 @@
-import { ContractApis, Multicall } from '@reflexer-finance/geb-contract-api'
+import {
+    ContractApis,
+    Multicall,
+    Erc20,
+} from '@reflexer-finance/geb-contract-api'
 import {
     GebProviderInterface,
     MulticallRequest,
@@ -110,7 +114,6 @@ export class Geb {
         } else {
             handler = idOrHandler
             let safeRights: BigNumber
-
             ;[safeData, safeRights] = await this.multiCall([
                 this.contracts.safeEngine.safes(ETH_A, handler, true),
                 this.contracts.safeEngine.safeRights(
@@ -137,6 +140,28 @@ export class Geb {
             ETH_A,
             isManaged
         )
+    }
+
+    /**
+     * Return an object that can be use to interact with a ERC20 token.
+     * Example:
+     * ```typescript
+     * const USDCAddress = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+     * const USDC = geb.getErc20Contract(USDCAddress)
+     *
+     * // Get deadBeef's balance
+     * const balance = USDC.balanceOf("0xdeadbeef..")
+     *
+     * // Send 1 USDC to deadbeef (Yes, USDC is 6 decimals)
+     * const tx = USDC.transfer("0xdeadbeef..", "1000000")
+     * await wallet.sendTransaction(tx)
+     * ```
+     *
+     * @param  {string} tokenAddress Token contract address
+     * @returns Erc20
+     */
+    public getErc20Contract(tokenAddress: string): Erc20 {
+        return new Erc20(tokenAddress, this.provider)
     }
 
     // Multicall overloads, typing support for up to 7 calls.

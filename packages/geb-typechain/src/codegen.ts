@@ -16,7 +16,11 @@ import {
 export function codegenContract(contract: Contract, abi: RawAbiDefinition[]) {
     // Implements the ERC20 interface for the contracts that are ERC20
     const isERCO20 =
-        contract.name === 'Weth' || contract.name === 'Coin' ? true : false
+        contract.name === 'Weth' ||
+        contract.name === 'Coin' ||
+        contract.name === 'Erc20'
+            ? true
+            : false
 
     // prettier-ignore
     let template = `
