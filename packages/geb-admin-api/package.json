@@ -1,0 +1,11 @@
+{
+    "name": "@reflexer-finance/geb-admin-api",
+    "version": "0.0.0",
+    "description": "Includes contract API from all contracts of the GEB ecosystem",
+    "main": "./lib/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Guillaume Felley <guillaume@reflexer.finance>",
+    "license": "ISC"
+}
