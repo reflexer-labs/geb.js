@@ -1,6 +1,7 @@
 const fs = require('fs')
 const { loadJson, resolve, saveJson } = require('./src/utils')
 const solc = require('solc')
+const { execSync } = require('child_process')
 
 const sources = {}
 
@@ -13,7 +14,7 @@ const addToSource = (name, path) => {
 
 // geb repo
 fs.readdirSync(resolve('./../deps/geb/src/'))
-    .filter((x) => x.slice(-4) === '.sol')
+    .filter((x) => x.slice(-4) === '.sol' && x !== 'CoinSavingsAccount.sol')
     //.map((x) => x.slice(0, -4))
     .map((x) => addToSource(x, `./../deps/geb/src/${x}`))
 
@@ -58,8 +59,6 @@ const config = {
     },
 }
 
-// ds-token/=lib/ds-token/src/ ds-token=lib/ds-token/src/index.sol erc20/=lib/ds-token/lib/erc20/src/ erc20=lib/ds-token/lib/erc20/src/index.sol ds-math/=lib/ds-token/lib/ds-math/src/ ds-math=lib/ds-token/lib/ds-math/src/index.sol ds-test/=lib/ds-token/lib/ds-test/src/ ds-test=lib/ds-token/lib/ds-test/src/index.sol ds-stop/=lib/ds-token/lib/ds-stop/src/ ds-stop=lib/ds-token/lib/ds-stop/src/index.sol ds-auth/=lib/ds-token/lib/ds-stop/lib/ds-auth/src/ ds-auth=lib/ds-token/lib/ds-stop/lib/ds-auth/src/index.sol ds-note/=lib/ds-token/lib/ds-stop/lib/ds-note/src/ ds-note=lib/ds-token/lib/ds-stop/lib/ds-note/src/index.sol
-
 console.log('Compile contracts..')
 const out = JSON.parse(solc.compile(JSON.stringify(config)))
 console.log(out.error)
@@ -79,3 +78,10 @@ for (let file in out.contracts) {
         )
     }
 }
+
+// Remove some unwanted contracts
+execSync(
+    `rm -f ${resolve(
+        './../packages/geb-contract-api/abis/GebProxyActionsCoinSavingsAccount.json'
+    )}`
+)
