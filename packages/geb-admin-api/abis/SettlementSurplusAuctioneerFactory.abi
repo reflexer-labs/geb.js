@@ -1,1 +1,0 @@
-[{"inputs":[{"internalType":"address","name":"accountingEngine","type":"address"},{"internalType":"address","name":"surplusAuctionHouse","type":"address"}],"name":"newSettlementSurplusAuctioneer","outputs":[{"internalType":"contract SettlementSurplusAuctioneer","name":"settlementSurplusAuctioneer","type":"address"}],"stateMutability":"nonpayable","type":"function"}]

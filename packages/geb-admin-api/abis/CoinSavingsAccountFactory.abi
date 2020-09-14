@@ -1,1 +1,0 @@
-[{"inputs":[{"internalType":"address","name":"safeEngine","type":"address"}],"name":"newCoinSavingsAccount","outputs":[{"internalType":"contract CoinSavingsAccount","name":"coinSavingsAccount","type":"address"}],"stateMutability":"nonpayable","type":"function"}]

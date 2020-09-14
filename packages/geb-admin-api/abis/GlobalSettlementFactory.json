@@ -1,0 +1,15 @@
+[
+    {
+        "inputs": [],
+        "name": "newGlobalSettlement",
+        "outputs": [
+            {
+                "internalType": "contract GlobalSettlement",
+                "name": "globalSettlement",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]

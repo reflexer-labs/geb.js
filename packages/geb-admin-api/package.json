@@ -4,7 +4,7 @@
     "description": "Includes contract API from all contracts of the GEB ecosystem",
     "main": "./lib/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "codegen": "typechain --target=./../geb-typechain/lib 'abis/*.json'"
     },
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
     "license": "ISC"

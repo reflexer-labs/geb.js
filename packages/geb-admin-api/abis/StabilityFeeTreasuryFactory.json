@@ -1,0 +1,27 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "safeEngine",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "accountingEngine",
+                "type": "address"
+            },
+            { "internalType": "address", "name": "coinJoin", "type": "address" }
+        ],
+        "name": "newStabilityFeeTreasury",
+        "outputs": [
+            {
+                "internalType": "contract StabilityFeeTreasury",
+                "name": "stabilityFeeTreasury",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]

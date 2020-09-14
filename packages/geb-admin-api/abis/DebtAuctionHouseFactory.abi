@@ -1,1 +1,0 @@
-[{"inputs":[{"internalType":"address","name":"safeEngine","type":"address"},{"internalType":"address","name":"prot","type":"address"}],"name":"newDebtAuctionHouse","outputs":[{"internalType":"contract DebtAuctionHouse","name":"debtAuctionHouse","type":"address"}],"stateMutability":"nonpayable","type":"function"}]
