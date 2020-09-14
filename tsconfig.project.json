@@ -18,13 +18,13 @@
             "path": "./packages/geb-contract-api"
         },
         {
+            "path": "./packages/geb-admin-api"
+        },
+        {
             "path": "./packages/geb"
         },
         {
             "path": "./packages/geb-test"
-        },
-        {
-            "path": "./packages/geb-admin-api"
         }
     ],
     "files": []

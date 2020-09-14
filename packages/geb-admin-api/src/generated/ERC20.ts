@@ -9,43 +9,22 @@ import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class Erc20 extends BaseContractAPI implements ERC20 {
-    allowance(src: string, guy: string): Promise<BigNumber>
-    allowance(
-        src: string,
-        guy: string,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    allowance(
-        src: string,
-        guy: string,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+    name(): Promise<string>
+    name(multicall: true): MulticallRequest<string>
+    name(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"guy","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+        const abi = {"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}
 
-        return this.ethCallOrMulticall(abi, [src, guy], multicall)
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    approve(guy: string, wad: BigNumberish): TransactionRequest {
+    approve(_spender: string, _value: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"guy","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [guy, wad])
-    }
-
-    balanceOf(guy: string): Promise<BigNumber>
-    balanceOf(guy: string, multicall: true): MulticallRequest<BigNumber>
-    balanceOf(
-        guy: string,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"guy","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [guy], multicall)
+        return this.getTransactionRequest(abi, [_spender, _value])
     }
 
     totalSupply(): Promise<BigNumber>
@@ -55,28 +34,79 @@ export class Erc20 extends BaseContractAPI implements ERC20 {
     ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+        const abi = {"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    transfer(dst: string, wad: BigNumberish): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [dst, wad])
-    }
-
     transferFrom(
-        src: string,
-        dst: string,
-        wad: BigNumberish
+        _from: string,
+        _to: string,
+        _value: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [src, dst, wad])
+        return this.getTransactionRequest(abi, [_from, _to, _value])
+    }
+
+    decimals(): Promise<number>
+    decimals(multicall: true): MulticallRequest<number>
+    decimals(multicall?: true): Promise<number> | MulticallRequest<number> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    balanceOf(_owner: string): Promise<BigNumber>
+    balanceOf(_owner: string, multicall: true): MulticallRequest<BigNumber>
+    balanceOf(
+        _owner: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [_owner], multicall)
+    }
+
+    symbol(): Promise<string>
+    symbol(multicall: true): MulticallRequest<string>
+    symbol(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    transfer(_to: string, _value: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [_to, _value])
+    }
+
+    allowance(_owner: string, _spender: string): Promise<BigNumber>
+    allowance(
+        _owner: string,
+        _spender: string,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    allowance(
+        _owner: string,
+        _spender: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [_owner, _spender], multicall)
     }
 }
