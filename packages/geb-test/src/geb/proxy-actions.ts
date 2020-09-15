@@ -5,7 +5,7 @@ import {
     GebProviderInterface,
     KOVAN_ADDRESSES,
 } from '@reflexer-finance/geb-contract-base'
-import { GebProxyActions } from 'geb.js'
+import { GebProxyActions, GebProxyActionsGlobalSettlement } from 'geb.js'
 import { NULL_ADDRESS, ETH_A, ONE_ADDRESS, WAD } from '../const'
 
 export const testsProxyActionWithGenericGebProvider = (
@@ -94,6 +94,29 @@ export const testsProxyActionWithGenericGebProvider = (
                     assert.fail(
                         'openLockETHAndGenerateDebt: ' +
                             gebProvider.decodeError(err)
+                    )
+                }
+            })
+
+            it('Global settlement proxy action', async () => {
+                const settlementProxy = new GebProxyActionsGlobalSettlement(
+                    KOVAN_ADDRESSES.PROXY_DEPLOYER,
+                    'kovan',
+                    gebProvider
+                )
+
+                const tx = settlementProxy.freeTokenCollateral(
+                    KOVAN_ADDRESSES.GEB_JOIN_ETH_A,
+                    1
+                )
+
+                try {
+                    await gebProvider.ethCall(tx)
+                    assert.fail()
+                } catch (err) {
+                    assert.equal(
+                        gebProvider.decodeError(err),
+                        'ds-auth-unauthorized'
                     )
                 }
             })

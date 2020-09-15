@@ -17,6 +17,7 @@ import { GebProxyActions } from './proxy-action'
 import { NULL_ADDRESS, ETH_A } from './utils'
 import { Safe } from './schema/safe'
 import { BigNumber } from '@ethersproject/bignumber'
+import { GebProxyActionsGlobalSettlement } from './proxy-action-global-settlement'
 
 /**
  * Main object of the library instantiating all useful GEB contracts and providing all helper functions needed.
@@ -84,6 +85,24 @@ export class Geb {
             throw new GebError(GebErrorTypes.DOES_NOT_OWN_HAVE_PROXY)
         }
         return new GebProxyActions(address, this.network, this.provider)
+    }
+
+    /**
+     * Given an address returns a GebProxyActionsGlobalSettlement object to execute bundled operations during GlobalSettlement.
+     * Important: Same as for `getProxyAction` it requires a proxy deploy through the registry.
+     * @param ownerAddress Externally owned user account, Ethereum address that owns a GEB proxy.
+     */
+    public async getProxyActionGlobalSettlement(ownerAddress: string) {
+        const address = await this.contracts.proxyRegistry.proxies(ownerAddress)
+
+        if (address === NULL_ADDRESS) {
+            throw new GebError(GebErrorTypes.DOES_NOT_OWN_HAVE_PROXY)
+        }
+        return new GebProxyActionsGlobalSettlement(
+            address,
+            this.network,
+            this.provider
+        )
     }
 
     /**

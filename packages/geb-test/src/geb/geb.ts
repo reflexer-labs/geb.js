@@ -69,8 +69,15 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             assert.equal(value.generatedDebt, expected[1])
         })
 
-        it('Get proxy with geb', async () => {
+        it('Get proxy action with geb', async () => {
             const proxy = await geb.getProxyAction(KOVAN_ADDRESSES.ETH_FROM)
+            assert.equal(proxy.proxyAddress, KOVAN_ADDRESSES.PROXY_DEPLOYER)
+        })
+
+        it('Get proxy action global settlement with geb', async () => {
+            const proxy = await geb.getProxyActionGlobalSettlement(
+                KOVAN_ADDRESSES.ETH_FROM
+            )
             assert.equal(proxy.proxyAddress, KOVAN_ADDRESSES.PROXY_DEPLOYER)
         })
 

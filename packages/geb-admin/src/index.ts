@@ -1,6 +1,13 @@
 import { GebAdmin } from './geb-admin'
 import * as adminContracts from '@reflexer-finance/geb-admin-api'
-import { Geb, GebErrorTypes, GebProxyActions, utils, contracts } from 'geb.js'
+import {
+    Geb,
+    GebErrorTypes,
+    GebProxyActions,
+    utils,
+    contracts,
+    GebProxyActionsGlobalSettlement,
+} from 'geb.js'
 
 export {
     GebAdmin,
@@ -8,6 +15,7 @@ export {
     Geb,
     GebErrorTypes,
     GebProxyActions,
+    GebProxyActionsGlobalSettlement,
     utils,
     contracts,
 }

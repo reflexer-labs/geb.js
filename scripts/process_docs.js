@@ -15,6 +15,13 @@ async function main() {
             './../docs/gebproxyactions.md'
         )}`
     )
+
+    execSync(
+        `cp ${resolve(
+            './../docs/classes/gebproxyactionsglobalsettlement.md'
+        )} ${resolve('./../docs/gebproxyactionsglobalsettlement.md')}`
+    )
+
     execSync(
         `cp ${resolve('./../docs/classes/safe.md')} ${resolve(
             './../docs/safe.md'
@@ -43,6 +50,7 @@ async function main() {
     // Some minor edit of the files
     cleanUpTypeDoc(resolve('./../docs/geb.md'))
     cleanUpTypeDoc(resolve('./../docs/gebproxyactions.md'))
+    cleanUpTypeDoc(resolve('./../docs/gebproxyactionsglobalsettlement.md'))
     cleanUpTypeDoc(resolve('./../docs/safe.md'))
     cleanUpTypeDoc(resolve('./../docs/gebadmin.md'))
 }
