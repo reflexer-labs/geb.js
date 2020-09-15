@@ -65,5 +65,5 @@ function cleanUpTypeDoc(filePath) {
     // Remove the index and Hierarchy
     regexReplaceInFile(filePath, /## Hierarchy(.*)(?=## Constructors)/gs, '')
     regexReplaceInFile(filePath, /\n###  constructor/g, '')
-    regexReplaceInFile(filePath, /\*Overrides void*/g, '')
+    regexReplaceInFile(filePath, /\*Overrides void\*\n/g, '')
 }
