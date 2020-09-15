@@ -1,6 +1,6 @@
 {
     "name": "@reflexer-finance/geb-admin-api",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Includes contract API from all contracts of the GEB ecosystem",
     "main": "./lib/index.js",
     "scripts": {
