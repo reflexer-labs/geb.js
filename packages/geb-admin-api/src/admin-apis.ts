@@ -12,14 +12,12 @@ import {
     GovActions,
     Esm,
     TokenBurner,
-    GebProxyActionsGlobalSettlement,
     FsmGovernanceInterface,
     DsProxyFactory,
     ChainlinkMedianEthusd,
     Osm,
     GebDeployPauseProxyActions,
     TxManager,
-    GebProxyActions,
     DsValue,
     Weth9,
 } from '.'
@@ -46,8 +44,6 @@ export class AdminApis {
     public govActions: GovActions
     public esm: Esm
     public esmBurner: TokenBurner
-    public proxyActions: GebProxyActions
-    public proxyActionsGlobalSettlement: GebProxyActionsGlobalSettlement
     public fsmGovInterface: FsmGovernanceInterface
     public proxyFactory: DsProxyFactory
     public medianizerEth: ChainlinkMedianEthusd | DsValue
@@ -80,8 +76,6 @@ export class AdminApis {
         this.govActions = new GovActions(addressList.GEB_GOV_ACTIONS, this.chainProvider)
         this.esm = new Esm(addressList.GEB_ESM, this.chainProvider)
         this.esmBurner = new TokenBurner(addressList.GEB_ESM_TOKEN_BURNER, this.chainProvider)
-        this.proxyActions = new GebProxyActions(addressList.PROXY_ACTIONS, this.chainProvider)
-        this.proxyActionsGlobalSettlement = new GebProxyActionsGlobalSettlement(addressList.PROXY_ACTIONS_GLOBAL_SETTLEMENT, this.chainProvider)
         this.fsmGovInterface = new FsmGovernanceInterface(addressList.FSM_GOV_INTERFACE, this.chainProvider)
         this.proxyFactory = new DsProxyFactory(addressList.PROXY_FACTORY, this.chainProvider)
         this.medianizerEth = new DsValue(addressList.MEDIANIZER_ETH, this.chainProvider)

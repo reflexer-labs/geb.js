@@ -44,7 +44,6 @@ import { DsToken } from './generated/DSToken'
 import { DsTokenBase } from './generated/DSTokenBase'
 import { DsValue } from './generated/DSValue'
 import { DebtAuctionHouseFactory } from './generated/DebtAuctionHouseFactory'
-import { Erc20 } from './generated/ERC20'
 import { Erc20Events } from './generated/ERC20Events'
 import { Esm } from './generated/ESM'
 import { EsmFactory } from './generated/ESMFactory'
@@ -62,9 +61,6 @@ import { GebDeployTestBase } from './generated/GebDeployTestBase'
 import { GebPollingEmitter } from './generated/GebPollingEmitter'
 import { GebPollingEvents } from './generated/GebPollingEvents'
 import { GebPrintingPermissions } from './generated/GebPrintingPermissions'
-import { GebProxyActions } from './generated/GebProxyActions'
-import { GebProxyActionsCoinSavingsAccount } from './generated/GebProxyActionsCoinSavingsAccount'
-import { GebProxyActionsGlobalSettlement } from './generated/GebProxyActionsGlobalSettlement'
 import { GemBag } from './generated/GemBag'
 import { GlobalSettlementFactory } from './generated/GlobalSettlementFactory'
 import { GovActions } from './generated/GovActions'
@@ -80,7 +76,6 @@ import { Logging } from './generated/Logging'
 import { MockDebtAuctionHouse } from './generated/MockDebtAuctionHouse'
 import { MockSurplusAuctionHouse } from './generated/MockSurplusAuctionHouse'
 import { MultiSigWallet } from './generated/MultiSigWallet'
-import { Multicall } from './generated/Multicall'
 import { NotThrowingToken } from './generated/NotThrowingToken'
 import { Osm } from './generated/OSM'
 import { OracleRelayerFactory } from './generated/OracleRelayerFactory'
@@ -96,7 +91,6 @@ import { SafeHandler } from './generated/SAFEHandler'
 import { Setter } from './generated/Setter'
 import { SettlementSurplusAuctioneerFactory } from './generated/SettlementSurplusAuctioneerFactory'
 import { SimpleAuthority } from './generated/SimpleAuthority'
-import { StabilityFeeTreasury } from './generated/StabilityFeeTreasury'
 import { StabilityFeeTreasuryFactory } from './generated/StabilityFeeTreasuryFactory'
 import { Store } from './generated/Store'
 import { TestAccountingEngine } from './generated/TestAccountingEngine'
@@ -162,7 +156,6 @@ export {
     DsTokenBase,
     DsValue,
     DebtAuctionHouseFactory,
-    Erc20,
     Erc20Events,
     Esm,
     EsmFactory,
@@ -180,9 +173,6 @@ export {
     GebPollingEmitter,
     GebPollingEvents,
     GebPrintingPermissions,
-    GebProxyActions,
-    GebProxyActionsCoinSavingsAccount,
-    GebProxyActionsGlobalSettlement,
     GemBag,
     GlobalSettlementFactory,
     GovActions,
@@ -198,7 +188,6 @@ export {
     MockDebtAuctionHouse,
     MockSurplusAuctionHouse,
     MultiSigWallet,
-    Multicall,
     NotThrowingToken,
     Osm,
     OracleRelayerFactory,
@@ -214,7 +203,6 @@ export {
     Setter,
     SettlementSurplusAuctioneerFactory,
     SimpleAuthority,
-    StabilityFeeTreasury,
     StabilityFeeTreasuryFactory,
     Store,
     TestAccountingEngine,
