@@ -28,30 +28,31 @@ import { ethers } from 'ethers'
  */
 export class GebAdmin extends Geb {
     /**
-     * Object containing all admin contracts instances of the GEB ecosystem (Contracts considered core are available on the `contracts` attribute)
-     * - weth
-     * - multisigAdmin
-     * - multisigAdminProxy
-     * - deploy
-     * - flx
-     * - flxAuthority
-     * - pollingEmitter
-     * - pauseAuthority
-     * - printingPermissionRegistry
-     * - pause
-     * - pauseProxy
-     * - govActions
-     * - esm
-     * - esmBurner
-     * - proxyActions
-     * - proxyActionsGlobalSettlement
-     * - fsmGovInterface
-     * - proxyFactory
-     * - medianizerEth
-     * - osm
-     * - pauseProxyAction
-     * - proxyDeployer
-     * - txManager
+     * Object containing all GEB admin contracts instances for low level interactions.
+     * Currently has the following contracts:
+     * - Weth9
+     * - MultiSigWallet
+     * - DsProxy
+     * - GebDeploy
+     * - DsToken
+     * - ProtocolTokenAuthority
+     * - GebPollingEmitter
+     * - GebPrintingPermissions
+     * - DsRecursiveRoles
+     * - DsPause
+     * - DsPauseProxy
+     * - GovActions
+     * - Esm
+     * - TokenBurner
+     * - GebProxyActions
+     * - GebProxyActionsGlobalSettlement
+     * - FsmGovernanceInterface
+     * - DsProxyFactory
+     * - ChainlinkMedianEthusd or DsValue
+     * - Osm or DsValue
+     * - GebDeployPauseProxyActions
+     * - DsProxy
+     * - TxManager
      */
     public contractsAdmin: AdminApis
 
