@@ -23,7 +23,7 @@ import { BigNumber } from '@ethersproject/bignumber'
  */
 export class Geb {
     /**
-     * Object containing all GEB contracts instances for low level interactions. All contracts object offer a one-to-one typed API to the underlying smart-contract.
+     * Object containing all GEB core contracts instances for low level interactions. All contracts object offer a one-to-one typed API to the underlying smart-contract.
      * Currently has the following contracts:
      * - SafeEngine
      * - AccountingEngine
@@ -45,14 +45,14 @@ export class Geb {
      * - Weth (ERC20)
      */
     public contracts: ContractApis
-    private provider: GebProviderInterface
-    private addresses: ContractList
+    protected provider: GebProviderInterface
+    protected addresses: ContractList
     /**
      * @param  {GebDeployment} network Either `'kovan'`, `'mainnet'` or an actual list of contract address from the deployment script.
      * @param  {GebProviderInterface|ethers.providers.Provider} provider Either a Ethers.js provider or a Geb provider (Soon support for Web3 will be added)
      */
     constructor(
-        private network: GebDeployment,
+        protected network: GebDeployment,
         provider: GebProviderInterface | ethers.providers.Provider
     ) {
         if (

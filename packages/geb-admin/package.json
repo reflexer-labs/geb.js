@@ -1,0 +1,18 @@
+{
+    "name": "@reflexer-finance/geb-admin",
+    "version": "0.0.0",
+    "description": "",
+    "main": "./lib/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Guillaume Felley <guillaume@reflexer.finance>",
+    "license": "ISC",
+    "dependencies": {
+        "geb.js": "^0.0.6",
+        "@reflexer-finance/geb-admin-api": "^0.0.1",
+        "@reflexer-finance/geb-contract-base": "^0.0.7",
+        "@reflexer-finance/geb-ethers-provider": "^0.0.9",
+        "@ethersproject/bignumber": "5.x"
+    }
+}

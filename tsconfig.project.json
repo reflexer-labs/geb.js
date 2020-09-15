@@ -24,6 +24,9 @@
             "path": "./packages/geb"
         },
         {
+            "path": "./packages/geb-admin"
+        },
+        {
             "path": "./packages/geb-test"
         }
     ],

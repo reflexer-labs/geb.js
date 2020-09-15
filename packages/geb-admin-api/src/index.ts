@@ -50,7 +50,6 @@ import { Esm } from './generated/ESM'
 import { EsmFactory } from './generated/ESMFactory'
 import { EsmThresholdSetter } from './generated/ESMThresholdSetter'
 import { EthJoin } from './generated/ETHJoin'
-import { EnglishCollateralAuctionHouse } from './generated/EnglishCollateralAuctionHouse'
 import { EnglishCollateralAuctionHouseFactory } from './generated/EnglishCollateralAuctionHouseFactory'
 import { FaucetUser } from './generated/FaucetUser'
 import { FixedDiscountCollateralAuctionHouseFactory } from './generated/FixedDiscountCollateralAuctionHouseFactory'
@@ -95,13 +94,11 @@ import { RestrictedTokenFaucet } from './generated/RestrictedTokenFaucet'
 import { SafeEngineFactory } from './generated/SAFEEngineFactory'
 import { SafeHandler } from './generated/SAFEHandler'
 import { Setter } from './generated/Setter'
-import { SettlementSurplusAuctioneer } from './generated/SettlementSurplusAuctioneer'
 import { SettlementSurplusAuctioneerFactory } from './generated/SettlementSurplusAuctioneerFactory'
 import { SimpleAuthority } from './generated/SimpleAuthority'
 import { StabilityFeeTreasury } from './generated/StabilityFeeTreasury'
 import { StabilityFeeTreasuryFactory } from './generated/StabilityFeeTreasuryFactory'
 import { Store } from './generated/Store'
-import { TaxCollector } from './generated/TaxCollector'
 import { TestAccountingEngine } from './generated/TestAccountingEngine'
 import { TestDebtAuctionHouse } from './generated/TestDebtAuctionHouse'
 import { Tester } from './generated/Tester'
@@ -171,7 +168,6 @@ export {
     EsmFactory,
     EsmThresholdSetter,
     EthJoin,
-    EnglishCollateralAuctionHouse,
     EnglishCollateralAuctionHouseFactory,
     FaucetUser,
     FixedDiscountCollateralAuctionHouseFactory,
@@ -216,13 +212,11 @@ export {
     SafeEngineFactory,
     SafeHandler,
     Setter,
-    SettlementSurplusAuctioneer,
     SettlementSurplusAuctioneerFactory,
     SimpleAuthority,
     StabilityFeeTreasury,
     StabilityFeeTreasuryFactory,
     Store,
-    TaxCollector,
     TestAccountingEngine,
     TestDebtAuctionHouse,
     Tester,
