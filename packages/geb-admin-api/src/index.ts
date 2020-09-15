@@ -129,8 +129,12 @@ import { UniswapMedianRaiusd } from './generated/UniswapMedianRAIUSD'
 import { UniswapPriceFeedMedianizer } from './generated/UniswapPriceFeedMedianizer'
 import { Weth9 } from './generated/WETH9_'
 import { Authed } from './generated/authed'
+import { AdminApis } from './admin-apis'
 
 export {
+    // Object with all instances
+    AdminApis,
+    // Individual contracts
     AccountingEngine,
     AccountingEngineFactory,
     AggregatorInterface,

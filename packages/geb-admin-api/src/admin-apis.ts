@@ -31,7 +31,6 @@ import {
     GovActions,
     Esm,
     TokenBurner,
-    ProxyActions,
     GebProxyActionsGlobalSettlement,
     FsmGovernanceInterface,
     DsProxyFactory,
@@ -39,6 +38,8 @@ import {
     Osm,
     GebDeployPauseProxyActions,
     TxManager,
+    GebProxyActions,
+    DsValue,
 } from '.'
 import {
     GebProviderInterface,
@@ -81,12 +82,12 @@ export class AdminApis {
     public rai: Coin
     public esm: Esm
     public esmBurner: TokenBurner
-    public proxyActions: ProxyActions
+    public proxyActions: GebProxyActions
     public proxyActionsGlobalSettlement: GebProxyActionsGlobalSettlement
     public fsmGovInterface: FsmGovernanceInterface
     public proxyFactory: DsProxyFactory
-    public medianizerEth: ChainlinkMedianEthusd
-    public osm: Osm
+    public medianizerEth: ChainlinkMedianEthusd | DsValue
+    public osm: Osm | DsValue 
     public pauseProxyAction: GebDeployPauseProxyActions
     public proxyDeployer: DsProxy
     public txManager: TxManager
@@ -135,12 +136,12 @@ export class AdminApis {
         this.rai = new Coin(addressList.GEB_COIN, this.chainProvider)
         this.esm = new Esm(addressList.GEB_ESM, this.chainProvider)
         this.esmBurner = new TokenBurner(addressList.GEB_ESM_TOKEN_BURNER, this.chainProvider)
-        this.proxyActions = new ProxyActions(addressList.PROXY_ACTIONS, this.chainProvider)
+        this.proxyActions = new GebProxyActions(addressList.PROXY_ACTIONS, this.chainProvider)
         this.proxyActionsGlobalSettlement = new GebProxyActionsGlobalSettlement(addressList.PROXY_ACTIONS_GLOBAL_SETTLEMENT, this.chainProvider)
         this.fsmGovInterface = new FsmGovernanceInterface(addressList.FSM_GOV_INTERFACE, this.chainProvider)
         this.proxyFactory = new DsProxyFactory(addressList.PROXY_FACTORY, this.chainProvider)
-        this.medianizerEth = new ChainlinkMedianEthusd(addressList.MEDIANIZER_ETH, this.chainProvider)
-        this.osm = new Osm(addressList.ORACLE_SECURITY_MODULE_ETH, this.chainProvider)
+        this.medianizerEth = new DsValue(addressList.MEDIANIZER_ETH, this.chainProvider)
+        this.osm = new DsValue(addressList.ORACLE_SECURITY_MODULE_ETH, this.chainProvider)
         this.pauseProxyAction = new GebDeployPauseProxyActions(addressList.PROXY_PAUSE_ACTIONS, this.chainProvider)
         this.proxyDeployer = new DsProxy(addressList.PROXY_DEPLOYER, this.chainProvider)
         this.txManager = new TxManager(addressList.GEB_TX_MANAGER, this.chainProvider)
