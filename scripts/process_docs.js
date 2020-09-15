@@ -21,6 +21,12 @@ async function main() {
         )}`
     )
 
+    execSync(
+        `cp ${resolve('./../docs/classes/gebadmin.md')} ${resolve(
+            './../docs/gebadmin.md'
+        )}`
+    )
+
     // Add the readme as a main page
     execSync(
         `cp ${resolve('./../packages/geb/README.md')} ${resolve(
@@ -38,6 +44,7 @@ async function main() {
     cleanUpTypeDoc(resolve('./../docs/geb.md'))
     cleanUpTypeDoc(resolve('./../docs/gebproxyactions.md'))
     cleanUpTypeDoc(resolve('./../docs/safe.md'))
+    cleanUpTypeDoc(resolve('./../docs/gebadmin.md'))
 }
 
 function regexReplaceInFile(filePath, regex, replace) {

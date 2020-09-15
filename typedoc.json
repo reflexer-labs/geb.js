@@ -1,5 +1,8 @@
 {
-    "inputFiles": ["./packages/geb/src/geb.ts"],
+    "inputFiles": [
+        "./packages/geb/src/geb.ts",
+        "./packages/geb-admin/src/geb-admin.ts"
+    ],
     "exclude": ["**/*+(index|.spec|.d).ts", "**/node_modules"],
     "mode": "file",
     "readme": "none",
