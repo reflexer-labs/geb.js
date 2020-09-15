@@ -15,7 +15,6 @@ import { ethers } from 'ethers'
 import { GebError, GebErrorTypes } from './errors'
 import { GebProxyActions } from './proxy-action'
 import { NULL_ADDRESS, ETH_A } from './utils'
-import { isNumber } from 'util'
 import { Safe } from './schema/safe'
 import { BigNumber } from '@ethersproject/bignumber'
 
@@ -106,7 +105,7 @@ export class Geb {
             generatedDebt: ethers.BigNumber
         }
 
-        if (isNumber(idOrHandler)) {
+        if (typeof idOrHandler === 'number') {
             // TODO: multicall
             handler = await this.contracts.safeManager.safes(idOrHandler)
             isManaged = true
