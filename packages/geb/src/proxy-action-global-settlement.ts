@@ -15,7 +15,7 @@ import {
 } from '@reflexer-finance/geb-contract-api'
 
 /**
- * Convenience class to call function from the Proxy Action Global Settlement contract through a proxy registered in the proxy registry. It is used the same way as the `ProxyAction` class.
+ * Convenience class to call functions from the Proxy Action Global Settlement contract through a proxy registered in the proxy registry. It is used the same way as the `ProxyAction` class.
  * Useful only during global settlement (System shutdown) for users to retrieve their collateral.
  */
 export class GebProxyActionsGlobalSettlement extends GebProxyActionsGlobalSettlementGenerated {
