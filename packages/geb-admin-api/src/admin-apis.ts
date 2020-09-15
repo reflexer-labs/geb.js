@@ -1,23 +1,4 @@
 import {
-    AccountingEngine,
-    TaxCollector,
-    LiquidationEngine,
-    OracleRelayer,
-    GlobalSettlement,
-    DebtAuctionHouse,
-    PreSettlementSurplusAuctionHouse,
-    PostSettlementSurplusAuctionHouse,
-    SettlementSurplusAuctioneer,
-    Coin,
-    GebSafeManager,
-    GetSafes,
-    BasicCollateralJoin,
-    CoinJoin,
-    GebProxyRegistry,
-    EnglishCollateralAuctionHouse,
-    FixedDiscountCollateralAuctionHouse,
-    Weth9,
-    SafeEngine,
     MultiSigWallet,
     DsProxy,
     GebDeploy,
@@ -40,6 +21,7 @@ import {
     TxManager,
     GebProxyActions,
     DsValue,
+    Weth9,
 } from '.'
 import {
     GebProviderInterface,
@@ -50,23 +32,6 @@ import {
 // Container class instantiate all GEB contracts
 // prettier-ignore
 export class AdminApis {
-    public safeEngine: SafeEngine
-    public accountingEngine: AccountingEngine
-    public taxCollector: TaxCollector
-    public liquidationEngine: LiquidationEngine
-    public oracleRelayer: OracleRelayer
-    public globalSettlement: GlobalSettlement
-    public debtAuctionHouse: DebtAuctionHouse
-    public preSettlementSurplusAuctionHouse: PreSettlementSurplusAuctionHouse
-    public postSettlementSurplusAuctionHouse: PostSettlementSurplusAuctionHouse
-    public settlementSurplusAuctioneer: SettlementSurplusAuctioneer
-    public safeManager: GebSafeManager
-    public getSafes: GetSafes
-    public joinETH_A: BasicCollateralJoin
-    public joinCoin: CoinJoin
-    public coin: Coin
-    public proxyRegistry: GebProxyRegistry
-    public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse | EnglishCollateralAuctionHouse
     public weth: Weth9
     public multisigAdmin: MultiSigWallet
     public multisigAdminProxy: DsProxy
@@ -79,7 +44,6 @@ export class AdminApis {
     public pause: DsPause
     public pauseProxy: DsPauseProxy
     public govActions: GovActions
-    public rai: Coin
     public esm: Esm
     public esmBurner: TokenBurner
     public proxyActions: GebProxyActions
@@ -100,28 +64,9 @@ export class AdminApis {
     {
         // Set the address list
         let addressList = getAddressList(network)
-
-        // Instances included in contract-api
-        this.safeEngine = new SafeEngine(addressList.GEB_SAFE_ENGINE, this.chainProvider)
-        this.accountingEngine = new AccountingEngine(addressList.GEB_ACCOUNTING_ENGINE, this.chainProvider)
-        this.taxCollector = new TaxCollector(addressList.GEB_TAX_COLLECTOR, this.chainProvider)
-        this.liquidationEngine = new LiquidationEngine(addressList.GEB_LIQUIDATION_ENGINE, this.chainProvider)
-        this.oracleRelayer = new OracleRelayer(addressList.GEB_ORACLE_RELAYER, this.chainProvider)
-        this.globalSettlement = new GlobalSettlement(addressList.GEB_GLOBAL_SETTLEMENT, this.chainProvider)
-        this.debtAuctionHouse = new DebtAuctionHouse(addressList.GEB_DEBT_AUCTION_HOUSE, this.chainProvider)
-        this.preSettlementSurplusAuctionHouse = new PreSettlementSurplusAuctionHouse(addressList.GEB_PRE_SETTLEMENT_SURPLUS_AUCTION_HOUSE, this.chainProvider)
-        this.postSettlementSurplusAuctionHouse = new PostSettlementSurplusAuctionHouse(addressList.GEB_POST_SETTLEMENT_SURPLUS_AUCTION_HOUSE, this.chainProvider)
-        this.settlementSurplusAuctioneer = new SettlementSurplusAuctioneer(addressList.GEB_SETTLEMENT_SURPLUS_AUCTIONEER, this.chainProvider)
-        this.safeManager = new GebSafeManager(addressList.SAFE_MANAGER, this.chainProvider)
-        this.getSafes = new GetSafes(addressList.GET_SAFES, this.chainProvider)
-        this.joinETH_A = new BasicCollateralJoin(addressList.GEB_JOIN_ETH_A, this.chainProvider)
-        this.joinCoin = new CoinJoin(addressList.GEB_COIN_JOIN, this.chainProvider)
-        this.coin = new Coin(addressList.GEB_COIN, this.chainProvider)
-        this.proxyRegistry = new GebProxyRegistry(addressList.PROXY_REGISTRY, this.chainProvider)
-        this.collateralAuctionHouseETH_A = new FixedDiscountCollateralAuctionHouse(addressList.GEB_COLLATERAL_AUCTION_HOUSE_ETH_A, this.chainProvider)
-        this.weth = new Weth9(addressList.ETH, this.chainProvider)
-
+        
         // Additional instances only in admin package
+        this.weth = new Weth9(addressList.ETH, this.chainProvider)
         this.multisigAdmin = new MultiSigWallet(addressList.GEB_MULTISIG, this.chainProvider)
         this.multisigAdminProxy = new DsProxy(addressList.GEB_MULTISIG_PROXY, this.chainProvider)
         this.deploy = new GebDeploy(addressList.GEB_DEPLOY, this.chainProvider)
@@ -133,7 +78,6 @@ export class AdminApis {
         this.pause = new DsPause(addressList.GEB_PAUSE, this.chainProvider)
         this.pauseProxy = new DsPauseProxy(addressList.GEB_PAUSE_PROXY, this.chainProvider)
         this.govActions = new GovActions(addressList.GEB_GOV_ACTIONS, this.chainProvider)
-        this.rai = new Coin(addressList.GEB_COIN, this.chainProvider)
         this.esm = new Esm(addressList.GEB_ESM, this.chainProvider)
         this.esmBurner = new TokenBurner(addressList.GEB_ESM_TOKEN_BURNER, this.chainProvider)
         this.proxyActions = new GebProxyActions(addressList.PROXY_ACTIONS, this.chainProvider)
