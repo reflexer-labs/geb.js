@@ -49,7 +49,7 @@ export class Geb {
     protected provider: GebProviderInterface
     protected addresses: ContractList
     /**
-     * @param  {GebDeployment} network Either `'kovan'`, `'mainnet'` or an actual list of contract address from the deployment script.
+     * @param  {GebDeployment} network Either `'kovan'`, `'mainnet'` or an actual list of contract addresses.
      * @param  {GebProviderInterface|ethers.providers.Provider} provider Either a Ethers.js provider or a Geb provider (Soon support for Web3 will be added)
      */
     constructor(
@@ -74,7 +74,7 @@ export class Geb {
     }
 
     /**
-     * Given an address returns a GebProxyAction object to execute bundled operations.
+     * Given an address returns a GebProxyActions object to execute bundled operations.
      * Important: This requires the address to have deployed a GEB proxy through the proxy registry contract. It will throw a `DOES_NOT_OWN_HAVE_PROXY` error if the address specified does not have a proxy. Use the [[deployProxy]] function to get a new proxy.
      * @param ownerAddress Externally owned user account, Ethereum address that owns a GEB proxy.
      */
@@ -113,8 +113,8 @@ export class Geb {
     }
 
     /**
-     * Get the safe object
-     * @param idOrHandler Safe Id or Safe handler
+     * Get the SAFE object
+     * @param idOrHandler Safe Id or SAFE handler
      */
     public async getSafe(idOrHandler: string | number) {
         let handler: string
@@ -167,11 +167,11 @@ export class Geb {
      * const USDCAddress = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
      * const USDC = geb.getErc20Contract(USDCAddress)
      *
-     * // Get deadbeef's balance
-     * const balance = USDC.balanceOf("0xdeadbeef..")
+     * // Get defiisawesome's balance
+     * const balance = USDC.balanceOf("0xdefiisawesome..")
      *
-     * // Send 1 USDC to deadbeef (Yes, USDC is 6 decimals)
-     * const tx = USDC.transfer("0xdeadbeef..", "1000000")
+     * // Send 1 USDC to defiisawesome (USDC is 6 decimals)
+     * const tx = USDC.transfer("0xdefiisawesome..", "1000000")
      * await wallet.sendTransaction(tx)
      * ```
      *

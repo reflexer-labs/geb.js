@@ -7,16 +7,16 @@ import {
 import { ethers } from 'ethers'
 
 /**
- * This class extends the `Geb` class with additional tools and contracts that are not considered core to the system. Core contracts are mostly the contracts located in the [`geb`](https://github.com/reflexer-labs/geb) repo.
- * Here you will find all remaining contracts of the system such as OSM, Governance, Pause, etc.. These contracts are scattered across several repositories. Please refer to the smart contract documentation to learn how to use them.
+ * This class extends the core `GEB` class with additional tools and contracts that are not used as often as other SAFE management tools.
+ * Here you will find utils for contracts such as DSPause, ESM etc. These contracts are scattered across several repositories. Please refer to the smart contract documentation to learn more about them.
  *
- * **Important:** To avoid bloating the main [geb.js](https://www.npmjs.com/package/geb.js) package this class is only available in a [separated package](https://www.npmjs.com/package/@reflexer-finance/geb-admin).
+ * **IMPORTANT:** To avoid bloating the main [geb.js](https://www.npmjs.com/package/geb.js) package this class is only available in a [separate package](https://www.npmjs.com/package/@reflexer-finance/geb-admin).
  * Please install it like this:
  * ```
  * npm install @reflexer-finance/geb-admin
  * ```
  *
- * And you are ready to use the admin class similarly to the Geb class. (Note that you don't need to install the geb.js package separately)
+ * And you are ready to use the admin tools similar to the GEB class:
  *
  * ```typescript
  * import { ethers } from 'ethers'
@@ -29,27 +29,21 @@ import { ethers } from 'ethers'
 export class GebAdmin extends Geb {
     /**
      * Object containing all GEB admin contracts instances for low level interactions.
-     * Currently has the following contracts:
-     * - Weth9
+     * It currently has the following contracts:
      * - MultiSigWallet
      * - DsProxy
-     * - GebDeploy
      * - DsToken
      * - ProtocolTokenAuthority
      * - GebPollingEmitter
      * - GebPrintingPermissions
-     * - DsRecursiveRoles
+     * - DsDelegateRoles
      * - DsPause
      * - DsPauseProxy
      * - GovActions
-     * - Esm
+     * - ESM
      * - TokenBurner
-     * - GebProxyActions
-     * - GebProxyActionsGlobalSettlement
      * - FsmGovernanceInterface
      * - DsProxyFactory
-     * - ChainlinkMedianEthusd or DsValue
-     * - Osm or DsValue
      * - GebDeployPauseProxyActions
      * - DsProxy
      * - TxManager
@@ -57,8 +51,8 @@ export class GebAdmin extends Geb {
     public contractsAdmin: AdminApis
 
     /**
-     * @param  {GebDeployment} network Either `'kovan'`, `'mainnet'` or an actual list of contract address from the deployment script.
-     * @param  {GebProviderInterface|ethers.providers.Provider} provider Either a Ethers.js provider or a Geb provider (Soon support for Web3 will be added)
+     * @param  {GebDeployment} network Either `'kovan'`, `'mainnet'` or an actual list of contract addresses.
+     * @param  {GebProviderInterface|ethers.providers.Provider} provider Either a Ethers.js provider or a GEB provider. Support for Web3.js will soon be added.
      */
     constructor(
         network: GebDeployment,

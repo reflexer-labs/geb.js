@@ -33,7 +33,7 @@ import { Geb, utils } from 'geb.js'
 const provider = new ethers.providers.JsonRpcProvider(
     'http://kovan.infura.io/<API KEY>'
 )
-const wallet = new ethers.Wallet('0xdeadbeef...', provider)
+const wallet = new ethers.Wallet('0xdefiisawesome...', provider)
 
 // Create the main GEB object
 const geb = new Geb('kovan', provider)
@@ -72,7 +72,7 @@ const surplusBuffer = await geb.contracts.accountingEngine.surplusBuffer()
 const { stabilityFee } = await geb.contracts.taxCollector.collateralTypes(utils.ETH_A)
 
 // Liquidate a Safe
-const tx = geb.contracts.liquidationEngine.liquidateSAFE(utils.ETH_A,"0xdeadbeef..");
+const tx = geb.contracts.liquidationEngine.liquidateSAFE(utils.ETH_A,"0xdefiisawesome..");
 await wallet.sendTransaction(tx)
 ```
 
