@@ -3,7 +3,7 @@ import { ContractApis } from '@reflexer-finance/geb-contract-api'
 import { RAY, ETH_A } from '../utils'
 
 /**
- * Represent a GEB safe. Has the safe state and provide helper function to calculate liquidation price, CRatio, etc...
+ * This object represents a GEB safe. It has the entire SAFE state and provides helper functions to calculate its liquidation price, collateralization ratio etc.
  */
 export class Safe {
     constructor(
@@ -32,7 +32,7 @@ export class Safe {
     ) {}
 
     /**
-     * Ratio used to calculate the amount of debt that can be drawn. Returns null is ratio is +Infinity. Uses unsafe division that can lead to precision loss.
+     * Ratio used to calculate the amount of debt that can be drawn. Returns null is ratio is +Infinity. !! Uses unsafe division that can lead to precision loss.
      * @returns Promise<FixedNumber> CRatio
      */
     public async getCRatio(): Promise<FixedNumber | null> {
@@ -55,7 +55,7 @@ export class Safe {
     }
 
     /**
-     * Ratio used for liquidation. If LRatio = 1 you can get liquidated, the greater LRatio the safer your safe is. !! Use unsafe division leading to precision loss.
+     * Ratio used for liquidating the SAFE. If LRatio <= 1 you can get liquidated, the greater LRatio the safer your safe is. Uses unsafe division which leads to precision loss.
      * @returns Promise<FixedNumber> LRatio
      */
     public async getLRatio(): Promise<FixedNumber | null> {
@@ -78,7 +78,7 @@ export class Safe {
     }
 
     /**
-     * Price at which the safe would get liquidated.
+     * Price at which the SAFE will get liquidated.
      * @returns <FixedNumber> Liquidation price
      */
     public async liquidationPrice(): Promise<FixedNumber | null> {

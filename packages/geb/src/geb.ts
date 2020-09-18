@@ -20,13 +20,13 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { GebProxyActionsGlobalSettlement } from './proxy-action-global-settlement'
 
 /**
- * Main object of the library instantiating all useful GEB contracts and providing all helper functions needed.
+ * The main package used to interact with the core GEB contracts.
  */
 export class Geb {
     /**
      * Object containing all GEB core contracts instances for low level interactions. All contracts object offer a one-to-one typed API to the underlying smart-contract.
      * Currently has the following contracts:
-     * - SafeEngine
+     * - SAFEEngine
      * - AccountingEngine
      * - TaxCollector
      * - LiquidationEngine
@@ -89,7 +89,7 @@ export class Geb {
 
     /**
      * Given an address returns a GebProxyActionsGlobalSettlement object to execute bundled operations during GlobalSettlement.
-     * Important: Same as for `getProxyAction` it requires a proxy deploy through the registry.
+     * **IMPORTANT**: Same as for `getProxyAction` you will need to deploy a proxy beforehand using the proxy registry.
      * @param ownerAddress Externally owned user account, Ethereum address that owns a GEB proxy.
      */
     public async getProxyActionGlobalSettlement(ownerAddress: string) {
@@ -167,10 +167,10 @@ export class Geb {
      * const USDCAddress = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
      * const USDC = geb.getErc20Contract(USDCAddress)
      *
-     * // Get defiisawesome's balance
+     * // Get 0xdefiisawesome's balance
      * const balance = USDC.balanceOf("0xdefiisawesome..")
      *
-     * // Send 1 USDC to defiisawesome (USDC is 6 decimals)
+     * // Send 1 USDC to 0xdefiisawesome (USDC is 6 decimals)
      * const tx = USDC.transfer("0xdefiisawesome..", "1000000")
      * await wallet.sendTransaction(tx)
      * ```
@@ -208,7 +208,7 @@ export class Geb {
     /**
      * Bundles several read only GEB contract call into 1 RPC single request. Useful for front-ends or apps that need to fetch many parameters from the contracts but want to minimize the network request and the load on the underlying Ethereum node.
      * The function takes as input an Array of GEB view contract calls.
-     * IMPORTANT: You have to set the `multicall` parameter of the contract function to `true`, it is the always the last parameter of the function.
+     * **IMPORTANT**: You have to set the `multicall` parameter of the contract function to `true`, it is the always the last parameter of the function.
      * Multicall works for all contracts in the `Geb.contracts` and can be use with any contract that inherit the `BaseContractApi`. Note that it does not support non-view calls (Calls that require to pay gas and change the state of the blockchain).
      *
      * Example:
@@ -227,7 +227,7 @@ export class Geb {
      * console.log(`Current global debt: ${globalDebt.toString()}`)
      * console.log(`Current ETH_A debt: ${collateralInfo.debtAmount}`)
      * ```
-     * @param  {MulticallRequest<T>[]} calls Return value from a view GEB contract call. !! The GEB contract object needs to be call with the parameter `multicall` set to `true`, see example above.
+     * @param  {MulticallRequest<T>[]} calls Call a read only GEB contract function. The GEB contract object needs to be called with the parameter `multicall` set to `true` as seen in the example above.
      * @returns Promise<T[]> Array with the result from their respective requests.
      */
     public async multiCall<T>(calls: MulticallRequest<T>[]): Promise<T[]> {
