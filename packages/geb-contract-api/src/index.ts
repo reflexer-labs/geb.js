@@ -23,11 +23,14 @@ import { TaxCollector } from './generated/TaxCollector'
 import { Weth } from './generated/WETH'
 import { GebProxyActions } from './generated/GebProxyActions'
 import { GebProxyActionsGlobalSettlement } from './generated/GebProxyActionsGlobalSettlement'
+import { ChainlinkMedianEthusd } from './generated/ChainlinkMedianETHUSD'
 import { DsToken } from './generated/DSToken'
 import { Erc20 } from './generated/ERC20'
 
 import { ContractApis } from './contract-apis'
 import { Multicall } from './generated/Multicall'
+import { DsValue } from './generated/DSValue'
+import { Osm } from './generated/OSM'
 
 export {
     // Factory
@@ -61,4 +64,7 @@ export {
     Multicall,
     DsToken,
     Erc20,
+    Osm,
+    DsValue,
+    ChainlinkMedianEthusd,
 }

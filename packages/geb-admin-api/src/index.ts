@@ -3,7 +3,6 @@ import { AggregatorInterface } from './generated/AggregatorInterface'
 import { AuthCollateralJoin } from './generated/AuthCollateralJoin'
 import { AuthorizableContract } from './generated/AuthorizableContract'
 import { BurntToken } from './generated/BurntToken'
-import { ChainlinkMedianEthusd } from './generated/ChainlinkMedianETHUSD'
 import { ChainlinkMedianFlxusd } from './generated/ChainlinkMedianFLXUSD'
 import { ChainlinkMedianRaiusd } from './generated/ChainlinkMedianRAIUSD'
 import { ChainlinkPriceFeedMedianizer } from './generated/ChainlinkPriceFeedMedianizer'
@@ -40,7 +39,6 @@ import { DsRoles } from './generated/DSRoles'
 import { DsStop } from './generated/DSStop'
 import { DsThing } from './generated/DSThing'
 import { DsTokenBase } from './generated/DSTokenBase'
-import { DsValue } from './generated/DSValue'
 import { DebtAuctionHouseFactory } from './generated/DebtAuctionHouseFactory'
 import { Erc20Events } from './generated/ERC20Events'
 import { Esm } from './generated/ESM'
@@ -75,7 +73,6 @@ import { MockDebtAuctionHouse } from './generated/MockDebtAuctionHouse'
 import { MockSurplusAuctionHouse } from './generated/MockSurplusAuctionHouse'
 import { MultiSigWallet } from './generated/MultiSigWallet'
 import { NotThrowingToken } from './generated/NotThrowingToken'
-import { Osm } from './generated/OSM'
 import { OracleRelayerFactory } from './generated/OracleRelayerFactory'
 import { PauseFactory } from './generated/PauseFactory'
 import { PostSettlementSurplusAuctionHouseFactory } from './generated/PostSettlementSurplusAuctionHouseFactory'
@@ -112,7 +109,6 @@ export {
     AuthCollateralJoin,
     AuthorizableContract,
     BurntToken,
-    ChainlinkMedianEthusd,
     ChainlinkMedianFlxusd,
     ChainlinkMedianRaiusd,
     ChainlinkPriceFeedMedianizer,
@@ -149,7 +145,6 @@ export {
     DsStop,
     DsThing,
     DsTokenBase,
-    DsValue,
     DebtAuctionHouseFactory,
     Erc20Events,
     Esm,
@@ -184,7 +179,6 @@ export {
     MockSurplusAuctionHouse,
     MultiSigWallet,
     NotThrowingToken,
-    Osm,
     OracleRelayerFactory,
     PauseFactory,
     PostSettlementSurplusAuctionHouseFactory,

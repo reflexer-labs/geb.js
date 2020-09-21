@@ -12,11 +12,8 @@ import {
     TokenBurner,
     FsmGovernanceInterface,
     DsProxyFactory,
-    ChainlinkMedianEthusd,
-    Osm,
     GebDeployPauseProxyActions,
     TxManager,
-    DsValue,
 } from '.'
 import {
     GebProviderInterface,
@@ -43,8 +40,6 @@ export class AdminApis {
     public esmBurner: TokenBurner
     public fsmGovInterface: FsmGovernanceInterface
     public proxyFactory: DsProxyFactory
-    public medianizerEth: ChainlinkMedianEthusd | DsValue
-    public osm: Osm | DsValue 
     public pauseProxyAction: GebDeployPauseProxyActions
     public proxyDeployer: DsProxy
     public txManager: TxManager
@@ -73,8 +68,6 @@ export class AdminApis {
         this.esmBurner = new TokenBurner(addressList.GEB_ESM_TOKEN_BURNER, this.chainProvider)
         this.fsmGovInterface = new FsmGovernanceInterface(addressList.FSM_GOV_INTERFACE, this.chainProvider)
         this.proxyFactory = new DsProxyFactory(addressList.PROXY_FACTORY, this.chainProvider)
-        this.medianizerEth = new DsValue(addressList.MEDIANIZER_ETH, this.chainProvider)
-        this.osm = new DsValue(addressList.ORACLE_SECURITY_MODULE_ETH, this.chainProvider)
         this.pauseProxyAction = new GebDeployPauseProxyActions(addressList.PROXY_PAUSE_ACTIONS, this.chainProvider)
         this.proxyDeployer = new DsProxy(addressList.PROXY_DEPLOYER, this.chainProvider)
         this.txManager = new TxManager(addressList.GEB_TX_MANAGER, this.chainProvider)
