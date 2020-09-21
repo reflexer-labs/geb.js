@@ -14,7 +14,7 @@ import { GebEthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import { ethers } from 'ethers'
 import { GebError, GebErrorTypes } from './errors'
 import { GebProxyActions } from './proxy-action'
-import { NULL_ADDRESS, ETH_A } from './utils'
+import { NULL_ADDRESS } from './utils'
 import { Safe } from './schema/safe'
 import { BigNumber } from '@ethersproject/bignumber'
 import { GebProxyActionsGlobalSettlement } from './proxy-action-global-settlement'
@@ -116,7 +116,10 @@ export class Geb {
      * Get the SAFE object
      * @param idOrHandler Safe Id or SAFE handler
      */
-    public async getSafe(idOrHandler: string | number) {
+    public async getSafe(
+        idOrHandler: string | number,
+        collateralType?: string
+    ) {
         let handler: string
         let isManaged: boolean
         let safeData: {
@@ -125,15 +128,42 @@ export class Geb {
         }
 
         if (typeof idOrHandler === 'number') {
-            // TODO: multicall
-            handler = await this.contracts.safeManager.safes(idOrHandler)
+            if (collateralType) {
+                throw new GebError(
+                    GebErrorTypes.INVALID_FUNCTION_INPUT,
+                    'Do not specify a collateral type when providing a SAFE Id.'
+                )
+            }
+
             isManaged = true
-            safeData = await this.contracts.safeEngine.safes(ETH_A, handler)
+            ;[handler, collateralType] = await this.multiCall([
+                this.contracts.safeManager.safes(idOrHandler, true),
+                this.contracts.safeManager.collateralTypes(idOrHandler, true),
+            ])
+
+            if (handler === NULL_ADDRESS) {
+                throw new GebError(
+                    GebErrorTypes.SAFE_DOES_NOT_EXIST,
+                    `Safe id ${idOrHandler} does not exist`
+                )
+            }
+
+            safeData = await this.contracts.safeEngine.safes(
+                collateralType,
+                handler
+            )
         } else {
+            if (!collateralType) {
+                throw new GebError(
+                    GebErrorTypes.INVALID_FUNCTION_INPUT,
+                    'Collateral type needs to be specified when providing a SAFE handler'
+                )
+            }
+
             handler = idOrHandler
             let safeRights: BigNumber
             ;[safeData, safeRights] = await this.multiCall([
-                this.contracts.safeEngine.safes(ETH_A, handler, true),
+                this.contracts.safeEngine.safes(collateralType, handler, true),
                 this.contracts.safeEngine.safeRights(
                     handler,
                     this.contracts.safeManager.address,
@@ -144,18 +174,13 @@ export class Geb {
             // If SafeManager has right over the safe, it's a managed safe
             isManaged = !safeRights.isZero()
             handler = idOrHandler
-            safeData = await this.contracts.safeEngine.safes(ETH_A, handler)
-            isManaged = !!(await this.contracts.safeEngine.safeRights(
-                handler,
-                this.contracts.safeManager.address
-            ))
         }
         return new Safe(
             this.contracts,
             handler,
             safeData.generatedDebt,
             safeData.lockedCollateral,
-            ETH_A,
+            collateralType,
             isManaged
         )
     }

@@ -1,6 +1,6 @@
 import { BigNumber, FixedNumber } from '@ethersproject/bignumber'
 import { ContractApis } from '@reflexer-finance/geb-contract-api'
-import { RAY, ETH_A } from '../utils'
+import { RAY } from '../utils'
 
 /**
  * This object represents a GEB safe. It has the entire SAFE state and provides helper functions to calculate its liquidation price, collateralization ratio etc.
@@ -47,7 +47,7 @@ export class Safe {
         const {
             accumulatedRate,
             safetyPrice,
-        } = await this.contracts.safeEngine.collateralTypes(ETH_A)
+        } = await this.contracts.safeEngine.collateralTypes(this.collateralType)
 
         return FixedNumber.from(this.collateral.mul(safetyPrice)).divUnsafe(
             FixedNumber.from(this.debt.mul(accumulatedRate))
@@ -70,7 +70,7 @@ export class Safe {
         const {
             accumulatedRate,
             liquidationPrice,
-        } = await this.contracts.safeEngine.collateralTypes(ETH_A)
+        } = await this.contracts.safeEngine.collateralTypes(this.collateralType)
 
         return FixedNumber.from(
             this.collateral.mul(liquidationPrice)
@@ -92,10 +92,12 @@ export class Safe {
 
         const {
             accumulatedRate,
-        } = await this.contracts.safeEngine.collateralTypes(ETH_A)
+        } = await this.contracts.safeEngine.collateralTypes(this.collateralType)
         const redemptionPrice = await this.contracts.oracleRelayer.redemptionPrice_readOnly()
         const liqCRatio = (
-            await this.contracts.oracleRelayer.collateralTypes(ETH_A)
+            await this.contracts.oracleRelayer.collateralTypes(
+                this.collateralType
+            )
         ).liquidationCRatio
 
         // Formula:

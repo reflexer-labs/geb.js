@@ -2,7 +2,7 @@ import { ethers } from 'ethers'
 import assert from 'assert'
 
 import { ETH_A, NULL_ADDRESS, ONE_ADDRESS } from '../const'
-import { Geb } from 'geb.js'
+import { Geb, GebErrorTypes } from 'geb.js'
 import { sethCall } from '../utils'
 import {
     GebProviderInterface,
@@ -109,10 +109,21 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             assert.equal(safe.collateral.toString(), expected[0])
         })
 
+        it('Get safe by id error', async () => {
+            const safeId = (await geb.contracts.safeManager.safei()).add(1)
+
+            try {
+                await geb.getSafe(safeId.toNumber())
+                assert.fail()
+            } catch (err) {
+                assert.equal(err.code, GebErrorTypes.SAFE_DOES_NOT_EXIST)
+            }
+        })
+
         it('Get safe owner by manager with handler', async () => {
             const handler = await geb.contracts.safeManager.safes(1)
 
-            const safe = await geb.getSafe(handler)
+            const safe = await geb.getSafe(handler, ETH_A)
 
             assert.equal(safe.collateralType, ETH_A)
             assert.equal(safe.handler, handler, 'handler')
