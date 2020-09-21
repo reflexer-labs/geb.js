@@ -33,14 +33,12 @@ import { DsGuardEvents } from './generated/DSGuardEvents'
 import { DsGuardFactory } from './generated/DSGuardFactory'
 import { DsPause } from './generated/DSPause'
 import { DsPauseProxy } from './generated/DSPauseProxy'
-import { DsProxy } from './generated/DSProxy'
 import { DsProxyCache } from './generated/DSProxyCache'
 import { DsProxyFactory } from './generated/DSProxyFactory'
 import { DsRecursiveRoles } from './generated/DSRecursiveRoles'
 import { DsRoles } from './generated/DSRoles'
 import { DsStop } from './generated/DSStop'
 import { DsThing } from './generated/DSThing'
-import { DsToken } from './generated/DSToken'
 import { DsTokenBase } from './generated/DSTokenBase'
 import { DsValue } from './generated/DSValue'
 import { DebtAuctionHouseFactory } from './generated/DebtAuctionHouseFactory'
@@ -102,7 +100,6 @@ import { TxManager } from './generated/TxManager'
 import { UniswapMedianFlxusd } from './generated/UniswapMedianFLXUSD'
 import { UniswapMedianRaiusd } from './generated/UniswapMedianRAIUSD'
 import { UniswapPriceFeedMedianizer } from './generated/UniswapPriceFeedMedianizer'
-import { Weth9 } from './generated/WETH9_'
 import { Authed } from './generated/authed'
 import { AdminApis } from './admin-apis'
 
@@ -145,14 +142,12 @@ export {
     DsGuardFactory,
     DsPause,
     DsPauseProxy,
-    DsProxy,
     DsProxyCache,
     DsProxyFactory,
     DsRecursiveRoles,
     DsRoles,
     DsStop,
     DsThing,
-    DsToken,
     DsTokenBase,
     DsValue,
     DebtAuctionHouseFactory,
@@ -214,6 +209,5 @@ export {
     UniswapMedianFlxusd,
     UniswapMedianRaiusd,
     UniswapPriceFeedMedianizer,
-    Weth9,
     Authed,
 }

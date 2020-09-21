@@ -1,8 +1,6 @@
 import {
     MultiSigWallet,
-    DsProxy,
     GebDeploy,
-    DsToken,
     ProtocolTokenAuthority,
     GebPollingEmitter,
     DsRecursiveRoles,
@@ -19,7 +17,6 @@ import {
     GebDeployPauseProxyActions,
     TxManager,
     DsValue,
-    Weth9,
 } from '.'
 import {
     GebProviderInterface,
@@ -27,15 +24,15 @@ import {
     getAddressList,
 } from '@reflexer-finance/geb-contract-base'
 
+import { DsProxy } from '@reflexer-finance/geb-contract-api'
+
 // Container class instantiate all GEB contracts
 // prettier-ignore
 export class AdminApis {
-    public weth: Weth9
     public multisigAdmin: MultiSigWallet
     public multisigAdminProxy: DsProxy
     public deploy : GebDeploy
-    public flx: DsToken
-    public flxAuthority: ProtocolTokenAuthority
+    public protocolTokenAuthority: ProtocolTokenAuthority
     public pollingEmitter: GebPollingEmitter
     public printingPermissionRegistry: GebPrintingPermissions
     public pauseAuthority: DsRecursiveRoles
@@ -62,12 +59,10 @@ export class AdminApis {
         let addressList = getAddressList(network)
         
         // Additional instances only in admin package
-        this.weth = new Weth9(addressList.ETH, this.chainProvider)
         this.multisigAdmin = new MultiSigWallet(addressList.GEB_MULTISIG, this.chainProvider)
         this.multisigAdminProxy = new DsProxy(addressList.GEB_MULTISIG_PROXY, this.chainProvider)
         this.deploy = new GebDeploy(addressList.GEB_DEPLOY, this.chainProvider)
-        this.flx = new DsToken(addressList.GEB_PROT, this.chainProvider)
-        this.flxAuthority = new ProtocolTokenAuthority(addressList.PROTOCOL_TOKEN_AUTHORITY, this.chainProvider)
+        this.protocolTokenAuthority = new ProtocolTokenAuthority(addressList.PROTOCOL_TOKEN_AUTHORITY, this.chainProvider)
         this.pollingEmitter = new GebPollingEmitter(addressList.GEB_POLLING_EMITTER, this.chainProvider)
         this.pauseAuthority = new DsRecursiveRoles(addressList.GEB_PAUSE_AUTHORITY, this.chainProvider)
         this.printingPermissionRegistry = new GebPrintingPermissions(addressList.PRINTING_PERMISSIONS_REGISTRY, this.chainProvider)

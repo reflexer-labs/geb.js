@@ -16,6 +16,7 @@ import {
     GebProxyRegistry,
     EnglishCollateralAuctionHouse,
     FixedDiscountCollateralAuctionHouse,
+    DsToken,
     Weth,
     SafeEngine,
 } from '.'
@@ -45,6 +46,7 @@ export class ContractApis {
     public coin: Coin
     public proxyRegistry: GebProxyRegistry
     public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse | EnglishCollateralAuctionHouse
+    public protocolToken: DsToken
     public weth: Weth
 
     constructor(
@@ -72,6 +74,7 @@ export class ContractApis {
         this.coin = new Coin(addressList.GEB_COIN, this.chainProvider)
         this.proxyRegistry = new GebProxyRegistry(addressList.PROXY_REGISTRY, this.chainProvider)
         this.collateralAuctionHouseETH_A = new FixedDiscountCollateralAuctionHouse(addressList.GEB_COLLATERAL_AUCTION_HOUSE_ETH_A, this.chainProvider)
+        this.protocolToken = new DsToken(addressList.GEB_PROT, this.chainProvider)
         this.weth = new Weth(addressList.ETH, this.chainProvider)
     }
 }
