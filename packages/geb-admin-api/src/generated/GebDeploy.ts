@@ -221,12 +221,11 @@ export class GebDeploy extends BaseContractAPI {
         adapter: string,
         collateralOSM: string,
         collateralMedian: string,
-        systemCoinOracle: string,
-        bidToMarketPriceRatio: BigNumberish
+        systemCoinOracle: string
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"auctionHouseType","type":"bytes32"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"adapter","type":"address"},{"internalType":"address","name":"collateralOSM","type":"address"},{"internalType":"address","name":"collateralMedian","type":"address"},{"internalType":"address","name":"systemCoinOracle","type":"address"},{"internalType":"uint256","name":"bidToMarketPriceRatio","type":"uint256"}],"name":"deployCollateral","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"auctionHouseType","type":"bytes32"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"adapter","type":"address"},{"internalType":"address","name":"collateralOSM","type":"address"},{"internalType":"address","name":"collateralMedian","type":"address"},{"internalType":"address","name":"systemCoinOracle","type":"address"}],"name":"deployCollateral","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             auctionHouseType,
@@ -235,7 +234,6 @@ export class GebDeploy extends BaseContractAPI {
             collateralOSM,
             collateralMedian,
             systemCoinOracle,
-            bidToMarketPriceRatio,
         ])
     }
 
@@ -253,6 +251,22 @@ export class GebDeploy extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"uint256","name":"delay","type":"uint256"},{"internalType":"contract DSAuthority","name":"authority","type":"address"}],"name":"deployPause","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [delay, authority])
+    }
+
+    deployProtestPause(
+        protesterLifetime: BigNumberish,
+        delay: BigNumberish,
+        authority: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"protesterLifetime","type":"uint256"},{"internalType":"uint256","name":"delay","type":"uint256"},{"internalType":"contract DSAuthority","name":"authority","type":"address"}],"name":"deployProtestPause","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            protesterLifetime,
+            delay,
+            authority,
+        ])
     }
 
     deploySAFEEngine(): TransactionRequest {
@@ -523,6 +537,28 @@ export class GebDeploy extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
+    protestPause(): Promise<string>
+    protestPause(multicall: true): MulticallRequest<string>
+    protestPause(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"protestPause","outputs":[{"internalType":"contract DSProtestPause","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    protestPauseFactory(): Promise<string>
+    protestPauseFactory(multicall: true): MulticallRequest<string>
+    protestPauseFactory(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"protestPauseFactory","outputs":[{"internalType":"contract ProtestPauseFactory","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     releaseAuth(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -634,14 +670,16 @@ export class GebDeploy extends BaseContractAPI {
 
     setThirdFactoryBatch(
         pauseFactory_: string,
+        protestPauseFactory_: string,
         stabilityFeeTreasuryFactory_: string
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"contract PauseFactory","name":"pauseFactory_","type":"address"},{"internalType":"contract StabilityFeeTreasuryFactory","name":"stabilityFeeTreasuryFactory_","type":"address"}],"name":"setThirdFactoryBatch","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"contract PauseFactory","name":"pauseFactory_","type":"address"},{"internalType":"contract ProtestPauseFactory","name":"protestPauseFactory_","type":"address"},{"internalType":"contract StabilityFeeTreasuryFactory","name":"stabilityFeeTreasuryFactory_","type":"address"}],"name":"setThirdFactoryBatch","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             pauseFactory_,
+            protestPauseFactory_,
             stabilityFeeTreasuryFactory_,
         ])
     }

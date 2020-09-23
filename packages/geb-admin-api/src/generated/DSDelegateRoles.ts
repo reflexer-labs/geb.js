@@ -7,7 +7,7 @@ import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
 import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 
-export class DsRecursiveRoles extends BaseContractAPI {
+export class DsDelegateRoles extends BaseContractAPI {
     authority(): Promise<string>
     authority(multicall: true): MulticallRequest<string>
     authority(multicall?: true): Promise<string> | MulticallRequest<string> {

@@ -205,6 +205,30 @@ export class OracleRelayer extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
+    redemptionRateLowerBound(): Promise<BigNumber>
+    redemptionRateLowerBound(multicall: true): MulticallRequest<BigNumber>
+    redemptionRateLowerBound(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"redemptionRateLowerBound","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    redemptionRateUpperBound(): Promise<BigNumber>
+    redemptionRateUpperBound(multicall: true): MulticallRequest<BigNumber>
+    redemptionRateUpperBound(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"redemptionRateUpperBound","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     /**
      * Remove auth from an account
      * @param account Account to remove auth from

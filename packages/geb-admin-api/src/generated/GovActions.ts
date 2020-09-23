@@ -44,6 +44,40 @@ export class GovActions extends BaseContractAPI {
         ])
     }
 
+    modifyTwoParameters(
+        targetContract1: string,
+        targetContract2: string,
+        parameter1: BytesLike,
+        parameter2: BytesLike,
+        data1: BigNumberish,
+        data2: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract1","type":"address"},{"internalType":"address","name":"targetContract2","type":"address"},{"internalType":"bytes32","name":"parameter1","type":"bytes32"},{"internalType":"bytes32","name":"parameter2","type":"bytes32"},{"internalType":"uint256","name":"data1","type":"uint256"},{"internalType":"uint256","name":"data2","type":"uint256"}],"name":"modifyTwoParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            targetContract1,
+            targetContract2,
+            parameter1,
+            parameter2,
+            data1,
+            data2,
+        ])
+    }
+
+    multiSetAllowance(
+        join: string,
+        accounts: string[],
+        allowances: BigNumberish[]
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"join","type":"address"},{"internalType":"address[]","name":"accounts","type":"address[]"},{"internalType":"uint256[]","name":"allowances","type":"uint256[]"}],"name":"multiSetAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [join, accounts, allowances])
+    }
+
     removeAuthorization(
         targetContract: string,
         to: string
@@ -53,6 +87,36 @@ export class GovActions extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"address","name":"to","type":"address"}],"name":"removeAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [targetContract, to])
+    }
+
+    removeAuthorizationAndModify(
+        targetContract: string,
+        to: string,
+        parameter: BytesLike,
+        data: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"removeAuthorizationAndModify","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            targetContract,
+            to,
+            parameter,
+            data,
+        ])
+    }
+
+    setAllowance(
+        join: string,
+        account: string,
+        allowance: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"join","type":"address"},{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"allowance","type":"uint256"}],"name":"setAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [join, account, allowance])
     }
 
     setAuthority(pause: string, newAuthority: string): TransactionRequest {
@@ -81,6 +145,25 @@ export class GovActions extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"uint256","name":"newDelay","type":"uint256"}],"name":"setDelay","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [pause, newDelay])
+    }
+
+    setDelayMultiplier(
+        pause: string,
+        delayMultiplier: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"uint256","name":"delayMultiplier","type":"uint256"}],"name":"setDelayMultiplier","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [pause, delayMultiplier])
+    }
+
+    setProtester(pause: string, protester: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"protester","type":"address"}],"name":"setProtester","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [pause, protester])
     }
 
     shutdownSystem(globalSettlement: string): TransactionRequest {

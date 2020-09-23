@@ -123,18 +123,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    bidToMarketPriceRatio(): Promise<BigNumber>
-    bidToMarketPriceRatio(multicall: true): MulticallRequest<BigNumber>
-    bidToMarketPriceRatio(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"bidToMarketPriceRatio","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     bids(
         uinteger: BigNumberish
     ): Promise<{

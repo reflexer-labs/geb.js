@@ -75,7 +75,7 @@ export class CoinJoin extends BaseContractAPI {
 
     /**
      * Inside the system, coins have 45 (rad) decimals but outside they have 18 decimals (wad). When we exit, we specify a wad amount of coins and then the contract automatically multiplies wad by 10**27 to move the correct 45 decimal coin amount to this adapter
-     * Exit reflex-bonds/pegged-coins from the system and inside 'Coin.sol'
+     * Exit system coins from the system and inside 'Coin.sol'
      * @param account Account that will receive the exited coins
      * @param wad Amount of internal coins to join (18 decimal number that will be multiplied by ray)*
      */
@@ -90,7 +90,7 @@ export class CoinJoin extends BaseContractAPI {
 
     /**
      * Exited coins have 18 decimals but inside the system they have 45 (rad) decimals. When we join, the amount (wad) is multiplied by 10**27 (ray)
-     * Join reflex-bonds/pegged-coins in the system
+     * Join system coins in the system
      * @param account Account that will receive the joined coins
      * @param wad Amount of external coins to join (18 decimal number)*
      */

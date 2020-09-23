@@ -8,7 +8,7 @@ import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
-export class DsPause extends BaseContractAPI {
+export class DsProtestPause extends BaseContractAPI {
     DS_PAUSE_TYPE(): Promise<string>
     DS_PAUSE_TYPE(multicall: true): MulticallRequest<string>
     DS_PAUSE_TYPE(
@@ -41,6 +41,18 @@ export class DsPause extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"MAX_DELAY","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    MAX_DELAY_MULTIPLIER(): Promise<BigNumber>
+    MAX_DELAY_MULTIPLIER(multicall: true): MulticallRequest<BigNumber>
+    MAX_DELAY_MULTIPLIER(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"MAX_DELAY_MULTIPLIER","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -115,6 +127,30 @@ export class DsPause extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
+    delayMultiplier(): Promise<BigNumber>
+    delayMultiplier(multicall: true): MulticallRequest<BigNumber>
+    delayMultiplier(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"delayMultiplier","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    deploymentTime(): Promise<BigNumber>
+    deploymentTime(multicall: true): MulticallRequest<BigNumber>
+    deploymentTime(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"deploymentTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     executeTransaction(
         usr: string,
         codeHash: BytesLike,
@@ -136,19 +172,29 @@ export class DsPause extends BaseContractAPI {
     getTransactionDataHash(
         usr: string,
         codeHash: BytesLike,
-        parameters: BytesLike,
-        earliestExecutionTime: BigNumberish
+        parameters: BytesLike
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"},{"internalType":"uint256","name":"earliestExecutionTime","type":"uint256"}],"name":"getTransactionDataHash","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"pure","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"}],"name":"getTransactionDataHash","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [
-            usr,
-            codeHash,
-            parameters,
-            earliestExecutionTime,
-        ])
+        return this.getTransactionRequest(abi, [usr, codeHash, parameters])
+    }
+
+    getTransactionDelays(txHash: BytesLike): Promise<{}>
+    getTransactionDelays(
+        txHash: BytesLike,
+        multicall: true
+    ): MulticallRequest<{}>
+    getTransactionDelays(
+        txHash: BytesLike,
+        multicall?: true
+    ): Promise<{}> | MulticallRequest<{}> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"txHash","type":"bytes32"}],"name":"getTransactionDelays","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [txHash], multicall)
     }
 
     maxScheduledTransactions(): Promise<BigNumber>
@@ -169,6 +215,80 @@ export class DsPause extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    protestAgainstTransaction(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"}],"name":"protestAgainstTransaction","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [usr, codeHash, parameters])
+    }
+
+    protestEnd(): Promise<BigNumber>
+    protestEnd(multicall: true): MulticallRequest<BigNumber>
+    protestEnd(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"protestEnd","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    protestWindowAvailable(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike
+    ): Promise<boolean>
+    protestWindowAvailable(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        multicall: true
+    ): MulticallRequest<boolean>
+    protestWindowAvailable(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        multicall?: true
+    ): Promise<boolean> | MulticallRequest<boolean> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"}],"name":"protestWindowAvailable","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(
+            abi,
+            [usr, codeHash, parameters],
+            multicall
+        )
+    }
+
+    protester(): Promise<string>
+    protester(multicall: true): MulticallRequest<string>
+    protester(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"protester","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    protesterLifetime(): Promise<BigNumber>
+    protesterLifetime(multicall: true): MulticallRequest<BigNumber>
+    protesterLifetime(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"protesterLifetime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -233,11 +353,43 @@ export class DsPause extends BaseContractAPI {
         return this.getTransactionRequest(abi, [delay_])
     }
 
+    setDelayMultiplier(multiplier_: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"multiplier_","type":"uint256"}],"name":"setDelayMultiplier","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [multiplier_])
+    }
+
     setOwner(owner_: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"owner_","type":"address"}],"name":"setOwner","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [owner_])
+    }
+
+    setProtester(protester_: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"protester_","type":"address"}],"name":"setProtester","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [protester_])
+    }
+
+    timeUntilProposalProtestDeadline(txHash: BytesLike): Promise<BigNumber>
+    timeUntilProposalProtestDeadline(
+        txHash: BytesLike,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    timeUntilProposalProtestDeadline(
+        txHash: BytesLike,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"txHash","type":"bytes32"}],"name":"timeUntilProposalProtestDeadline","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [txHash], multicall)
     }
 }

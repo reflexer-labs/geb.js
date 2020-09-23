@@ -24,15 +24,21 @@ export class Setter extends BaseContractAPI {
     }
 
     modifyParameters(
-        bytes1: BytesLike,
-        bytes2: BytesLike,
+        bytes: BytesLike,
+        uinteger1: BigNumberish,
+        uinteger2: BigNumberish,
         address: string
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [bytes1, bytes2, address])
+        return this.getTransactionRequest(abi, [
+            bytes,
+            uinteger1,
+            uinteger2,
+            address,
+        ])
     }
 
     redemptionPrice(): TransactionRequest {
@@ -49,6 +55,14 @@ export class Setter extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"removeAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [address])
+    }
+
+    setAllowance(address: string, uinteger: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"setAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [address, uinteger])
     }
 
     taxMany(start: BigNumberish, end: BigNumberish): TransactionRequest {

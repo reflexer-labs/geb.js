@@ -189,7 +189,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
      * Pull stability fees from the treasury (if your allowance permits)
      * @param dstAccount Address to transfer funds to
      * @param token Address of the token to transfer (in this case it must be the address of the ERC20 system coin).             Used only to adhere to a standard for automated, on-chain treasuries
-     * @param wad Amount of system coins (SF) to transfer (expressed as an 18 decimal number but the contract will transfer internal system coins that have 18 decimals)
+     * @param wad Amount of system coins (SF) to transfer (expressed as an 18 decimal number but the contract will transfer internal system coins that have 45 decimals)
      */
 
     pullFunds(
@@ -313,7 +313,7 @@ export class StabilityFeeTreasury extends BaseContractAPI {
     }
 
     /**
-     * Tranfer surplus stability fees to the AccountingEngine. This is here to make sure that the treasury doesn't accumulate too many fees that it doesn't even need in order to pay for allowances. It ensures that there are enough funds left in the treasury to account for projected expenses (latest expenses multiplied by an expense multiplier)
+     * Transfer surplus stability fees to the AccountingEngine. This is here to make sure that the treasury doesn't accumulate too many fees that it doesn't even need in order to pay for allowances. It ensures that there are enough funds left in the treasury to account for projected expenses (latest expenses multiplied by an expense multiplier)
      */
 
     transferSurplusFunds(): TransactionRequest {
