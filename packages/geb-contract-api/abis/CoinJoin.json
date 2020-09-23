@@ -244,10 +244,10 @@
             "addAuthorization(address)": { "notice": "Add auth to an account" },
             "disableContract()": { "notice": "Disable this contract" },
             "exit(address,uint256)": {
-                "notice": "Exit reflex-bonds/pegged-coins from the system and inside 'Coin.sol'"
+                "notice": "Exit system coins from the system and inside 'Coin.sol'"
             },
             "join(address,uint256)": {
-                "notice": "Join reflex-bonds/pegged-coins in the system"
+                "notice": "Join system coins in the system"
             },
             "removeAuthorization(address)": {
                 "notice": "Remove auth from an account"

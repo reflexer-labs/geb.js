@@ -1,6 +1,11 @@
 [
     {
         "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "protesterLifetime_",
+                "type": "uint256"
+            },
             { "internalType": "uint256", "name": "delay_", "type": "uint256" },
             { "internalType": "address", "name": "owner_", "type": "address" },
             {
@@ -90,6 +95,19 @@
             }
         ],
         "name": "AttachTransactionDescription",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "multiplier",
+                "type": "uint256"
+            }
+        ],
+        "name": "ChangeDelayMultiplier",
         "type": "event"
     },
     {
@@ -228,6 +246,43 @@
             {
                 "indexed": false,
                 "internalType": "uint256",
+                "name": "totalDelay",
+                "type": "uint256"
+            }
+        ],
+        "name": "ProtestAgainstTransaction",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "usr",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "bytes32",
+                "name": "codeHash",
+                "type": "bytes32"
+            },
+            {
+                "indexed": false,
+                "internalType": "bytes",
+                "name": "parameters",
+                "type": "bytes"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
                 "name": "earliestExecutionTime",
                 "type": "uint256"
             }
@@ -246,6 +301,19 @@
             }
         ],
         "name": "SetDelay",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "protester",
+                "type": "address"
+            }
+        ],
+        "name": "SetProtester",
         "type": "event"
     },
     {
@@ -269,6 +337,15 @@
     {
         "inputs": [],
         "name": "MAX_DELAY",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "MAX_DELAY_MULTIPLIER",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
@@ -352,6 +429,24 @@
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "delayMultiplier",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "deploymentTime",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             { "internalType": "address", "name": "usr", "type": "address" },
             {
@@ -381,6 +476,23 @@
                 "name": "codeHash",
                 "type": "bytes32"
             },
+            { "internalType": "bytes", "name": "parameters", "type": "bytes" }
+        ],
+        "name": "getTransactionDataHash",
+        "outputs": [
+            { "internalType": "bytes32", "name": "", "type": "bytes32" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" },
+            {
+                "internalType": "bytes32",
+                "name": "codeHash",
+                "type": "bytes32"
+            },
             { "internalType": "bytes", "name": "parameters", "type": "bytes" },
             {
                 "internalType": "uint256",
@@ -393,6 +505,38 @@
             { "internalType": "bytes32", "name": "", "type": "bytes32" }
         ],
         "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "bytes32", "name": "txHash", "type": "bytes32" }
+        ],
+        "name": "getTransactionDelays",
+        "outputs": [
+            { "internalType": "bool", "name": "", "type": "bool" },
+            { "internalType": "uint256", "name": "", "type": "uint256" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" },
+            {
+                "internalType": "bytes32",
+                "name": "codeHash",
+                "type": "bytes32"
+            },
+            { "internalType": "bytes", "name": "parameters", "type": "bytes" }
+        ],
+        "name": "getTransactionDelays",
+        "outputs": [
+            { "internalType": "bool", "name": "", "type": "bool" },
+            { "internalType": "uint256", "name": "", "type": "uint256" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -409,6 +553,72 @@
         "name": "owner",
         "outputs": [
             { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" },
+            {
+                "internalType": "bytes32",
+                "name": "codeHash",
+                "type": "bytes32"
+            },
+            { "internalType": "bytes", "name": "parameters", "type": "bytes" }
+        ],
+        "name": "protestAgainstTransaction",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "protestEnd",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" },
+            {
+                "internalType": "bytes32",
+                "name": "codeHash",
+                "type": "bytes32"
+            },
+            { "internalType": "bytes", "name": "parameters", "type": "bytes" }
+        ],
+        "name": "protestWindowAvailable",
+        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "bytes32", "name": "txHash", "type": "bytes32" }
+        ],
+        "name": "protestWindowAvailable",
+        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "protester",
+        "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "protesterLifetime",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -504,11 +714,65 @@
     },
     {
         "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "multiplier_",
+                "type": "uint256"
+            }
+        ],
+        "name": "setDelayMultiplier",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
             { "internalType": "address", "name": "owner_", "type": "address" }
         ],
         "name": "setOwner",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "protester_",
+                "type": "address"
+            }
+        ],
+        "name": "setProtester",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "bytes32", "name": "txHash", "type": "bytes32" }
+        ],
+        "name": "timeUntilProposalProtestDeadline",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" },
+            {
+                "internalType": "bytes32",
+                "name": "codeHash",
+                "type": "bytes32"
+            },
+            { "internalType": "bytes", "name": "parameters", "type": "bytes" }
+        ],
+        "name": "timeUntilProposalProtestDeadline",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
         "type": "function"
     }
 ]
