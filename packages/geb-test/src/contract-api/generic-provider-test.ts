@@ -102,13 +102,15 @@ export const testsWithGenericGebProvider = (
 
         it('Test with contract API factory', async () => {
             const contracts = new ContractApis('kovan', gebProvider)
-            const debHouseExpect = '0x0E742BDF585e3EC1Bf0B7A2a52562EC3D17D7adC'
 
-            assert.equal(contracts.debtAuctionHouse.address, debHouseExpect)
+            assert.equal(
+                contracts.debtAuctionHouse.address,
+                KOVAN_ADDRESSES.GEB_DEBT_AUCTION_HOUSE
+            )
 
             const debtHouse = await contracts.accountingEngine.debtAuctionHouse()
 
-            assert.equal(debtHouse, debHouseExpect)
+            assert.equal(debtHouse, KOVAN_ADDRESSES.GEB_DEBT_AUCTION_HOUSE)
         })
     })
 }
