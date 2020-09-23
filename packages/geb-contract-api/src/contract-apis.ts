@@ -20,6 +20,8 @@ import {
     Weth,
     SafeEngine,
     ChainlinkMedianEthusd,
+    UniswapMedianFlxusd,
+    UniswapMedianRaiusd,
     DsValue,
     Osm,
 } from '.'
@@ -51,7 +53,11 @@ export class ContractApis {
     public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse | EnglishCollateralAuctionHouse
     public protocolToken: DsToken
     public medianizerEth: ChainlinkMedianEthusd | DsValue
-    public osm: Osm | DsValue  
+    public medianizerCoin: UniswapMedianRaiusd | DsValue
+    public medianizerProt: UniswapMedianFlxusd | DsValue
+    public fsmEth: Osm | DsValue
+    public fsmCoin: Osm | DsValue
+    public fsmProt: Osm | DsValue
     public weth: Weth
 
     constructor(
@@ -80,8 +86,12 @@ export class ContractApis {
         this.proxyRegistry = new GebProxyRegistry(addressList.PROXY_REGISTRY, this.chainProvider)
         this.collateralAuctionHouseETH_A = new FixedDiscountCollateralAuctionHouse(addressList.GEB_COLLATERAL_AUCTION_HOUSE_ETH_A, this.chainProvider)
         this.protocolToken = new DsToken(addressList.GEB_PROT, this.chainProvider)
-        this.medianizerEth = new DsValue(addressList.MEDIANIZER_ETH, this.chainProvider)
-        this.osm = new DsValue(addressList.ORACLE_SECURITY_MODULE_ETH, this.chainProvider)
+        this.medianizerEth = new ChainlinkMedianEthusd(addressList.MEDIANIZER_ETH, this.chainProvider)
+        this.medianizerCoin = new UniswapMedianRaiusd(addressList.MEDIANIZER_RAI, this.chainProvider)
+        this.medianizerProt = new UniswapMedianFlxusd(addressList.MEDIANIZER_FLX, this.chainProvider)
+        this.fsmEth = new Osm(addressList.FEED_SECURITY_MODULE_ETH, this.chainProvider)
+        this.fsmProt = new Osm(addressList.FEED_SECURITY_MODULE_FLX, this.chainProvider)
+        this.fsmCoin = new Osm(addressList.FEED_SECURITY_MODULE_RAI, this.chainProvider)
         this.weth = new Weth(addressList.ETH, this.chainProvider)
     }
 }

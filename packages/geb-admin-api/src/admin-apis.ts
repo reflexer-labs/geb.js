@@ -1,9 +1,8 @@
 import {
-    MultiSigWallet,
     GebDeploy,
     ProtocolTokenAuthority,
     GebPollingEmitter,
-    DsRecursiveRoles,
+    DsDelegateRoles,
     GebPrintingPermissions,
     DsPause,
     DsPauseProxy,
@@ -14,6 +13,7 @@ import {
     DsProxyFactory,
     GebDeployPauseProxyActions,
     TxManager,
+    GnosisSafeProxy,
 } from '.'
 import {
     GebProviderInterface,
@@ -26,13 +26,13 @@ import { DsProxy } from '@reflexer-finance/geb-contract-api'
 // Container class instantiate all GEB contracts
 // prettier-ignore
 export class AdminApis {
-    public multisigAdmin: MultiSigWallet
+    public multisigAdmin: GnosisSafeProxy
     public multisigAdminProxy: DsProxy
     public deploy : GebDeploy
     public protocolTokenAuthority: ProtocolTokenAuthority
     public pollingEmitter: GebPollingEmitter
     public printingPermissionRegistry: GebPrintingPermissions
-    public pauseAuthority: DsRecursiveRoles
+    public pauseAuthority: DsDelegateRoles
     public pause: DsPause
     public pauseProxy: DsPauseProxy
     public govActions: GovActions
@@ -54,12 +54,12 @@ export class AdminApis {
         let addressList = getAddressList(network)
         
         // Additional instances only in admin package
-        this.multisigAdmin = new MultiSigWallet(addressList.GEB_MULTISIG, this.chainProvider)
+        this.multisigAdmin = new GnosisSafeProxy(addressList.GEB_MULTISIG, this.chainProvider)
         this.multisigAdminProxy = new DsProxy(addressList.GEB_MULTISIG_PROXY, this.chainProvider)
         this.deploy = new GebDeploy(addressList.GEB_DEPLOY, this.chainProvider)
         this.protocolTokenAuthority = new ProtocolTokenAuthority(addressList.PROTOCOL_TOKEN_AUTHORITY, this.chainProvider)
         this.pollingEmitter = new GebPollingEmitter(addressList.GEB_POLLING_EMITTER, this.chainProvider)
-        this.pauseAuthority = new DsRecursiveRoles(addressList.GEB_PAUSE_AUTHORITY, this.chainProvider)
+        this.pauseAuthority = new DsDelegateRoles(addressList.GEB_PAUSE_AUTHORITY, this.chainProvider)
         this.printingPermissionRegistry = new GebPrintingPermissions(addressList.PRINTING_PERMISSIONS_REGISTRY, this.chainProvider)
         this.pause = new DsPause(addressList.GEB_PAUSE, this.chainProvider)
         this.pauseProxy = new DsPauseProxy(addressList.GEB_PAUSE_PROXY, this.chainProvider)

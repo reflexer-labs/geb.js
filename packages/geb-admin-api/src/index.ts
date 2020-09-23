@@ -22,7 +22,6 @@ import { CollateralLike3 } from './generated/CollateralLike3'
 import { CollateralLike4 } from './generated/CollateralLike4'
 import { CollateralLike5 } from './generated/CollateralLike5'
 import { Common } from './generated/Common'
-import { Dgd } from './generated/DGD'
 import { DsAuth } from './generated/DSAuth'
 import { DsAuthEvents } from './generated/DSAuthEvents'
 import { DsAuthority } from './generated/DSAuthority'
@@ -34,7 +33,6 @@ import { DsPause } from './generated/DSPause'
 import { DsPauseProxy } from './generated/DSPauseProxy'
 import { DsProxyCache } from './generated/DSProxyCache'
 import { DsProxyFactory } from './generated/DSProxyFactory'
-import { DsRecursiveRoles } from './generated/DSRecursiveRoles'
 import { DsRoles } from './generated/DSRoles'
 import { DsStop } from './generated/DSStop'
 import { DsThing } from './generated/DSThing'
@@ -50,10 +48,8 @@ import { FaucetUser } from './generated/FaucetUser'
 import { FixedDiscountCollateralAuctionHouseFactory } from './generated/FixedDiscountCollateralAuctionHouseFactory'
 import { FsmGovernanceInterface } from './generated/FsmGovernanceInterface'
 import { FsmGovernanceInterfaceCaller } from './generated/FsmGovernanceInterfaceCaller'
-import { Gnt } from './generated/GNT'
 import { GebDeploy } from './generated/GebDeploy'
 import { GebDeployPauseProxyActions } from './generated/GebDeployPauseProxyActions'
-import { GebDeployTestBase } from './generated/GebDeployTestBase'
 import { GebPollingEmitter } from './generated/GebPollingEmitter'
 import { GebPollingEvents } from './generated/GebPollingEvents'
 import { GebPrintingPermissions } from './generated/GebPrintingPermissions'
@@ -71,15 +67,12 @@ import { LiquidationEngineMock } from './generated/LiquidationEngineMock'
 import { Logging } from './generated/Logging'
 import { MockDebtAuctionHouse } from './generated/MockDebtAuctionHouse'
 import { MockSurplusAuctionHouse } from './generated/MockSurplusAuctionHouse'
-import { MultiSigWallet } from './generated/MultiSigWallet'
 import { NotThrowingToken } from './generated/NotThrowingToken'
 import { OracleRelayerFactory } from './generated/OracleRelayerFactory'
 import { PauseFactory } from './generated/PauseFactory'
 import { PostSettlementSurplusAuctionHouseFactory } from './generated/PostSettlementSurplusAuctionHouseFactory'
 import { PreSettlementSurplusAuctionHouseFactory } from './generated/PreSettlementSurplusAuctionHouseFactory'
 import { ProtocolTokenAuthority } from './generated/ProtocolTokenAuthority'
-import { ProxyActions } from './generated/ProxyActions'
-import { ProxyCalls } from './generated/ProxyCalls'
 import { RestrictedTokenFaucet } from './generated/RestrictedTokenFaucet'
 import { SafeEngineFactory } from './generated/SAFEEngineFactory'
 import { SafeHandler } from './generated/SAFEHandler'
@@ -99,6 +92,12 @@ import { UniswapMedianRaiusd } from './generated/UniswapMedianRAIUSD'
 import { UniswapPriceFeedMedianizer } from './generated/UniswapPriceFeedMedianizer'
 import { Authed } from './generated/authed'
 import { AdminApis } from './admin-apis'
+import { DsProtestPause } from './generated/DSProtestPause'
+import { GovProtester } from './generated/GovProtester'
+import { DsDelegateRoles } from './generated/DSDelegateRoles'
+import { ProtestPauseFactory } from './generated/ProtestPauseFactory'
+import { GnosisSafe } from './generated/GnosisSafe'
+import { GnosisSafeProxy } from './generated/GnosisSafeProxy'
 
 export {
     // Object with all instances
@@ -128,7 +127,6 @@ export {
     CollateralLike4,
     CollateralLike5,
     Common,
-    Dgd,
     DsAuth,
     DsAuthEvents,
     DsAuthority,
@@ -140,7 +138,6 @@ export {
     DsPauseProxy,
     DsProxyCache,
     DsProxyFactory,
-    DsRecursiveRoles,
     DsRoles,
     DsStop,
     DsThing,
@@ -156,10 +153,8 @@ export {
     FixedDiscountCollateralAuctionHouseFactory,
     FsmGovernanceInterface,
     FsmGovernanceInterfaceCaller,
-    Gnt,
     GebDeploy,
     GebDeployPauseProxyActions,
-    GebDeployTestBase,
     GebPollingEmitter,
     GebPollingEvents,
     GebPrintingPermissions,
@@ -177,15 +172,12 @@ export {
     Logging,
     MockDebtAuctionHouse,
     MockSurplusAuctionHouse,
-    MultiSigWallet,
     NotThrowingToken,
     OracleRelayerFactory,
     PauseFactory,
     PostSettlementSurplusAuctionHouseFactory,
     PreSettlementSurplusAuctionHouseFactory,
     ProtocolTokenAuthority,
-    ProxyActions,
-    ProxyCalls,
     RestrictedTokenFaucet,
     SafeEngineFactory,
     SafeHandler,
@@ -204,4 +196,10 @@ export {
     UniswapMedianRaiusd,
     UniswapPriceFeedMedianizer,
     Authed,
+    DsDelegateRoles,
+    DsProtestPause,
+    GovProtester,
+    ProtestPauseFactory,
+    GnosisSafeProxy,
+    GnosisSafe,
 }
