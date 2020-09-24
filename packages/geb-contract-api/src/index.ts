@@ -31,8 +31,7 @@ import { ContractApis } from './contract-apis'
 import { Multicall } from './generated/Multicall'
 import { DsValue } from './generated/DSValue'
 import { Osm } from './generated/OSM'
-import { UniswapMedianFlxusd } from './generated/UniswapMedianFLXUSD'
-import { UniswapMedianRaiusd } from './generated/UniswapMedianRAIUSD'
+import { UniswapMedian } from './generated/UniswapMedian'
 
 export {
     // Factory
@@ -69,6 +68,5 @@ export {
     Osm,
     DsValue,
     ChainlinkMedianEthusd,
-    UniswapMedianRaiusd,
-    UniswapMedianFlxusd,
+    UniswapMedian,
 }

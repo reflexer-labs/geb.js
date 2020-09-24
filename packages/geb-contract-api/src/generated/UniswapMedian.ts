@@ -8,7 +8,7 @@ import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
-export class UniswapMedianRaiusd extends BaseContractAPI {
+export class UniswapMedian extends BaseContractAPI {
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
