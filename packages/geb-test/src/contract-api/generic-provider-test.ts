@@ -11,6 +11,7 @@ import {
     KOVAN_ADDRESSES,
 } from '@reflexer-finance/geb-contract-base'
 import { NULL_ADDRESS, ETH_A, ONE_ADDRESS } from './../const'
+import { utils } from 'geb.js'
 
 export const testsWithGenericGebProvider = (
     gebProvider: GebProviderInterface
@@ -59,7 +60,7 @@ export const testsWithGenericGebProvider = (
             try {
                 await gebProvider.ethCall(tx)
             } catch (err) {
-                assert.fail(gebProvider.decodeError(err))
+                assert.fail(utils.decodeChainError(err))
             }
         })
 
@@ -76,7 +77,7 @@ export const testsWithGenericGebProvider = (
                 await gebProvider.ethCall(tx)
                 assert.fail('Address 0x0 should have no balance')
             } catch (err) {
-                assert.equal(gebProvider.decodeError(err), '0x')
+                assert.equal(utils.decodeChainError(err), '0x')
             }
         })
 

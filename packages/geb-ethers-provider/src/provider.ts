@@ -44,35 +44,6 @@ export class GebEthersProvider implements GebProviderInterface {
         return coder.encodeFunctionData(abiFragment.name, params)
     }
 
-    decodeError(error: any): string {
-        let data: string
-        if (error?.data) {
-            data = error.data
-        } else if (error?.error?.data) {
-            data = error.error.data
-        } else if (error?.error?.stack) {
-            return error.error.stack.split('\n')[0]
-        } else {
-            throw new Error('Unknown error format')
-        }
-
-        if (data.startsWith('Reverted 0x08c379a0')) {
-            data = data.slice(19)
-        } else if (data.startsWith('0x08c379a0')) {
-            data = data.slice(10)
-        } else if (data === 'Reverted') {
-            return 'Reverted'
-        } else if (data === 'Reverted 0x') {
-            return '0x'
-        } else {
-            return data
-        }
-
-        return decodeURIComponent(data.slice(2).replace(/[0-9a-f]{2}/g, '%$&'))
-            .replace(/\0/g, '')
-            .slice(2)
-    }
-
     async chainId(): Promise<number> {
         return (await this.provider.getNetwork()).chainId
     }

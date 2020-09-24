@@ -47,7 +47,5 @@ export interface GebProviderInterface {
      */
     encodeFunctionData(params: Inputs, abiFragment: AbiDefinition): string
 
-    decodeError(error: any): string
-
     chainId(): Promise<number>
 }

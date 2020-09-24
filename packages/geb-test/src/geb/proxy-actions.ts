@@ -5,7 +5,7 @@ import {
     GebProviderInterface,
     KOVAN_ADDRESSES,
 } from '@reflexer-finance/geb-contract-base'
-import { GebProxyActions, GebProxyActionsGlobalSettlement } from 'geb.js'
+import { GebProxyActions, GebProxyActionsGlobalSettlement, utils } from 'geb.js'
 import { NULL_ADDRESS, ETH_A, ONE_ADDRESS, WAD } from '../const'
 
 export const testsProxyActionWithGenericGebProvider = (
@@ -62,7 +62,7 @@ export const testsProxyActionWithGenericGebProvider = (
                     assert.fail()
                 } catch (err) {
                     assert.equal(
-                        gebProvider.decodeError(err),
+                        utils.decodeChainError(err),
                         'ds-auth-unauthorized'
                     )
                 }
@@ -75,7 +75,7 @@ export const testsProxyActionWithGenericGebProvider = (
                 try {
                     await gebProvider.ethCall(tx)
                 } catch (err) {
-                    assert.fail('openSAFE: ' + gebProvider.decodeError(err))
+                    assert.fail('openSAFE: ' + utils.decodeChainError(err))
                 }
             })
 
@@ -93,7 +93,7 @@ export const testsProxyActionWithGenericGebProvider = (
                 } catch (err) {
                     assert.fail(
                         'openLockETHAndGenerateDebt: ' +
-                            gebProvider.decodeError(err)
+                            utils.decodeChainError(err)
                     )
                 }
             })
@@ -115,7 +115,7 @@ export const testsProxyActionWithGenericGebProvider = (
                     assert.fail()
                 } catch (err) {
                     assert.equal(
-                        gebProvider.decodeError(err),
+                        utils.decodeChainError(err),
                         'ds-auth-unauthorized'
                     )
                 }

@@ -14,6 +14,7 @@ import {
     ContractApis,
 } from '@reflexer-finance/geb-contract-api'
 import { KOVAN_ADDRESSES } from '@reflexer-finance/geb-contract-base'
+import { utils } from 'geb.js'
 
 export const testsWithEthersProvider = () => {
     describe('Test made only for Ethers', () => {
@@ -44,7 +45,7 @@ export const testsWithEthersProvider = () => {
                 assert.fail('This dummy Address should have no balance')
             } catch (err) {
                 assert.equal(
-                    gebProvider.decodeError(err.error),
+                    utils.decodeChainError(err.error),
                     'SAFEEngine/not-allowed'
                 )
             }
@@ -81,7 +82,7 @@ export const testsWithEthersProvider = () => {
                 await wallet.call(tx)
                 assert.fail('Should have fail')
             } catch (err) {
-                assert.equal(gebProvider.decodeError(err), '0x')
+                assert.equal(utils.decodeChainError(err), '0x')
             }
         })
 
@@ -103,7 +104,7 @@ export const testsWithEthersProvider = () => {
                 assert.fail()
             } catch (err) {
                 // This random address should have no balance
-                assert.equal(gebProvider.decodeError(err.error), 'Reverted')
+                assert.equal(utils.decodeChainError(err.error), 'Reverted')
             }
         })
 
@@ -136,7 +137,7 @@ export const testsWithEthersProvider = () => {
                 await wallet.sendTransaction(tx)
             } catch (err) {
                 assert.ok(
-                    gebProvider.decodeError(err).includes('Insufficient funds')
+                    utils.decodeChainError(err).includes('Insufficient funds')
                 )
             }
         })

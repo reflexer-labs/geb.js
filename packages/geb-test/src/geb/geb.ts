@@ -2,13 +2,12 @@ import { ethers } from 'ethers'
 import assert from 'assert'
 
 import { ETH_A, NULL_ADDRESS, ONE_ADDRESS } from '../const'
-import { Geb, GebErrorTypes } from 'geb.js'
+import { Geb, GebErrorTypes, utils } from 'geb.js'
 import { sethCall } from '../utils'
 import {
     GebProviderInterface,
     KOVAN_ADDRESSES,
 } from '@reflexer-finance/geb-contract-base'
-import { RAD } from 'geb.js/lib/utils'
 
 export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
     describe('Using a provider (Ethers OR web3)', async () => {
@@ -172,7 +171,7 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
 
             // debtFloor is 15
             res[1].debtAmount
-            assert.ok(res[1].debtFloor.eq(RAD.mul(15)))
+            assert.ok(res[1].debtFloor.eq(utils.RAD.mul(15)))
         })
 
         it('multicall with 3 calls', async () => {
@@ -186,7 +185,7 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             assert.ok(res[0].gt('1'))
 
             // debtFloor is 15
-            assert.ok(res[1].debtFloor.eq(RAD.mul(15)))
+            assert.ok(res[1].debtFloor.eq(utils.RAD.mul(15)))
 
             // Should get the right ETH auction house
             assert.ok(
@@ -222,7 +221,7 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             } catch (err) {
                 assert.equal(
                     'Coin/insufficient-balance',
-                    gebProvider.decodeError(err)
+                    utils.decodeChainError(err)
                 )
             }
         })
