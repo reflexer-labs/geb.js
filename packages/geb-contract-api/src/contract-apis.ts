@@ -52,8 +52,8 @@ export class ContractApis {
     public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse | EnglishCollateralAuctionHouse
     public protocolToken: DsToken
     public medianizerEth: ChainlinkMedianEthusd | DsValue
-    public medianizerCoin: UniswapMedianRaiusd | DsValue
-    public medianizerProt: UniswapMedianFlxusd | DsValue
+    public medianizerCoin: UniswapMedian | DsValue
+    public medianizerProt: UniswapMedian | DsValue
     public fsmEth: Osm | DsValue
     public fsmCoin: Osm | DsValue
     public fsmProt: Osm | DsValue
