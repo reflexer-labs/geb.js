@@ -84,13 +84,15 @@ export class ContractApis {
         this.coin = new Coin(addressList.GEB_COIN, this.chainProvider)
         this.proxyRegistry = new GebProxyRegistry(addressList.PROXY_REGISTRY, this.chainProvider)
         this.collateralAuctionHouseETH_A = new FixedDiscountCollateralAuctionHouse(addressList.GEB_COLLATERAL_AUCTION_HOUSE_ETH_A, this.chainProvider)
-        this.protocolToken = new DsToken(addressList.GEB_PROT, this.chainProvider)
         this.medianizerEth = new ChainlinkMedianEthusd(addressList.MEDIANIZER_ETH, this.chainProvider)
-        this.medianizerCoin = new UniswapMedian(addressList.MEDIANIZER_RAI, this.chainProvider)
-        this.medianizerProt = new UniswapMedian(addressList.MEDIANIZER_FLX, this.chainProvider)
+        this.medianizerCoin = new UniswapMedian(addressList.MEDIANIZER_PRAI, this.chainProvider)
         this.fsmEth = new Osm(addressList.FEED_SECURITY_MODULE_ETH, this.chainProvider)
-        this.fsmProt = new Osm(addressList.FEED_SECURITY_MODULE_FLX, this.chainProvider)
-        this.fsmCoin = new Osm(addressList.FEED_SECURITY_MODULE_RAI, this.chainProvider)
+        this.fsmCoin = new Osm(addressList.FEED_SECURITY_MODULE_PRAI, this.chainProvider)
         this.weth = new Weth(addressList.ETH, this.chainProvider)
+        
+        // Contracts removed for the beta testnet
+        // this.protocolToken = new DsToken(addressList.GEB_PROT, this.chainProvider)
+        // this.medianizerProt = new UniswapMedian(addressList.MEDIANIZER_FLX, this.chainProvider)
+        // this.fsmProt = new Osm(addressList.FEED_SECURITY_MODULE_FLX, this.chainProvider)
     }
 }

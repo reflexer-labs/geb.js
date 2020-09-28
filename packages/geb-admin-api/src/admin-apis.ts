@@ -57,19 +57,21 @@ export class AdminApis {
         this.multisigAdmin = new GnosisSafeProxy(addressList.GEB_MULTISIG, this.chainProvider)
         this.multisigAdminProxy = new DsProxy(addressList.GEB_MULTISIG_PROXY, this.chainProvider)
         this.deploy = new GebDeploy(addressList.GEB_DEPLOY, this.chainProvider)
-        this.protocolTokenAuthority = new ProtocolTokenAuthority(addressList.PROTOCOL_TOKEN_AUTHORITY, this.chainProvider)
         this.pollingEmitter = new GebPollingEmitter(addressList.GEB_POLLING_EMITTER, this.chainProvider)
         this.pauseAuthority = new DsDelegateRoles(addressList.GEB_PAUSE_AUTHORITY, this.chainProvider)
-        this.printingPermissionRegistry = new GebPrintingPermissions(addressList.PRINTING_PERMISSIONS_REGISTRY, this.chainProvider)
         this.pause = new DsPause(addressList.GEB_PAUSE, this.chainProvider)
         this.pauseProxy = new DsPauseProxy(addressList.GEB_PAUSE_PROXY, this.chainProvider)
         this.govActions = new GovActions(addressList.GEB_GOV_ACTIONS, this.chainProvider)
-        this.esm = new Esm(addressList.GEB_ESM, this.chainProvider)
-        this.esmBurner = new TokenBurner(addressList.GEB_ESM_TOKEN_BURNER, this.chainProvider)
         this.fsmGovInterface = new FsmGovernanceInterface(addressList.FSM_GOV_INTERFACE, this.chainProvider)
         this.proxyFactory = new DsProxyFactory(addressList.PROXY_FACTORY, this.chainProvider)
         this.pauseProxyAction = new GebDeployPauseProxyActions(addressList.PROXY_PAUSE_ACTIONS, this.chainProvider)
         this.proxyDeployer = new DsProxy(addressList.PROXY_DEPLOYER, this.chainProvider)
         this.txManager = new TxManager(addressList.GEB_TX_MANAGER, this.chainProvider)
+        
+        // Contracts removed for the beta testnet. 
+        // this.esm = new Esm(addressList.GEB_ESM, this.chainProvider)
+        // this.protocolTokenAuthority = new ProtocolTokenAuthority(addressList.PROTOCOL_TOKEN_AUTHORITY, this.chainProvider)
+        // this.printingPermissionRegistry = new GebPrintingPermissions(addressList.PRINTING_PERMISSIONS_REGISTRY, this.chainProvider)
+        // this.esmBurner = new TokenBurner(addressList.GEB_ESM_TOKEN_BURNER, this.chainProvider)
     }
 }

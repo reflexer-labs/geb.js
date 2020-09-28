@@ -51,20 +51,21 @@ export const testsWithEthersProvider = () => {
             }
         })
 
-        it('Test join function with ethers from contraApis', async () => {
-            const contracts = new ContractApis('kovan', gebProvider)
+        // TODO: Due to whitelisting feature of the beta mainnet test, we can't test successful Join.
+        // it('Test join function with ethers from contraApis', async () => {
+        //     const contracts = new ContractApis('kovan', gebProvider)
 
-            const tx = await contracts.joinETH_A.join(
-                wallet.address,
-                ethers.utils.parseEther('0')
-            )
+        //     const tx = await contracts.joinETH_A.join(
+        //         wallet.address,
+        //         ethers.utils.parseEther('0')
+        //     )
 
-            try {
-                await wallet.call(tx)
-            } catch {
-                assert.fail('Payable function')
-            }
-        })
+        //     try {
+        //         await wallet.call(tx)
+        //     } catch(err) {
+        //         assert.fail(`Should not have failed. Error code ${utils.decodeChainError(err)}`)
+        //     }
+        // })
 
         it('Test join function failed with ethers', async () => {
             const ethJoin = new BasicCollateralJoin(
@@ -82,7 +83,11 @@ export const testsWithEthersProvider = () => {
                 await wallet.call(tx)
                 assert.fail('Should have fail')
             } catch (err) {
-                assert.equal(utils.decodeChainError(err), '0x')
+                // Currently failing with this error message, will fail with "Not enough funds" when whitelisting removed.
+                assert.equal(
+                    utils.decodeChainError(err),
+                    'CollateralJoin6/cannot-join-above-allowance'
+                )
             }
         })
 

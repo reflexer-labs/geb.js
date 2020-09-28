@@ -225,6 +225,11 @@
     },
     {
         "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "timeElapsed",
+                "type": "uint256"
+            },
             { "internalType": "uint256", "name": "amountIn", "type": "uint256" }
         ],
         "name": "converterComputeAmountOut",
@@ -262,7 +267,11 @@
                 "name": "timestamp",
                 "type": "uint256"
             },
-            { "internalType": "uint256", "name": "price", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "timeAdjustedPrice",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -299,6 +308,15 @@
         "name": "denominationToken",
         "outputs": [
             { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "earliestObservationIndex",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -392,21 +410,6 @@
         "name": "modifyParameters",
         "outputs": [],
         "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "timestamp",
-                "type": "uint256"
-            }
-        ],
-        "name": "observationIndexOf",
-        "outputs": [
-            { "internalType": "uint8", "name": "index", "type": "uint8" }
-        ],
-        "stateMutability": "view",
         "type": "function"
     },
     {

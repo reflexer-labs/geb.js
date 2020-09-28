@@ -94,7 +94,7 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
         })
 
         it('Check non-empty safe with debt and collateral', async () => {
-            const safeId = 4
+            const safeId = 1
             const safe = await geb.getSafe(safeId)
             const handler = await geb.contracts.safeManager.safes(safeId)
 
@@ -171,7 +171,7 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
 
             // debtFloor is 15
             res[1].debtAmount
-            assert.ok(res[1].debtFloor.eq(utils.RAD.mul(15)))
+            assert.ok(res[1].debtFloor.eq(utils.RAD.mul(100)))
         })
 
         it('multicall with 3 calls', async () => {
@@ -185,7 +185,7 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             assert.ok(res[0].gt('1'))
 
             // debtFloor is 15
-            assert.ok(res[1].debtFloor.eq(utils.RAD.mul(15)))
+            assert.ok(res[1].debtFloor.eq(utils.RAD.mul(100)))
 
             // Should get the right ETH auction house
             assert.ok(
@@ -197,7 +197,7 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
         it('ERC20 symbol', async () => {
             const erc20 = geb.getErc20Contract(KOVAN_ADDRESSES.GEB_COIN)
             const symbol = await erc20.symbol()
-            assert.equal(symbol, 'RAI')
+            assert.ok(symbol === 'RAI' || symbol === 'PRAI')
         })
 
         it('ERC20 balance', async () => {

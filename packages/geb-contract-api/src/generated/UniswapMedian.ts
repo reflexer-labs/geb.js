@@ -45,20 +45,25 @@ export class UniswapMedian extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    converterComputeAmountOut(amountIn: BigNumberish): Promise<BigNumber>
     converterComputeAmountOut(
+        timeElapsed: BigNumberish,
+        amountIn: BigNumberish
+    ): Promise<BigNumber>
+    converterComputeAmountOut(
+        timeElapsed: BigNumberish,
         amountIn: BigNumberish,
         multicall: true
     ): MulticallRequest<BigNumber>
     converterComputeAmountOut(
+        timeElapsed: BigNumberish,
         amountIn: BigNumberish,
         multicall?: true
     ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"}],"name":"converterComputeAmountOut","outputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"timeElapsed","type":"uint256"},{"internalType":"uint256","name":"amountIn","type":"uint256"}],"name":"converterComputeAmountOut","outputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCallOrMulticall(abi, [amountIn], multicall)
+        return this.ethCallOrMulticall(abi, [timeElapsed, amountIn], multicall)
     }
 
     converterFeed(): Promise<string>
@@ -77,14 +82,14 @@ export class UniswapMedian extends BaseContractAPI {
         uinteger: BigNumberish
     ): Promise<{
         timestamp: BigNumber
-        price: BigNumber
+        timeAdjustedPrice: BigNumber
     }>
     converterFeedObservations(
         uinteger: BigNumberish,
         multicall: true
     ): MulticallRequest<{
         timestamp: BigNumber
-        price: BigNumber
+        timeAdjustedPrice: BigNumber
     }>
     converterFeedObservations(
         uinteger: BigNumberish,
@@ -92,15 +97,15 @@ export class UniswapMedian extends BaseContractAPI {
     ):
         | Promise<{
               timestamp: BigNumber
-              price: BigNumber
+              timeAdjustedPrice: BigNumber
           }>
         | MulticallRequest<{
               timestamp: BigNumber
-              price: BigNumber
+              timeAdjustedPrice: BigNumber
           }> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"converterFeedObservations","outputs":[{"internalType":"uint256","name":"timestamp","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"converterFeedObservations","outputs":[{"internalType":"uint256","name":"timestamp","type":"uint256"},{"internalType":"uint256","name":"timeAdjustedPrice","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
@@ -149,6 +154,18 @@ export class UniswapMedian extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"denominationToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    earliestObservationIndex(): Promise<BigNumber>
+    earliestObservationIndex(multicall: true): MulticallRequest<BigNumber>
+    earliestObservationIndex(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"earliestObservationIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -241,22 +258,6 @@ export class UniswapMedian extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [parameter, data])
-    }
-
-    observationIndexOf(timestamp: BigNumberish): Promise<number>
-    observationIndexOf(
-        timestamp: BigNumberish,
-        multicall: true
-    ): MulticallRequest<number>
-    observationIndexOf(
-        timestamp: BigNumberish,
-        multicall?: true
-    ): Promise<number> | MulticallRequest<number> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"observationIndexOf","outputs":[{"internalType":"uint8","name":"index","type":"uint8"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [timestamp], multicall)
     }
 
     perSecondCallerRewardIncrease(): Promise<BigNumber>
