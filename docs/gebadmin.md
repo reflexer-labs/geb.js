@@ -25,7 +25,7 @@ import { GebAdmin } from "@reflexer-finance/geb-admin"
 \+ **new GebAdmin**(`network`: GebDeployment, `provider`: GebProviderInterface | Provider): *[GebAdmin](gebadmin.md)*
 
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/bd995fd/packages/geb-admin/src/geb-admin.ts#L51)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/8be1111/packages/geb-admin/src/geb-admin.ts#L51)*
 
 **Parameters:**
 
@@ -48,7 +48,7 @@ Defined in packages/geb/lib/geb.d.ts:34
 
 Object containing all GEB core contracts instances for low level interactions. All contracts object offer a one-to-one typed API to the underlying smart-contract.
 Currently has the following contracts:
-- SafeEngine
+- SAFEEngine
 - AccountingEngine
 - TaxCollector
 - LiquidationEngine
@@ -73,7 +73,7 @@ ___
 
 • **contractsAdmin**: *AdminApis*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/bd995fd/packages/geb-admin/src/geb-admin.ts#L51)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/8be1111/packages/geb-admin/src/geb-admin.ts#L51)*
 
 Object containing all GEB admin contracts instances for low level interactions.
 It currently has the following contracts:
@@ -141,11 +141,11 @@ Example:
 const USDCAddress = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
 const USDC = geb.getErc20Contract(USDCAddress)
 
-// Get deadbeef's balance
-const balance = USDC.balanceOf("0xdeadbeef..")
+// Get 0xdefiisawesome's balance
+const balance = USDC.balanceOf("0xdefiisawesome..")
 
-// Send 1 USDC to deadbeef (Yes, USDC is 6 decimals)
-const tx = USDC.transfer("0xdeadbeef..", "1000000")
+// Send 1 USDC to 0xdefiisawesome (USDC is 6 decimals)
+const tx = USDC.transfer("0xdefiisawesome..", "1000000")
 await wallet.sendTransaction(tx)
 ```
 
@@ -169,7 +169,7 @@ ___
 
 Defined in packages/geb/lib/geb.d.ts:47
 
-Given an address returns a GebProxyAction object to execute bundled operations.
+Given an address returns a GebProxyActions object to execute bundled operations.
 Important: This requires the address to have deployed a GEB proxy through the proxy registry contract. It will throw a `DOES_NOT_OWN_HAVE_PROXY` error if the address specified does not have a proxy. Use the [deployProxy](gebadmin.md#deployproxy) function to get a new proxy.
 
 **Parameters:**
@@ -191,7 +191,7 @@ ___
 Defined in packages/geb/lib/geb.d.ts:53
 
 Given an address returns a GebProxyActionsGlobalSettlement object to execute bundled operations during GlobalSettlement.
-Important: Same as for `getProxyAction` it requires a proxy deploy through the registry.
+**IMPORTANT**: Same as for `getProxyAction` you will need to deploy a proxy beforehand using the proxy registry.
 
 **Parameters:**
 
@@ -205,19 +205,20 @@ ___
 
 ###  getSafe
 
-▸ **getSafe**(`idOrHandler`: string | number): *Promise‹Safe›*
+▸ **getSafe**(`idOrHandler`: string | number, `collateralType?`: string): *Promise‹Safe›*
 
 *Inherited from [GebAdmin](gebadmin.md).[getSafe](gebadmin.md#getsafe)*
 
 Defined in packages/geb/lib/geb.d.ts:62
 
-Get the safe object
+Get the SAFE object
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`idOrHandler` | string &#124; number | Safe Id or Safe handler  |
+`idOrHandler` | string &#124; number | Safe Id or SAFE handler  |
+`collateralType?` | string | - |
 
 **Returns:** *Promise‹Safe›*
 
