@@ -17,6 +17,33 @@ import {
 /**
  * Convenience class used to call functions from [GebProxyActionsGlobalSettlement](https://github.com/reflexer-labs/geb-proxy-actions/blob/master/src/GebProxyActions.sol) using a proxy registered in the [GebProxyRegistry](https://github.com/reflexer-labs/geb-proxy-registry/blob/master/src/GebProxyRegistry.sol).
  * Useful only during Global Settlement in order for users to redeem collateral.
+ *
+ * ## Examples
+ *
+ * Redeem some ETH collateral against some RAI using a proxy contract:
+ * ```typescript
+ * // The wallet needs to have a proxy already deployed
+ * const globalSettlementProxy = await geb.getProxyActionGlobalSettlement(wallet.address)
+ * // We need the address of the collateral adapter
+ * const wethJoinAddress = geb.contracts.joinETH_A.address
+ * // Prepare the transaction to redeem 10 RAI for Ether
+ * const tx = globalSettlementProxy.redeemTokenCollateral(wethJoinAddress, ETH_A, WAD.mul(10))
+ * // Send the transaction with a Ethers Wallet object
+ * await wallet.sendTransaction(tx)
+ * ```
+ *
+ * Redeem as much collateral as possible from a Safe managed by a proxy:
+ * ```typescript
+ * // The Safe has to be managed by a proxy for this to work
+ * const globalSettlementProxy = await geb.getProxyActionGlobalSettlement(wallet.address)
+ * // We need the address of the collateral adapter
+ * const wethJoinAddress = geb.contracts.joinETH_A.address
+ * // Extract the collateral from the Safe with ID 3
+ * const tx = globalSettlementProxy.freeTokenCollateral(wethJoinAddress, 3)
+ * // Send the transaction with a Ethers Wallet object
+ * wallet.sendTransaction(tx)
+ * ```
+ *
  */
 export class GebProxyActionsGlobalSettlement extends GebProxyActionsGlobalSettlementGenerated {
     /**
