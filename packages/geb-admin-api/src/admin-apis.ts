@@ -4,7 +4,6 @@ import {
     GebPollingEmitter,
     DsDelegateRoles,
     GebPrintingPermissions,
-    DsPause,
     DsPauseProxy,
     GovActions,
     Esm,
@@ -14,6 +13,7 @@ import {
     GebDeployPauseProxyActions,
     TxManager,
     GnosisSafeProxy,
+    DsProtestPause,
 } from '.'
 import {
     GebProviderInterface,
@@ -33,7 +33,7 @@ export class AdminApis {
     public pollingEmitter: GebPollingEmitter
     public printingPermissionRegistry: GebPrintingPermissions
     public pauseAuthority: DsDelegateRoles
-    public pause: DsPause
+    public pause: DsProtestPause
     public pauseProxy: DsPauseProxy
     public govActions: GovActions
     public esm: Esm
@@ -59,7 +59,7 @@ export class AdminApis {
         this.deploy = new GebDeploy(addressList.GEB_DEPLOY, this.chainProvider)
         this.pollingEmitter = new GebPollingEmitter(addressList.GEB_POLLING_EMITTER, this.chainProvider)
         this.pauseAuthority = new DsDelegateRoles(addressList.GEB_PAUSE_AUTHORITY, this.chainProvider)
-        this.pause = new DsPause(addressList.GEB_PAUSE, this.chainProvider)
+        this.pause = new DsProtestPause(addressList.GEB_PAUSE, this.chainProvider)
         this.pauseProxy = new DsPauseProxy(addressList.GEB_PAUSE_PROXY, this.chainProvider)
         this.govActions = new GovActions(addressList.GEB_GOV_ACTIONS, this.chainProvider)
         this.fsmGovInterface = new FsmGovernanceInterface(addressList.FSM_GOV_INTERFACE, this.chainProvider)
