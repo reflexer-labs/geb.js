@@ -91,25 +91,55 @@ export function codegenForFunctions(
     fns: Dictionary<FunctionDeclaration[]>,
     abi: RawAbiDefinition[]
 ): string {
-    return values(fns)
+    // Flatten the overload by adding a number suffix to their name
+    const flattened: Dictionary<FunctionDeclaration> = {}
+    for (let name in fns) {
+        if (fns[name].length === 1) {
+            // No overload
+            flattened[name] = fns[name][0]
+        } else {
+            // Function is overloaded, add a number suffix to the function name for each overload
+            let i = 1
+            for (let overload of fns[name]) {
+                const overloadName = name + i.toString()
+                flattened[overloadName] = overload
+                flattened[overloadName].name = overloadName
+                i++
+            }
+        }
+    }
+
+    // Generate the code
+    return values(flattened)
         .map((fns) => {
-            return codegenForSingleFunction(fns[0], getABIFragment(fns[0], abi))
+            return codegenForSingleFunction(fns, getABIFragment(fns, abi))
         })
         .join('\n')
 }
 
+// Given a function declaration, finds the right abi fragment in it. Take into account overload with id suffixes
 function getABIFragment(
     fn: FunctionDeclaration,
     abi: RawAbiDefinition[]
 ): RawAbiDefinition {
     for (let fragment of abi) {
+        if (!fragment.name) {
+            continue
+        }
+
+        // If overload, these are not equal because of the suffix
+        const isOverloaded =
+            fragment.name.length !== fn.name.length &&
+            /^-?\d+$/.test(fn.name.slice(fragment.name.length))
         if (
-            fragment.name === fn.name &&
-            fn.inputs.length === fragment.inputs.length &&
-            fn.inputs.map(
-                (input, i) =>
-                    input.type.originalType === fragment.inputs[i].type
-            )
+            fn.name === fragment.name ||
+            (fn.name.startsWith(fragment.name) &&
+                isOverloaded &&
+                fn.inputs.length === fragment.inputs.length &&
+                fn.inputs.map(
+                    (input, i) =>
+                        input.type.originalType === fragment.inputs[i].type
+                ))
         ) {
             return fragment
         }
