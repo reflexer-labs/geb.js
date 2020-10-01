@@ -6,12 +6,20 @@ import { MulticallRequest } from '@reflexer-finance/geb-contract-base'
 import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
 
 export class GebProxyRegistry extends BaseContractAPI {
-    build(): TransactionRequest {
+    build1(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"build","outputs":[{"internalType":"address payable","name":"proxy","type":"address"}],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [])
+    }
+
+    build2(owner: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"build","outputs":[{"internalType":"address payable","name":"proxy","type":"address"}],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [owner])
     }
 
     proxies(address: string): Promise<string>

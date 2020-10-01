@@ -196,7 +196,7 @@ export class DsPause extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    scheduleTransaction(
+    scheduleTransaction1(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -211,6 +211,26 @@ export class DsPause extends BaseContractAPI {
             codeHash,
             parameters,
             earliestExecutionTime,
+        ])
+    }
+
+    scheduleTransaction2(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        earliestExecutionTime: BigNumberish,
+        description: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"},{"internalType":"uint256","name":"earliestExecutionTime","type":"uint256"},{"internalType":"string","name":"description","type":"string"}],"name":"scheduleTransaction","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            usr,
+            codeHash,
+            parameters,
+            earliestExecutionTime,
+            description,
         ])
     }
 

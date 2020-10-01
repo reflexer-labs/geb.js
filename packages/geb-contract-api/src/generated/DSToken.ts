@@ -27,12 +27,20 @@ export class DsToken extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [src, guy], multicall)
     }
 
-    approve(guy: string, wad: BigNumberish): TransactionRequest {
+    approve1(guy: string, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"guy","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [guy, wad])
+    }
+
+    approve2(guy: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"guy","type":"address"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [guy])
     }
 
     authority(): Promise<string>
@@ -58,12 +66,20 @@ export class DsToken extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [src], multicall)
     }
 
-    burn(wad: BigNumberish): TransactionRequest {
+    burn1(wad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [wad])
+    }
+
+    burn2(guy: string, wad: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"guy","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [guy, wad])
     }
 
     decimals(): Promise<BigNumber>
@@ -78,12 +94,20 @@ export class DsToken extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    mint(guy: string, wad: BigNumberish): TransactionRequest {
+    mint1(guy: string, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"guy","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [guy, wad])
+    }
+
+    mint2(wad: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [wad])
     }
 
     move(src: string, dst: string, wad: BigNumberish): TransactionRequest {

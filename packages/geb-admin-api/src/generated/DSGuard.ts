@@ -47,7 +47,19 @@ export class DsGuard extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [src_, dst_, sig], multicall)
     }
 
-    forbid(src: string, dst: string, sig: BytesLike): TransactionRequest {
+    forbid1(src: string, dst: string, sig: BytesLike): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"bytes32","name":"sig","type":"bytes32"}],"name":"forbid","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [src, dst, sig])
+    }
+
+    forbid2(
+        src: BytesLike,
+        dst: BytesLike,
+        sig: BytesLike
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"bytes32","name":"sig","type":"bytes32"}],"name":"forbid","outputs":[],"stateMutability":"nonpayable","type":"function"}
@@ -65,7 +77,19 @@ export class DsGuard extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    permit(src: string, dst: string, sig: BytesLike): TransactionRequest {
+    permit1(src: string, dst: string, sig: BytesLike): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"bytes32","name":"sig","type":"bytes32"}],"name":"permit","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [src, dst, sig])
+    }
+
+    permit2(
+        src: BytesLike,
+        dst: BytesLike,
+        sig: BytesLike
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"bytes32","name":"sig","type":"bytes32"}],"name":"permit","outputs":[],"stateMutability":"nonpayable","type":"function"}

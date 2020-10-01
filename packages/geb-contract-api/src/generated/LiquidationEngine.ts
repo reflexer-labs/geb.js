@@ -187,7 +187,7 @@ export class LiquidationEngine extends BaseContractAPI {
      * @param parameter The name of the integration modified
      */
 
-    modifyParameters(
+    modifyParameters1(
         collateralType: BytesLike,
         parameter: BytesLike,
         data: string
@@ -201,6 +201,54 @@ export class LiquidationEngine extends BaseContractAPI {
             parameter,
             data,
         ])
+    }
+
+    /**
+     * Modify contract integrations
+     * @param data New address for the parameter
+     * @param parameter The name of the parameter modified
+     */
+
+    modifyParameters2(parameter: BytesLike, data: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [parameter, data])
+    }
+
+    /**
+     * Modify liquidation params
+     * @param collateralType The collateral type we change parameters for
+     * @param data New value for the parameter
+     * @param parameter The name of the parameter modified
+     */
+
+    modifyParameters3(
+        collateralType: BytesLike,
+        parameter: BytesLike,
+        data: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            collateralType,
+            parameter,
+            data,
+        ])
+    }
+
+    modifyParameters4(
+        parameter: BytesLike,
+        data: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [parameter, data])
     }
 
     mutex(bytes: BytesLike, address: string): Promise<number>

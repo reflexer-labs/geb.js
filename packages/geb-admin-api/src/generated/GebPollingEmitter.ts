@@ -36,7 +36,7 @@ export class GebPollingEmitter extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    vote(
+    vote1(
         pollIds: BigNumberish[],
         optionIds: BigNumberish[]
     ): TransactionRequest {
@@ -47,11 +47,27 @@ export class GebPollingEmitter extends BaseContractAPI {
         return this.getTransactionRequest(abi, [pollIds, optionIds])
     }
 
-    withdrawPoll(pollId: BigNumberish): TransactionRequest {
+    vote2(pollId: BigNumberish, optionId: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256[]","name":"pollIds","type":"uint256[]"},{"internalType":"uint256[]","name":"optionIds","type":"uint256[]"}],"name":"vote","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [pollId, optionId])
+    }
+
+    withdrawPoll1(pollId: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"pollId","type":"uint256"}],"name":"withdrawPoll","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [pollId])
+    }
+
+    withdrawPoll2(pollIds: BigNumberish[]): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"pollId","type":"uint256"}],"name":"withdrawPoll","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [pollIds])
     }
 }

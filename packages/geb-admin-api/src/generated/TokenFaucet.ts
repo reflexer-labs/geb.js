@@ -74,12 +74,20 @@ export class TokenFaucet extends BaseContractAPI {
         return this.getTransactionRequest(abi, [account])
     }
 
-    requestTokens(token: string): TransactionRequest {
+    requestTokens1(token: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"requestTokens","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [token])
+    }
+
+    requestTokens2(token: string, addrs: string[]): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"address[]","name":"addrs","type":"address[]"}],"name":"requestTokens","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [token, addrs])
     }
 
     setAllocatedAmount(

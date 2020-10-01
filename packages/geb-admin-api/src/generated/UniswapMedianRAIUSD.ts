@@ -235,7 +235,18 @@ export class UniswapMedianRaiusd extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    modifyParameters(parameter: BytesLike, data: string): TransactionRequest {
+    modifyParameters1(parameter: BytesLike, data: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [parameter, data])
+    }
+
+    modifyParameters2(
+        parameter: BytesLike,
+        data: BigNumberish
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}

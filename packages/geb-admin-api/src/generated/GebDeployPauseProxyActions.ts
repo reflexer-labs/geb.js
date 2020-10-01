@@ -20,7 +20,7 @@ export class GebDeployPauseProxyActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [pause, actions, who, to])
     }
 
-    modifyParameters(
+    modifyParameters1(
         pause: string,
         actions: string,
         who: string,
@@ -37,6 +37,114 @@ export class GebDeployPauseProxyActions extends BaseContractAPI {
             actions,
             who,
             collateralType,
+            parameter,
+            data,
+        ])
+    }
+
+    modifyParameters2(
+        pause: string,
+        actions: string,
+        who: string,
+        collateralType: BytesLike,
+        parameter: BytesLike,
+        data: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"actions","type":"address"},{"internalType":"address","name":"who","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            pause,
+            actions,
+            who,
+            collateralType,
+            parameter,
+            data,
+        ])
+    }
+
+    modifyParameters3(
+        pause: string,
+        actions: string,
+        who: string,
+        collateralType: BytesLike,
+        data1: BigNumberish,
+        data2: BigNumberish,
+        data3: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"actions","type":"address"},{"internalType":"address","name":"who","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"data1","type":"uint256"},{"internalType":"uint256","name":"data2","type":"uint256"},{"internalType":"address","name":"data3","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            pause,
+            actions,
+            who,
+            collateralType,
+            data1,
+            data2,
+            data3,
+        ])
+    }
+
+    modifyParameters4(
+        pause: string,
+        actions: string,
+        who: string,
+        parameter: BytesLike,
+        data: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"actions","type":"address"},{"internalType":"address","name":"who","type":"address"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            pause,
+            actions,
+            who,
+            parameter,
+            data,
+        ])
+    }
+
+    modifyParameters5(
+        pause: string,
+        actions: string,
+        who: string,
+        collateralType: BytesLike,
+        data1: BigNumberish,
+        data2: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"actions","type":"address"},{"internalType":"address","name":"who","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            pause,
+            actions,
+            who,
+            collateralType,
+            data1,
+            data2,
+        ])
+    }
+
+    modifyParameters6(
+        pause: string,
+        actions: string,
+        who: string,
+        parameter: BytesLike,
+        data: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"actions","type":"address"},{"internalType":"address","name":"who","type":"address"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            pause,
+            actions,
+            who,
             parameter,
             data,
         ])

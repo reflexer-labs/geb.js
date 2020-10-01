@@ -169,18 +169,18 @@ export class DsProtestPause extends BaseContractAPI {
         ])
     }
 
-    getTransactionDataHash(
+    getTransactionDataHash1(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike
     ): Promise<string>
-    getTransactionDataHash(
+    getTransactionDataHash1(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         multicall: true
     ): MulticallRequest<string>
-    getTransactionDataHash(
+    getTransactionDataHash1(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -197,12 +197,43 @@ export class DsProtestPause extends BaseContractAPI {
         )
     }
 
-    getTransactionDelays(txHash: BytesLike): Promise<{}>
-    getTransactionDelays(
+    getTransactionDataHash2(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        earliestExecutionTime: BigNumberish
+    ): Promise<string>
+    getTransactionDataHash2(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        earliestExecutionTime: BigNumberish,
+        multicall: true
+    ): MulticallRequest<string>
+    getTransactionDataHash2(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        earliestExecutionTime: BigNumberish,
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"},{"internalType":"uint256","name":"earliestExecutionTime","type":"uint256"}],"name":"getTransactionDataHash","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"pure","type":"function"}
+
+        return this.ethCallOrMulticall(
+            abi,
+            [usr, codeHash, parameters, earliestExecutionTime],
+            multicall
+        )
+    }
+
+    getTransactionDelays1(txHash: BytesLike): Promise<{}>
+    getTransactionDelays1(
         txHash: BytesLike,
         multicall: true
     ): MulticallRequest<{}>
-    getTransactionDelays(
+    getTransactionDelays1(
         txHash: BytesLike,
         multicall?: true
     ): Promise<{}> | MulticallRequest<{}> {
@@ -211,6 +242,34 @@ export class DsProtestPause extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"bytes32","name":"txHash","type":"bytes32"}],"name":"getTransactionDelays","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [txHash], multicall)
+    }
+
+    getTransactionDelays2(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike
+    ): Promise<{}>
+    getTransactionDelays2(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        multicall: true
+    ): MulticallRequest<{}>
+    getTransactionDelays2(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        multicall?: true
+    ): Promise<{}> | MulticallRequest<{}> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"}],"name":"getTransactionDelays","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(
+            abi,
+            [usr, codeHash, parameters],
+            multicall
+        )
     }
 
     maxScheduledTransactions(): Promise<BigNumber>
@@ -259,18 +318,18 @@ export class DsProtestPause extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    protestWindowAvailable(
+    protestWindowAvailable1(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike
     ): Promise<boolean>
-    protestWindowAvailable(
+    protestWindowAvailable1(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         multicall: true
     ): MulticallRequest<boolean>
-    protestWindowAvailable(
+    protestWindowAvailable1(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -285,6 +344,22 @@ export class DsProtestPause extends BaseContractAPI {
             [usr, codeHash, parameters],
             multicall
         )
+    }
+
+    protestWindowAvailable2(txHash: BytesLike): Promise<boolean>
+    protestWindowAvailable2(
+        txHash: BytesLike,
+        multicall: true
+    ): MulticallRequest<boolean>
+    protestWindowAvailable2(
+        txHash: BytesLike,
+        multicall?: true
+    ): Promise<boolean> | MulticallRequest<boolean> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"txHash","type":"bytes32"}],"name":"protestWindowAvailable","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [txHash], multicall)
     }
 
     protester(): Promise<string>
@@ -319,7 +394,7 @@ export class DsProtestPause extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    scheduleTransaction(
+    scheduleTransaction1(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -334,6 +409,26 @@ export class DsProtestPause extends BaseContractAPI {
             codeHash,
             parameters,
             earliestExecutionTime,
+        ])
+    }
+
+    scheduleTransaction2(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        earliestExecutionTime: BigNumberish,
+        description: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"},{"internalType":"uint256","name":"earliestExecutionTime","type":"uint256"},{"internalType":"string","name":"description","type":"string"}],"name":"scheduleTransaction","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            usr,
+            codeHash,
+            parameters,
+            earliestExecutionTime,
+            description,
         ])
     }
 
@@ -393,12 +488,12 @@ export class DsProtestPause extends BaseContractAPI {
         return this.getTransactionRequest(abi, [protester_])
     }
 
-    timeUntilProposalProtestDeadline(txHash: BytesLike): Promise<BigNumber>
-    timeUntilProposalProtestDeadline(
+    timeUntilProposalProtestDeadline1(txHash: BytesLike): Promise<BigNumber>
+    timeUntilProposalProtestDeadline1(
         txHash: BytesLike,
         multicall: true
     ): MulticallRequest<BigNumber>
-    timeUntilProposalProtestDeadline(
+    timeUntilProposalProtestDeadline1(
         txHash: BytesLike,
         multicall?: true
     ): Promise<BigNumber> | MulticallRequest<BigNumber> {
@@ -407,5 +502,33 @@ export class DsProtestPause extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"bytes32","name":"txHash","type":"bytes32"}],"name":"timeUntilProposalProtestDeadline","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [txHash], multicall)
+    }
+
+    timeUntilProposalProtestDeadline2(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike
+    ): Promise<BigNumber>
+    timeUntilProposalProtestDeadline2(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    timeUntilProposalProtestDeadline2(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"}],"name":"timeUntilProposalProtestDeadline","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(
+            abi,
+            [usr, codeHash, parameters],
+            multicall
+        )
     }
 }

@@ -177,12 +177,29 @@ export class StabilityFeeTreasury extends BaseContractAPI {
      * @param parameter The name of the contract whose address will be changed
      */
 
-    modifyParameters(parameter: BytesLike, addr: string): TransactionRequest {
+    modifyParameters1(parameter: BytesLike, addr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"addr","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [parameter, addr])
+    }
+
+    /**
+     * Modify uint256 parameters
+     * @param parameter The name of the parameter to modify
+     * @param val New parameter value
+     */
+
+    modifyParameters2(
+        parameter: BytesLike,
+        val: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"addr","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [parameter, val])
     }
 
     /**

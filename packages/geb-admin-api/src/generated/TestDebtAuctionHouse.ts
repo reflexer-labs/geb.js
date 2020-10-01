@@ -5,6 +5,7 @@ import { BaseContractAPI } from '@reflexer-finance/geb-contract-base'
 import { MulticallRequest } from '@reflexer-finance/geb-contract-base'
 import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
 import { BytesLike } from '@ethersproject/bytes'
+import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class TestDebtAuctionHouse extends BaseContractAPI {
@@ -32,9 +33,20 @@ export class TestDebtAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    modifyParameters(
+    modifyParameters1(
         parameter: BytesLike,
         data: BytesLike
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"bytes32","name":"data","type":"bytes32"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [parameter, data])
+    }
+
+    modifyParameters2(
+        parameter: BytesLike,
+        data: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore

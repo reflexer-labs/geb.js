@@ -196,7 +196,24 @@ export class AccountingEngine extends BaseContractAPI {
      * @param parameter The name of the auction type we want to change the address for
      */
 
-    modifyParameters(parameter: BytesLike, data: string): TransactionRequest {
+    modifyParameters1(parameter: BytesLike, data: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [parameter, data])
+    }
+
+    /**
+     * Modify general uint params for auctions
+     * @param data New value for the parameter
+     * @param parameter The name of the parameter modified
+     */
+
+    modifyParameters2(
+        parameter: BytesLike,
+        data: BigNumberish
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}

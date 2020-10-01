@@ -375,12 +375,20 @@ export class GebDeploy extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    giveControl(usr: string): TransactionRequest {
+    giveControl1(usr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"giveControl","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [usr])
+    }
+
+    giveControl2(usr: string, target: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"address","name":"target","type":"address"}],"name":"giveControl","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [usr, target])
     }
 
     globalSettlement(): Promise<string>
@@ -734,12 +742,20 @@ export class GebDeploy extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    takeControl(usr: string, target: string): TransactionRequest {
+    takeControl1(usr: string, target: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"address","name":"target","type":"address"}],"name":"takeControl","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [usr, target])
+    }
+
+    takeControl2(usr: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"takeControl","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [usr])
     }
 
     taxCollector(): Promise<string>

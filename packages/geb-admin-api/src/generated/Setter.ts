@@ -23,7 +23,7 @@ export class Setter extends BaseContractAPI {
         return this.getTransactionRequest(abi, [bytes])
     }
 
-    modifyParameters(
+    modifyParameters1(
         bytes: BytesLike,
         uinteger1: BigNumberish,
         uinteger2: BigNumberish,
@@ -39,6 +39,61 @@ export class Setter extends BaseContractAPI {
             uinteger2,
             address,
         ])
+    }
+
+    modifyParameters2(
+        bytes1: BytesLike,
+        bytes2: BytesLike,
+        address: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [bytes1, bytes2, address])
+    }
+
+    modifyParameters3(
+        bytes: BytesLike,
+        uinteger1: BigNumberish,
+        uinteger2: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [bytes, uinteger1, uinteger2])
+    }
+
+    modifyParameters4(bytes: BytesLike, address: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [bytes, address])
+    }
+
+    modifyParameters5(
+        bytes1: BytesLike,
+        bytes2: BytesLike,
+        uinteger: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [bytes1, bytes2, uinteger])
+    }
+
+    modifyParameters6(
+        bytes: BytesLike,
+        uinteger: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [bytes, uinteger])
     }
 
     redemptionPrice(): TransactionRequest {

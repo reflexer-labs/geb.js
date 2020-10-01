@@ -272,7 +272,7 @@ export class GebSafeManager extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
-    transferCollateral(
+    transferCollateral1(
         safe: BigNumberish,
         dst: string,
         wad: BigNumberish
@@ -282,6 +282,19 @@ export class GebSafeManager extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"transferCollateral","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [safe, dst, wad])
+    }
+
+    transferCollateral2(
+        collateralType: BytesLike,
+        safe: BigNumberish,
+        dst: string,
+        wad: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"transferCollateral","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [collateralType, safe, dst, wad])
     }
 
     transferInternalCoins(

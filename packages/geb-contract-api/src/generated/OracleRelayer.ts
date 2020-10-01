@@ -5,6 +5,7 @@ import { BaseContractAPI } from '@reflexer-finance/geb-contract-base'
 import { MulticallRequest } from '@reflexer-finance/geb-contract-base'
 import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
 import { BytesLike } from '@ethersproject/bytes'
+import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class OracleRelayer extends BaseContractAPI {
@@ -124,7 +125,7 @@ export class OracleRelayer extends BaseContractAPI {
      * @param parameter Name of the parameter
      */
 
-    modifyParameters(
+    modifyParameters1(
         collateralType: BytesLike,
         parameter: BytesLike,
         addr: string
@@ -138,6 +139,46 @@ export class OracleRelayer extends BaseContractAPI {
             parameter,
             addr,
         ])
+    }
+
+    /**
+     * Modify CRatio related parameters
+     * @param collateralType Collateral who's parameters we change
+     * @param data New param value
+     * @param parameter Name of the parameter
+     */
+
+    modifyParameters2(
+        collateralType: BytesLike,
+        parameter: BytesLike,
+        data: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"addr","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            collateralType,
+            parameter,
+            data,
+        ])
+    }
+
+    /**
+     * Modify redemption related parameters
+     * @param data New param value
+     * @param parameter Name of the parameter
+     */
+
+    modifyParameters3(
+        parameter: BytesLike,
+        data: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [parameter, data])
     }
 
     /**

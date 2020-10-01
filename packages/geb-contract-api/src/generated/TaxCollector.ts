@@ -198,7 +198,7 @@ export class TaxCollector extends BaseContractAPI {
      * @param taxPercentage Percentage of SF offered to the tax receiver
      */
 
-    modifyParameters(
+    modifyParameters1(
         collateralType: BytesLike,
         position: BigNumberish,
         taxPercentage: BigNumberish,
@@ -214,6 +214,79 @@ export class TaxCollector extends BaseContractAPI {
             taxPercentage,
             receiverAccount,
         ])
+    }
+
+    /**
+     * Set whether a tax receiver can incur negative fees
+     * @param collateralType Collateral type giving fees to the tax receiver
+     * @param position Receiver position in the list
+     * @param val Value that specifies whether a tax receiver can incur negative rates
+     */
+
+    modifyParameters2(
+        collateralType: BytesLike,
+        position: BigNumberish,
+        val: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"position","type":"uint256"},{"internalType":"uint256","name":"val","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [collateralType, position, val])
+    }
+
+    /**
+     * Modify general address params
+     * @param data New value for the parameter
+     * @param parameter The name of the parameter modified
+     */
+
+    modifyParameters3(parameter: BytesLike, data: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [parameter, data])
+    }
+
+    /**
+     * Modify collateral specific uint params
+     * @param collateralType Collateral type who's parameter is modified
+     * @param data New value for the parameter
+     * @param parameter The name of the parameter modified
+     */
+
+    modifyParameters4(
+        collateralType: BytesLike,
+        parameter: BytesLike,
+        data: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"position","type":"uint256"},{"internalType":"uint256","name":"val","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            collateralType,
+            parameter,
+            data,
+        ])
+    }
+
+    /**
+     * Modify general uint params
+     * @param data New value for the parameter
+     * @param parameter The name of the parameter modified
+     */
+
+    modifyParameters5(
+        parameter: BytesLike,
+        data: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [parameter, data])
     }
 
     primaryTaxReceiver(): Promise<string>

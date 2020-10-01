@@ -5,6 +5,7 @@ import { BaseContractAPI } from '@reflexer-finance/geb-contract-base'
 import { MulticallRequest } from '@reflexer-finance/geb-contract-base'
 import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
 import { BytesLike } from '@ethersproject/bytes'
+import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class Esm extends BaseContractAPI {
@@ -44,7 +45,7 @@ export class Esm extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    modifyParameters(
+    modifyParameters1(
         parameter: BytesLike,
         account: string
     ): TransactionRequest {
@@ -53,6 +54,17 @@ export class Esm extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [parameter, account])
+    }
+
+    modifyParameters2(
+        parameter: BytesLike,
+        wad: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [parameter, wad])
     }
 
     protocolToken(): Promise<string>

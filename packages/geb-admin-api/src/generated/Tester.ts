@@ -14,12 +14,20 @@ export class Tester extends BaseContractAPI {
         return this.getTransactionRequest(abi, [usr])
     }
 
-    burn(wad: BigNumberish): TransactionRequest {
+    burn1(wad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [wad])
+    }
+
+    burn2(usr: string, wad: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [usr, wad])
     }
 
     mint(usr: string, wad: BigNumberish): TransactionRequest {
