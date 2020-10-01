@@ -69,9 +69,13 @@ export function generateOutputTypes(
     if (outputs.length === 1) {
         return generateOutputType(outputs[0].type)
     } else {
+        // if multiples parameters, return an object. If the return values don't have a name, call them '0', '1', etc...
         return `{
       ${outputs
-          .map((t) => t.name && `${t.name}: ${generateOutputType(t.type)}, `)
+          .map(
+              (t, i) =>
+                  `${t.name || i.toString()}: ${generateOutputType(t.type)}, `
+          )
           .join('')}
       }`
     }

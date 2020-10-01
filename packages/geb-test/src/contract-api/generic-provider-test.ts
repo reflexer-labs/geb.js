@@ -5,6 +5,7 @@ import {
     SafeEngine,
     OracleRelayer,
     ContractApis,
+    StabilityFeeTreasury,
 } from '@reflexer-finance/geb-contract-api'
 import {
     GebProviderInterface,
@@ -112,6 +113,43 @@ export const testsWithGenericGebProvider = (
             const debtHouse = await contracts.accountingEngine.debtAuctionHouse()
 
             assert.equal(debtHouse, KOVAN_ADDRESSES.GEB_DEBT_AUCTION_HOUSE)
+        })
+
+        it('Test overloaded function', async () => {
+            const tx1 = safeEngine.modifyParameters1(ETH_A, ETH_A, '200')
+            const tx2 = safeEngine.modifyParameters2(ETH_A, '1000')
+
+            try {
+                await gebProvider.ethCall(tx1)
+                assert.fail()
+            } catch (err) {
+                assert.equal(
+                    utils.decodeChainError(err),
+                    'SAFEEngine/account-not-authorized'
+                )
+            }
+
+            try {
+                await gebProvider.ethCall(tx2)
+                assert.fail()
+            } catch (err) {
+                assert.equal(
+                    utils.decodeChainError(err),
+                    'SAFEEngine/account-not-authorized'
+                )
+            }
+        })
+
+        it('Test function with anonymous return object', async () => {
+            const treasury = new StabilityFeeTreasury(
+                KOVAN_ADDRESSES.GEB_STABILITY_FEE_TREASURY,
+                gebProvider
+            )
+
+            const allowance = await treasury.getAllowance(NULL_ADDRESS)
+
+            assert.ok(allowance[0].isZero())
+            assert.ok(allowance[1].isZero())
         })
     })
 }
