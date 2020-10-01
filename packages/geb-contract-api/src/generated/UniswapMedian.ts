@@ -349,17 +349,30 @@ export class UniswapMedian extends BaseContractAPI {
         priceCumulativeEnd: BigNumberish,
         timeElapsed: BigNumberish,
         amountIn: BigNumberish
-    ): TransactionRequest {
+    ): Promise<BigNumber>
+    uniswapComputeAmountOut(
+        priceCumulativeStart: BigNumberish,
+        priceCumulativeEnd: BigNumberish,
+        timeElapsed: BigNumberish,
+        amountIn: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    uniswapComputeAmountOut(
+        priceCumulativeStart: BigNumberish,
+        priceCumulativeEnd: BigNumberish,
+        timeElapsed: BigNumberish,
+        amountIn: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"priceCumulativeStart","type":"uint256"},{"internalType":"uint256","name":"priceCumulativeEnd","type":"uint256"},{"internalType":"uint256","name":"timeElapsed","type":"uint256"},{"internalType":"uint256","name":"amountIn","type":"uint256"}],"name":"uniswapComputeAmountOut","outputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [
-            priceCumulativeStart,
-            priceCumulativeEnd,
-            timeElapsed,
-            amountIn,
-        ])
+        return this.ethCallOrMulticall(
+            abi,
+            [priceCumulativeStart, priceCumulativeEnd, timeElapsed, amountIn],
+            multicall
+        )
     }
 
     uniswapFactory(): Promise<string>

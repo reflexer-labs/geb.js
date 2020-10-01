@@ -173,12 +173,28 @@ export class DsProtestPause extends BaseContractAPI {
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike
-    ): TransactionRequest {
+    ): Promise<string>
+    getTransactionDataHash(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        multicall: true
+    ): MulticallRequest<string>
+    getTransactionDataHash(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"}],"name":"getTransactionDataHash","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [usr, codeHash, parameters])
+        return this.ethCallOrMulticall(
+            abi,
+            [usr, codeHash, parameters],
+            multicall
+        )
     }
 
     getTransactionDelays(txHash: BytesLike): Promise<{}>

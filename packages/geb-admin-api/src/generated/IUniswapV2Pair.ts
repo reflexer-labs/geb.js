@@ -21,20 +21,28 @@ export class IUniswapV2Pair extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    MINIMUM_LIQUIDITY(): TransactionRequest {
+    MINIMUM_LIQUIDITY(): Promise<BigNumber>
+    MINIMUM_LIQUIDITY(multicall: true): MulticallRequest<BigNumber>
+    MINIMUM_LIQUIDITY(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"MINIMUM_LIQUIDITY","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    PERMIT_TYPEHASH(): TransactionRequest {
+    PERMIT_TYPEHASH(): Promise<string>
+    PERMIT_TYPEHASH(multicall: true): MulticallRequest<string>
+    PERMIT_TYPEHASH(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"PERMIT_TYPEHASH","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     allowance(owner: string, spender: string): Promise<BigNumber>
@@ -84,12 +92,14 @@ export class IUniswapV2Pair extends BaseContractAPI {
         return this.getTransactionRequest(abi, [to])
     }
 
-    decimals(): TransactionRequest {
+    decimals(): Promise<number>
+    decimals(multicall: true): MulticallRequest<number>
+    decimals(multicall?: true): Promise<number> | MulticallRequest<number> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     factory(): Promise<string>
@@ -160,12 +170,14 @@ export class IUniswapV2Pair extends BaseContractAPI {
         return this.getTransactionRequest(abi, [to])
     }
 
-    name(): TransactionRequest {
+    name(): Promise<string>
+    name(multicall: true): MulticallRequest<string>
+    name(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     nonces(owner: string): Promise<BigNumber>
@@ -255,12 +267,14 @@ export class IUniswapV2Pair extends BaseContractAPI {
         ])
     }
 
-    symbol(): TransactionRequest {
+    symbol(): Promise<string>
+    symbol(multicall: true): MulticallRequest<string>
+    symbol(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     sync(): TransactionRequest {

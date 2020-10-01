@@ -138,17 +138,30 @@ export class DsPause extends BaseContractAPI {
         codeHash: BytesLike,
         parameters: BytesLike,
         earliestExecutionTime: BigNumberish
-    ): TransactionRequest {
+    ): Promise<string>
+    getTransactionDataHash(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        earliestExecutionTime: BigNumberish,
+        multicall: true
+    ): MulticallRequest<string>
+    getTransactionDataHash(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        earliestExecutionTime: BigNumberish,
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"},{"internalType":"uint256","name":"earliestExecutionTime","type":"uint256"}],"name":"getTransactionDataHash","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [
-            usr,
-            codeHash,
-            parameters,
-            earliestExecutionTime,
-        ])
+        return this.ethCallOrMulticall(
+            abi,
+            [usr, codeHash, parameters, earliestExecutionTime],
+            multicall
+        )
     }
 
     maxScheduledTransactions(): Promise<BigNumber>

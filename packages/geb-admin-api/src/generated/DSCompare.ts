@@ -2,39 +2,79 @@
 /* tslint:disable */
 
 import { BaseContractAPI } from '@reflexer-finance/geb-contract-base'
-import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
+import { MulticallRequest } from '@reflexer-finance/geb-contract-base'
 import { BigNumberish } from '@ethersproject/bignumber'
 
 export class DsCompare extends BaseContractAPI {
-    ge(x: BigNumberish, y: BigNumberish): TransactionRequest {
+    ge(x: BigNumberish, y: BigNumberish): Promise<boolean>
+    ge(
+        x: BigNumberish,
+        y: BigNumberish,
+        multicall: true
+    ): MulticallRequest<boolean>
+    ge(
+        x: BigNumberish,
+        y: BigNumberish,
+        multicall?: true
+    ): Promise<boolean> | MulticallRequest<boolean> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"int256","name":"x","type":"int256"},{"internalType":"int256","name":"y","type":"int256"}],"name":"ge","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [x, y])
+        return this.ethCallOrMulticall(abi, [x, y], multicall)
     }
 
-    gt(x: BigNumberish, y: BigNumberish): TransactionRequest {
+    gt(x: BigNumberish, y: BigNumberish): Promise<boolean>
+    gt(
+        x: BigNumberish,
+        y: BigNumberish,
+        multicall: true
+    ): MulticallRequest<boolean>
+    gt(
+        x: BigNumberish,
+        y: BigNumberish,
+        multicall?: true
+    ): Promise<boolean> | MulticallRequest<boolean> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"x","type":"uint256"},{"internalType":"uint256","name":"y","type":"uint256"}],"name":"gt","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [x, y])
+        return this.ethCallOrMulticall(abi, [x, y], multicall)
     }
 
-    le(x: BigNumberish, y: BigNumberish): TransactionRequest {
+    le(x: BigNumberish, y: BigNumberish): Promise<boolean>
+    le(
+        x: BigNumberish,
+        y: BigNumberish,
+        multicall: true
+    ): MulticallRequest<boolean>
+    le(
+        x: BigNumberish,
+        y: BigNumberish,
+        multicall?: true
+    ): Promise<boolean> | MulticallRequest<boolean> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"int256","name":"x","type":"int256"},{"internalType":"int256","name":"y","type":"int256"}],"name":"le","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [x, y])
+        return this.ethCallOrMulticall(abi, [x, y], multicall)
     }
 
-    lt(x: BigNumberish, y: BigNumberish): TransactionRequest {
+    lt(x: BigNumberish, y: BigNumberish): Promise<boolean>
+    lt(
+        x: BigNumberish,
+        y: BigNumberish,
+        multicall: true
+    ): MulticallRequest<boolean>
+    lt(
+        x: BigNumberish,
+        y: BigNumberish,
+        multicall?: true
+    ): Promise<boolean> | MulticallRequest<boolean> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"x","type":"uint256"},{"internalType":"uint256","name":"y","type":"uint256"}],"name":"lt","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"pure","type":"function"}
 
-        return this.getTransactionRequest(abi, [x, y])
+        return this.ethCallOrMulticall(abi, [x, y], multicall)
     }
 }
