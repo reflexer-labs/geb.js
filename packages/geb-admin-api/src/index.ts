@@ -17,10 +17,6 @@ import { CollateralJoin3 } from './generated/CollateralJoin3'
 import { CollateralJoin4 } from './generated/CollateralJoin4'
 import { CollateralJoin5 } from './generated/CollateralJoin5'
 import { CollateralJoin6 } from './generated/CollateralJoin6'
-import { CollateralLike2 } from './generated/CollateralLike2'
-import { CollateralLike3 } from './generated/CollateralLike3'
-import { CollateralLike4 } from './generated/CollateralLike4'
-import { CollateralLike5 } from './generated/CollateralLike5'
 import { Common } from './generated/Common'
 import { DsAuth } from './generated/DSAuth'
 import { DsAuthEvents } from './generated/DSAuthEvents'
@@ -122,10 +118,6 @@ export {
     CollateralJoin4,
     CollateralJoin5,
     CollateralJoin6,
-    CollateralLike2,
-    CollateralLike3,
-    CollateralLike4,
-    CollateralLike5,
     Common,
     DsAuth,
     DsAuthEvents,
