@@ -121,7 +121,8 @@ function codegenForSingleFunction(
     fn: FunctionDeclaration,
     abiFragment: RawAbiDefinition
 ): string {
-    const isView = fn.stateMutability === 'view'
+    const isView =
+        fn.stateMutability === 'view' || fn.stateMutability === 'pure'
     const inputTypes = generateInputTypes(fn.inputs, fn.stateMutability)
     const outputType = generateOutputTypes(fn.outputs)
     const processedInputName = generateInputNames(fn.inputs)
