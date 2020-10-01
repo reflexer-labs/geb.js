@@ -41,11 +41,27 @@ export class GovernanceLedMedianRaiusd extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
-    getResultWithValidity(): Promise<{}>
-    getResultWithValidity(multicall: true): MulticallRequest<{}>
+    getResultWithValidity(): Promise<{
+        0: BigNumber
+        1: boolean
+    }>
+    getResultWithValidity(
+        multicall: true
+    ): MulticallRequest<{
+        0: BigNumber
+        1: boolean
+    }>
     getResultWithValidity(
         multicall?: true
-    ): Promise<{}> | MulticallRequest<{}> {
+    ):
+        | Promise<{
+              0: BigNumber
+              1: boolean
+          }>
+        | MulticallRequest<{
+              0: BigNumber
+              1: boolean
+          }> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"getResultWithValidity","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}

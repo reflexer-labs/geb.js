@@ -31,9 +31,27 @@ export class Store extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [_val], multicall)
     }
 
-    getAnd10(): Promise<{}>
-    getAnd10(multicall: true): MulticallRequest<{}>
-    getAnd10(multicall?: true): Promise<{}> | MulticallRequest<{}> {
+    getAnd10(): Promise<{
+        0: BigNumber
+        1: BigNumber
+    }>
+    getAnd10(
+        multicall: true
+    ): MulticallRequest<{
+        0: BigNumber
+        1: BigNumber
+    }>
+    getAnd10(
+        multicall?: true
+    ):
+        | Promise<{
+              0: BigNumber
+              1: BigNumber
+          }>
+        | MulticallRequest<{
+              0: BigNumber
+              1: BigNumber
+          }> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"getAnd10","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}

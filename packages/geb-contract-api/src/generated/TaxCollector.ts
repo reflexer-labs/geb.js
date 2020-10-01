@@ -505,15 +505,31 @@ export class TaxCollector extends BaseContractAPI {
      * Get how much SF will be distributed after taxing a specific collateral type
      * @param collateralType Collateral type to compute the taxation outcome for
      */
-    taxSingleOutcome(collateralType: BytesLike): Promise<{}>
+    taxSingleOutcome(
+        collateralType: BytesLike
+    ): Promise<{
+        0: BigNumber
+        1: BigNumber
+    }>
     taxSingleOutcome(
         collateralType: BytesLike,
         multicall: true
-    ): MulticallRequest<{}>
+    ): MulticallRequest<{
+        0: BigNumber
+        1: BigNumber
+    }>
     taxSingleOutcome(
         collateralType: BytesLike,
         multicall?: true
-    ): Promise<{}> | MulticallRequest<{}> {
+    ):
+        | Promise<{
+              0: BigNumber
+              1: BigNumber
+          }>
+        | MulticallRequest<{
+              0: BigNumber
+              1: BigNumber
+          }> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"taxSingleOutcome","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"int256","name":"","type":"int256"}],"stateMutability":"view","type":"function"}

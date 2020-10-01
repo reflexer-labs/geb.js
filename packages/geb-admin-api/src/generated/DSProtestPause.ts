@@ -228,15 +228,35 @@ export class DsProtestPause extends BaseContractAPI {
         )
     }
 
-    getTransactionDelays1(txHash: BytesLike): Promise<{}>
+    getTransactionDelays1(
+        txHash: BytesLike
+    ): Promise<{
+        0: boolean
+        1: BigNumber
+        2: BigNumber
+    }>
     getTransactionDelays1(
         txHash: BytesLike,
         multicall: true
-    ): MulticallRequest<{}>
+    ): MulticallRequest<{
+        0: boolean
+        1: BigNumber
+        2: BigNumber
+    }>
     getTransactionDelays1(
         txHash: BytesLike,
         multicall?: true
-    ): Promise<{}> | MulticallRequest<{}> {
+    ):
+        | Promise<{
+              0: boolean
+              1: BigNumber
+              2: BigNumber
+          }>
+        | MulticallRequest<{
+              0: boolean
+              1: BigNumber
+              2: BigNumber
+          }> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"txHash","type":"bytes32"}],"name":"getTransactionDelays","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
@@ -248,19 +268,37 @@ export class DsProtestPause extends BaseContractAPI {
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike
-    ): Promise<{}>
+    ): Promise<{
+        0: boolean
+        1: BigNumber
+        2: BigNumber
+    }>
     getTransactionDelays2(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         multicall: true
-    ): MulticallRequest<{}>
+    ): MulticallRequest<{
+        0: boolean
+        1: BigNumber
+        2: BigNumber
+    }>
     getTransactionDelays2(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         multicall?: true
-    ): Promise<{}> | MulticallRequest<{}> {
+    ):
+        | Promise<{
+              0: boolean
+              1: BigNumber
+              2: BigNumber
+          }>
+        | MulticallRequest<{
+              0: boolean
+              1: BigNumber
+              2: BigNumber
+          }> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"}],"name":"getTransactionDelays","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}

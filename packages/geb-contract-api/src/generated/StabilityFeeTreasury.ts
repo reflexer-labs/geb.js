@@ -120,12 +120,31 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    getAllowance(account: string): Promise<{}>
-    getAllowance(account: string, multicall: true): MulticallRequest<{}>
+    getAllowance(
+        account: string
+    ): Promise<{
+        0: BigNumber
+        1: BigNumber
+    }>
+    getAllowance(
+        account: string,
+        multicall: true
+    ): MulticallRequest<{
+        0: BigNumber
+        1: BigNumber
+    }>
     getAllowance(
         account: string,
         multicall?: true
-    ): Promise<{}> | MulticallRequest<{}> {
+    ):
+        | Promise<{
+              0: BigNumber
+              1: BigNumber
+          }>
+        | MulticallRequest<{
+              0: BigNumber
+              1: BigNumber
+          }> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"getAllowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
