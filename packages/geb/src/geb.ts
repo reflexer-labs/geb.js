@@ -109,7 +109,7 @@ export class Geb {
      * Deploy a new proxy owned by the sender.
      */
     public deployProxy() {
-        return this.contracts.proxyRegistry.build()
+        return this.contracts.proxyRegistry.build1()
     }
 
     /**

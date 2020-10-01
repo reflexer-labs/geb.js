@@ -54,7 +54,7 @@ export const verifyContract = async (contract: any, ethNode: string) => {
         // TODO: Figure this out. For mysterious reasons,
         // this function on the GebDeploy contract is not found
         .filter((x) => x !== 'releaseAuthCollateralAuctionHouse')
-        .map((fct: any) => {
+        .map((fct: string) => {
             // Get function JS code and extract the ABI
             const fctString: string = contract[fct].toString()
             const abiString = /(?<=( *)var abi = )(.*)/g.exec(fctString)
@@ -65,8 +65,11 @@ export const verifyContract = async (contract: any, ethNode: string) => {
 
             const abi = JSON.parse(abiString[0].replace(';', ''))
 
+            // Strip trailing digits (overload suffix)
+            const functionName = fct.replace(/\d+$/, '')
+
             // Readable sig i.g: safes(bytes32,address)
-            const sig = `${fct}(${abi.inputs
+            const sig = `${functionName}(${abi.inputs
                 .map((x: any) => x.type)
                 .join(',')})`
 

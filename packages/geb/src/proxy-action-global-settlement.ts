@@ -85,7 +85,7 @@ export class GebProxyActionsGlobalSettlement extends GebProxyActionsGlobalSettle
             ethValue = BigNumber.from('0')
         }
 
-        return this.proxy.execute(ethValue, this.proxyActionAddress, data)
+        return this.proxy.execute1(ethValue, this.proxyActionAddress, data)
     }
 
     coinJoin_join(
