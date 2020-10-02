@@ -33,11 +33,6 @@ export class CoinSavingsAccount extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Add auth to an account
-     * @param account Account to add auth to
-     */
-
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -74,11 +69,6 @@ export class CoinSavingsAccount extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Deposit coins in the savings account
-     * @param wad Amount of coins to deposit (expressed as an 18 decimal number). 'wad' will be multiplied by 'accumulatedRate' (27 decimals) to result in a correct amount of internal coins transferred
-     */
-
     deposit(wad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -86,10 +76,6 @@ export class CoinSavingsAccount extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [wad])
     }
-
-    /**
-     * Disable this contract (usually called by Global Settlement)
-     */
 
     disableContract(): TransactionRequest {
         // prettier-ignore
@@ -111,12 +97,6 @@ export class CoinSavingsAccount extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Modify address of the accounting engine
-     * @param addr New value for the parameter
-     * @param parameter The name of the parameter modified
-     */
-
     modifyParameters1(parameter: BytesLike, addr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -124,12 +104,6 @@ export class CoinSavingsAccount extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [parameter, addr])
     }
-
-    /**
-     * Modify savings rate
-     * @param data New value for the parameter
-     * @param parameter The name of the parameter modified
-     */
 
     modifyParameters2(
         parameter: BytesLike,
@@ -142,9 +116,6 @@ export class CoinSavingsAccount extends BaseContractAPI {
         return this.getTransactionRequest(abi, [parameter, data])
     }
 
-    /**
-     * Get the next value of 'accumulatedRate' without actually updating the variable
-     */
     nextAccumulatedRate(): Promise<BigNumber>
     nextAccumulatedRate(multicall: true): MulticallRequest<BigNumber>
     nextAccumulatedRate(
@@ -156,11 +127,6 @@ export class CoinSavingsAccount extends BaseContractAPI {
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
-
-    /**
-     * Remove auth from an account
-     * @param account Account to remove auth from
-     */
 
     removeAuthorization(account: string): TransactionRequest {
         // prettier-ignore
@@ -217,11 +183,6 @@ export class CoinSavingsAccount extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * We return early if 'latestUpdateTime' is smaller or equal to block.timestamp. When the savings rate is positive, we create unbacked debt for the accounting engine and issue new coins for this contract
-     * Update the accumulated rates index
-     */
-
     updateAccumulatedRate(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -229,11 +190,6 @@ export class CoinSavingsAccount extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [])
     }
-
-    /**
-     * Withdraw coins (alongside any interest accrued) from the savings account
-     * @param wad Amount of coins to withdraw (expressed as an 18 decimal number). 'wad' will be multiplied by 'accumulatedRate' (27 decimals) to result in a correct amount of internal coins transferred
-     */
 
     withdraw(wad: BigNumberish): TransactionRequest {
         // prettier-ignore

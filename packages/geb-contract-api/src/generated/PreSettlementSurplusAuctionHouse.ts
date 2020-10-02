@@ -21,11 +21,6 @@ export class PreSettlementSurplusAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Add auth to an account
-     * @param account Account to add auth to
-     */
-
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -140,10 +135,6 @@ export class PreSettlementSurplusAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Disable the auction house (usually called by AccountingEngine)*
-     */
-
     disableContract(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -151,13 +142,6 @@ export class PreSettlementSurplusAuctionHouse extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [])
     }
-
-    /**
-     * Submit a higher protocol token bid for the same amount of system coins
-     * @param amountToBuy Amount of system coins to buy (wad)
-     * @param bid New bid submitted (rad)
-     * @param id ID of the auction you want to submit the bid for
-     */
 
     increaseBidSize(
         id: BigNumberish,
@@ -170,12 +154,6 @@ export class PreSettlementSurplusAuctionHouse extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [id, amountToBuy, bid])
     }
-
-    /**
-     * Modify auction parameters
-     * @param data New value for the parameter
-     * @param parameter The name of the parameter modified
-     */
 
     modifyParameters(
         parameter: BytesLike,
@@ -200,11 +178,6 @@ export class PreSettlementSurplusAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Remove auth from an account
-     * @param account Account to remove auth from
-     */
-
     removeAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -212,11 +185,6 @@ export class PreSettlementSurplusAuctionHouse extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [account])
     }
-
-    /**
-     * Restart an auction if no bids were submitted for it
-     * @param id ID of the auction to restart
-     */
 
     restartAuction(id: BigNumberish): TransactionRequest {
         // prettier-ignore
@@ -236,11 +204,6 @@ export class PreSettlementSurplusAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Settle/finish an auction
-     * @param id ID of the auction to settle
-     */
-
     settleAuction(id: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -248,12 +211,6 @@ export class PreSettlementSurplusAuctionHouse extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [id])
     }
-
-    /**
-     * Start a new surplus auction
-     * @param amountToSell Total amount of system coins to sell (wad)
-     * @param initialBid Initial protocol token bid (rad)
-     */
 
     startAuction(
         amountToSell: BigNumberish,
@@ -265,11 +222,6 @@ export class PreSettlementSurplusAuctionHouse extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [amountToSell, initialBid])
     }
-
-    /**
-     * Terminate an auction prematurely.
-     * @param id ID of the auction to settle/terminate
-     */
 
     terminateAuctionPrematurely(id: BigNumberish): TransactionRequest {
         // prettier-ignore

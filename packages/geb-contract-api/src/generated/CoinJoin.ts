@@ -8,11 +8,6 @@ import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class CoinJoin extends BaseContractAPI {
-    /**
-     * Add auth to an account
-     * @param account Account to add auth to
-     */
-
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -61,10 +56,6 @@ export class CoinJoin extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Disable this contract
-     */
-
     disableContract(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -72,13 +63,6 @@ export class CoinJoin extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [])
     }
-
-    /**
-     * Inside the system, coins have 45 (rad) decimals but outside they have 18 decimals (wad). When we exit, we specify a wad amount of coins and then the contract automatically multiplies wad by 10**27 to move the correct 45 decimal coin amount to this adapter
-     * Exit system coins from the system and inside 'Coin.sol'
-     * @param account Account that will receive the exited coins
-     * @param wad Amount of internal coins to join (18 decimal number that will be multiplied by ray)*
-     */
 
     exit(account: string, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
@@ -88,13 +72,6 @@ export class CoinJoin extends BaseContractAPI {
         return this.getTransactionRequest(abi, [account, wad])
     }
 
-    /**
-     * Exited coins have 18 decimals but inside the system they have 45 (rad) decimals. When we join, the amount (wad) is multiplied by 10**27 (ray)
-     * Join system coins in the system
-     * @param account Account that will receive the joined coins
-     * @param wad Amount of external coins to join (18 decimal number)*
-     */
-
     join(account: string, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -102,11 +79,6 @@ export class CoinJoin extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [account, wad])
     }
-
-    /**
-     * Remove auth from an account
-     * @param account Account to remove auth from
-     */
 
     removeAuthorization(account: string): TransactionRequest {
         // prettier-ignore

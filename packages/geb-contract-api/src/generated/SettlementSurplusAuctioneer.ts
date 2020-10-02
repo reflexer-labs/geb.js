@@ -20,11 +20,6 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Add auth to an account
-     * @param account Account to add auth to
-     */
-
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -32,10 +27,6 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [account])
     }
-
-    /**
-     * Auction stability fees. The process is very similar to how the AccountingEngine would do it. The contract even reads surplus auction parameters from the AccountingEngine and uses them to start a new auction.
-     */
 
     auctionSurplus(): TransactionRequest {
         // prettier-ignore
@@ -73,12 +64,6 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Modify contract addresses
-     * @param addr New address for the contract
-     * @param parameter The name of the contract whose address will be changed
-     */
-
     modifyParameters(parameter: BytesLike, addr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -86,11 +71,6 @@ export class SettlementSurplusAuctioneer extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [parameter, addr])
     }
-
-    /**
-     * Remove auth from an account
-     * @param account Account to remove auth from
-     */
 
     removeAuthorization(account: string): TransactionRequest {
         // prettier-ignore

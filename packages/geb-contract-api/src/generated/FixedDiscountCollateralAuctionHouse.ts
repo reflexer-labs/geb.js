@@ -31,11 +31,6 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Add auth to an account
-     * @param account Account to add auth to
-     */
-
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -153,18 +148,24 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
-    /**
-     * Buy collateral from an auction at a fixed discount
-     * @param id ID of the auction to buy collateral from
-     * @param wad New bid submitted
-     */
-
     buyCollateral(id: BigNumberish, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"buyCollateral","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [id, wad])
+    }
+
+    collateralFSM(): Promise<string>
+    collateralFSM(multicall: true): MulticallRequest<string>
+    collateralFSM(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"collateralFSM","outputs":[{"internalType":"contract OracleLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     collateralMedian(): Promise<string>
@@ -175,18 +176,6 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"collateralMedian","outputs":[{"internalType":"contract OracleLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    collateralOSM(): Promise<string>
-    collateralOSM(multicall: true): MulticallRequest<string>
-    collateralOSM(
-        multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"collateralOSM","outputs":[{"internalType":"contract OracleLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -231,12 +220,6 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
-    /**
-     * Calculate how much collateral someone would buy from an auction
-     * @param id ID of the auction to buy collateral from
-     * @param wad New bid submitted
-     */
-
     getCollateralBought(
         id: BigNumberish,
         wad: BigNumberish
@@ -249,17 +232,17 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
     }
 
     getDiscountedCollateralPrice(
-        collateralOSMPriceFeedValue: BigNumberish,
+        collateralFsmPriceFeedValue: BigNumberish,
         collateralMedianPriceFeedValue: BigNumberish,
         systemCoinPriceFeedValue: BigNumberish,
         customDiscount: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"collateralOSMPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"collateralMedianPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"systemCoinPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"customDiscount","type":"uint256"}],"name":"getDiscountedCollateralPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"collateralFsmPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"collateralMedianPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"systemCoinPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"customDiscount","type":"uint256"}],"name":"getDiscountedCollateralPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
-            collateralOSMPriceFeedValue,
+            collateralFsmPriceFeedValue,
             collateralMedianPriceFeedValue,
             systemCoinPriceFeedValue,
             customDiscount,
@@ -326,12 +309,6 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Modify oracle related integrations
-     * @param data New address for the oracle contract
-     * @param parameter The name of the contract address being updated
-     */
-
     modifyParameters1(parameter: BytesLike, data: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -339,12 +316,6 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [parameter, data])
     }
-
-    /**
-     * Modify auction parameters
-     * @param data New value for the parameter
-     * @param parameter The name of the parameter modified
-     */
 
     modifyParameters2(
         parameter: BytesLike,
@@ -385,11 +356,6 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
-    /**
-     * Remove auth from an account
-     * @param account Account to remove auth from
-     */
-
     removeAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -408,11 +374,6 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Settle/finish an auction
-     * @param id ID of the auction to settle
-     */
-
     settleAuction(id: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -420,15 +381,6 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [id])
     }
-
-    /**
-     * Start a new collateral auction
-     * @param amountToRaise Total amount of coins to raise (rad)
-     * @param amountToSell Total amount of collateral available to sell (wad)
-     * @param auctionIncomeRecipient Who receives the amount raised in the auction
-     * @param forgoneCollateralReceiver Who receives leftover collateral that is not auctioned
-     * @param initialBid Unused
-     */
 
     startAuction(
         forgoneCollateralReceiver: string,
@@ -461,11 +413,6 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
-
-    /**
-     * Terminate an auction prematurely. Usually called by Global Settlement.
-     * @param id ID of the auction to settle
-     */
 
     terminateAuctionPrematurely(id: BigNumberish): TransactionRequest {
         // prettier-ignore

@@ -9,11 +9,6 @@ import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class OracleRelayer extends BaseContractAPI {
-    /**
-     * Add auth to an account
-     * @param account Account to add auth to
-     */
-
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -86,10 +81,6 @@ export class OracleRelayer extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Disable this contract (normally called by GlobalSettlement)
-     */
-
     disableContract(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -98,10 +89,6 @@ export class OracleRelayer extends BaseContractAPI {
         return this.getTransactionRequest(abi, [])
     }
 
-    /**
-     * Fetch the liquidation CRatio of a specific collateral type
-     * @param collateralType The collateral price we want the liquidation CRatio for
-     */
     liquidationCRatio(collateralType: BytesLike): Promise<BigNumber>
     liquidationCRatio(
         collateralType: BytesLike,
@@ -117,13 +104,6 @@ export class OracleRelayer extends BaseContractAPI {
 
         return this.ethCallOrMulticall(abi, [collateralType], multicall)
     }
-
-    /**
-     * Modify oracle price feed addresses
-     * @param addr New oracle address
-     * @param collateralType Collateral who's oracle we change
-     * @param parameter Name of the parameter
-     */
 
     modifyParameters1(
         collateralType: BytesLike,
@@ -141,13 +121,6 @@ export class OracleRelayer extends BaseContractAPI {
         ])
     }
 
-    /**
-     * Modify CRatio related parameters
-     * @param collateralType Collateral who's parameters we change
-     * @param data New param value
-     * @param parameter Name of the parameter
-     */
-
     modifyParameters2(
         collateralType: BytesLike,
         parameter: BytesLike,
@@ -164,12 +137,6 @@ export class OracleRelayer extends BaseContractAPI {
         ])
     }
 
-    /**
-     * Modify redemption related parameters
-     * @param data New param value
-     * @param parameter Name of the parameter
-     */
-
     modifyParameters3(
         parameter: BytesLike,
         data: BigNumberish
@@ -181,10 +148,6 @@ export class OracleRelayer extends BaseContractAPI {
         return this.getTransactionRequest(abi, [parameter, data])
     }
 
-    /**
-     * Fetch the oracle price feed of a specific collateral type
-     * @param collateralType The collateral price we want the oracle price feed for
-     */
     orcl(collateralType: BytesLike): Promise<string>
     orcl(collateralType: BytesLike, multicall: true): MulticallRequest<string>
     orcl(
@@ -198,28 +161,12 @@ export class OracleRelayer extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [collateralType], multicall)
     }
 
-    /**
-     * Fetch the latest redemption price by first updating it
-     */
-
     redemptionPrice(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"redemptionPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [])
-    }
-
-    redemptionPrice_readOnly(): Promise<BigNumber>
-    redemptionPrice_readOnly(multicall: true): MulticallRequest<BigNumber>
-    redemptionPrice_readOnly(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"redemptionPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     redemptionPriceUpdateTime(): Promise<BigNumber>
@@ -270,11 +217,6 @@ export class OracleRelayer extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Remove auth from an account
-     * @param account Account to remove auth from
-     */
-
     removeAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -293,10 +235,6 @@ export class OracleRelayer extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Fetch the safety CRatio of a specific collateral type
-     * @param collateralType The collateral price we want the safety CRatio for
-     */
     safetyCRatio(collateralType: BytesLike): Promise<BigNumber>
     safetyCRatio(
         collateralType: BytesLike,
@@ -312,11 +250,6 @@ export class OracleRelayer extends BaseContractAPI {
 
         return this.ethCallOrMulticall(abi, [collateralType], multicall)
     }
-
-    /**
-     * Update the collateral price inside the system (inside SAFEEngine)
-     * @param collateralType The collateral we want to update prices (safety and liquidation prices) for
-     */
 
     updateCollateralPrice(collateralType: BytesLike): TransactionRequest {
         // prettier-ignore

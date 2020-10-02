@@ -9,11 +9,6 @@ import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class AccountingEngine extends BaseContractAPI {
-    /**
-     * Add auth to an account
-     * @param account Account to add auth to
-     */
-
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -22,11 +17,6 @@ export class AccountingEngine extends BaseContractAPI {
         return this.getTransactionRequest(abi, [account])
     }
 
-    /**
-     * We can only auction debt that is not already being auctioned and is not locked in the debt queue*
-     * Start a debt auction (print protocol tokens in exchange for coins so that the        system can accumulate surplus)
-     */
-
     auctionDebt(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -34,11 +24,6 @@ export class AccountingEngine extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [])
     }
-
-    /**
-     * We can only auction surplus if we wait at least 'surplusAuctionDelay' seconds since the last     auction trigger, if we keep enough surplus in the buffer and if there is no bad debt to settle*
-     * Start a surplus auction
-     */
 
     auctionSurplus(): TransactionRequest {
         // prettier-ignore
@@ -63,11 +48,6 @@ export class AccountingEngine extends BaseContractAPI {
 
         return this.ethCallOrMulticall(abi, [address], multicall)
     }
-
-    /**
-     * Use surplus coins to destroy debt that is/was in a debt auction
-     * @param rad Amount of coins/debt to destroy (number with 45 decimals)*
-     */
 
     cancelAuctionedDebtWithSurplus(rad: BigNumberish): TransactionRequest {
         // prettier-ignore
@@ -129,11 +109,6 @@ export class AccountingEngine extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
-    /**
-     * When we disable, the contract tries to settle as much debt as possible (if there's any) with any surplus that's left in the system. After erasing debt, the contract will either transfer any remaining surplus right away (if disableCooldown == 0) or will only record the timestamp when it was disabled*
-     * Disable this contract (normally called by Global Settlement)
-     */
-
     disableContract(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -190,12 +165,6 @@ export class AccountingEngine extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Modify dependency addresses
-     * @param data New address for the auction
-     * @param parameter The name of the auction type we want to change the address for
-     */
-
     modifyParameters1(parameter: BytesLike, data: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -203,12 +172,6 @@ export class AccountingEngine extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [parameter, data])
     }
-
-    /**
-     * Modify general uint params for auctions
-     * @param data New value for the parameter
-     * @param parameter The name of the parameter modified
-     */
 
     modifyParameters2(
         parameter: BytesLike,
@@ -232,11 +195,6 @@ export class AccountingEngine extends BaseContractAPI {
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
-
-    /**
-     * A block of debt can be popped from the queue after popDebtDelay seconds passed since it was        added there
-     * @param debtBlockTimestamp Timestamp of the block of debt that should be popped out
-     */
 
     popDebtFromQueue(debtBlockTimestamp: BigNumberish): TransactionRequest {
         // prettier-ignore
@@ -270,12 +228,6 @@ export class AccountingEngine extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Debt is locked in a queue to give the system enough time to auction collateral     and gather surplus
-     * Push debt (that the system tries to cover with collateral auctions) to a queue
-     * @param debtBlock Amount of debt to push
-     */
-
     pushDebtToQueue(debtBlock: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -283,11 +235,6 @@ export class AccountingEngine extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [debtBlock])
     }
-
-    /**
-     * Remove auth from an account
-     * @param account Account to remove auth from
-     */
 
     removeAuthorization(account: string): TransactionRequest {
         // prettier-ignore
@@ -306,12 +253,6 @@ export class AccountingEngine extends BaseContractAPI {
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
-
-    /**
-     * We can only destroy debt that is not locked in the queue and also not in a debt auction
-     * Destroy an equal amount of coins and debt
-     * @param rad Amount of coins/debt to destroy (number with 45 decimals)*
-     */
 
     settleDebt(rad: BigNumberish): TransactionRequest {
         // prettier-ignore
@@ -392,11 +333,6 @@ export class AccountingEngine extends BaseContractAPI {
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
-
-    /**
-     * Transfer any remaining surplus after disableCooldown seconds have passed since disabling the contract*
-     * Transfer any remaining surplus after the disable cooldown has passed
-     */
 
     transferPostSettlementSurplus(): TransactionRequest {
         // prettier-ignore

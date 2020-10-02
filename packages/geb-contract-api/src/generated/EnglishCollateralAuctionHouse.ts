@@ -31,11 +31,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Add auth to an account
-     * @param account Account to add auth to
-     */
-
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -191,13 +186,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Second auction phase: decrease the collateral amount you're willing to receive in        exchange for providing the same amount of coins as the winning bid
-     * @param amountToBuy Amount of collateral to buy (must be smaller than the previous proposed amount) (wad)
-     * @param id ID of the auction for which you want to submit a new amount of collateral to buy
-     * @param rad New bid submitted; must be equal to the winning bid from the increaseBidSize phase (rad)
-     */
-
     decreaseSoldAmount(
         id: BigNumberish,
         amountToBuy: BigNumberish,
@@ -226,13 +214,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
-    /**
-     * First auction phase: submit a higher bid for the same amount of collateral
-     * @param amountToBuy Amount of collateral to buy (wad)
-     * @param id ID of the auction you want to submit the bid for
-     * @param rad New bid submitted (rad)
-     */
-
     increaseBidSize(
         id: BigNumberish,
         amountToBuy: BigNumberish,
@@ -257,12 +238,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Modify oracle related integrations
-     * @param data New address for the oracle contract
-     * @param parameter The name of the oracle contract modified
-     */
-
     modifyParameters1(parameter: BytesLike, data: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -270,12 +245,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [parameter, data])
     }
-
-    /**
-     * Modify auction parameters
-     * @param data New value for the parameter
-     * @param parameter The name of the parameter modified
-     */
 
     modifyParameters2(
         parameter: BytesLike,
@@ -286,28 +255,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [parameter, data])
-    }
-
-    oracleRelayer(): Promise<string>
-    oracleRelayer(multicall: true): MulticallRequest<string>
-    oracleRelayer(
-        multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"oracleRelayer","outputs":[{"internalType":"contract OracleRelayerLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    osm(): Promise<string>
-    osm(multicall: true): MulticallRequest<string>
-    osm(multicall?: true): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"osm","outputs":[{"internalType":"contract OracleLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     remainingAmountToSell(id: BigNumberish): Promise<BigNumber>
@@ -326,11 +273,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
-    /**
-     * Remove auth from an account
-     * @param account Account to remove auth from
-     */
-
     removeAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -338,11 +280,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [account])
     }
-
-    /**
-     * Restart an auction if no bids were submitted for it
-     * @param id ID of the auction to restart
-     */
 
     restartAuction(id: BigNumberish): TransactionRequest {
         // prettier-ignore
@@ -362,11 +299,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    /**
-     * Settle/finish an auction
-     * @param id ID of the auction to settle
-     */
-
     settleAuction(id: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -374,15 +306,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
 
         return this.getTransactionRequest(abi, [id])
     }
-
-    /**
-     * Start a new collateral auction
-     * @param amountToRaise Total amount of coins to raise (rad)
-     * @param amountToSell Total amount of collateral available to sell (wad)
-     * @param auctionIncomeRecipient Who receives the amount raised in the auction
-     * @param forgoneCollateralReceiver Who receives leftover collateral that is not auctioned
-     * @param initialBid Initial bid size (usually zero in this implementation) (rad)
-     */
 
     startAuction(
         forgoneCollateralReceiver: string,
@@ -403,11 +326,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
             initialBid,
         ])
     }
-
-    /**
-     * Terminate an auction prematurely (if it's still in the first phase).        Usually called by Global Settlement.
-     * @param id ID of the auction to settle
-     */
 
     terminateAuctionPrematurely(id: BigNumberish): TransactionRequest {
         // prettier-ignore

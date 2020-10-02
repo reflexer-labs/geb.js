@@ -16,31 +16,6 @@ export class BasicCollateralJoin extends BaseContractAPI {
         return this.getTransactionRequest(abi, [account])
     }
 
-    allowance(address: string): Promise<BigNumber>
-    allowance(address: string, multicall: true): MulticallRequest<BigNumber>
-    allowance(
-        address: string,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [address], multicall)
-    }
-
-    allowed(): Promise<BigNumber>
-    allowed(multicall: true): MulticallRequest<BigNumber>
-    allowed(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"allowed","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     authorizedAccounts(address: string): Promise<BigNumber>
     authorizedAccounts(
         address: string,
@@ -57,19 +32,6 @@ export class BasicCollateralJoin extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
-    canJoin(amount: BigNumberish): Promise<boolean>
-    canJoin(amount: BigNumberish, multicall: true): MulticallRequest<boolean>
-    canJoin(
-        amount: BigNumberish,
-        multicall?: true
-    ): Promise<boolean> | MulticallRequest<boolean> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"canJoin","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [amount], multicall)
-    }
-
     collateral(): Promise<string>
     collateral(multicall: true): MulticallRequest<string>
     collateral(multicall?: true): Promise<string> | MulticallRequest<string> {
@@ -78,22 +40,6 @@ export class BasicCollateralJoin extends BaseContractAPI {
         const abi = {"inputs":[],"name":"collateral","outputs":[{"internalType":"contract CollateralLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    collateralJoined(address: string): Promise<BigNumber>
-    collateralJoined(
-        address: string,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    collateralJoined(
-        address: string,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"collateralJoined","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     collateralType(): Promise<string>
@@ -140,20 +86,20 @@ export class BasicCollateralJoin extends BaseContractAPI {
         return this.getTransactionRequest(abi, [])
     }
 
-    exit(usr: string, wad: BigNumberish): TransactionRequest {
+    exit(account: string, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"exit","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"exit","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [usr, wad])
+        return this.getTransactionRequest(abi, [account, wad])
     }
 
-    join(usr: string, wad: BigNumberish): TransactionRequest {
+    join(account: string, wad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"join","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"join","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [usr, wad])
+        return this.getTransactionRequest(abi, [account, wad])
     }
 
     removeAuthorization(account: string): TransactionRequest {
@@ -172,13 +118,5 @@ export class BasicCollateralJoin extends BaseContractAPI {
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    setAllowance(account: string, amount: BigNumberish): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"setAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [account, amount])
     }
 }

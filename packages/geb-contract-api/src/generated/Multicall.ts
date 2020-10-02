@@ -9,119 +9,14 @@ import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class Multicall extends BaseContractAPI {
-    getCurrentBlockTimestamp(): Promise<BigNumber>
-    getCurrentBlockTimestamp(multicall: true): MulticallRequest<BigNumber>
-    getCurrentBlockTimestamp(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"constant":true,"inputs":[],"name":"getCurrentBlockTimestamp","outputs":[{"name":"timestamp","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     aggregate(
         calls: { target: string; callData: BytesLike }[]
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"constant":false,"inputs":[{"components":[{"name":"target","type":"address"},{"name":"callData","type":"bytes"}],"name":"calls","type":"tuple[]"}],"name":"aggregate","outputs":[{"name":"blockNumber","type":"uint256"},{"name":"returnData","type":"bytes[]"}],"payable":false,"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"components":[{"internalType":"address","name":"target","type":"address"},{"internalType":"bytes","name":"callData","type":"bytes"}],"internalType":"struct Multicall.Call[]","name":"calls","type":"tuple[]"}],"name":"aggregate","outputs":[{"internalType":"uint256","name":"blockNumber","type":"uint256"},{"internalType":"bytes[]","name":"returnData","type":"bytes[]"}],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [calls])
-    }
-
-    aggregate_readOnly(
-        calls: { target: string; callData: BytesLike }[]
-    ): Promise<{
-        blockNumber: BigNumber
-        returnData: string[]
-    }>
-    aggregate_readOnly(
-        calls: { target: string; callData: BytesLike }[],
-        multicall: true
-    ): MulticallRequest<{
-        blockNumber: BigNumber
-        returnData: string[]
-    }>
-    aggregate_readOnly(
-        calls: { target: string; callData: BytesLike }[],
-        multicall?: true
-    ):
-        | Promise<{
-              blockNumber: BigNumber
-              returnData: string[]
-          }>
-        | MulticallRequest<{
-              blockNumber: BigNumber
-              returnData: string[]
-          }> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"constant":false,"inputs":[{"components":[{"name":"target","type":"address"},{"name":"callData","type":"bytes"}],"name":"calls","type":"tuple[]"}],"name":"aggregate","outputs":[{"name":"blockNumber","type":"uint256"},{"name":"returnData","type":"bytes[]"}],"payable":false,"stateMutability":"nonpayable","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [calls], multicall)
-    }
-
-    getLastBlockHash(): Promise<string>
-    getLastBlockHash(multicall: true): MulticallRequest<string>
-    getLastBlockHash(
-        multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"constant":true,"inputs":[],"name":"getLastBlockHash","outputs":[{"name":"blockHash","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    getEthBalance(addr: string): Promise<BigNumber>
-    getEthBalance(addr: string, multicall: true): MulticallRequest<BigNumber>
-    getEthBalance(
-        addr: string,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"getEthBalance","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [addr], multicall)
-    }
-
-    getCurrentBlockDifficulty(): Promise<BigNumber>
-    getCurrentBlockDifficulty(multicall: true): MulticallRequest<BigNumber>
-    getCurrentBlockDifficulty(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"constant":true,"inputs":[],"name":"getCurrentBlockDifficulty","outputs":[{"name":"difficulty","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    getCurrentBlockGasLimit(): Promise<BigNumber>
-    getCurrentBlockGasLimit(multicall: true): MulticallRequest<BigNumber>
-    getCurrentBlockGasLimit(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"constant":true,"inputs":[],"name":"getCurrentBlockGasLimit","outputs":[{"name":"gaslimit","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    getCurrentBlockCoinbase(): Promise<string>
-    getCurrentBlockCoinbase(multicall: true): MulticallRequest<string>
-    getCurrentBlockCoinbase(
-        multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"constant":true,"inputs":[],"name":"getCurrentBlockCoinbase","outputs":[{"name":"coinbase","type":"address"}],"payable":false,"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     getBlockHash(blockNumber: BigNumberish): Promise<string>
@@ -135,8 +30,81 @@ export class Multicall extends BaseContractAPI {
     ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"constant":true,"inputs":[{"name":"blockNumber","type":"uint256"}],"name":"getBlockHash","outputs":[{"name":"blockHash","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"blockNumber","type":"uint256"}],"name":"getBlockHash","outputs":[{"internalType":"bytes32","name":"blockHash","type":"bytes32"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [blockNumber], multicall)
+    }
+
+    getCurrentBlockCoinbase(): Promise<string>
+    getCurrentBlockCoinbase(multicall: true): MulticallRequest<string>
+    getCurrentBlockCoinbase(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"getCurrentBlockCoinbase","outputs":[{"internalType":"address","name":"coinbase","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    getCurrentBlockDifficulty(): Promise<BigNumber>
+    getCurrentBlockDifficulty(multicall: true): MulticallRequest<BigNumber>
+    getCurrentBlockDifficulty(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"getCurrentBlockDifficulty","outputs":[{"internalType":"uint256","name":"difficulty","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    getCurrentBlockGasLimit(): Promise<BigNumber>
+    getCurrentBlockGasLimit(multicall: true): MulticallRequest<BigNumber>
+    getCurrentBlockGasLimit(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"getCurrentBlockGasLimit","outputs":[{"internalType":"uint256","name":"gaslimit","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    getCurrentBlockTimestamp(): Promise<BigNumber>
+    getCurrentBlockTimestamp(multicall: true): MulticallRequest<BigNumber>
+    getCurrentBlockTimestamp(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"getCurrentBlockTimestamp","outputs":[{"internalType":"uint256","name":"timestamp","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    getEthBalance(addr: string): Promise<BigNumber>
+    getEthBalance(addr: string, multicall: true): MulticallRequest<BigNumber>
+    getEthBalance(
+        addr: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"addr","type":"address"}],"name":"getEthBalance","outputs":[{"internalType":"uint256","name":"balance","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [addr], multicall)
+    }
+
+    getLastBlockHash(): Promise<string>
+    getLastBlockHash(multicall: true): MulticallRequest<string>
+    getLastBlockHash(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"getLastBlockHash","outputs":[{"internalType":"bytes32","name":"blockHash","type":"bytes32"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 }

@@ -8,7 +8,7 @@ import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
-export class UniswapConsecutiveSlotsMedianPraiusd extends BaseContractAPI {
+export class UniswapConsecutiveSlotsMedianRaiusd extends BaseContractAPI {
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
