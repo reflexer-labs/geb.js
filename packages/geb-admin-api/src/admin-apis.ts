@@ -3,11 +3,9 @@ import {
     ProtocolTokenAuthority,
     GebPollingEmitter,
     DsDelegateRoles,
-    GebPrintingPermissions,
     DsPauseProxy,
     GovActions,
     Esm,
-    TokenBurner,
     FsmGovernanceInterface,
     DsProxyFactory,
     GebDeployPauseProxyActions,
@@ -31,13 +29,11 @@ export class AdminApis {
     public deploy : GebDeploy
     public protocolTokenAuthority: ProtocolTokenAuthority
     public pollingEmitter: GebPollingEmitter
-    public printingPermissionRegistry: GebPrintingPermissions
     public pauseAuthority: DsDelegateRoles
     public pause: DsProtestPause
     public pauseProxy: DsPauseProxy
     public govActions: GovActions
     public esm: Esm
-    public esmBurner: TokenBurner
     public fsmGovInterface: FsmGovernanceInterface
     public proxyFactory: DsProxyFactory
     public pauseProxyAction: GebDeployPauseProxyActions
@@ -67,11 +63,5 @@ export class AdminApis {
         this.pauseProxyAction = new GebDeployPauseProxyActions(addressList.PROXY_PAUSE_ACTIONS, this.chainProvider)
         this.proxyDeployer = new DsProxy(addressList.PROXY_DEPLOYER, this.chainProvider)
         this.txManager = new TxManager(addressList.GEB_TX_MANAGER, this.chainProvider)
-        
-        // Contracts removed for the beta testnet. 
-        // this.esm = new Esm(addressList.GEB_ESM, this.chainProvider)
-        // this.protocolTokenAuthority = new ProtocolTokenAuthority(addressList.PROTOCOL_TOKEN_AUTHORITY, this.chainProvider)
-        // this.printingPermissionRegistry = new GebPrintingPermissions(addressList.PRINTING_PERMISSIONS_REGISTRY, this.chainProvider)
-        // this.esmBurner = new TokenBurner(addressList.GEB_ESM_TOKEN_BURNER, this.chainProvider)
     }
 }

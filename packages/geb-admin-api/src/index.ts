@@ -2,7 +2,6 @@ import { AccountingEngineFactory } from './generated/AccountingEngineFactory'
 import { AggregatorInterface } from './generated/AggregatorInterface'
 import { AuthCollateralJoin } from './generated/AuthCollateralJoin'
 import { AuthorizableContract } from './generated/AuthorizableContract'
-import { BurntToken } from './generated/BurntToken'
 import { ChainlinkMedianFlxusd } from './generated/ChainlinkMedianFLXUSD'
 import { ChainlinkMedianRaiusd } from './generated/ChainlinkMedianRAIUSD'
 import { ChainlinkPriceFeedMedianizer } from './generated/ChainlinkPriceFeedMedianizer'
@@ -48,7 +47,6 @@ import { GebDeploy } from './generated/GebDeploy'
 import { GebDeployPauseProxyActions } from './generated/GebDeployPauseProxyActions'
 import { GebPollingEmitter } from './generated/GebPollingEmitter'
 import { GebPollingEvents } from './generated/GebPollingEvents'
-import { GebPrintingPermissions } from './generated/GebPrintingPermissions'
 import { GemBag } from './generated/GemBag'
 import { GlobalSettlementFactory } from './generated/GlobalSettlementFactory'
 import { GovActions } from './generated/GovActions'
@@ -60,10 +58,6 @@ import { IUniswapV2Factory } from './generated/IUniswapV2Factory'
 import { IUniswapV2Pair } from './generated/IUniswapV2Pair'
 import { LiquidationEngineFactory } from './generated/LiquidationEngineFactory'
 import { LiquidationEngineMock } from './generated/LiquidationEngineMock'
-import { Logging } from './generated/Logging'
-import { MockDebtAuctionHouse } from './generated/MockDebtAuctionHouse'
-import { MockSurplusAuctionHouse } from './generated/MockSurplusAuctionHouse'
-import { NotThrowingToken } from './generated/NotThrowingToken'
 import { OracleRelayerFactory } from './generated/OracleRelayerFactory'
 import { PauseFactory } from './generated/PauseFactory'
 import { PostSettlementSurplusAuctionHouseFactory } from './generated/PostSettlementSurplusAuctionHouseFactory'
@@ -77,23 +71,23 @@ import { SettlementSurplusAuctioneerFactory } from './generated/SettlementSurplu
 import { SimpleAuthority } from './generated/SimpleAuthority'
 import { StabilityFeeTreasuryFactory } from './generated/StabilityFeeTreasuryFactory'
 import { Store } from './generated/Store'
-import { TestAccountingEngine } from './generated/TestAccountingEngine'
-import { TestDebtAuctionHouse } from './generated/TestDebtAuctionHouse'
 import { Tester } from './generated/Tester'
-import { TokenBurner } from './generated/TokenBurner'
 import { TokenFaucet } from './generated/TokenFaucet'
 import { TxManager } from './generated/TxManager'
-import { UniswapMedianFlxusd } from './generated/UniswapMedianFLXUSD'
-import { UniswapMedianRaiusd } from './generated/UniswapMedianRAIUSD'
-import { UniswapPriceFeedMedianizer } from './generated/UniswapPriceFeedMedianizer'
-import { Authed } from './generated/authed'
 import { AdminApis } from './admin-apis'
 import { DsProtestPause } from './generated/DSProtestPause'
-import { GovProtester } from './generated/GovProtester'
 import { DsDelegateRoles } from './generated/DSDelegateRoles'
 import { ProtestPauseFactory } from './generated/ProtestPauseFactory'
 import { GnosisSafe } from './generated/GnosisSafe'
 import { GnosisSafeProxy } from './generated/GnosisSafeProxy'
+import { UniswapConsecutiveSlotsMedianFlxusd } from './generated/UniswapConsecutiveSlotsMedianFLXUSD'
+import { UniswapConsecutiveSlotsMedianPraiusd } from './generated/UniswapConsecutiveSlotsMedianPRAIUSD'
+import { UniswapConsecutiveSlotsMedianRaiusd } from './generated/UniswapConsecutiveSlotsMedianRAIUSD'
+import { UniswapConsecutiveSlotsPriceFeedMedianizer } from './generated/UniswapConsecutiveSlotsPriceFeedMedianizer'
+import { UniswapConverterBasicAverageMedianFlxusd } from './generated/UniswapConverterBasicAverageMedianFLXUSD'
+import { UniswapConverterBasicAverageMedianPraiusd } from './generated/UniswapConverterBasicAverageMedianPRAIUSD'
+import { UniswapConverterBasicAverageMedianRaiusd } from './generated/UniswapConverterBasicAverageMedianRAIUSD'
+import { UniswapConverterBasicAveragePriceFeedMedianizer } from './generated/UniswapConverterBasicAveragePriceFeedMedianizer'
 
 export {
     // Object with all instances
@@ -103,7 +97,6 @@ export {
     AggregatorInterface,
     AuthCollateralJoin,
     AuthorizableContract,
-    BurntToken,
     ChainlinkMedianFlxusd,
     ChainlinkMedianRaiusd,
     ChainlinkPriceFeedMedianizer,
@@ -149,7 +142,6 @@ export {
     GebDeployPauseProxyActions,
     GebPollingEmitter,
     GebPollingEvents,
-    GebPrintingPermissions,
     GemBag,
     GlobalSettlementFactory,
     GovActions,
@@ -161,10 +153,6 @@ export {
     IUniswapV2Pair,
     LiquidationEngineFactory,
     LiquidationEngineMock,
-    Logging,
-    MockDebtAuctionHouse,
-    MockSurplusAuctionHouse,
-    NotThrowingToken,
     OracleRelayerFactory,
     PauseFactory,
     PostSettlementSurplusAuctionHouseFactory,
@@ -178,20 +166,20 @@ export {
     SimpleAuthority,
     StabilityFeeTreasuryFactory,
     Store,
-    TestAccountingEngine,
-    TestDebtAuctionHouse,
     Tester,
-    TokenBurner,
     TokenFaucet,
     TxManager,
-    UniswapMedianFlxusd,
-    UniswapMedianRaiusd,
-    UniswapPriceFeedMedianizer,
-    Authed,
     DsDelegateRoles,
     DsProtestPause,
-    GovProtester,
     ProtestPauseFactory,
     GnosisSafeProxy,
     GnosisSafe,
+    UniswapConsecutiveSlotsMedianFlxusd,
+    UniswapConsecutiveSlotsMedianPraiusd,
+    UniswapConsecutiveSlotsMedianRaiusd,
+    UniswapConsecutiveSlotsPriceFeedMedianizer,
+    UniswapConverterBasicAverageMedianFlxusd,
+    UniswapConverterBasicAverageMedianPraiusd,
+    UniswapConverterBasicAverageMedianRaiusd,
+    UniswapConverterBasicAveragePriceFeedMedianizer,
 }
