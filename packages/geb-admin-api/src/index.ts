@@ -81,11 +81,9 @@ import { ProtestPauseFactory } from './generated/ProtestPauseFactory'
 import { GnosisSafe } from './generated/GnosisSafe'
 import { GnosisSafeProxy } from './generated/GnosisSafeProxy'
 import { UniswapConsecutiveSlotsMedianFlxusd } from './generated/UniswapConsecutiveSlotsMedianFLXUSD'
-import { UniswapConsecutiveSlotsMedianPraiusd } from './generated/UniswapConsecutiveSlotsMedianPRAIUSD'
 import { UniswapConsecutiveSlotsMedianRaiusd } from './generated/UniswapConsecutiveSlotsMedianRAIUSD'
 import { UniswapConsecutiveSlotsPriceFeedMedianizer } from './generated/UniswapConsecutiveSlotsPriceFeedMedianizer'
 import { UniswapConverterBasicAverageMedianFlxusd } from './generated/UniswapConverterBasicAverageMedianFLXUSD'
-import { UniswapConverterBasicAverageMedianPraiusd } from './generated/UniswapConverterBasicAverageMedianPRAIUSD'
 import { UniswapConverterBasicAverageMedianRaiusd } from './generated/UniswapConverterBasicAverageMedianRAIUSD'
 import { UniswapConverterBasicAveragePriceFeedMedianizer } from './generated/UniswapConverterBasicAveragePriceFeedMedianizer'
 
@@ -175,11 +173,9 @@ export {
     GnosisSafeProxy,
     GnosisSafe,
     UniswapConsecutiveSlotsMedianFlxusd,
-    UniswapConsecutiveSlotsMedianPraiusd,
     UniswapConsecutiveSlotsMedianRaiusd,
     UniswapConsecutiveSlotsPriceFeedMedianizer,
     UniswapConverterBasicAverageMedianFlxusd,
-    UniswapConverterBasicAverageMedianPraiusd,
     UniswapConverterBasicAverageMedianRaiusd,
     UniswapConverterBasicAveragePriceFeedMedianizer,
 }

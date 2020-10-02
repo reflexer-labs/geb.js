@@ -10,7 +10,6 @@ import {
     TransactionRequest,
     MulticallRequest,
 } from './base-contract-api'
-import { ERC20 } from './erc20-interface'
 import {
     KOVAN_ADDRESSES,
     MAINNET_ADDRESSES,
@@ -38,6 +37,4 @@ export {
     ContractList,
     ContractKey,
     getAddressList,
-    // ERC20
-    ERC20,
 }

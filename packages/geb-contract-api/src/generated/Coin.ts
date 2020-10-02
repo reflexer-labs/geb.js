@@ -4,12 +4,11 @@
 import { BaseContractAPI } from '@reflexer-finance/geb-contract-base'
 import { MulticallRequest } from '@reflexer-finance/geb-contract-base'
 import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
-import { ERC20 } from '@reflexer-finance/geb-contract-base'
 import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
-export class Coin extends BaseContractAPI implements ERC20 {
+export class Coin extends BaseContractAPI {
     DOMAIN_SEPARATOR(): Promise<string>
     DOMAIN_SEPARATOR(multicall: true): MulticallRequest<string>
     DOMAIN_SEPARATOR(

@@ -10,7 +10,7 @@ import { GebEthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import {
     SafeEngine,
     BasicCollateralJoin,
-    Weth,
+    Weth9,
     ContractApis,
 } from '@reflexer-finance/geb-contract-api'
 import { KOVAN_ADDRESSES } from '@reflexer-finance/geb-contract-base'
@@ -112,7 +112,7 @@ export const testsWithEthersProvider = () => {
         it('Test ethers payable call', async () => {
             const contracts = new ContractApis('kovan', gebProvider)
 
-            const weth = new Weth(
+            const weth = new Weth9(
                 await contracts.joinETH_A.collateral(),
                 gebProvider
             )
@@ -126,7 +126,7 @@ export const testsWithEthersProvider = () => {
         it('Test ethers payable sendTransaction insufficient funds', async () => {
             const contracts = new ContractApis('kovan', gebProvider)
 
-            const weth = new Weth(
+            const weth = new Weth9(
                 await contracts.joinETH_A.collateral(),
                 gebProvider
             )

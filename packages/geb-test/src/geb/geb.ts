@@ -194,12 +194,6 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             )
         })
 
-        it('ERC20 symbol', async () => {
-            const erc20 = geb.getErc20Contract(KOVAN_ADDRESSES.GEB_COIN)
-            const symbol = await erc20.symbol()
-            assert.ok(symbol === 'RAI' || symbol === 'PRAI')
-        })
-
         it('ERC20 balance', async () => {
             const erc20 = geb.getErc20Contract(KOVAN_ADDRESSES.GEB_COIN)
             const balance = await erc20.balanceOf(NULL_ADDRESS)

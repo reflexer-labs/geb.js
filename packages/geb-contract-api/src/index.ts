@@ -20,18 +20,17 @@ import { SafeEngine } from './generated/SAFEEngine'
 import { SettlementSurplusAuctioneer } from './generated/SettlementSurplusAuctioneer'
 import { StabilityFeeTreasury } from './generated/StabilityFeeTreasury'
 import { TaxCollector } from './generated/TaxCollector'
-import { Weth } from './generated/WETH'
 import { GebProxyActions } from './generated/GebProxyActions'
 import { GebProxyActionsGlobalSettlement } from './generated/GebProxyActionsGlobalSettlement'
 import { ChainlinkMedianEthusd } from './generated/ChainlinkMedianETHUSD'
 import { DsToken } from './generated/DSToken'
 import { Erc20 } from './generated/ERC20'
-
+import { UniswapConsecutiveSlotsMedianRaiusd } from './generated/UniswapConsecutiveSlotsMedianRAIUSD'
 import { ContractApis } from './contract-apis'
 import { Multicall } from './generated/Multicall'
 import { DsValue } from './generated/DSValue'
 import { Osm } from './generated/OSM'
-import { UniswapMedian } from './generated/UniswapMedian'
+import { Weth9 } from './generated/WETH9_'
 
 export {
     // Factory
@@ -59,7 +58,6 @@ export {
     SettlementSurplusAuctioneer,
     StabilityFeeTreasury,
     TaxCollector,
-    Weth,
     GebProxyActions,
     GebProxyActionsGlobalSettlement,
     Multicall,
@@ -68,5 +66,6 @@ export {
     Osm,
     DsValue,
     ChainlinkMedianEthusd,
-    UniswapMedian,
+    UniswapConsecutiveSlotsMedianRaiusd,
+    Weth9,
 }

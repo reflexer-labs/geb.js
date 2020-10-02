@@ -4,11 +4,10 @@
 import { BaseContractAPI } from '@reflexer-finance/geb-contract-base'
 import { MulticallRequest } from '@reflexer-finance/geb-contract-base'
 import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
-import { ERC20 } from '@reflexer-finance/geb-contract-base'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
-export class Erc20 extends BaseContractAPI implements ERC20 {
+export class Erc20 extends BaseContractAPI {
     allowance(src: string, guy: string): Promise<BigNumber>
     allowance(
         src: string,

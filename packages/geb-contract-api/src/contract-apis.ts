@@ -17,10 +17,10 @@ import {
     EnglishCollateralAuctionHouse,
     FixedDiscountCollateralAuctionHouse,
     DsToken,
-    Weth,
+    Weth9,
     SafeEngine,
     ChainlinkMedianEthusd,
-    UniswapMedian,
+    UniswapConsecutiveSlotsMedianRaiusd,
     DsValue,
     Osm,
 } from '.'
@@ -52,12 +52,10 @@ export class ContractApis {
     public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse | EnglishCollateralAuctionHouse
     public protocolToken: DsToken
     public medianizerEth: ChainlinkMedianEthusd | DsValue
-    public medianizerCoin: UniswapMedian | DsValue
-    public medianizerProt: UniswapMedian | DsValue
+    public medianizerCoin: UniswapConsecutiveSlotsMedianRaiusd | DsValue
     public fsmEth: Osm | DsValue
     public fsmCoin: Osm | DsValue
-    public fsmProt: Osm | DsValue
-    public weth: Weth
+    public weth: Weth9
 
     constructor(
         network: GebDeployment,
@@ -85,14 +83,9 @@ export class ContractApis {
         this.proxyRegistry = new GebProxyRegistry(addressList.PROXY_REGISTRY, this.chainProvider)
         this.collateralAuctionHouseETH_A = new FixedDiscountCollateralAuctionHouse(addressList.GEB_COLLATERAL_AUCTION_HOUSE_ETH_A, this.chainProvider)
         this.medianizerEth = new ChainlinkMedianEthusd(addressList.MEDIANIZER_ETH, this.chainProvider)
-        this.medianizerCoin = new UniswapMedian(addressList.MEDIANIZER_PRAI, this.chainProvider)
+        this.medianizerCoin = new UniswapConsecutiveSlotsMedianRaiusd(addressList.MEDIANIZER_PRAI, this.chainProvider)
         this.fsmEth = new Osm(addressList.FEED_SECURITY_MODULE_ETH, this.chainProvider)
         this.fsmCoin = new Osm(addressList.FEED_SECURITY_MODULE_PRAI, this.chainProvider)
-        this.weth = new Weth(addressList.ETH, this.chainProvider)
-        
-        // Contracts removed for the beta testnet
-        // this.protocolToken = new DsToken(addressList.GEB_PROT, this.chainProvider)
-        // this.medianizerProt = new UniswapMedian(addressList.MEDIANIZER_FLX, this.chainProvider)
-        // this.fsmProt = new Osm(addressList.FEED_SECURITY_MODULE_FLX, this.chainProvider)
+        this.weth = new Weth9(addressList.ETH, this.chainProvider)
     }
 }

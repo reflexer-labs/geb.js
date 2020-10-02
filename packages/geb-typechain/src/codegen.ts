@@ -15,26 +15,20 @@ import {
 
 export function codegenContract(contract: Contract, abi: RawAbiDefinition[]) {
     // Implements the ERC20 interface for the contracts that are ERC20
-    const isERCO20 =
-        contract.name === 'Weth' ||
-        contract.name === 'Coin' ||
-        contract.name === 'Erc20'
-            ? true
-            : false
 
     // prettier-ignore
     let template = `
     
-    export class ${contract.name} extends BaseContractAPI${isERCO20 ? ' implements ERC20' : ''} {
+    export class ${contract.name} extends BaseContractAPI {
         ${codegenForFunctions(contract.functions, abi)}
     }
     `
-    template = addImports(template, isERCO20)
+    template = addImports(template)
 
     return template
 }
 
-function addImports(template: string, isERC20: boolean): string {
+function addImports(template: string): string {
     if (
         template.includes('BigNumber)') ||
         template.includes('BigNumber ') ||
@@ -57,13 +51,6 @@ function addImports(template: string, isERC20: boolean): string {
         template =
             `   
             import { BytesLike } from "@ethersproject/bytes"` + template
-    }
-
-    if (isERC20) {
-        template =
-            `
-            import { ERC20 } from '@reflexer-finance/geb-contract-base'` +
-            template
     }
 
     if (template.includes('TransactionRequest')) {

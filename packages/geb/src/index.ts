@@ -8,7 +8,6 @@ import { GebProxyActionsGlobalSettlement } from './proxy-action-global-settlemen
 import { GebEthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import {
     ContractList,
-    ERC20,
     GebProviderInterface,
     KOVAN_ADDRESSES,
     MAINNET_ADDRESSES,
@@ -27,7 +26,6 @@ export {
     MAINNET_ADDRESSES,
     // Type & Interfaces
     ContractList,
-    ERC20,
     TransactionRequest,
     GebProviderInterface,
 }
