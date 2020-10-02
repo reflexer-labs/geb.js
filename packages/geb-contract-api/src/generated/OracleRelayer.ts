@@ -169,6 +169,18 @@ export class OracleRelayer extends BaseContractAPI {
         return this.getTransactionRequest(abi, [])
     }
 
+    redemptionPrice_readOnly(): Promise<BigNumber>
+    redemptionPrice_readOnly(multicall: true): MulticallRequest<BigNumber>
+    redemptionPrice_readOnly(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"redemptionPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     redemptionPriceUpdateTime(): Promise<BigNumber>
     redemptionPriceUpdateTime(multicall: true): MulticallRequest<BigNumber>
     redemptionPriceUpdateTime(

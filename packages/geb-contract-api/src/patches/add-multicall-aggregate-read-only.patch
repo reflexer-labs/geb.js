@@ -1,8 +1,8 @@
 diff --git a/packages/geb-contract-api/src/generated/Multicall.ts b/packages/geb-contract-api/src/generated/Multicall.ts
-index 2e9eedd..82cb824 100644
+index 719ebd3..01d7577 100644
 --- a/packages/geb-contract-api/src/generated/Multicall.ts
 +++ b/packages/geb-contract-api/src/generated/Multicall.ts
-@@ -31,6 +31,38 @@ export class Multicall extends BaseContractAPI {
+@@ -19,6 +19,38 @@ export class Multicall extends BaseContractAPI {
          return this.getTransactionRequest(abi, [calls])
      }
  
@@ -37,7 +37,7 @@ index 2e9eedd..82cb824 100644
 +
 +        return this.ethCallOrMulticall(abi, [calls], multicall)
 +    }
-+
-     getLastBlockHash(): Promise<string>
-     getLastBlockHash(multicall: true): MulticallRequest<string>
-     getLastBlockHash(
++    
+     getBlockHash(blockNumber: BigNumberish): Promise<string>
+     getBlockHash(
+         blockNumber: BigNumberish,
