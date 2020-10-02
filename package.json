@@ -58,5 +58,8 @@
     },
     "lint-staged": {
         "*.{js,md,json,ts}": "prettier --write"
+    },
+    "dependencies": {
+        "axios": "^0.20.0"
     }
 }

@@ -83,11 +83,7 @@ export const testsWithEthersProvider = () => {
                 await wallet.call(tx)
                 assert.fail('Should have fail')
             } catch (err) {
-                // Currently failing with this error message, will fail with "Not enough funds" when whitelisting removed.
-                assert.equal(
-                    utils.decodeChainError(err),
-                    'CollateralJoin6/cannot-join-above-allowance'
-                )
+                assert.equal(utils.decodeChainError(err), '0x')
             }
         })
 
