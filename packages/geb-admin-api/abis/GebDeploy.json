@@ -248,7 +248,7 @@
             { "internalType": "address", "name": "adapter", "type": "address" },
             {
                 "internalType": "address",
-                "name": "collateralOSM",
+                "name": "collateralFSM",
                 "type": "address"
             },
             {

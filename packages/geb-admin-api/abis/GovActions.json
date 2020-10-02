@@ -351,6 +351,21 @@
     },
     {
         "inputs": [
+            {
+                "internalType": "address",
+                "name": "targetContract",
+                "type": "address"
+            },
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "uint256", "name": "rad", "type": "uint256" }
+        ],
+        "name": "setPerBlockAllowance",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
             { "internalType": "address", "name": "pause", "type": "address" },
             {
                 "internalType": "address",
@@ -359,6 +374,21 @@
             }
         ],
         "name": "setProtester",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "targetContract",
+                "type": "address"
+            },
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "uint256", "name": "rad", "type": "uint256" }
+        ],
+        "name": "setTotalAllowance",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"

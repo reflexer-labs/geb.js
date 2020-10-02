@@ -2,8 +2,8 @@
     {
         "inputs": [
             {
-                "internalType": "contract ProtocolTokenAuthority",
-                "name": "authority_",
+                "internalType": "contract ERC20",
+                "name": "token_",
                 "type": "address"
             }
         ],
@@ -11,75 +11,44 @@
         "type": "constructor"
     },
     {
-        "inputs": [
-            { "internalType": "address", "name": "usr", "type": "address" }
-        ],
-        "name": "addAuthorization",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "uint256", "name": "wad", "type": "uint256" }
-        ],
-        "name": "burn",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "usr", "type": "address" },
-            { "internalType": "uint256", "name": "wad", "type": "uint256" }
-        ],
-        "name": "burn",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "usr", "type": "address" },
-            { "internalType": "uint256", "name": "wad", "type": "uint256" }
-        ],
-        "name": "mint",
+        "inputs": [],
+        "name": "balance",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "notMintOrBurn",
+        "name": "fail",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "usr", "type": "address" }
+            { "internalType": "uint256", "name": "value_", "type": "uint256" }
         ],
-        "name": "removeAuthorization",
+        "name": "ok",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "inputs": [
-            { "internalType": "address", "name": "usr", "type": "address" }
+        "inputs": [],
+        "name": "token",
+        "outputs": [
+            { "internalType": "contract ERC20", "name": "", "type": "address" }
         ],
-        "name": "setOwner",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
-        "inputs": [
-            { "internalType": "address", "name": "usr", "type": "address" }
+        "inputs": [],
+        "name": "value",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "name": "setRoot",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     }
 ]
