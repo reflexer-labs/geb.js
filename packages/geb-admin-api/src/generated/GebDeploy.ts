@@ -219,19 +219,19 @@ export class GebDeploy extends BaseContractAPI {
         auctionHouseType: BytesLike,
         collateralType: BytesLike,
         adapter: string,
-        collateralOSM: string,
+        collateralFSM: string,
         collateralMedian: string,
         systemCoinOracle: string
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"auctionHouseType","type":"bytes32"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"adapter","type":"address"},{"internalType":"address","name":"collateralOSM","type":"address"},{"internalType":"address","name":"collateralMedian","type":"address"},{"internalType":"address","name":"systemCoinOracle","type":"address"}],"name":"deployCollateral","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"auctionHouseType","type":"bytes32"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"adapter","type":"address"},{"internalType":"address","name":"collateralFSM","type":"address"},{"internalType":"address","name":"collateralMedian","type":"address"},{"internalType":"address","name":"systemCoinOracle","type":"address"}],"name":"deployCollateral","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             auctionHouseType,
             collateralType,
             adapter,
-            collateralOSM,
+            collateralFSM,
             collateralMedian,
             systemCoinOracle,
         ])

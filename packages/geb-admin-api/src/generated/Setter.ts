@@ -120,6 +120,28 @@ export class Setter extends BaseContractAPI {
         return this.getTransactionRequest(abi, [address, uinteger])
     }
 
+    setPerBlockAllowance(
+        address: string,
+        uinteger: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"setPerBlockAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [address, uinteger])
+    }
+
+    setTotalAllowance(
+        address: string,
+        uinteger: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"setTotalAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [address, uinteger])
+    }
+
     taxMany(start: BigNumberish, end: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore

@@ -216,6 +216,18 @@ export class ChainlinkMedianFlxusd extends BaseContractAPI {
         return this.getTransactionRequest(abi, [account])
     }
 
+    staleThreshold(): Promise<BigNumber>
+    staleThreshold(multicall: true): MulticallRequest<BigNumber>
+    staleThreshold(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"staleThreshold","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     symbol(): Promise<string>
     symbol(multicall: true): MulticallRequest<string>
     symbol(multicall?: true): Promise<string> | MulticallRequest<string> {

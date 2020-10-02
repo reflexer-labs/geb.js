@@ -272,12 +272,36 @@ export class GovActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [pause, delayMultiplier])
     }
 
+    setPerBlockAllowance(
+        targetContract: string,
+        account: string,
+        rad: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"rad","type":"uint256"}],"name":"setPerBlockAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [targetContract, account, rad])
+    }
+
     setProtester(pause: string, protester: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"protester","type":"address"}],"name":"setProtester","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [pause, protester])
+    }
+
+    setTotalAllowance(
+        targetContract: string,
+        account: string,
+        rad: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"rad","type":"uint256"}],"name":"setTotalAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [targetContract, account, rad])
     }
 
     shutdownSystem(globalSettlement: string): TransactionRequest {
