@@ -18,7 +18,15 @@ import {
  * Convenience class used to call functions from [GebProxyActionsGlobalSettlement](https://github.com/reflexer-labs/geb-proxy-actions/blob/master/src/GebProxyActions.sol) using a proxy registered in the [GebProxyRegistry](https://github.com/reflexer-labs/geb-proxy-registry/blob/master/src/GebProxyRegistry.sol).
  * Useful only during Global Settlement in order for users to redeem collateral.
  *
- * ## Examples
+ * ## Global settlement guide
+ *
+ * Protocol token holders and/or governance can trigger the Global settlement (GS). The procedure is explain in details [on the module page](https://docs.reflexer.finance/system-contracts/shutdown-module/global-settlement#the-shutdown-mechanism-9-crucial-steps). The global starts when the `shutdownSystem()` function of the [global settlement contract](https://github.com/reflexer-labs/geb/blob/38665149f953e14ab19a41f577e42f8f0b565226/src/GlobalSettlement.sol#L254) was called.
+ * To check if the procedure was started do
+ * ```typescript
+ * const gsStarted = geb.contracts.globalSettlement.shutdownTime().gt(0)
+ * ```
+ *
+ *
  *
  * Redeem some ETH collateral against some RAI using a proxy contract:
  * ```typescript
