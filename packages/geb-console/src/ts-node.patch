@@ -1,0 +1,23 @@
+diff --git a/node_modules/ts-node/dist/bin.js b/node_modules/ts-node/dist/bin.js
+index b01b813..7df89dd 100644
+--- a/node_modules/ts-node/dist/bin.js
++++ b/node_modules/ts-node/dist/bin.js
+@@ -316,7 +316,7 @@ function startRepl(service, state, code) {
+         }
+     }
+     const repl = repl_1.start({
+-        prompt: '> ',
++        prompt: '🗿 > ',
+         input: process.stdin,
+         output: process.stdout,
+         // Mimicking node's REPL implementation: https://github.com/nodejs/node/blob/168b22ba073ee1cbf8d0bcb4ded7ff3099335d04/lib/internal/repl.js#L28-L30
+@@ -360,6 +360,9 @@ function startRepl(service, state, code) {
+         resetEval();
+         // Hard fix for TypeScript forcing `Object.defineProperty(exports, ...)`.
+         exec('exports = module.exports', state.path);
++        process.stdin.push(".load ./../src/env.ts\n")
++        process.stdout.write('\u001B[2J\u001B[0;0f');
++        process.stdin.push("\n")
+     }
+     reset();
+     repl.on('reset', reset);

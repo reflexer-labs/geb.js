@@ -28,6 +28,9 @@
         },
         {
             "path": "./packages/geb-test"
+        },
+        {
+            "path": "./packages/geb-console"
         }
     ],
     "files": []
