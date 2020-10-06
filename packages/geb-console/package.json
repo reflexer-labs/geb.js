@@ -5,7 +5,7 @@
     "main": "./lib/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "postinstall": "patch --forward $(readlink -e node_modules/.bin/ts-node) src/ts-node.patch",
+        "postinstall": "patch --forward $(readlink -e node_modules/.bin/ts-node) src/ts-node.patch || true",
         "create-patch": "diff node_modules/.bin/ts-node src/ts-node-original.js > src/ts-node.patch"
     },
     "bin": {
