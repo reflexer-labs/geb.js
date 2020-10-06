@@ -1,13 +1,38 @@
 #!/usr/bin/env node
-var ts = require('ts-node/dist/bin')
-var params = [
-  '--interactive',
-  '-D',
-  '2339',
-  '-D',
-  '2304',
-  '-D',
-  '2445'
-]
 
-ts.main(params)
+var repl = require('repl')
+var ethers = require('ethers')
+var geb_admin = require('@reflexer-finance/geb-admin')
+
+var rpcUrl
+var network
+if (process.env.NETWORK === 'mainnet') {
+    console.log('Start geb-console on Mainnet...')
+    rpcUrl = 'https://parity0.mainnet.makerfoundation.com:8545'
+    network = 'mainnet'
+} else {
+    console.log('Start geb-console on Kovan...')
+    rpcUrl = 'https://parity0.kovan.makerfoundation.com:8545'
+    network = 'kovan'
+}
+
+if (process.env.RPC_URL) {
+    rpcUrl = process.env.RPC_URL
+}
+
+var repl = repl.start({ prompt: '🗿 >' })
+
+repl.context.provider = new ethers.ethers.providers.JsonRpcProvider(rpcUrl)
+repl.context.geb = new geb_admin.Geb(network, repl.context.provider)
+repl.context.gebAdmin = new geb_admin.GebAdmin(network, repl.context.provider)
+repl.context.ETH_A = geb_admin.utils.ETH_A
+repl.context.WAD = geb_admin.utils.WAD
+repl.context.decodeChainError = geb_admin.utils.decodeChainError
+repl.context.BigNumber = ethers.ethers.BigNumber
+
+if (process.env.PK) {
+    repl.context.wallet = new ethers.ethers.Wallet(process.env.PK, repl.context.provider)
+}
+repl.context.wait = function (promise) {
+    return require('deasync2').await(promise)
+}
