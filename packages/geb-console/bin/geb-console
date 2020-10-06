@@ -37,6 +37,8 @@ repl.context.WAD = geb_admin.utils.WAD
 repl.context.decodeChainError = geb_admin.utils.decodeChainError
 repl.context.gebUtils = geb_admin.utils
 repl.context.BigNumber = ethers.ethers.BigNumber
+repl.context.ethers = ethers
+repl.context.geb_lib = geb_admin
 repl.context.info = function (fct) {
     if (typeof fct === 'function') {
         return fct.toString().split('\n')[0].replace(' {', '')
