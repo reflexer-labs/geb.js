@@ -5,7 +5,8 @@
     "main": "./lib/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "postinstall": "git apply -v --no-index src/ts-node.patch"
+        "postinstall": "patch --forward $(readlink -e node_modules/.bin/ts-node) src/ts-node.patch",
+        "create-patch": "diff node_modules/.bin/ts-node src/ts-node-original.js > src/ts-node.patch"
     },
     "bin": {
         "geb-console": "./bin/geb-console"
@@ -15,8 +16,8 @@
     "dependencies": {
         "@reflexer-finance/geb-admin": "0.0.10",
         "@types/node": "^14.11.2",
+        "deasync2": "^1.0.1",
         "ethers": "^5.0.14",
-        "ts-node": "^9.0.0",
-        "deasync2": "^1.0.1"
+        "ts-node": "^9.0.0"
     }
 }

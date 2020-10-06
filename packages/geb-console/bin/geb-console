@@ -2,4 +2,4 @@
 
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 cd "$parent_path"
-NETWORK=$1 ../../../node_modules/ts-node/dist/bin.js --project ../tsconfig.json --interactive
+NETWORK=$1 ../node_modules/.bin/ts-node --project ../tsconfig.json --interactive -D 2339 -D 2304 -D 2445

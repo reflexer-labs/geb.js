@@ -7,7 +7,7 @@ import {
     adminContracts,
 } from '@reflexer-finance/geb-admin'
 
-declare var global: any
+declare var _: any
 
 let rpcUrl: string
 let network: 'kovan' | 'mainnet'
@@ -32,6 +32,7 @@ const gebAdmin = new GebAdmin(network, provider)
 const ETH_A = utils.ETH_A
 const WAD = utils.WAD
 const decodeChainError = utils.decodeChainError
+const BigNumber = ethers.BigNumber
 
 let wallet: Wallet
 if (process.env.PK) {
