@@ -3,7 +3,6 @@
 var repl = require('repl')
 var ethers = require('ethers')
 var geb_admin = require('@reflexer-finance/geb-admin')
-const { info } = require('console')
 
 var rpcUrl
 var network
