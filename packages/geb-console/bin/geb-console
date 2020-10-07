@@ -10,6 +10,10 @@ if (process.env.NETWORK === 'mainnet' || process.argv[2] === 'mainnet') {
     console.log('Start geb-console on Mainnet...')
     rpcUrl = 'https://parity0.mainnet.makerfoundation.com:8545'
     network = 'mainnet'
+} else if (process.env.NETWORK === 'rinkeby' || process.argv[2] === 'rinkeby') {
+    console.log('Start geb-console on Rinkeby...')
+    rpcUrl = 'https://rinkeby.infura.io/v3/7a5c8172af0d41fd896a18dd1d866f87'
+    network = 'rinkeby'
 } else {
     console.log('Start geb-console on Kovan...')
     rpcUrl = 'https://parity0.kovan.makerfoundation.com:8545'
