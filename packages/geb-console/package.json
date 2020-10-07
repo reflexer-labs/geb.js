@@ -9,7 +9,7 @@
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
     "license": "ISC",
     "dependencies": {
-        "@reflexer-finance/geb-admin": "^0.0.12",
+        "@reflexer-finance/geb-admin": "0.0.12",
         "ethers": "^5.0.14"
     }
 }
