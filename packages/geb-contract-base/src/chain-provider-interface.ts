@@ -48,4 +48,10 @@ export interface GebProviderInterface {
     encodeFunctionData(params: Inputs, abiFragment: AbiDefinition): string
 
     chainId(): Promise<number>
+
+    /**
+     * Contract code hash from EIP 1052
+     * @param address target contract
+     */
+    extCodeHash(address: string): Promise<string>
 }

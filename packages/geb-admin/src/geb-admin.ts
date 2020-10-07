@@ -1,4 +1,4 @@
-import { Geb } from 'geb.js'
+import { Geb, TransactionRequest } from 'geb.js'
 import { AdminApis } from '@reflexer-finance/geb-admin-api'
 import {
     GebDeployment,
@@ -61,5 +61,103 @@ export class GebAdmin extends Geb {
         super(network, provider)
 
         this.contractsAdmin = new AdminApis(network, this.provider)
+    }
+    /**
+     * Verifies a transaction for scheduling proposals
+     *
+     * @param  {string} govFunctionAbi Human readable abi from gov actions or proxy of choice -> "setDelay(address,uint256)"
+     * @param  {any[]} params Array containing all for the above function
+     * @param  {number} earliestExecutionTime
+     * @param  {string} calldata to verify
+     * @returns Promise<TransactionRequest>
+     */
+    public async verifyWebScheduleCallcode(
+        govFunctionAbi: string,
+        params: any[],
+        earliestExecutionTime: number,
+        calldata: string
+    ) {
+        const encoded = await this.webScheduleProposal(
+            govFunctionAbi,
+            params,
+            earliestExecutionTime
+        )
+        return encoded.data == calldata
+    }
+
+    /**
+     * Encodes executing a proposal in dspause for web GUI
+     *
+     * @param  {string} govFunctionAbi Human readable abi from gov actions or proxy of choice -> "setDelay(address,uint256)"
+     * @param  {any[]} params Array containing all for the above function
+     * @param  {number} earliestExecutionTime
+     * @returns Promise<TransactionRequest>
+     */
+    public async webExecuteProposal(
+        govFunctionAbi: string,
+        params: any[],
+        earliestExecutionTime: number
+    ): Promise<TransactionRequest> {
+        const codeHash = await this.provider.extCodeHash(
+            this.addresses.GEB_GOV_ACTIONS
+        )
+
+        return this.contractsAdmin.pause.executeTransaction(
+            this.addresses.GEB_GOV_ACTIONS,
+            codeHash,
+            this.getGovCallData(govFunctionAbi, params),
+            earliestExecutionTime
+        )
+    }
+
+    /**
+     * Encodes scheduling a proposal in dspause for web GUI
+     *
+     * @param  {string} govFunctionAbi Human readable abi from gov actions or proxy of choice -> "setDelay(address,uint256)"
+     * @param  {any[]} params Array containing all for the above function
+     * @param  {number} earliestExecutionTime
+     * @returns Promise<TransactionRequest>
+     */
+    public async webScheduleProposal(
+        govFunctionAbi: string,
+        params: any[],
+        earliestExecutionTime: number
+    ) {
+        const codeHash = await this.provider.extCodeHash(
+            this.addresses.GEB_GOV_ACTIONS
+        )
+
+        const tx = this.contractsAdmin.pause.scheduleTransaction1(
+            this.addresses.GEB_GOV_ACTIONS,
+            codeHash,
+            this.getGovCallData(govFunctionAbi, params),
+            earliestExecutionTime
+        )
+
+        return {
+            to: this.addresses.GEB_PAUSE,
+            value: 0,
+            data: tx.data,
+            gov_function_abi: govFunctionAbi,
+            params: params,
+            earliestExecutionTime: earliestExecutionTime,
+        }
+    }
+
+    private getGovCallData(govFunctionAbi: string, params: any[]) {
+        const prototype = govFunctionAbi.split(/\(|\)/)
+        return this.provider.encodeFunctionData(
+            params,
+            // Convert the human readable format to JSON ABI fragment
+            {
+                name: prototype[0],
+                inputs: prototype[1]
+                    .split(',')
+                    .map((t) => ({ name: '', type: t })),
+                outputs: [],
+                type: 'function',
+                stateMutability: 'nonpayable',
+            }
+        )
     }
 }

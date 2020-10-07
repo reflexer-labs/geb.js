@@ -47,4 +47,9 @@ export class GebEthersProvider implements GebProviderInterface {
     async chainId(): Promise<number> {
         return (await this.provider.getNetwork()).chainId
     }
+
+    async extCodeHash(address: string): Promise<string> {
+        const code = await this.provider.getCode(address)
+        return utils.keccak256(code)
+    }
 }
