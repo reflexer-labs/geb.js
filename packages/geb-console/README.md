@@ -1,6 +1,6 @@
 # geb-console
 
-## install 
+## Install 
 
 ```
 npm install -g @reflexer-finance/geb-console
@@ -82,6 +82,7 @@ Sign transactions with metamask!
 // Send one RAI to 0x7eb123...
 🗿 > tx = geb.contracts.coin.transfer("0x7eb123...", WAD)
 🗿 > metamask(tx)
+Open you browser at http://localhost:8084
 ```
 
 <img src="metmaskdemo.gif" width="550">
