@@ -77,5 +77,11 @@ BigNumber { _hex: '0x152966db5e2e62e08ba0', _isBigNumber: true }
 // Hint: See geb.js docs https://docs.reflexer.finance/geb-js/geb-js-get-started
 ```
 
+Sign transactions with metamask!
+```js
+// Send one RAI to 0x7eb123...
+🗿 > tx = geb.contracts.coin.transfer("0x7eb123...", WAD)
+🗿 > metamask(tx)
+```
 
-
+<img src="metmaskdemo.gif" width="550">

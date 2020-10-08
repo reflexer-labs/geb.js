@@ -3,21 +3,27 @@
 var repl = require('repl')
 var ethers = require('ethers')
 var geb_admin = require('@reflexer-finance/geb-admin')
+var http = require('http')
+var open = require('open')
 
 var rpcUrl
 var network
+var netId
 if (process.env.NETWORK === 'mainnet' || process.argv[2] === 'mainnet') {
     console.log('Start geb-console on Mainnet...')
     rpcUrl = 'https://parity0.mainnet.makerfoundation.com:8545'
     network = 'mainnet'
+    netId = 1
 } else if (process.env.NETWORK === 'rinkeby' || process.argv[2] === 'rinkeby') {
     console.log('Start geb-console on Rinkeby...')
     rpcUrl = 'https://rinkeby.infura.io/v3/7a5c8172af0d41fd896a18dd1d866f87'
     network = 'rinkeby'
+    netId = 4
 } else {
     console.log('Start geb-console on Kovan...')
     rpcUrl = 'https://parity0.kovan.makerfoundation.com:8545'
     network = 'kovan'
+    netId = 42
 }
 
 if (process.env.RPC_URL) {
@@ -30,6 +36,8 @@ console.log('- gebAdmin              - wallet')
 console.log('- contracts             - provider')
 console.log('- BigNumber             - info(func)')
 console.log('- ETH_A                 - WAD\n')
+console.log('- RAD                   - RAY\n')
+console.log('- metamask(txRequest)   \n')
 
 var repl = repl.start({ prompt: '🗿 > ', useGlobal: true })
 
@@ -38,6 +46,8 @@ repl.context.geb = new geb_admin.Geb(network, repl.context.provider)
 repl.context.gebAdmin = new geb_admin.GebAdmin(network, repl.context.provider)
 repl.context.ETH_A = geb_admin.utils.ETH_A
 repl.context.WAD = geb_admin.utils.WAD
+repl.context.RAD = geb_admin.utils.RAD
+repl.context.RAD = geb_admin.utils.RAY
 repl.context.decodeChainError = geb_admin.utils.decodeChainError
 repl.context.gebUtils = geb_admin.utils
 repl.context.BigNumber = ethers.ethers.BigNumber
@@ -55,6 +65,46 @@ if (process.env.PK) {
         repl.context.provider
     )
 }
-repl.context.wait = function (promise) {
-    return require('deasync2').await(promise)
+
+// Metamask signer
+repl.context.metamask = function (tx) {
+    const strTx = JSON.stringify(tx)
+    const requestListener = function (req, res) {
+        res.setHeader('Content-Type', 'text/html')
+        res.writeHead(200)
+        res.end(`<html><body>
+            <h1 style="text-align: center;">Metamask Signer</h1>
+            <h1 style="text-align: center;" id="hash"></h1>
+            <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"
+            type="application/javascript">
+            </script>
+            <script>
+                async function main() {
+                    await ethereum.request({ method: 'eth_requestAccounts' });
+                    if(ethereum.networkVersion != ${netId}){alert("Metamask is on the wrong Network. Please change network and run the command again."); return}
+                    const provider = new ethers.providers.Web3Provider(window.ethereum)
+                    const signer = provider.getSigner()
+                    console.log(${strTx})
+                    const pending = await signer.sendTransaction(${strTx})
+                    console.log(pending)
+                    document.getElementById("hash").innerHTML = 'Transaction hash: ' + pending.hash
+                }
+                main()
+            </script>
+            </body></html>`)
+    }
+
+    // Start web server
+    const host = 'localhost'
+    const port = 8084
+    const server = http.createServer(requestListener)
+    server.listen(port, host, () => {
+        console.log(`Open you browser at http://${host}:${port}`)
+    })
+
+    // Shutdown server upon first load
+    server.on('connection', () => server.close())
+
+    // Open browser
+    open(`http://${host}:${port}`)
 }

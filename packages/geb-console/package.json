@@ -10,6 +10,7 @@
     "license": "ISC",
     "dependencies": {
         "@reflexer-finance/geb-admin": "0.0.12",
-        "ethers": "^5.0.14"
+        "ethers": "^5.0.14",
+        "open": "^7.3.0"
     }
 }
