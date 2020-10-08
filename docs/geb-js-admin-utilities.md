@@ -25,7 +25,7 @@ import { GebAdmin } from "@reflexer-finance/geb-admin"
 \+ **new GebAdmin**(`network`: GebDeployment, `provider`: GebProviderInterface | Provider): *[GebAdmin](gebadmin.md)*
 
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/38b6cad/packages/geb-admin/src/geb-admin.ts#L51)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/a97f67f/packages/geb-admin/src/geb-admin.ts#L51)*
 
 **Parameters:**
 
@@ -73,7 +73,7 @@ ___
 
 • **contractsAdmin**: *AdminApis*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/38b6cad/packages/geb-admin/src/geb-admin.ts#L51)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/a97f67f/packages/geb-admin/src/geb-admin.ts#L51)*
 
 Object containing all GEB admin contracts instances for low level interactions.
 It currently has the following contracts:
@@ -247,3 +247,70 @@ Name | Type |
 `calls` | [MulticallRequest‹O1›, MulticallRequest‹O2›, MulticallRequest‹O3›] |
 
 **Returns:** *Promise‹[O1, O2, O3]›*
+
+___
+
+###  verifyWebScheduleCallcode
+
+▸ **verifyWebScheduleCallcode**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number, `calldata`: string): *Promise‹boolean›*
+
+*Defined in [packages/geb-admin/src/geb-admin.ts:74](https://github.com/reflexer-labs/geb.js/blob/a97f67f/packages/geb-admin/src/geb-admin.ts#L74)*
+
+Verifies a transaction for scheduling proposals
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`govFunctionAbi` | string | Human readable abi from gov actions or proxy of choice -> "setDelay(address,uint256)" |
+`params` | any[] | Array containing all for the above function |
+`earliestExecutionTime` | number | - |
+`calldata` | string | to verify |
+
+**Returns:** *Promise‹boolean›*
+
+Promise<TransactionRequest>
+
+___
+
+###  webExecuteProposal
+
+▸ **webExecuteProposal**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number): *Promise‹TransactionRequest›*
+
+*Defined in [packages/geb-admin/src/geb-admin.ts:96](https://github.com/reflexer-labs/geb.js/blob/a97f67f/packages/geb-admin/src/geb-admin.ts#L96)*
+
+Encodes executing a proposal in dspause for web GUI
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`govFunctionAbi` | string | Human readable abi from gov actions or proxy of choice -> "setDelay(address,uint256)" |
+`params` | any[] | Array containing all for the above function |
+`earliestExecutionTime` | number | - |
+
+**Returns:** *Promise‹TransactionRequest›*
+
+Promise<TransactionRequest>
+
+___
+
+###  webScheduleProposal
+
+▸ **webScheduleProposal**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number): *Promise‹object›*
+
+*Defined in [packages/geb-admin/src/geb-admin.ts:121](https://github.com/reflexer-labs/geb.js/blob/a97f67f/packages/geb-admin/src/geb-admin.ts#L121)*
+
+Encodes scheduling a proposal in dspause for web GUI
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`govFunctionAbi` | string | Human readable abi from gov actions or proxy of choice -> "setDelay(address,uint256)" |
+`params` | any[] | Array containing all for the above function |
+`earliestExecutionTime` | number | - |
+
+**Returns:** *Promise‹object›*
+
+Promise<TransactionRequest>
