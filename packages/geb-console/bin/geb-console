@@ -30,13 +30,13 @@ if (process.env.RPC_URL) {
     rpcUrl = process.env.RPC_URL
 }
 
-console.log('Context objects:')
+console.log('\nContext objects:')
 console.log('- geb                   - ethers')
 console.log('- gebAdmin              - wallet')
 console.log('- contracts             - provider')
 console.log('- BigNumber             - info(func)')
-console.log('- ETH_A                 - WAD\n')
-console.log('- RAD                   - RAY\n')
+console.log('- ETH_A                 - WAD')
+console.log('- RAD                   - RAY')
 console.log('- metamask(txRequest)   \n')
 
 var repl = repl.start({ prompt: '🗿 > ', useGlobal: true })
@@ -84,10 +84,12 @@ repl.context.metamask = function (tx) {
                     if(ethereum.networkVersion != ${netId}){alert("Metamask is on the wrong Network. Please change network and run the command again."); return}
                     const provider = new ethers.providers.Web3Provider(window.ethereum)
                     const signer = provider.getSigner()
-                    console.log(${strTx})
-                    const pending = await signer.sendTransaction(${strTx})
-                    console.log(pending)
-                    document.getElementById("hash").innerHTML = 'Transaction hash: ' + pending.hash
+                    signer.sendTransaction(${strTx}).then(p => {
+                        document.getElementById("hash").innerHTML = 'Transaction hash: ' + p.hash
+                    }).catch(err => {
+                        console.error(err)
+                        alert('Metamask Error' + err.message || err)
+                    })
                 }
                 main()
             </script>
