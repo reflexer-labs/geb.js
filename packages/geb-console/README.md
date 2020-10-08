@@ -3,7 +3,7 @@
 ## Install 
 
 ```
-npm install -g @reflexer-finance/geb-console
+npm install -g @reflexer-finance/geb-console@latest
 ```
 
 ## Use
