@@ -33,7 +33,7 @@
         "labs"
     ],
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/reflexer-labs/geb.js/issues"
     },
