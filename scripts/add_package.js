@@ -20,7 +20,7 @@ const packageJson = `
       "test": "echo \\"Error: no test specified\\" && exit 1"
     },
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
-    "license": "ISC"
+    "license": "MIT"
   }
 `
 

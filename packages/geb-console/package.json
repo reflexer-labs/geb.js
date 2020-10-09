@@ -7,7 +7,7 @@
         "geb-console": "./bin/geb-console"
     },
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
-    "license": "ISC",
+    "license": "MIT",
     "dependencies": {
         "@reflexer-finance/geb-admin": "0.0.12",
         "ethers": "^5.0.14",

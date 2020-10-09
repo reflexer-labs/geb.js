@@ -7,7 +7,7 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
-    "license": "ISC",
+    "license": "MIT",
     "dependencies": {
         "@ethersproject/bignumber": "5.x",
         "@reflexer-finance/geb-admin-api": "^0.0.12",
