@@ -14,10 +14,8 @@ import { GetSafes } from './generated/GetSafes'
 import { GlobalSettlement } from './generated/GlobalSettlement'
 import { LiquidationEngine } from './generated/LiquidationEngine'
 import { OracleRelayer } from './generated/OracleRelayer'
-import { PostSettlementSurplusAuctionHouse } from './generated/PostSettlementSurplusAuctionHouse'
 import { PreSettlementSurplusAuctionHouse } from './generated/PreSettlementSurplusAuctionHouse'
 import { SafeEngine } from './generated/SAFEEngine'
-import { SettlementSurplusAuctioneer } from './generated/SettlementSurplusAuctioneer'
 import { StabilityFeeTreasury } from './generated/StabilityFeeTreasury'
 import { TaxCollector } from './generated/TaxCollector'
 import { GebProxyActions } from './generated/GebProxyActions'
@@ -52,10 +50,8 @@ export {
     GlobalSettlement,
     LiquidationEngine,
     OracleRelayer,
-    PostSettlementSurplusAuctionHouse,
     PreSettlementSurplusAuctionHouse,
     SafeEngine,
-    SettlementSurplusAuctioneer,
     StabilityFeeTreasury,
     TaxCollector,
     GebProxyActions,

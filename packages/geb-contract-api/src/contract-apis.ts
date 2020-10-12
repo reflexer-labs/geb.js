@@ -6,8 +6,6 @@ import {
     GlobalSettlement,
     DebtAuctionHouse,
     PreSettlementSurplusAuctionHouse,
-    PostSettlementSurplusAuctionHouse,
-    SettlementSurplusAuctioneer,
     Coin,
     GebSafeManager,
     GetSafes,
@@ -41,8 +39,6 @@ export class ContractApis {
     public globalSettlement: GlobalSettlement
     public debtAuctionHouse: DebtAuctionHouse
     public preSettlementSurplusAuctionHouse: PreSettlementSurplusAuctionHouse
-    public postSettlementSurplusAuctionHouse: PostSettlementSurplusAuctionHouse
-    public settlementSurplusAuctioneer: SettlementSurplusAuctioneer
     public safeManager: GebSafeManager
     public getSafes: GetSafes
     public joinETH_A: BasicCollateralJoin
@@ -73,8 +69,6 @@ export class ContractApis {
         this.globalSettlement = new GlobalSettlement(addressList.GEB_GLOBAL_SETTLEMENT, this.chainProvider)
         this.debtAuctionHouse = new DebtAuctionHouse(addressList.GEB_DEBT_AUCTION_HOUSE, this.chainProvider)
         this.preSettlementSurplusAuctionHouse = new PreSettlementSurplusAuctionHouse(addressList.GEB_PRE_SETTLEMENT_SURPLUS_AUCTION_HOUSE, this.chainProvider)
-        this.postSettlementSurplusAuctionHouse = new PostSettlementSurplusAuctionHouse(addressList.GEB_POST_SETTLEMENT_SURPLUS_AUCTION_HOUSE, this.chainProvider)
-        this.settlementSurplusAuctioneer = new SettlementSurplusAuctioneer(addressList.GEB_SETTLEMENT_SURPLUS_AUCTIONEER, this.chainProvider)
         this.safeManager = new GebSafeManager(addressList.SAFE_MANAGER, this.chainProvider)
         this.getSafes = new GetSafes(addressList.GET_SAFES, this.chainProvider)
         this.joinETH_A = new BasicCollateralJoin(addressList.GEB_JOIN_ETH_A, this.chainProvider)

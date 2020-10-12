@@ -4,6 +4,7 @@ import { ethers } from 'ethers'
 import { testContractPresence } from './contracts'
 import { KOVAN_ADDRESSES } from '@reflexer-finance/geb-contract-base'
 import assert from 'assert'
+import { GebEthersProvider } from 'geb.js'
 
 describe('Test contract API', async () => {
     testContractPresence('kovan', MAKER_KOVAN_NODE)
@@ -26,7 +27,8 @@ describe('Test contract API', async () => {
 
     it('Test webScheduleProposal', async () => {
         const provider = new ethers.providers.JsonRpcProvider(MAKER_KOVAN_NODE)
-        const gebAdmin = new GebAdmin('kovan', provider)
+        const gebProvider = new GebEthersProvider(provider)
+        const gebAdmin = new GebAdmin('kovan', gebProvider)
 
         const data = await gebAdmin.webScheduleProposal(
             'modifyParameters(address,bytes32,uint256)',
@@ -38,10 +40,14 @@ describe('Test contract API', async () => {
             1602091914
         )
 
-        // Inject the right gov action address in the middle of the tx data
+        // Inject the right gov action address and codeHash in the middle of the tx data
         const expectedData = `0x7a0c53b2000000000000000000000000${KOVAN_ADDRESSES.GEB_GOV_ACTIONS.toLowerCase().slice(
             2
-        )}0482106d4f037a7a845d52c610f7932015152116b75cad3f2f07feda44e779fe0000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000005f7dfb8a0000000000000000000000000000000000000000000000000000000000000064ecf987ef00000000000000000000000018c5f335602c881eaa36d2a5a483186f61a7c087676c6f62616c446562744365696c696e6700000000000000000000000000000000000000000000000000000008c213d9da502de454526f422cc340000000000000000000000000000000000000000000000000000000000000000000`
+        )}${(
+            await gebProvider.extCodeHash(KOVAN_ADDRESSES.GEB_GOV_ACTIONS)
+        ).slice(
+            2
+        )}0000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000005f7dfb8a0000000000000000000000000000000000000000000000000000000000000064ecf987ef00000000000000000000000018c5f335602c881eaa36d2a5a483186f61a7c087676c6f62616c446562744365696c696e6700000000000000000000000000000000000000000000000000000008c213d9da502de454526f422cc340000000000000000000000000000000000000000000000000000000000000000000`
 
         assert.strictEqual(data.data, expectedData)
         assert.ok(

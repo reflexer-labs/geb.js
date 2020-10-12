@@ -16,7 +16,6 @@ import { CollateralJoin3 } from './generated/CollateralJoin3'
 import { CollateralJoin4 } from './generated/CollateralJoin4'
 import { CollateralJoin5 } from './generated/CollateralJoin5'
 import { CollateralJoin6 } from './generated/CollateralJoin6'
-import { Common } from './generated/Common'
 import { DsAuth } from './generated/DSAuth'
 import { DsAuthEvents } from './generated/DSAuthEvents'
 import { DsAuthority } from './generated/DSAuthority'
@@ -60,14 +59,12 @@ import { LiquidationEngineFactory } from './generated/LiquidationEngineFactory'
 import { LiquidationEngineMock } from './generated/LiquidationEngineMock'
 import { OracleRelayerFactory } from './generated/OracleRelayerFactory'
 import { PauseFactory } from './generated/PauseFactory'
-import { PostSettlementSurplusAuctionHouseFactory } from './generated/PostSettlementSurplusAuctionHouseFactory'
 import { PreSettlementSurplusAuctionHouseFactory } from './generated/PreSettlementSurplusAuctionHouseFactory'
 import { ProtocolTokenAuthority } from './generated/ProtocolTokenAuthority'
 import { RestrictedTokenFaucet } from './generated/RestrictedTokenFaucet'
 import { SafeEngineFactory } from './generated/SAFEEngineFactory'
 import { SafeHandler } from './generated/SAFEHandler'
 import { Setter } from './generated/Setter'
-import { SettlementSurplusAuctioneerFactory } from './generated/SettlementSurplusAuctioneerFactory'
 import { SimpleAuthority } from './generated/SimpleAuthority'
 import { StabilityFeeTreasuryFactory } from './generated/StabilityFeeTreasuryFactory'
 import { Store } from './generated/Store'
@@ -109,7 +106,6 @@ export {
     CollateralJoin4,
     CollateralJoin5,
     CollateralJoin6,
-    Common,
     DsAuth,
     DsAuthEvents,
     DsAuthority,
@@ -153,14 +149,12 @@ export {
     LiquidationEngineMock,
     OracleRelayerFactory,
     PauseFactory,
-    PostSettlementSurplusAuctionHouseFactory,
     PreSettlementSurplusAuctionHouseFactory,
     ProtocolTokenAuthority,
     RestrictedTokenFaucet,
     SafeEngineFactory,
     SafeHandler,
     Setter,
-    SettlementSurplusAuctioneerFactory,
     SimpleAuthority,
     StabilityFeeTreasuryFactory,
     Store,

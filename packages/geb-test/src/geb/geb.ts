@@ -171,7 +171,7 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
 
             // debtFloor is 15
             res[1].debtAmount
-            assert.ok(res[1].debtFloor.eq(utils.RAD.mul(100)))
+            assert.ok(res[1].debtFloor.eq(utils.RAD.mul(70)))
         })
 
         it('multicall with 3 calls', async () => {
@@ -185,7 +185,7 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             assert.ok(res[0].gt('1'))
 
             // debtFloor is 15
-            assert.ok(res[1].debtFloor.eq(utils.RAD.mul(100)))
+            assert.ok(res[1].debtFloor.eq(utils.RAD.mul(70)))
 
             // Should get the right ETH auction house
             assert.ok(
