@@ -64,6 +64,7 @@ export class ContractApis {
         public chainProvider: GebProviderInterface
     )
     {
+        // Set the contract address list 
         let addressList = getAddressList(network)
 
         this.safeEngine = new SafeEngine(addressList.GEB_SAFE_ENGINE, this.chainProvider)
