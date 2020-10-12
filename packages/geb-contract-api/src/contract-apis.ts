@@ -28,6 +28,8 @@ import {
     GebDeployment,
     getAddressList,
 } from '@reflexer-finance/geb-contract-base'
+import { RateSetter } from './generated/RateSetter'
+import { PiRawPerSecondValidator } from './generated/PIRawPerSecondValidator'
 
 // Container class instantiate most GEB contracts
 // prettier-ignore
@@ -51,6 +53,8 @@ export class ContractApis {
     public protocolToken: DsToken
     public medianizerEth: ChainlinkMedianEthusd | DsValue
     public medianizerCoin: UniswapConsecutiveSlotsMedianRaiusd | DsValue
+    public rateSetter: RateSetter
+    public piValidator: PiRawPerSecondValidator
     public fsmEth: Osm | DsValue
     public fsmCoin: Osm | DsValue
     public weth: Weth9
@@ -80,6 +84,8 @@ export class ContractApis {
         this.collateralAuctionHouseETH_A = new FixedDiscountCollateralAuctionHouse(addressList.GEB_COLLATERAL_AUCTION_HOUSE_ETH_A, this.chainProvider)
         this.medianizerEth = new ChainlinkMedianEthusd(addressList.MEDIANIZER_ETH, this.chainProvider)
         this.medianizerCoin = new UniswapConsecutiveSlotsMedianRaiusd(addressList.MEDIANIZER_PRAI, this.chainProvider)
+        this.rateSetter = new RateSetter(addressList.GEB_RRFM_SETTER, this.chainProvider)
+        this.piValidator = new PiRawPerSecondValidator(addressList.GEB_RRFM_VALIDATOR, this.chainProvider)
         this.fsmEth = new Osm(addressList.FEED_SECURITY_MODULE_ETH, this.chainProvider)
         this.fsmCoin = new Osm(addressList.FEED_SECURITY_MODULE_PRAI, this.chainProvider)
         this.weth = new Weth9(addressList.ETH, this.chainProvider)
