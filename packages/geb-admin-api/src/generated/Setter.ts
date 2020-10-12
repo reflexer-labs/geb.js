@@ -7,12 +7,44 @@ import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 
 export class Setter extends BaseContractAPI {
+    addAuthority(account: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"addAuthority","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [account])
+    }
+
     addAuthorization(address: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"addAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [address])
+    }
+
+    addReader(address: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"addReader","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [address])
+    }
+
+    changeNextPriceDeviation(deviation: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"deviation","type":"uint256"}],"name":"changeNextPriceDeviation","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [deviation])
+    }
+
+    changePriceSource(priceSource_: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"priceSource_","type":"address"}],"name":"changePriceSource","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [priceSource_])
     }
 
     initializeCollateralType(bytes: BytesLike): TransactionRequest {
@@ -65,15 +97,26 @@ export class Setter extends BaseContractAPI {
         return this.getTransactionRequest(abi, [bytes, uinteger1, uinteger2])
     }
 
-    modifyParameters4(bytes: BytesLike, address: string): TransactionRequest {
+    modifyParameters4(
+        bytes: BytesLike,
+        integer: BigNumberish
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"int256","name":"","type":"int256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [bytes, integer])
+    }
+
+    modifyParameters5(bytes: BytesLike, address: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"int256","name":"","type":"int256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [bytes, address])
     }
 
-    modifyParameters5(
+    modifyParameters6(
         bytes1: BytesLike,
         bytes2: BytesLike,
         uinteger: BigNumberish
@@ -85,13 +128,13 @@ export class Setter extends BaseContractAPI {
         return this.getTransactionRequest(abi, [bytes1, bytes2, uinteger])
     }
 
-    modifyParameters6(
+    modifyParameters7(
         bytes: BytesLike,
         uinteger: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"int256","name":"","type":"int256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [bytes, uinteger])
     }
@@ -104,10 +147,26 @@ export class Setter extends BaseContractAPI {
         return this.getTransactionRequest(abi, [])
     }
 
+    removeAuthority(account: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"removeAuthority","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [account])
+    }
+
     removeAuthorization(address: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"removeAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [address])
+    }
+
+    removeReader(address: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"removeReader","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [address])
     }
@@ -118,6 +177,14 @@ export class Setter extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"setAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [address, uinteger])
+    }
+
+    setDummyPIDValidator(address: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"setDummyPIDValidator","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [address])
     }
 
     setPerBlockAllowance(
@@ -140,6 +207,22 @@ export class Setter extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"setTotalAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [address, uinteger])
+    }
+
+    start(): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"start","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [])
+    }
+
+    stopFsm(collateralType: BytesLike): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"stopFsm","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [collateralType])
     }
 
     taxMany(start: BigNumberish, end: BigNumberish): TransactionRequest {

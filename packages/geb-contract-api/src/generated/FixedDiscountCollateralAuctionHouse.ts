@@ -220,6 +220,41 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
+    getApproximateCollateralBought(
+        id: BigNumberish,
+        wad: BigNumberish
+    ): Promise<{
+        0: BigNumber
+        1: BigNumber
+    }>
+    getApproximateCollateralBought(
+        id: BigNumberish,
+        wad: BigNumberish,
+        multicall: true
+    ): MulticallRequest<{
+        0: BigNumber
+        1: BigNumber
+    }>
+    getApproximateCollateralBought(
+        id: BigNumberish,
+        wad: BigNumberish,
+        multicall?: true
+    ):
+        | Promise<{
+              0: BigNumber
+              1: BigNumber
+          }>
+        | MulticallRequest<{
+              0: BigNumber
+              1: BigNumber
+          }> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"getApproximateCollateralBought","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [id, wad], multicall)
+    }
+
     getCollateralBought(
         id: BigNumberish,
         wad: BigNumberish
@@ -231,22 +266,173 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         return this.getTransactionRequest(abi, [id, wad])
     }
 
+    getCollateralMedianPrice(): Promise<BigNumber>
+    getCollateralMedianPrice(multicall: true): MulticallRequest<BigNumber>
+    getCollateralMedianPrice(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"getCollateralMedianPrice","outputs":[{"internalType":"uint256","name":"priceFeed","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     getDiscountedCollateralPrice(
         collateralFsmPriceFeedValue: BigNumberish,
         collateralMedianPriceFeedValue: BigNumberish,
         systemCoinPriceFeedValue: BigNumberish,
         customDiscount: BigNumberish
-    ): TransactionRequest {
+    ): Promise<BigNumber>
+    getDiscountedCollateralPrice(
+        collateralFsmPriceFeedValue: BigNumberish,
+        collateralMedianPriceFeedValue: BigNumberish,
+        systemCoinPriceFeedValue: BigNumberish,
+        customDiscount: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    getDiscountedCollateralPrice(
+        collateralFsmPriceFeedValue: BigNumberish,
+        collateralMedianPriceFeedValue: BigNumberish,
+        systemCoinPriceFeedValue: BigNumberish,
+        customDiscount: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"collateralFsmPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"collateralMedianPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"systemCoinPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"customDiscount","type":"uint256"}],"name":"getDiscountedCollateralPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"collateralFsmPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"collateralMedianPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"systemCoinPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"customDiscount","type":"uint256"}],"name":"getDiscountedCollateralPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [
-            collateralFsmPriceFeedValue,
-            collateralMedianPriceFeedValue,
-            systemCoinPriceFeedValue,
-            customDiscount,
-        ])
+        return this.ethCallOrMulticall(
+            abi,
+            [
+                collateralFsmPriceFeedValue,
+                collateralMedianPriceFeedValue,
+                systemCoinPriceFeedValue,
+                customDiscount,
+            ],
+            multicall
+        )
+    }
+
+    getFinalBaseCollateralPrice(
+        collateralFsmPriceFeedValue: BigNumberish,
+        collateralMedianPriceFeedValue: BigNumberish
+    ): Promise<BigNumber>
+    getFinalBaseCollateralPrice(
+        collateralFsmPriceFeedValue: BigNumberish,
+        collateralMedianPriceFeedValue: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    getFinalBaseCollateralPrice(
+        collateralFsmPriceFeedValue: BigNumberish,
+        collateralMedianPriceFeedValue: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"collateralFsmPriceFeedValue","type":"uint256"},{"internalType":"uint256","name":"collateralMedianPriceFeedValue","type":"uint256"}],"name":"getFinalBaseCollateralPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(
+            abi,
+            [collateralFsmPriceFeedValue, collateralMedianPriceFeedValue],
+            multicall
+        )
+    }
+
+    getFinalTokenPrices(
+        systemCoinRedemptionPrice: BigNumberish
+    ): Promise<{
+        0: BigNumber
+        1: BigNumber
+    }>
+    getFinalTokenPrices(
+        systemCoinRedemptionPrice: BigNumberish,
+        multicall: true
+    ): MulticallRequest<{
+        0: BigNumber
+        1: BigNumber
+    }>
+    getFinalTokenPrices(
+        systemCoinRedemptionPrice: BigNumberish,
+        multicall?: true
+    ):
+        | Promise<{
+              0: BigNumber
+              1: BigNumber
+          }>
+        | MulticallRequest<{
+              0: BigNumber
+              1: BigNumber
+          }> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"systemCoinRedemptionPrice","type":"uint256"}],"name":"getFinalTokenPrices","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(
+            abi,
+            [systemCoinRedemptionPrice],
+            multicall
+        )
+    }
+
+    getSystemCoinCeilingDeviatedPrice(
+        redemptionPrice: BigNumberish
+    ): Promise<BigNumber>
+    getSystemCoinCeilingDeviatedPrice(
+        redemptionPrice: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    getSystemCoinCeilingDeviatedPrice(
+        redemptionPrice: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"redemptionPrice","type":"uint256"}],"name":"getSystemCoinCeilingDeviatedPrice","outputs":[{"internalType":"uint256","name":"ceilingPrice","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [redemptionPrice], multicall)
+    }
+
+    getSystemCoinFloorDeviatedPrice(
+        redemptionPrice: BigNumberish
+    ): Promise<BigNumber>
+    getSystemCoinFloorDeviatedPrice(
+        redemptionPrice: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    getSystemCoinFloorDeviatedPrice(
+        redemptionPrice: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"redemptionPrice","type":"uint256"}],"name":"getSystemCoinFloorDeviatedPrice","outputs":[{"internalType":"uint256","name":"floorPrice","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [redemptionPrice], multicall)
+    }
+
+    getSystemCoinMarketPrice(): Promise<BigNumber>
+    getSystemCoinMarketPrice(multicall: true): MulticallRequest<BigNumber>
+    getSystemCoinMarketPrice(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"getSystemCoinMarketPrice","outputs":[{"internalType":"uint256","name":"priceFeed","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    lastReadRedemptionPrice(): Promise<BigNumber>
+    lastReadRedemptionPrice(multicall: true): MulticallRequest<BigNumber>
+    lastReadRedemptionPrice(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"lastReadRedemptionPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     liquidationEngine(): Promise<string>

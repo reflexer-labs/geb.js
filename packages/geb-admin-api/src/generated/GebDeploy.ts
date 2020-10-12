@@ -285,14 +285,6 @@ export class GebDeploy extends BaseContractAPI {
         return this.getTransactionRequest(abi, [])
     }
 
-    deploySettlementSurplusAuctioneer(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"deploySettlementSurplusAuctioneer","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
     deployShutdown(
         prot: string,
         tokenBurner: string,
@@ -493,32 +485,6 @@ export class GebDeploy extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    postSettlementSurplusAuctionHouse(): Promise<string>
-    postSettlementSurplusAuctionHouse(multicall: true): MulticallRequest<string>
-    postSettlementSurplusAuctionHouse(
-        multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"postSettlementSurplusAuctionHouse","outputs":[{"internalType":"contract PostSettlementSurplusAuctionHouse","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    postSettlementSurplusAuctionHouseFactory(): Promise<string>
-    postSettlementSurplusAuctionHouseFactory(
-        multicall: true
-    ): MulticallRequest<string>
-    postSettlementSurplusAuctionHouseFactory(
-        multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"postSettlementSurplusAuctionHouseFactory","outputs":[{"internalType":"contract PostSettlementSurplusAuctionHouseFactory","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     preSettlementSurplusAuctionHouse(): Promise<string>
     preSettlementSurplusAuctionHouse(multicall: true): MulticallRequest<string>
     preSettlementSurplusAuctionHouse(
@@ -623,12 +589,11 @@ export class GebDeploy extends BaseContractAPI {
         liquidationEngineFactory_: string,
         coinFactory_: string,
         coinJoinFactory_: string,
-        coinSavingsAccountFactory_: string,
-        settlementSurplusAuctioneerFactory_: string
+        coinSavingsAccountFactory_: string
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"contract SAFEEngineFactory","name":"safeEngineFactory_","type":"address"},{"internalType":"contract TaxCollectorFactory","name":"taxCollectorFactory_","type":"address"},{"internalType":"contract AccountingEngineFactory","name":"accountingEngineFactory_","type":"address"},{"internalType":"contract LiquidationEngineFactory","name":"liquidationEngineFactory_","type":"address"},{"internalType":"contract CoinFactory","name":"coinFactory_","type":"address"},{"internalType":"contract CoinJoinFactory","name":"coinJoinFactory_","type":"address"},{"internalType":"contract CoinSavingsAccountFactory","name":"coinSavingsAccountFactory_","type":"address"},{"internalType":"contract SettlementSurplusAuctioneerFactory","name":"settlementSurplusAuctioneerFactory_","type":"address"}],"name":"setFirstFactoryBatch","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"contract SAFEEngineFactory","name":"safeEngineFactory_","type":"address"},{"internalType":"contract TaxCollectorFactory","name":"taxCollectorFactory_","type":"address"},{"internalType":"contract AccountingEngineFactory","name":"accountingEngineFactory_","type":"address"},{"internalType":"contract LiquidationEngineFactory","name":"liquidationEngineFactory_","type":"address"},{"internalType":"contract CoinFactory","name":"coinFactory_","type":"address"},{"internalType":"contract CoinJoinFactory","name":"coinJoinFactory_","type":"address"},{"internalType":"contract CoinSavingsAccountFactory","name":"coinSavingsAccountFactory_","type":"address"}],"name":"setFirstFactoryBatch","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             safeEngineFactory_,
@@ -638,7 +603,6 @@ export class GebDeploy extends BaseContractAPI {
             coinFactory_,
             coinJoinFactory_,
             coinSavingsAccountFactory_,
-            settlementSurplusAuctioneerFactory_,
         ])
     }
 
@@ -652,7 +616,6 @@ export class GebDeploy extends BaseContractAPI {
 
     setSecondFactoryBatch(
         preSettlementSurplusAuctionHouseFactory_: string,
-        postSettlementSurplusAuctionHouseFactory_: string,
         debtAuctionHouseFactory_: string,
         englishCollateralAuctionHouseFactory_: string,
         fixedDiscountCollateralAuctionHouseFactory_: string,
@@ -662,11 +625,10 @@ export class GebDeploy extends BaseContractAPI {
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"contract PreSettlementSurplusAuctionHouseFactory","name":"preSettlementSurplusAuctionHouseFactory_","type":"address"},{"internalType":"contract PostSettlementSurplusAuctionHouseFactory","name":"postSettlementSurplusAuctionHouseFactory_","type":"address"},{"internalType":"contract DebtAuctionHouseFactory","name":"debtAuctionHouseFactory_","type":"address"},{"internalType":"contract EnglishCollateralAuctionHouseFactory","name":"englishCollateralAuctionHouseFactory_","type":"address"},{"internalType":"contract FixedDiscountCollateralAuctionHouseFactory","name":"fixedDiscountCollateralAuctionHouseFactory_","type":"address"},{"internalType":"contract OracleRelayerFactory","name":"oracleRelayerFactory_","type":"address"},{"internalType":"contract GlobalSettlementFactory","name":"globalSettlementFactory_","type":"address"},{"internalType":"contract ESMFactory","name":"esmFactory_","type":"address"}],"name":"setSecondFactoryBatch","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"contract PreSettlementSurplusAuctionHouseFactory","name":"preSettlementSurplusAuctionHouseFactory_","type":"address"},{"internalType":"contract DebtAuctionHouseFactory","name":"debtAuctionHouseFactory_","type":"address"},{"internalType":"contract EnglishCollateralAuctionHouseFactory","name":"englishCollateralAuctionHouseFactory_","type":"address"},{"internalType":"contract FixedDiscountCollateralAuctionHouseFactory","name":"fixedDiscountCollateralAuctionHouseFactory_","type":"address"},{"internalType":"contract OracleRelayerFactory","name":"oracleRelayerFactory_","type":"address"},{"internalType":"contract GlobalSettlementFactory","name":"globalSettlementFactory_","type":"address"},{"internalType":"contract ESMFactory","name":"esmFactory_","type":"address"}],"name":"setSecondFactoryBatch","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             preSettlementSurplusAuctionHouseFactory_,
-            postSettlementSurplusAuctionHouseFactory_,
             debtAuctionHouseFactory_,
             englishCollateralAuctionHouseFactory_,
             fixedDiscountCollateralAuctionHouseFactory_,
@@ -690,32 +652,6 @@ export class GebDeploy extends BaseContractAPI {
             protestPauseFactory_,
             stabilityFeeTreasuryFactory_,
         ])
-    }
-
-    settlementSurplusAuctioneer(): Promise<string>
-    settlementSurplusAuctioneer(multicall: true): MulticallRequest<string>
-    settlementSurplusAuctioneer(
-        multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"settlementSurplusAuctioneer","outputs":[{"internalType":"contract SettlementSurplusAuctioneer","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    settlementSurplusAuctioneerFactory(): Promise<string>
-    settlementSurplusAuctioneerFactory(
-        multicall: true
-    ): MulticallRequest<string>
-    settlementSurplusAuctioneerFactory(
-        multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"settlementSurplusAuctioneerFactory","outputs":[{"internalType":"contract SettlementSurplusAuctioneerFactory","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     stabilityFeeTreasury(): Promise<string>
