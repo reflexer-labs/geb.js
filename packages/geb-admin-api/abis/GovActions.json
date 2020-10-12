@@ -3,12 +3,68 @@
         "inputs": [
             {
                 "internalType": "address",
+                "name": "validator",
+                "type": "address"
+            },
+            { "internalType": "address", "name": "account", "type": "address" }
+        ],
+        "name": "addAuthority",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
                 "name": "targetContract",
                 "type": "address"
             },
             { "internalType": "address", "name": "to", "type": "address" }
         ],
         "name": "addAuthorization",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "validator",
+                "type": "address"
+            },
+            { "internalType": "address", "name": "reader", "type": "address" }
+        ],
+        "name": "addReader",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "fsm", "type": "address" },
+            {
+                "internalType": "uint256",
+                "name": "deviation",
+                "type": "uint256"
+            }
+        ],
+        "name": "changeNextPriceDeviation",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "fsm", "type": "address" },
+            {
+                "internalType": "address",
+                "name": "priceSource",
+                "type": "address"
+            }
+        ],
+        "name": "changePriceSource",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -73,6 +129,25 @@
                 "type": "bytes32"
             },
             { "internalType": "address", "name": "data", "type": "address" }
+        ],
+        "name": "modifyParameters",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "targetContract",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "parameter",
+                "type": "bytes32"
+            },
+            { "internalType": "int256", "name": "data", "type": "int256" }
         ],
         "name": "modifyParameters",
         "outputs": [],
@@ -251,6 +326,20 @@
         "inputs": [
             {
                 "internalType": "address",
+                "name": "validator",
+                "type": "address"
+            },
+            { "internalType": "address", "name": "account", "type": "address" }
+        ],
+        "name": "removeAuthority",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
                 "name": "targetContract",
                 "type": "address"
             },
@@ -277,6 +366,20 @@
             { "internalType": "uint256", "name": "data", "type": "uint256" }
         ],
         "name": "removeAuthorizationAndModify",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "validator",
+                "type": "address"
+            },
+            { "internalType": "address", "name": "reader", "type": "address" }
+        ],
+        "name": "removeReader",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -353,6 +456,29 @@
         "inputs": [
             {
                 "internalType": "address",
+                "name": "rateSetter",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "oracleRelayer",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "dummyValidator",
+                "type": "address"
+            }
+        ],
+        "name": "setDummyPIDValidator",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
                 "name": "targetContract",
                 "type": "address"
             },
@@ -402,6 +528,33 @@
             }
         ],
         "name": "shutdownSystem",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "fsm", "type": "address" }
+        ],
+        "name": "start",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "fsmGovInterface",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
+            }
+        ],
+        "name": "stopFsm",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"

@@ -392,12 +392,38 @@
             { "internalType": "uint256", "name": "id", "type": "uint256" },
             { "internalType": "uint256", "name": "wad", "type": "uint256" }
         ],
+        "name": "getApproximateCollateralBought",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "id", "type": "uint256" },
+            { "internalType": "uint256", "name": "wad", "type": "uint256" }
+        ],
         "name": "getCollateralBought",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" },
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getCollateralMedianPrice",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "priceFeed",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -427,7 +453,103 @@
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "collateralFsmPriceFeedValue",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "collateralMedianPriceFeedValue",
+                "type": "uint256"
+            }
+        ],
+        "name": "getFinalBaseCollateralPrice",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "systemCoinRedemptionPrice",
+                "type": "uint256"
+            }
+        ],
+        "name": "getFinalTokenPrices",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "redemptionPrice",
+                "type": "uint256"
+            }
+        ],
+        "name": "getSystemCoinCeilingDeviatedPrice",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "ceilingPrice",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "redemptionPrice",
+                "type": "uint256"
+            }
+        ],
+        "name": "getSystemCoinFloorDeviatedPrice",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "floorPrice",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getSystemCoinMarketPrice",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "priceFeed",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "lastReadRedemptionPrice",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
