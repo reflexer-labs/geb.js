@@ -29,6 +29,8 @@ import { Multicall } from './generated/Multicall'
 import { DsValue } from './generated/DSValue'
 import { Osm } from './generated/OSM'
 import { Weth9 } from './generated/WETH9_'
+import { RateSetter } from './generated/RateSetter'
+import { PiRawPerSecondValidator } from './generated/PIRawPerSecondValidator'
 
 export {
     // Factory
@@ -61,6 +63,8 @@ export {
     Erc20,
     Osm,
     DsValue,
+    PiRawPerSecondValidator,
+    RateSetter,
     ChainlinkMedianEthusd,
     UniswapConsecutiveSlotsMedianRaiusd,
     Weth9,
