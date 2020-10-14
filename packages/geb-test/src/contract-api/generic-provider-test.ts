@@ -1,6 +1,5 @@
 import assert from 'assert'
 
-import { ethers } from 'ethers'
 import {
     SafeEngine,
     OracleRelayer,
@@ -61,7 +60,7 @@ export const testsWithGenericGebProvider = (
             try {
                 await gebProvider.ethCall(tx)
             } catch (err) {
-                assert.fail(utils.decodeChainError(err))
+                assert.fail(utils.getRequireString(err))
             }
         })
 
@@ -78,7 +77,7 @@ export const testsWithGenericGebProvider = (
                 await gebProvider.ethCall(tx)
                 assert.fail('Address 0x0 should have no balance')
             } catch (err) {
-                assert.equal(utils.decodeChainError(err), '0x')
+                assert.equal(utils.getRequireString(err), null)
             }
         })
 
@@ -89,7 +88,7 @@ export const testsWithGenericGebProvider = (
             )
 
             const rate = await oracleRelayer.redemptionRate()
-            assert.ok(rate.gt(ethers.BigNumber.from('10').pow(27)))
+            assert.ok(rate.gt(1))
         })
 
         it('Test Oracle relayer redemptionPrice_readOnly', async () => {
@@ -124,7 +123,7 @@ export const testsWithGenericGebProvider = (
                 assert.fail()
             } catch (err) {
                 assert.equal(
-                    utils.decodeChainError(err),
+                    utils.getRequireString(err),
                     'SAFEEngine/account-not-authorized'
                 )
             }
@@ -134,7 +133,7 @@ export const testsWithGenericGebProvider = (
                 assert.fail()
             } catch (err) {
                 assert.equal(
-                    utils.decodeChainError(err),
+                    utils.getRequireString(err),
                     'SAFEEngine/account-not-authorized'
                 )
             }

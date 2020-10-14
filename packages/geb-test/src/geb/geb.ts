@@ -215,7 +215,7 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             } catch (err) {
                 assert.equal(
                     'Coin/insufficient-balance',
-                    utils.decodeChainError(err)
+                    utils.getRequireString(err)
                 )
             }
         })

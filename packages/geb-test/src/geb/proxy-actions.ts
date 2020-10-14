@@ -62,7 +62,7 @@ export const testsProxyActionWithGenericGebProvider = (
                     assert.fail()
                 } catch (err) {
                     assert.equal(
-                        utils.decodeChainError(err),
+                        utils.getRequireString(err),
                         'ds-auth-unauthorized'
                     )
                 }
@@ -75,7 +75,7 @@ export const testsProxyActionWithGenericGebProvider = (
                 try {
                     await gebProvider.ethCall(tx)
                 } catch (err) {
-                    assert.fail('openSAFE: ' + utils.decodeChainError(err))
+                    assert.fail('openSAFE: ' + utils.getRequireString(err))
                 }
             })
 
@@ -116,7 +116,7 @@ export const testsProxyActionWithGenericGebProvider = (
                     assert.fail()
                 } catch (err) {
                     assert.equal(
-                        utils.decodeChainError(err),
+                        utils.getRequireString(err),
                         'ds-auth-unauthorized'
                     )
                 }

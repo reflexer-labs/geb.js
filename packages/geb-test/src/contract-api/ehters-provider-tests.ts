@@ -45,7 +45,7 @@ export const testsWithEthersProvider = () => {
                 assert.fail('This dummy Address should have no balance')
             } catch (err) {
                 assert.equal(
-                    utils.decodeChainError(err.error),
+                    utils.getRequireString(err.error),
                     'SAFEEngine/not-allowed'
                 )
             }
@@ -83,7 +83,7 @@ export const testsWithEthersProvider = () => {
                 await wallet.call(tx)
                 assert.fail('Should have fail')
             } catch (err) {
-                assert.equal(utils.decodeChainError(err), '0x')
+                assert.equal(utils.getRequireString(err), null)
             }
         })
 
@@ -105,7 +105,7 @@ export const testsWithEthersProvider = () => {
                 assert.fail()
             } catch (err) {
                 // This random address should have no balance
-                assert.equal(utils.decodeChainError(err.error), 'Reverted')
+                assert.equal(utils.getRequireString(err.error), null)
             }
         })
 
@@ -137,9 +137,7 @@ export const testsWithEthersProvider = () => {
             try {
                 await wallet.sendTransaction(tx)
             } catch (err) {
-                assert.ok(
-                    utils.decodeChainError(err).includes('Insufficient funds')
-                )
+                assert.ok(JSON.stringify(err).includes('Insufficient funds'))
             }
         })
     })

@@ -71,33 +71,32 @@ const decimalShift = (val: BigNumberish, shift: number) => {
     return BigNumber.from(val)
 }
 
-const decodeChainError = (error: any): string => {
-    let data: string
-    if (error?.data) {
-        data = error.data
-    } else if (error?.error?.data) {
-        data = error.error.data
-    } else if (error?.error?.stack) {
-        return error.error.stack.split('\n')[0]
-    } else {
-        throw new Error('Unknown error format')
+/**
+ * Given any kind of error object from an Ethereum RPC. Will look for an error string from a solidity require statement. Returns null if not found.
+ * @param  {any} RPC error object of any kind
+ * @returns string
+ */
+const getRequireString = (error: any): string | null => {
+    // Stringify to object
+    let str: string
+    try {
+        str = JSON.stringify(error)
+    } catch {
+        return null
     }
+    // Search for the require error string selector 0x08c379a0
+    const hexerrorArray = str.match(/0x08c379a0[0-9a-fA-F]*/g)
 
-    if (data.startsWith('Reverted 0x08c379a0')) {
-        data = data.slice(19)
-    } else if (data.startsWith('0x08c379a0')) {
-        data = data.slice(10)
-    } else if (data === 'Reverted') {
-        return 'Reverted'
-    } else if (data === 'Reverted 0x') {
-        return '0x'
+    if (hexerrorArray) {
+        // Convert from hex to UTF-8 string
+        return decodeURIComponent(
+            hexerrorArray[0].slice(12).replace(/[0-9a-f]{2}/g, '%$&')
+        )
+            .replace(/\0/g, '')
+            .slice(2)
     } else {
-        return data
+        return null
     }
-
-    return decodeURIComponent(data.slice(2).replace(/[0-9a-f]{2}/g, '%$&'))
-        .replace(/\0/g, '')
-        .slice(2)
 }
 
 export {
@@ -112,5 +111,5 @@ export {
     rayToFixed,
     radToFixed,
     decimalShift,
-    decodeChainError,
+    getRequireString,
 }
