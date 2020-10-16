@@ -15,6 +15,7 @@ import {
     TransactionRequest,
     GebProviderInterface,
     BaseContractAPI,
+    GebContractAPIConstructorInterface,
 } from 'geb.js'
 
 export {
@@ -34,4 +35,5 @@ export {
     TransactionRequest,
     GebProviderInterface,
     BaseContractAPI,
+    GebContractAPIConstructorInterface,
 }

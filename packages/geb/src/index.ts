@@ -13,6 +13,7 @@ import {
     MAINNET_ADDRESSES,
     TransactionRequest,
     BaseContractAPI,
+    GebContractAPIConstructorInterface,
 } from '@reflexer-finance/geb-contract-base'
 
 export {
@@ -30,4 +31,5 @@ export {
     TransactionRequest,
     GebProviderInterface,
     BaseContractAPI,
+    GebContractAPIConstructorInterface,
 }
