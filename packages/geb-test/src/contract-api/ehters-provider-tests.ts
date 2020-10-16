@@ -51,21 +51,24 @@ export const testsWithEthersProvider = () => {
             }
         })
 
-        // TODO: Due to whitelisting feature of the beta mainnet test, we can't test successful Join.
-        // it('Test join function with ethers from contraApis', async () => {
-        //     const contracts = new ContractApis('kovan', gebProvider)
+        it('Test join function with ethers from contraApis', async () => {
+            const contracts = new ContractApis('kovan', gebProvider)
 
-        //     const tx = await contracts.joinETH_A.join(
-        //         wallet.address,
-        //         ethers.utils.parseEther('0')
-        //     )
+            const tx = await contracts.joinETH_A.join(
+                wallet.address,
+                ethers.utils.parseEther('0')
+            )
 
-        //     try {
-        //         await wallet.call(tx)
-        //     } catch(err) {
-        //         assert.fail(`Should not have failed. Error code ${utils.decodeChainError(err)}`)
-        //     }
-        // })
+            try {
+                await wallet.call(tx)
+            } catch (err) {
+                assert.fail(
+                    `Should not have failed. Error code ${utils.getRequireString(
+                        err
+                    )}`
+                )
+            }
+        })
 
         it('Test join function failed with ethers', async () => {
             const ethJoin = new BasicCollateralJoin(

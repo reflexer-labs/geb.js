@@ -6,7 +6,7 @@ import {
     KOVAN_ADDRESSES,
 } from '@reflexer-finance/geb-contract-base'
 import { GebProxyActions, GebProxyActionsGlobalSettlement, utils } from 'geb.js'
-import { NULL_ADDRESS, ETH_A, ONE_ADDRESS } from '../const'
+import { NULL_ADDRESS, ETH_A, ONE_ADDRESS, WAD } from '../const'
 
 export const testsProxyActionWithGenericGebProvider = (
     gebProvider: GebProviderInterface
@@ -79,25 +79,24 @@ export const testsProxyActionWithGenericGebProvider = (
                 }
             })
 
-            // TODO: Comment-out due to the whitelisting feature requiring proxies to be allowed to deposit.
-            // it('Test complex payable proxy action function', async () => {
-            //     const tx = await proxy.openLockETHAndGenerateDebt(
-            //         '0',
-            //         ETH_A,
-            //         WAD.mul(0) // 100 RAI debt
-            //     )
+            it('Test complex payable proxy action function', async () => {
+                const tx = await proxy.openLockETHAndGenerateDebt(
+                    '0',
+                    ETH_A,
+                    WAD.mul(0) // 100 RAI debt
+                )
 
-            //     tx['from'] = KOVAN_ADDRESSES.ETH_FROM
+                tx['from'] = KOVAN_ADDRESSES.ETH_FROM
 
-            //     try {
-            //         await gebProvider.ethCall(tx)
-            //     } catch (err) {
-            //         assert.fail(
-            //             'openLockETHAndGenerateDebt: ' +
-            //                 utils.decodeChainError(err)
-            //         )
-            //     }
-            // })
+                try {
+                    await gebProvider.ethCall(tx)
+                } catch (err) {
+                    assert.fail(
+                        'openLockETHAndGenerateDebt: ' +
+                            utils.getRequireString(err)
+                    )
+                }
+            })
 
             it('Global settlement proxy action', async () => {
                 const settlementProxy = new GebProxyActionsGlobalSettlement(
