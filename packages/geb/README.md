@@ -45,11 +45,22 @@ console.log(`It will get liquidated if ETH price falls below ${(await safe.liqui
 
 // Open a new SAFE, lock ETH and draw RAI in a single transaction using a proxy
 // Note: Before doing this you need to create your own proxy
+
+// We first need to check that the system didn't reach the debt ceiling so that we can
+// mint more RAI.
+const globalDebt = await geb.contracts.safeEngine.globalDebt()
+const debtCeiling = await geb.contracts.safeEngine.globalDebtCeiling()
+const raiToDraw = ethersUtils.parseEther('15')
+if(globalDebt.add(raiToDraw).gt(debtCeiling)) {
+    throw new Error('Debt ceiling too low, not possible to draw this amount of RAI.')
+}
+
+// We're good to mint some RAI! 
 const proxy = await geb.getProxyAction(wallet.address)
 const tx = proxy.openLockETHAndGenerateDebt(
     ethersUtils.parseEther('1'), // Lock 1 Ether
     utils.ETH_A,                 // Of collateral ETH
-    ethersUtils.parseEther('15') // And draw 15 RAI
+    raiToDraw                    // And draw 15 RAI
 )
 
 tx.gasPrice = ethers.BigNumber.from('80').mul('1000000000') // Set the gas price to 80 Gwei
