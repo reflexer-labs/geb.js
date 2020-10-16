@@ -2,7 +2,7 @@ import { ethers } from 'ethers'
 import assert from 'assert'
 
 import { ETH_A, NULL_ADDRESS, ONE_ADDRESS } from '../const'
-import { Geb, GebErrorTypes, utils } from 'geb.js'
+import { Geb, GebErrorTypes, utils, contracts } from 'geb.js'
 import { sethCall } from '../utils'
 import {
     GebProviderInterface,
@@ -218,6 +218,48 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
                     utils.getRequireString(err)
                 )
             }
+        })
+
+        it('Test get gebContract', async () => {
+            const or = geb.getGebContract(
+                contracts.OracleRelayer,
+                KOVAN_ADDRESSES.GEB_ORACLE_RELAYER
+            )
+            const expected = await sethCall(
+                node,
+                KOVAN_ADDRESSES.GEB_ORACLE_RELAYER,
+                'redemptionRate()(uint256)'
+            )
+            assert.equal((await or.redemptionRate()).toString(), expected[0])
+        })
+
+        it('Test get gebContract static gebProvider', async () => {
+            const or = Geb.getGebContract(
+                contracts.OracleRelayer,
+                KOVAN_ADDRESSES.GEB_ORACLE_RELAYER,
+                gebProvider
+            )
+            const expected = await sethCall(
+                node,
+                KOVAN_ADDRESSES.GEB_ORACLE_RELAYER,
+                'redemptionRate()(uint256)'
+            )
+            assert.equal((await or.redemptionRate()).toString(), expected[0])
+        })
+
+        it('Test get gebContract static ether', async () => {
+            const provider = new ethers.providers.JsonRpcProvider(node)
+            const or = Geb.getGebContract(
+                contracts.OracleRelayer,
+                KOVAN_ADDRESSES.GEB_ORACLE_RELAYER,
+                provider
+            )
+            const expected = await sethCall(
+                node,
+                KOVAN_ADDRESSES.GEB_ORACLE_RELAYER,
+                'redemptionRate()(uint256)'
+            )
+            assert.equal((await or.redemptionRate()).toString(), expected[0])
         })
     })
 }

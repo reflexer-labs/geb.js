@@ -9,6 +9,8 @@ import {
     getAddressList,
     ContractList,
     GebDeployment,
+    BaseContractAPI,
+    GebContractAPIConstructorInterface,
 } from '@reflexer-finance/geb-contract-base'
 import { GebEthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import { ethers } from 'ethers'
@@ -270,5 +272,48 @@ export class Geb {
         )
 
         return (a as unknown) as T[]
+    }
+    /**
+     * Returns an instance of a specific geb contract given Geb contract API class constructor at a specified address
+     * ```typescript
+     * @param  {GebContractAPIConstructorInterface<T>} gebContractClass Class from Geb.contracts or Geb.con
+     * @param  {string} address
+     * @param  {GebProviderInterface|ethers.providers.Provider} provider Either a Ethers.js provider or a Geb provider
+     */
+    public static getGebContract<T extends BaseContractAPI>(
+        gebContractClass: GebContractAPIConstructorInterface<T>,
+        address: string,
+        provider: GebProviderInterface | ethers.providers.Provider
+    ): T {
+        if (
+            // @ts-ignore
+            provider.getBlockNumber !== undefined &&
+            // @ts-ignore
+            provider.getBlock !== undefined
+        ) {
+            // It's an Ethers provider
+            provider = new GebEthersProvider(
+                provider as ethers.providers.Provider
+            )
+        }
+
+        return new gebContractClass(address, provider as GebProviderInterface)
+    }
+
+    /**
+     * Returns an instance of a specific geb contract given a Geb contract API class at a specified address
+     * ```typescript
+     * import { contracts } from "geb.js"
+     * const safeEngine = geb.getGebContract(contracts.SafeEngine, "0xabcd123..")
+     * const globalDebt = safeEngine.globalDebt()
+     * ```
+     * @param  {GebContractAPIConstructorInterface<T>} gebContractClass Class from Geb.contracts or Geb.con
+     * @param  {string} address
+     */
+    public getGebContract<T extends BaseContractAPI>(
+        gebContractClass: GebContractAPIConstructorInterface<T>,
+        address: string
+    ): T {
+        return new gebContractClass(address, this.provider)
     }
 }

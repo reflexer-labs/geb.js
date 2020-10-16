@@ -12,6 +12,7 @@ import {
     KOVAN_ADDRESSES,
     MAINNET_ADDRESSES,
     TransactionRequest,
+    BaseContractAPI,
 } from '@reflexer-finance/geb-contract-base'
 
 export {
@@ -28,4 +29,5 @@ export {
     ContractList,
     TransactionRequest,
     GebProviderInterface,
+    BaseContractAPI,
 }

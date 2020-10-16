@@ -4,9 +4,17 @@ import {
     Geb,
     GebErrorTypes,
     GebProxyActions,
+    GebProxyActionsGlobalSettlement,
+    GebEthersProvider,
     utils,
     contracts,
-    GebProxyActionsGlobalSettlement,
+    KOVAN_ADDRESSES,
+    MAINNET_ADDRESSES,
+    // Type & Interfaces
+    ContractList,
+    TransactionRequest,
+    GebProviderInterface,
+    BaseContractAPI,
 } from 'geb.js'
 
 export {
@@ -16,6 +24,14 @@ export {
     GebErrorTypes,
     GebProxyActions,
     GebProxyActionsGlobalSettlement,
+    GebEthersProvider,
     utils,
     contracts,
+    KOVAN_ADDRESSES,
+    MAINNET_ADDRESSES,
+    // Type & Interfaces
+    ContractList,
+    TransactionRequest,
+    GebProviderInterface,
+    BaseContractAPI,
 }

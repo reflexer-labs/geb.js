@@ -9,6 +9,7 @@ import {
     BaseContractAPI,
     TransactionRequest,
     MulticallRequest,
+    GebContractAPIConstructorInterface,
 } from './base-contract-api'
 import {
     KOVAN_ADDRESSES,
@@ -28,6 +29,7 @@ export {
     Outputs,
     // Base contract API
     BaseContractAPI,
+    GebContractAPIConstructorInterface,
     TransactionRequest,
     MulticallRequest,
     // Addresses
