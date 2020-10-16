@@ -275,9 +275,9 @@ export class Geb {
     }
     /**
      * Returns an instance of a specific geb contract given Geb contract API class constructor at a specified address
-     * ```typescript
-     * @param  {GebContractAPIConstructorInterface<T>} gebContractClass Class from Geb.contracts or Geb.con
-     * @param  {string} address
+     *
+     * @param  {GebContractAPIConstructorInterface<T>} gebContractClass Class from contracts or adminContracts
+     * @param  {string} address Contract address of the instance
      * @param  {GebProviderInterface|ethers.providers.Provider} provider Either a Ethers.js provider or a Geb provider
      */
     public static getGebContract<T extends BaseContractAPI>(
@@ -302,13 +302,15 @@ export class Geb {
 
     /**
      * Returns an instance of a specific geb contract given a Geb contract API class at a specified address
+     *
      * ```typescript
      * import { contracts } from "geb.js"
      * const safeEngine = geb.getGebContract(contracts.SafeEngine, "0xabcd123..")
      * const globalDebt = safeEngine.globalDebt()
      * ```
-     * @param  {GebContractAPIConstructorInterface<T>} gebContractClass Class from Geb.contracts or Geb.con
-     * @param  {string} address
+     *
+     * @param  {GebContractAPIConstructorInterface<T>} gebContractClass Class from contracts or adminContracts
+     * @param  {string} address Contract address of the instance
      */
     public getGebContract<T extends BaseContractAPI>(
         gebContractClass: GebContractAPIConstructorInterface<T>,
