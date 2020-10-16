@@ -1,6 +1,6 @@
 {
     "name": "@reflexer-finance/geb-contract-base",
-    "version": "0.0.14",
+    "version": "0.0.15",
     "description": "",
     "main": "./lib/index.js",
     "scripts": {
