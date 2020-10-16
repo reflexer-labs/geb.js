@@ -1,6 +1,6 @@
 {
     "name": "@reflexer-finance/geb-admin",
-    "version": "0.0.22",
+    "version": "0.0.23",
     "description": "",
     "main": "./lib/index.js",
     "scripts": {
@@ -13,6 +13,6 @@
         "@reflexer-finance/geb-admin-api": "^0.0.20",
         "@reflexer-finance/geb-contract-base": "^0.0.15",
         "@reflexer-finance/geb-ethers-provider": "^0.0.17",
-        "geb.js": "^0.0.28"
+        "geb.js": "^0.0.29"
     }
 }
