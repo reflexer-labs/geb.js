@@ -121,19 +121,31 @@ export class GebAdmin extends Geb {
     public async webScheduleProposal(
         govFunctionAbi: string,
         params: any[],
-        earliestExecutionTime: number
+        earliestExecutionTime: number,
+        description?: string
     ) {
         const codeHash = await this.provider.extCodeHash(
             this.addresses.GEB_GOV_ACTIONS
         )
 
-        const tx = this.contractsAdmin.pause.scheduleTransaction1(
-            this.addresses.GEB_GOV_ACTIONS,
-            codeHash,
-            this.getGovCallData(govFunctionAbi, params),
-            earliestExecutionTime
-        )
+        let tx: TransactionRequest
 
+        if (description) {
+            tx = this.contractsAdmin.pause.scheduleTransaction2(
+                this.addresses.GEB_GOV_ACTIONS,
+                codeHash,
+                this.getGovCallData(govFunctionAbi, params),
+                earliestExecutionTime,
+                description
+            )
+        } else {
+            tx = this.contractsAdmin.pause.scheduleTransaction1(
+                this.addresses.GEB_GOV_ACTIONS,
+                codeHash,
+                this.getGovCallData(govFunctionAbi, params),
+                earliestExecutionTime
+            )
+        }
         return {
             to: this.addresses.GEB_PAUSE,
             value: 0,
