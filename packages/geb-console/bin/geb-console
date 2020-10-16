@@ -65,9 +65,12 @@ if (process.env.PK) {
         repl.context.provider
     )
 }
-
 // Metamask signer
 repl.context.metamask = function (tx) {
+    if(ethers.BigNumber.isBigNumber(tx.value)) {
+        tx.value = tx.value.toHexString()
+    }
+
     const strTx = JSON.stringify(tx)
     const requestListener = function (req, res) {
         res.setHeader('Content-Type', 'text/html')
@@ -87,8 +90,30 @@ repl.context.metamask = function (tx) {
                     signer.sendTransaction(${strTx}).then(p => {
                         document.getElementById("hash").innerHTML = 'Transaction hash: ' + p.hash
                     }).catch(err => {
+                        function getRequireString(error){
+                            let str
+                            try {
+                                str = JSON.stringify(error)
+                            } catch {
+                                return null
+                            }
+                            const hexerrorArray = str.match(/0x08c379a0[0-9a-fA-F]*/g)
+                            if (hexerrorArray) {
+                                return decodeURIComponent(
+                                    hexerrorArray[0].slice(12).replace(/[0-9a-f]{2}/g, '%$&')
+                                )
+                                    .replace(/\0/g, '')
+                                    .slice(2)
+                            } else {
+                                return null
+                            }
+                        }
                         console.error(err)
-                        alert('Metamask Error' + err.message || err)
+                        if(err.data == "Reverted") {
+                            provider.call(${strTx}).catch(x => alert('Metamask Error ' + getRequireString(x) || err.message || err))
+                        } else {
+                            alert('Metamask Error ' + err.message || err)
+                        }
                     })
                 }
                 main()
