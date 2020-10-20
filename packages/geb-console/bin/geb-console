@@ -122,7 +122,7 @@ repl.context.metamask = function (tx) {
                         }
                         console.error(err)
                         if(err.data == "Reverted") {
-                            provider.call(${strTx}).catch(x => alert('Metamask Error ' + getRequireString(x) || err.message || err))
+                            provider.call(tx).catch(x => alert('Metamask Error ' + getRequireString(x) || err.message || err))
                         } else {
                             alert('Metamask Error ' + err.message || err)
                         }
