@@ -31,13 +31,16 @@ if (process.env.RPC_URL) {
 }
 
 console.log('\nContext objects:')
-console.log('- geb                   - ethers')
-console.log('- gebAdmin              - wallet')
-console.log('- contracts             - provider')
-console.log('- BigNumber             - info(func)')
-console.log('- ETH_A                 - WAD')
-console.log('- RAD                   - RAY')
-console.log('- metamask(txRequest)   \n')
+console.log('- geb                        - ethers')
+console.log('- gebAdmin                   - wallet')
+console.log('- contracts                  - provider')
+console.log('- BigNumber                  - info(func)')
+console.log('- ETH_A                      - WAD')
+console.log('- RAD                        - RAY')
+console.log('- metamask(<txRequest>)      - wad(<BN|number|string>)')
+console.log('- ray(<BN|number|string>)    - rad(<BN|number|string>)')
+console.log('- parseWad(<BN>)             - parseRay(<BN>)')
+console.log('- parseRad(<BN>)\n')
 
 var repl = repl.start({ prompt: '🗿 > ', useGlobal: true })
 
@@ -47,12 +50,19 @@ repl.context.gebAdmin = new geb_admin.GebAdmin(network, repl.context.provider)
 repl.context.ETH_A = geb_admin.utils.ETH_A
 repl.context.WAD = geb_admin.utils.WAD
 repl.context.RAD = geb_admin.utils.RAD
-repl.context.RAD = geb_admin.utils.RAY
+repl.context.RAY = geb_admin.utils.RAY
 repl.context.decodeChainError = geb_admin.utils.decodeChainError
 repl.context.gebUtils = geb_admin.utils
 repl.context.BigNumber = ethers.ethers.BigNumber
 repl.context.ethers = ethers
 repl.context.geb_lib = geb_admin
+repl.context.wad = a => ethers.utils.parseEther(a.toString())
+repl.context.rad = a => geb_admin.utils.decimalShift(a.toString(), 45)
+repl.context.ray = a => geb_admin.utils.decimalShift(a.toString(), 27)
+repl.context.parseWad = a => geb_admin.utils.wadToFixed(a).toString()
+repl.context.parseRad = a => geb_admin.utils.radToFixed(a).toString()
+repl.context.parseRay = a => geb_admin.utils.rayToFixed(a).toString()
+
 repl.context.info = function (fct) {
     if (typeof fct === 'function') {
         return fct.toString().split('\n')[0].replace(' {', '')
@@ -83,11 +93,13 @@ repl.context.metamask = function (tx) {
             </script>
             <script>
                 async function main() {
-                    await ethereum.request({ method: 'eth_requestAccounts' });
+                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
                     if(ethereum.networkVersion != ${netId}){alert("Metamask is on the wrong Network. Please change network and run the command again."); return}
                     const provider = new ethers.providers.Web3Provider(window.ethereum)
                     const signer = provider.getSigner()
-                    signer.sendTransaction(${strTx}).then(p => {
+                    const tx = ${strTx}
+                    tx.from = accounts[0]
+                    signer.sendTransaction(tx).then(p => {
                         document.getElementById("hash").innerHTML = 'Transaction hash: ' + p.hash
                     }).catch(err => {
                         function getRequireString(error){
