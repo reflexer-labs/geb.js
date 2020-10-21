@@ -117,11 +117,12 @@ export class Geb {
     /**
      * Get the SAFE object
      * @param idOrHandler Safe Id or SAFE handler
+     * @returns Promise<Safe>
      */
     public async getSafe(
         idOrHandler: string | number,
         collateralType?: string
-    ) {
+    ): Promise<Safe> {
         let handler: string
         let isManaged: boolean
         let safeData: {
@@ -185,6 +186,36 @@ export class Geb {
             collateralType,
             isManaged
         )
+    }
+
+    /**
+     * Fetch the list of safes owned by an address. This function will fetch safes owned directly
+     * through the safeManager and safes owned through the safe manager through a proxy. Safes owned
+     * directly by the address at the safeEngine level won't appear here.
+     *
+     * Note that this function will make a lot of network calls and is therefore very slow. For
+     * front-ends we recommend using pre-indexed data such as the geb-subgraph.
+     *
+     * @param  {string} address
+     * @returns Promise<Safe[]>
+     */
+    public async getSafeFromOwner(address: string): Promise<Safe[]> {
+        // Fetch safes from proxy
+        const proxy = await this.contracts.proxyRegistry.proxies(address)
+        const safes: Safe[] = []
+        let safeId = await this.contracts.safeManager.firstSAFEID(proxy)
+        while (!safeId.isZero()) {
+            safes.push(await this.getSafe(safeId.toNumber()))
+            safeId = (await this.contracts.safeManager.safeList(safeId)).next
+        }
+
+        // Fetch safes owned directly
+        safeId = await this.contracts.safeManager.firstSAFEID(address)
+        while (!safeId.isZero()) {
+            safes.push(await this.getSafe(safeId.toNumber()))
+            safeId = (await this.contracts.safeManager.safeList(safeId)).next
+        }
+        return safes
     }
 
     /**

@@ -261,5 +261,20 @@ export const testsGeb = (gebProvider: GebProviderInterface, node: string) => {
             )
             assert.equal((await or.redemptionRate()).toString(), expected[0])
         })
+
+        it('Get safe from owner', async () => {
+            const safeList = await geb.getSafeFromOwner(
+                KOVAN_ADDRESSES.ETH_FROM
+            )
+            assert.strictEqual(safeList.length, 1)
+
+            const expected = await geb.contracts.safeEngine.safes(
+                ETH_A,
+                safeList[0].handler
+            )
+
+            assert.ok(safeList[0].debt.eq(expected.generatedDebt))
+            assert.ok(safeList[0].collateral.eq(expected.lockedCollateral))
+        })
     })
 }
