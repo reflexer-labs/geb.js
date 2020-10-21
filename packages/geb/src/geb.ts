@@ -115,9 +115,8 @@ export class Geb {
     }
 
     /**
-     * Get the SAFE object
+     * Get the SAFE object given a `safeManager` id or a `safeEngine` handler address.
      * @param idOrHandler Safe Id or SAFE handler
-     * @returns Promise<Safe>
      */
     public async getSafe(
         idOrHandler: string | number,
@@ -197,7 +196,6 @@ export class Geb {
      * front-ends we recommend using pre-indexed data such as the geb-subgraph.
      *
      * @param  {string} address
-     * @returns Promise<Safe[]>
      */
     public async getSafeFromOwner(address: string): Promise<Safe[]> {
         // Fetch safes from proxy
