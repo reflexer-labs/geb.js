@@ -31,6 +31,7 @@ import { Osm } from './generated/OSM'
 import { Weth9 } from './generated/WETH9_'
 import { RateSetter } from './generated/RateSetter'
 import { PiRawPerSecondValidator } from './generated/PIRawPerSecondValidator'
+import { Dsm } from './generated/DSM'
 
 export {
     // Factory
@@ -62,6 +63,7 @@ export {
     DsToken,
     Erc20,
     Osm,
+    Dsm,
     DsValue,
     PiRawPerSecondValidator,
     RateSetter,

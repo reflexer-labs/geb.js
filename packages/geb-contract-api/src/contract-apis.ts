@@ -19,8 +19,8 @@ import {
     SafeEngine,
     ChainlinkMedianEthusd,
     UniswapConsecutiveSlotsMedianRaiusd,
-    DsValue,
     Osm,
+    Dsm,
     StabilityFeeTreasury,
 } from '.'
 import {
@@ -51,12 +51,12 @@ export class ContractApis {
     public proxyRegistry: GebProxyRegistry
     public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse | EnglishCollateralAuctionHouse
     public protocolToken: DsToken
-    public medianizerEth: ChainlinkMedianEthusd | DsValue
-    public medianizerCoin: UniswapConsecutiveSlotsMedianRaiusd | DsValue
+    public medianizerEth: ChainlinkMedianEthusd 
+    public medianizerCoin: UniswapConsecutiveSlotsMedianRaiusd
     public rateSetter: RateSetter
     public piValidator: PiRawPerSecondValidator
-    public fsmEth: Osm | DsValue
-    public fsmCoin: Osm | DsValue
+    public fsmEth: Osm 
+    public fsmCoin: Dsm 
     public weth: Weth9
 
     constructor(
@@ -88,7 +88,7 @@ export class ContractApis {
         this.rateSetter = new RateSetter(addressList.GEB_RRFM_SETTER, this.chainProvider)
         this.piValidator = new PiRawPerSecondValidator(addressList.GEB_RRFM_VALIDATOR, this.chainProvider)
         this.fsmEth = new Osm(addressList.FEED_SECURITY_MODULE_ETH, this.chainProvider)
-        this.fsmCoin = new Osm(addressList.FEED_SECURITY_MODULE_PRAI, this.chainProvider)
+        this.fsmCoin = new Dsm(addressList.FEED_SECURITY_MODULE_PRAI, this.chainProvider)
         this.weth = new Weth9(addressList.ETH, this.chainProvider)
     }
 }
