@@ -1,18 +1,31 @@
 import { GebEthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import { ethers } from 'ethers'
-import { MAKER_KOVAN_NODE } from './../const'
+import { MAKER_KOVAN_NODE, MAKER_MAINNET_NODE } from './../const'
 import { testsWithGenericGebProvider } from './generic-provider-test'
 import { testsWithEthersProvider } from './ehters-provider-tests'
 import { testContractPresence } from './contracts'
+import { KOVAN_ADDRESSES, MAINNET_ADDRESSES } from 'geb.js'
 
 describe('Test contract API', async () => {
-    const provider = new ethers.providers.JsonRpcProvider(MAKER_KOVAN_NODE)
-    const gebProvider = new GebEthersProvider(provider)
+    // Kovan
+    const providerKovan = new ethers.providers.JsonRpcProvider(MAKER_KOVAN_NODE)
+    const gebProviderKovan = new GebEthersProvider(providerKovan)
 
-    // TODO: Call the same function but backed by web3
-    testsWithGenericGebProvider(gebProvider)
-    testsWithEthersProvider()
-
-    // TODO: call the same for mainnet addresses
+    testsWithGenericGebProvider(gebProviderKovan, KOVAN_ADDRESSES, 'kovan')
+    testsWithEthersProvider(KOVAN_ADDRESSES, MAKER_KOVAN_NODE, 'kovan')
     testContractPresence('kovan', MAKER_KOVAN_NODE)
+
+    // Mainnet
+    const providerMainnet = new ethers.providers.JsonRpcProvider(
+        MAKER_MAINNET_NODE
+    )
+    const gebProviderMainnet = new GebEthersProvider(providerMainnet)
+
+    testsWithGenericGebProvider(
+        gebProviderMainnet,
+        MAINNET_ADDRESSES,
+        'mainnet'
+    )
+    testsWithEthersProvider(MAINNET_ADDRESSES, MAKER_MAINNET_NODE, 'mainnet')
+    testContractPresence('mainnet', MAKER_MAINNET_NODE)
 })

@@ -8,7 +8,7 @@ export const testContractPresence = (
     network: GebDeployment,
     ethNode: string
 ) => {
-    describe('Test that contracts are present at their expected address', () => {
+    describe(`Test that contracts are present at their expected address. Network ${network}`, () => {
         const provider = new GebEthersProvider(
             new ethers.providers.JsonRpcProvider(ethNode)
         )

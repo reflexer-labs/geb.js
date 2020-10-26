@@ -7,23 +7,22 @@ import {
     StabilityFeeTreasury,
 } from '@reflexer-finance/geb-contract-api'
 import {
+    ContractList,
     GebProviderInterface,
-    KOVAN_ADDRESSES,
 } from '@reflexer-finance/geb-contract-base'
 import { NULL_ADDRESS, ETH_A, ONE_ADDRESS } from './../const'
 import { utils } from 'geb.js'
 
 export const testsWithGenericGebProvider = (
-    gebProvider: GebProviderInterface
+    gebProvider: GebProviderInterface,
+    addresses: ContractList,
+    networkName: 'kovan' | 'mainnet'
 ) => {
-    describe('Using a provider (Ethers OR web3)', async () => {
+    describe(`Generic provider test (ethers or web3) Network: ${networkName}`, async () => {
         let safeEngine: SafeEngine
 
         beforeEach(() => {
-            safeEngine = new SafeEngine(
-                KOVAN_ADDRESSES.GEB_SAFE_ENGINE,
-                gebProvider
-            )
+            safeEngine = new SafeEngine(addresses.GEB_SAFE_ENGINE, gebProvider)
         })
 
         it('Test call with single return value', async () => {
@@ -83,7 +82,7 @@ export const testsWithGenericGebProvider = (
 
         it('Test Oracle relayer', async () => {
             const oracleRelayer = new OracleRelayer(
-                KOVAN_ADDRESSES.GEB_ORACLE_RELAYER,
+                addresses.GEB_ORACLE_RELAYER,
                 gebProvider
             )
 
@@ -93,7 +92,7 @@ export const testsWithGenericGebProvider = (
 
         it('Test Oracle relayer redemptionPrice_readOnly', async () => {
             const oracleRelayer = new OracleRelayer(
-                KOVAN_ADDRESSES.GEB_ORACLE_RELAYER,
+                addresses.GEB_ORACLE_RELAYER,
                 gebProvider
             )
 
@@ -102,16 +101,16 @@ export const testsWithGenericGebProvider = (
         })
 
         it('Test with contract API factory', async () => {
-            const contracts = new ContractApis('kovan', gebProvider)
+            const contracts = new ContractApis(networkName, gebProvider)
 
             assert.equal(
                 contracts.debtAuctionHouse.address,
-                KOVAN_ADDRESSES.GEB_DEBT_AUCTION_HOUSE
+                addresses.GEB_DEBT_AUCTION_HOUSE
             )
 
             const debtHouse = await contracts.accountingEngine.debtAuctionHouse()
 
-            assert.equal(debtHouse, KOVAN_ADDRESSES.GEB_DEBT_AUCTION_HOUSE)
+            assert.equal(debtHouse, addresses.GEB_DEBT_AUCTION_HOUSE)
         })
 
         it('Test overloaded function', async () => {
@@ -141,7 +140,7 @@ export const testsWithGenericGebProvider = (
 
         it('Test function with anonymous return object', async () => {
             const treasury = new StabilityFeeTreasury(
-                KOVAN_ADDRESSES.GEB_STABILITY_FEE_TREASURY,
+                addresses.GEB_STABILITY_FEE_TREASURY,
                 gebProvider
             )
 

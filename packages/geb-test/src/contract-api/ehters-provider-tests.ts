@@ -1,10 +1,5 @@
 import assert from 'assert'
-import {
-    NULL_ADDRESS,
-    ONE_ADDRESS,
-    DUMMY_PRIVATE_KEY,
-    MAKER_KOVAN_NODE,
-} from '../const'
+import { NULL_ADDRESS, ONE_ADDRESS, DUMMY_PRIVATE_KEY } from '../const'
 import { ethers } from 'ethers'
 import { GebEthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import {
@@ -13,23 +8,24 @@ import {
     Weth9,
     ContractApis,
 } from '@reflexer-finance/geb-contract-api'
-import { KOVAN_ADDRESSES } from '@reflexer-finance/geb-contract-base'
-import { utils } from 'geb.js'
+import { ContractList, utils } from 'geb.js'
 
-export const testsWithEthersProvider = () => {
-    describe('Test made only for Ethers', () => {
+export const testsWithEthersProvider = (
+    addresses: ContractList,
+    rpcUrl: string,
+    networkName: 'mainnet' | 'kovan'
+) => {
+    describe(`Ethers only test. Network ${networkName} Rpc: ${rpcUrl}`, () => {
         let wallet: ethers.Wallet
         let gebProvider: GebEthersProvider
         beforeEach(() => {
-            const provider = new ethers.providers.JsonRpcProvider(
-                MAKER_KOVAN_NODE
-            )
+            const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
             wallet = new ethers.Wallet(DUMMY_PRIVATE_KEY, provider)
             gebProvider = new GebEthersProvider(provider)
         })
         it('Test ethers transferInternalCoins call failed', async () => {
             const safeEngine = new SafeEngine(
-                KOVAN_ADDRESSES.GEB_SAFE_ENGINE,
+                addresses.GEB_SAFE_ENGINE,
                 gebProvider
             )
 
@@ -52,7 +48,7 @@ export const testsWithEthersProvider = () => {
         })
 
         it('Test join function with ethers from contraApis', async () => {
-            const contracts = new ContractApis('kovan', gebProvider)
+            const contracts = new ContractApis(networkName, gebProvider)
 
             const tx = await contracts.joinETH_A.join(
                 wallet.address,
@@ -72,7 +68,7 @@ export const testsWithEthersProvider = () => {
 
         it('Test join function failed with ethers', async () => {
             const ethJoin = new BasicCollateralJoin(
-                KOVAN_ADDRESSES.GEB_JOIN_ETH_A,
+                addresses.GEB_JOIN_ETH_A,
                 gebProvider
             )
 
@@ -92,7 +88,7 @@ export const testsWithEthersProvider = () => {
 
         it('Test ethers transferInternalCoins sendTransaction (fail)', async () => {
             const safeEngine = new SafeEngine(
-                KOVAN_ADDRESSES.GEB_SAFE_ENGINE,
+                addresses.GEB_SAFE_ENGINE,
                 gebProvider
             )
 
@@ -113,7 +109,7 @@ export const testsWithEthersProvider = () => {
         })
 
         it('Test ethers payable call', async () => {
-            const contracts = new ContractApis('kovan', gebProvider)
+            const contracts = new ContractApis(networkName, gebProvider)
 
             const weth = new Weth9(
                 await contracts.joinETH_A.collateral(),
@@ -127,7 +123,7 @@ export const testsWithEthersProvider = () => {
         })
 
         it('Test ethers payable sendTransaction insufficient funds', async () => {
-            const contracts = new ContractApis('kovan', gebProvider)
+            const contracts = new ContractApis(networkName, gebProvider)
 
             const weth = new Weth9(
                 await contracts.joinETH_A.collateral(),
