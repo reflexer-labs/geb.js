@@ -112,20 +112,34 @@ repl.context.metamask = function (tx) {
                             const hexerrorArray = str.match(/0x08c379a0[0-9a-fA-F]*/g)
                             if (hexerrorArray) {
                                 return decodeURIComponent(
-                                    hexerrorArray[0].slice(12).replace(/[0-9a-f]{2}/g, '%$&')
-                                )
-                                    .replace(/\0/g, '')
-                                    .slice(2)
+                                    hexerrorArray[0].slice(12).replace(/[0-9a-f]{2}/g, '%$&').replace(/%00/g, '')
+                                ).slice(2)
                             } else {
                                 return null
                             }
                         }
-                        console.error(err)
-                        if(err.data == "Reverted") {
-                            provider.call(tx).catch(x => alert('Metamask Error ' + getRequireString(x) || err.message || err))
-                        } else {
-                            alert('Metamask Error ' + err.message || err)
-                        }
+                        provider.call(tx)
+                        .catch(x => {
+                            const req = getRequireString(x)
+                            let message
+                            if(req) {
+                                message = 'Geb Error:  ' + req
+                            } else {
+                                message = 'Metamask Error ' + (err.message || err)
+                            }
+                            alert(message)
+                            throw message
+                        })
+                        .then(a => {
+                            const req = getRequireString(a)
+                            let message
+                            if(req) {
+                                message = 'Geb Error:  ' + req
+                            } else {
+                                message = 'Metamask insufficient gas Error: ' + (err.message || err)
+                            }
+                            alert(message)
+                        })
                     })
                 }
                 main()
