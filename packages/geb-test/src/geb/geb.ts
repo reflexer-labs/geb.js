@@ -139,15 +139,10 @@ export const testsGeb = (
             assert.equal(safe.collateral.toString(), expected.lockedCollateral)
         })
 
-        it('Get CRatio and Liquidation ratio', async () => {
+        it('Get CRatio ratio', async () => {
             const safe = await geb.getSafe(1)
             const cRatio = await safe.getCRatio()
-            const lRatio = await safe.getLRatio()
             assert.ok(cRatio.toUnsafeFloat() > 1)
-            assert.ok(lRatio.toUnsafeFloat() > 1)
-
-            // Always true for cdp 1 but it the way it should be
-            assert.ok(cRatio.toUnsafeFloat() >= lRatio.toUnsafeFloat())
         })
 
         it('Liquidation Price', async () => {
