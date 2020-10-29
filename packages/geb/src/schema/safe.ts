@@ -47,37 +47,19 @@ export class Safe {
         if (this.debt.isZero()) {
             return null
         }
+        const {
+            liquidationCRatio,
+        } = await this.contracts.oracleRelayer.collateralTypes(
+            this.collateralType
+        )
 
         const {
             accumulatedRate,
             safetyPrice,
         } = await this.contracts.safeEngine.collateralTypes(this.collateralType)
 
-        return FixedNumber.from(this.collateral.mul(safetyPrice)).divUnsafe(
-            FixedNumber.from(this.debt.mul(accumulatedRate))
-        )
-    }
-
-    /**
-     * Ratio used for liquidating the SAFE. If LRatio <= 1 you can get liquidated, the greater LRatio the safer your safe is. Uses unsafe division which leads to precision loss.
-     * @returns Promise<FixedNumber> LRatio
-     */
-    public async getLRatio(): Promise<FixedNumber | null> {
-        if (this.collateral.isZero()) {
-            return FixedNumber.from('0')
-        }
-
-        if (this.debt.isZero()) {
-            return null
-        }
-
-        const {
-            accumulatedRate,
-            liquidationPrice,
-        } = await this.contracts.safeEngine.collateralTypes(this.collateralType)
-
         return FixedNumber.from(
-            this.collateral.mul(liquidationPrice)
+            this.collateral.mul(safetyPrice).mul(liquidationCRatio).div(RAY)
         ).divUnsafe(FixedNumber.from(this.debt.mul(accumulatedRate)))
     }
 
