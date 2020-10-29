@@ -124,6 +124,7 @@ export class Geb {
     ): Promise<Safe> {
         let handler: string
         let isManaged: boolean
+        let safeId: number
         let safeData: {
             lockedCollateral: ethers.BigNumber
             generatedDebt: ethers.BigNumber
@@ -138,6 +139,7 @@ export class Geb {
             }
 
             isManaged = true
+            safeId = idOrHandler
             ;[handler, collateralType] = await this.multiCall([
                 this.contracts.safeManager.safes(idOrHandler, true),
                 this.contracts.safeManager.collateralTypes(idOrHandler, true),
@@ -155,6 +157,7 @@ export class Geb {
                 handler
             )
         } else {
+            // We're given a handler
             if (!collateralType) {
                 throw new GebError(
                     GebErrorTypes.INVALID_FUNCTION_INPUT,
@@ -183,7 +186,8 @@ export class Geb {
             safeData.generatedDebt,
             safeData.lockedCollateral,
             collateralType,
-            isManaged
+            isManaged,
+            safeId
         )
     }
 

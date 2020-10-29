@@ -28,7 +28,11 @@ export class Safe {
         /**
          * Whether the safe was opened using a SAFE manager
          */
-        public isManaged: boolean
+        public isManaged: boolean,
+        /**
+         * Safe incremental ID, only for managed safes
+         */
+        public safeId?: number
     ) {}
 
     /**
