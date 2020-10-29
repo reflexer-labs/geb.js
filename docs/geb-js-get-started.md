@@ -89,17 +89,28 @@ await wallet.sendTransaction(tx)
 ### Partial repay of safe debt
 ```typescript
 const proxy = await geb.getProxyAction("0xdefidream...")
+const amountToRepay = ethersUtils.parseEther('1')
+
+// You first need to approve your proxy to spend your RAI
+let tx =  geb.contracts.coin.approve(proxy.proxyAddress, amountToRepay)
+await wallet.sendTransaction(tx)
+
 // Repay 1 RAI of debt to SAFE #4
-const tx = proxy.repayDebt(4, ethersUtils.parseEther('1'))
-const wallet.sendTransaction(tx)
+tx = proxy.repayDebt(4, amountToRepay)
+await wallet.sendTransaction(tx)
 ```
 
 ### Complete repay of safe debt
 ```typescript
 const proxy = await geb.getProxyAction("0xdefidream...")
+
+// You first need to approve your proxy to spend your RAI
+let tx =  geb.contracts.coin.approve(proxy.proxyAddress, ethers.constants.MaxUint256)
+await wallet.sendTransaction(tx)
+
 // Repay all debt of SAFE #4
-const tx = proxy.repayAllDebt(4)
-const wallet.sendTransaction(tx)
+tx = proxy.repayAllDebt(4)
+await wallet.sendTransaction(tx)
 ```
 
 ### Withdraw Ether collateral
@@ -107,14 +118,20 @@ const wallet.sendTransaction(tx)
 const proxy = await geb.getProxyAction("0xdefidream...")
 // Unlock 1 ETH of collateral from SAFE #4 and transfer it to its owner 
 const tx = proxy.freeETH(4, ethersUtils.parseEther('1'))
-const wallet.sendTransaction(tx)
+await wallet.sendTransaction(tx)
 ```
 ### Repay all debt and withdraw all collateral
 ```typescript
 const proxy = await geb.getProxyAction("0xdefidream...")
 const safe = await geb.getSafe(4)
+
+// You first need to approve your proxy to spend your RAI
+let tx =  geb.contracts.coin.approve(proxy.proxyAddress, safe.debt)
+await wallet.sendTransaction(tx)
+
+// Pay back everything and get your ETH back into your wallet
 const tx = proxy.repayAllDebtAndFreeETH(4, safe.collateral)
-const wallet.sendTransaction(tx)
+await wallet.sendTransaction(tx)
 ```
 
 ### Make direct contract calls
