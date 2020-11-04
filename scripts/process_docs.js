@@ -5,39 +5,44 @@ const { execSync } = require('child_process')
 main()
 async function main() {
     // Copy only the files we want on the website
+
+    execSync(`mkdir ${resolve('../docs/api-reference')}`)
+
     execSync(
         `cp ${resolve('./../docs/classes/geb.md')} ${resolve(
-            './../docs/geb-js-core-package.md'
+            './../docs/api-reference/geb.md'
         )}`
     )
     execSync(
         `cp ${resolve('./../docs/classes/gebproxyactions.md')} ${resolve(
-            './../docs/geb-js-proxy-actions.md'
+            './../docs/api-reference/gebproxyactions.md'
         )}`
     )
 
     execSync(
         `cp ${resolve(
             './../docs/classes/gebproxyactionsglobalsettlement.md'
-        )} ${resolve('./../docs/geb-js-global-settlement-proxies.md')}`
+        )} ${resolve(
+            './../docs/api-reference/gebproxyactionsglobalsettlement.md'
+        )}`
     )
 
     execSync(
         `cp ${resolve('./../docs/classes/safe.md')} ${resolve(
-            './../docs/geb-js-safe-management.md'
+            './../docs/api-reference/safe.md'
         )}`
     )
 
     execSync(
         `cp ${resolve('./../docs/classes/gebadmin.md')} ${resolve(
-            './../docs/geb-js-admin-utilities.md'
+            './../docs/api-reference/gebadmin.md'
         )}`
     )
 
     // Add the readme as a main page
     execSync(
         `cp ${resolve('./../packages/geb/README.md')} ${resolve(
-            './../docs/geb-js-get-started.md'
+            './../docs/getting-started.md'
         )}`
     )
 
@@ -48,11 +53,13 @@ async function main() {
     execSync(`rm -fr ${resolve('./../docs/enums')}`)
 
     // Some minor edit of the files
-    cleanUpTypeDoc(resolve('./../docs/geb-js-core-package.md'))
-    cleanUpTypeDoc(resolve('./../docs/geb-js-proxy-actions.md'))
-    cleanUpTypeDoc(resolve('./../docs/geb-js-global-settlement-proxies.md'))
-    cleanUpTypeDoc(resolve('./../docs/geb-js-safe-management.md'))
-    cleanUpTypeDoc(resolve('./../docs/geb-js-admin-utilities.md'))
+    cleanUpTypeDoc(resolve('./../docs/api-reference/geb.md'))
+    cleanUpTypeDoc(resolve('./../docs/api-reference/gebproxyactions.md'))
+    cleanUpTypeDoc(
+        resolve('./../docs/api-reference/gebproxyactionsglobalsettlement.md')
+    )
+    cleanUpTypeDoc(resolve('./../docs/api-reference/safe.md'))
+    cleanUpTypeDoc(resolve('./../docs/api-reference/gebadmin.md'))
 }
 
 function regexReplaceInFile(filePath, regex, replace) {

@@ -16,8 +16,8 @@
         "test-node": "mocha --timeout 8000 ./packages/geb-test/lib/*/*.js --grep",
         "test": "npm run build && npm run test-node",
         "dev": "npm run build && npm run bootstrap",
-        "doc": "rm -rf docs && typedoc --options typedoc.json && node scripts/process_docs.js",
-        "doc-publish": "npm run doc && git clone git@github.com:reflexer-labs/geb-docs.git && cp docs/* geb-docs/geb-js && cd geb-docs && git add -A && git commit -m'Update geb.js docs...' && git push && cd .. && rm -rf geb-docs"
+        "docs": "rm -rf docs && typedoc --options typedoc.json && node scripts/process_docs.js",
+        "docs-publish": "npm run doc && git clone git@github.com:reflexer-labs/geb-docs.git && cp -r docs/* geb-docs/geb-js && cd geb-docs && git add -A && git commit -m'Update geb.js docs...' && git push && cd .. && rm -rf geb-docs"
     },
     "repository": {
         "type": "git",

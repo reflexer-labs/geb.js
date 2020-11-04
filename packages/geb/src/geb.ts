@@ -22,12 +22,45 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { GebProxyActionsGlobalSettlement } from './proxy-action-global-settlement'
 
 /**
- * The main package used to interact with the core GEB contracts.
+ * The main package used to interact with the GEB system. Includes [[deployProxy |helper functions]] for safe
+ *  management and the [[contracts | contract interface object]] to directly call the smart-contracts.
  */
 export class Geb {
     /**
-     * Object containing all GEB core contracts instances for low level interactions. All contracts object offer a one-to-one typed API to the underlying smart-contract.
-     * Currently has the following contracts:
+     * Object containing all GEB core smart-contracts instances for direct level interactions. All of the
+     * following contracts object are one-to-one typed API to the underlying smart-contract. Read-only
+     * functions that do not change the blockchain state return a promise of the return data. State modifying
+     * function will return synchronously a pre-filled transaction request object:
+     * ```
+     * {
+     *   to: "0x123abc.."
+     *   data: "0xabab234ab..."
+     * }
+     * ```
+     * This object follow the [[https://docs.ethers.io/v5/api/providers/types/#providers-TransactionRequest
+     * TransactionRequest model of ethers.js]] (Also similar to the
+     * [[https://web3js.readthedocs.io/en/v1.3.0/web3-eth.html#id84 | model used by web.js]]). The object can
+     * be completed with properties such as ` from `, ` gasPrice `, ` gas ` (gas limit, web3.js ony) or
+     * ` gasLimit ` (gas limit, ethers.js only). The object can then be passed to the `sendTransaction` of
+     * [[https://docs.ethers.io/v5/api/signer/#Signer-sendTransaction|ehters.js]] or
+     * [[https://web3js.readthedocs.io/en/v1.3.0/web3-eth.html#sendtransaction | web3.js]]
+     *
+     *  Example:
+     *  ```typescript
+     *  // Setup geb.js an ethers
+     *  const provider = new ethers.providers.JsonRpcProvider('http://kovan.infura.io/<API KEY>')
+     *  const wallet = new ethers.Wallet('<Private key>', provider)
+     *  const geb = new Geb('kovan', provider)
+     *
+     *  // Contract read function: Fetch the debt ceiling
+     *  const debtCeiling = await geb.contracts.safeEngine.globalDebtCeiling()
+     *
+     *  // State changing function: Manualy liquidate a SAFE
+     *  const tx = geb.contracts.liquidationEngine.liquidateSAFE(ETH_A, '0x1234abc...')
+     *  await wallet.sendTransaction(tx) // Send the Ethereum transaction
+     *  ```
+     *
+     * Currently the following contracts ae available in this property:
      * - SAFEEngine
      * - AccountingEngine
      * - TaxCollector
@@ -46,11 +79,16 @@ export class Geb {
      * - GebProxyRegistry
      * - FixedDiscountCollateralAuctionHouse (For ETH-A)
      * - Weth (ERC20)
+     *
+     * For detailed information about the functions of each contract we recommend referring directly to the
+     * smart-contract [[https://github.com/reflexer-labs/geb | code]] and [[https://docs.reflexer.finance/ |
+     * documentation]]
      */
     public contracts: ContractApis
     protected provider: GebProviderInterface
     protected addresses: ContractList
     /**
+     * Constructor of the main Geb.js object.
      * @param  {GebDeployment} network Either `'kovan'`, `'mainnet'` or an actual list of contract addresses.
      * @param  {GebProviderInterface|ethers.providers.Provider} provider Either a Ethers.js provider or a Geb provider (Soon support for Web3 will be added)
      */
