@@ -7,7 +7,9 @@ import { KOVAN_ADDRESSES, MAINNET_ADDRESSES } from 'geb.js'
 
 describe('Test Geb', async () => {
     // Kovan
-    const providerKovan = new ethers.providers.JsonRpcProvider(MAKER_KOVAN_NODE)
+    const providerKovan = new ethers.providers.StaticJsonRpcProvider(
+        MAKER_KOVAN_NODE
+    )
     const gebProviderKovan = new GebEthersProvider(providerKovan)
 
     testsProxyActionWithGenericGebProvider(
@@ -18,7 +20,7 @@ describe('Test Geb', async () => {
     testsGeb(gebProviderKovan, MAKER_KOVAN_NODE, 'kovan', KOVAN_ADDRESSES)
 
     // Mainnet
-    const providerMainnet = new ethers.providers.JsonRpcProvider(
+    const providerMainnet = new ethers.providers.StaticJsonRpcProvider(
         MAKER_MAINNET_NODE
     )
     const gebProviderMainnet = new GebEthersProvider(providerMainnet)

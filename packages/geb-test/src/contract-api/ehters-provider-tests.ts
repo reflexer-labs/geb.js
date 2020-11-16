@@ -19,7 +19,7 @@ export const testsWithEthersProvider = (
         let wallet: ethers.Wallet
         let gebProvider: GebEthersProvider
         beforeEach(() => {
-            const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+            const provider = new ethers.providers.StaticJsonRpcProvider(rpcUrl)
             wallet = new ethers.Wallet(DUMMY_PRIVATE_KEY, provider)
             gebProvider = new GebEthersProvider(provider)
         })

@@ -10,7 +10,7 @@ export const testContractPresence = (
 ) => {
     describe('Test that contracts are present at their expected address', () => {
         const provider = new GebEthersProvider(
-            new ethers.providers.JsonRpcProvider(ethNode)
+            new ethers.providers.StaticJsonRpcProvider(ethNode)
         )
         const contractsApi = new AdminApis(network, provider)
 

@@ -44,7 +44,7 @@ console.log('- parseRad(<BN>)\n')
 
 var repl = repl.start({ prompt: '🗿 > ', useGlobal: true })
 
-repl.context.provider = new ethers.ethers.providers.JsonRpcProvider(rpcUrl)
+repl.context.provider = new ethers.ethers.providers.StaticJsonRpcProvider(rpcUrl)
 repl.context.geb = new geb_admin.Geb(network, repl.context.provider)
 repl.context.gebAdmin = new geb_admin.GebAdmin(network, repl.context.provider)
 repl.context.ETH_A = geb_admin.utils.ETH_A

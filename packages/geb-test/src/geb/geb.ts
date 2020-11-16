@@ -23,7 +23,7 @@ export const testsGeb = (
         })
 
         it('Create geb with ethers', async () => {
-            const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+            const provider = new ethers.providers.StaticJsonRpcProvider(rpcUrl)
             geb = new Geb(networkName, provider)
 
             const rate = await geb.contracts.oracleRelayer.redemptionRate()
@@ -263,7 +263,7 @@ export const testsGeb = (
         })
 
         it('Test get gebContract static ether', async () => {
-            const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+            const provider = new ethers.providers.StaticJsonRpcProvider(rpcUrl)
             const or = Geb.getGebContract(
                 contracts.OracleRelayer,
                 addresses.GEB_ORACLE_RELAYER,

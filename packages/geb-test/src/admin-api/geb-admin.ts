@@ -10,7 +10,7 @@ export const testsGebAdmin = (
 ) => {
     describe(`Network: ${networkName} RPC: ${rpcUrl}`, async () => {
         it('create a GebAdmin', async () => {
-            const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+            const provider = new ethers.providers.StaticJsonRpcProvider(rpcUrl)
             const gebAdmin = new GebAdmin(networkName, provider)
 
             // Test a few stuff
@@ -26,7 +26,7 @@ export const testsGebAdmin = (
         })
 
         it('Test webScheduleProposal', async () => {
-            const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+            const provider = new ethers.providers.StaticJsonRpcProvider(rpcUrl)
             const gebProvider = new GebEthersProvider(provider)
             const gebAdmin = new GebAdmin(networkName, gebProvider)
 
