@@ -17,7 +17,7 @@
         "test": "npm run build && npm run test-node",
         "dev": "npm run build && npm run bootstrap",
         "docs": "rm -rf docs && typedoc --options typedoc.json && node scripts/process_docs.js",
-        "docs-publish": "npm run doc && git clone git@github.com:reflexer-labs/geb-docs.git && cp -r docs/* geb-docs/geb-js && cd geb-docs && git add -A && git commit -m'Update geb.js docs...' && git push && cd .. && rm -rf geb-docs"
+        "docs-publish": "npm run docs && git clone git@github.com:reflexer-labs/geb-docs.git && cp -r docs/* geb-docs/geb-js && cd geb-docs && git add -A && git commit -m'Update geb.js docs...' && git push && cd .. && rm -rf geb-docs"
     },
     "repository": {
         "type": "git",

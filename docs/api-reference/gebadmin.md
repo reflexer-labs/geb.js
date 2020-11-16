@@ -25,7 +25,7 @@ import { GebAdmin } from "@reflexer-finance/geb-admin"
 \+ **new GebAdmin**(`network`: GebDeployment, `provider`: GebProviderInterface | Provider): *[GebAdmin](gebadmin.md)*
 
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/8c78ffc/packages/geb-admin/src/geb-admin.ts#L51)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/0337d96/packages/geb-admin/src/geb-admin.ts#L51)*
 
 **Parameters:**
 
@@ -44,10 +44,41 @@ Name | Type | Description |
 
 *Inherited from [GebAdmin](gebadmin.md).[contracts](gebadmin.md#contracts)*
 
-Defined in packages/geb/lib/geb.d.ts:34
+Defined in packages/geb/lib/geb.d.ts:71
 
-Object containing all GEB core contracts instances for low level interactions. All contracts object offer a one-to-one typed API to the underlying smart-contract.
-Currently has the following contracts:
+Object containing all GEB core smart-contracts instances for direct level interactions. All of the
+following contracts object are one-to-one typed API to the underlying smart-contract. Read-only
+functions that do not change the blockchain state return a promise of the return data. State modifying
+function will return synchronously a pre-filled transaction request object:
+```
+{
+  to: "0x123abc.."
+  data: "0xabab234ab..."
+}
+```
+This object follow the [TransactionRequest model of ethers.js](https://docs.ethers.io/v5/api/providers/types/#providers-TransactionRequest) (Also similar to the
+[model used by web.js](https://web3js.readthedocs.io/en/v1.3.0/web3-eth.html#id84)). The object can
+be completed with properties such as ` from `, ` gasPrice `, ` gas ` (gas limit, web3.js ony) or
+` gasLimit ` (gas limit, ethers.js only). The object can then be passed to the `sendTransaction` of
+[ehters.js](https://docs.ethers.io/v5/api/signer/#Signer-sendTransaction) or
+[web3.js](https://web3js.readthedocs.io/en/v1.3.0/web3-eth.html#sendtransaction)
+
+ Example:
+ ```typescript
+ // Setup geb.js an ethers
+ const provider = new ethers.providers.JsonRpcProvider('http://kovan.infura.io/<API KEY>')
+ const wallet = new ethers.Wallet('<Private key>', provider)
+ const geb = new Geb('kovan', provider)
+
+ // Contract read function: Fetch the debt ceiling
+ const debtCeiling = await geb.contracts.safeEngine.globalDebtCeiling()
+
+ // State changing function: Manualy liquidate a SAFE
+ const tx = geb.contracts.liquidationEngine.liquidateSAFE(ETH_A, '0x1234abc...')
+ await wallet.sendTransaction(tx) // Send the Ethereum transaction
+ ```
+
+Currently the following contracts ae available in this property:
 - SAFEEngine
 - AccountingEngine
 - TaxCollector
@@ -67,13 +98,16 @@ Currently has the following contracts:
 - FixedDiscountCollateralAuctionHouse (For ETH-A)
 - Weth (ERC20)
 
+For detailed information about the functions of each contract we recommend referring directly to the
+smart-contract [code](https://github.com/reflexer-labs/geb) and [documentation](https://docs.reflexer.finance/)
+
 ___
 
 ###  contractsAdmin
 
 • **contractsAdmin**: *AdminApis*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/8c78ffc/packages/geb-admin/src/geb-admin.ts#L51)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/0337d96/packages/geb-admin/src/geb-admin.ts#L51)*
 
 Object containing all GEB admin contracts instances for low level interactions.
 It currently has the following contracts:
@@ -103,7 +137,7 @@ It currently has the following contracts:
 
 *Inherited from [GebAdmin](gebadmin.md).[deployProxy](gebadmin.md#deployproxy)*
 
-Defined in packages/geb/lib/geb.d.ts:57
+Defined in packages/geb/lib/geb.d.ts:95
 
 Deploy a new proxy owned by the sender.
 
@@ -133,7 +167,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[getErc20Contract](gebadmin.md#geterc20contract)*
 
-Defined in packages/geb/lib/geb.d.ts:92
+Defined in packages/geb/lib/geb.d.ts:130
 
 Returns an object that can be used to interact with a ERC20 token.
 Example:
@@ -167,7 +201,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[getGebContract](gebadmin.md#static-getgebcontract)*
 
-Defined in packages/geb/lib/geb.d.ts:126
+Defined in packages/geb/lib/geb.d.ts:164
 
 Returns an instance of a specific geb contract given a Geb contract API class at a specified address
 
@@ -198,7 +232,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[getProxyAction](gebadmin.md#getproxyaction)*
 
-Defined in packages/geb/lib/geb.d.ts:47
+Defined in packages/geb/lib/geb.d.ts:85
 
 Given an address returns a GebProxyActions object to execute bundled operations.
 Important: This requires the address to have deployed a GEB proxy through the proxy registry contract. It will throw a `DOES_NOT_OWN_HAVE_PROXY` error if the address specified does not have a proxy. Use the [deployProxy](gebadmin.md#deployproxy) function to get a new proxy.
@@ -219,7 +253,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[getProxyActionGlobalSettlement](gebadmin.md#getproxyactionglobalsettlement)*
 
-Defined in packages/geb/lib/geb.d.ts:53
+Defined in packages/geb/lib/geb.d.ts:91
 
 Given an address returns a GebProxyActionsGlobalSettlement object to execute bundled operations during GlobalSettlement.
 **IMPORTANT**: Same as for `getProxyAction` you will need to deploy a proxy beforehand using the proxy registry.
@@ -240,7 +274,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[getSafe](gebadmin.md#getsafe)*
 
-Defined in packages/geb/lib/geb.d.ts:62
+Defined in packages/geb/lib/geb.d.ts:100
 
 Get the SAFE object given a `safeManager` id or a `safeEngine` handler address.
 
@@ -261,7 +295,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[getSafeFromOwner](gebadmin.md#getsafefromowner)*
 
-Defined in packages/geb/lib/geb.d.ts:73
+Defined in packages/geb/lib/geb.d.ts:111
 
 Fetch the list of safes owned by an address. This function will fetch safes owned directly
 through the safeManager and safes owned through the safe manager through a proxy. Safes owned
@@ -286,7 +320,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[multiCall](gebadmin.md#multicall)*
 
-Defined in packages/geb/lib/geb.d.ts:97
+Defined in packages/geb/lib/geb.d.ts:135
 
 **Type parameters:**
 
@@ -310,7 +344,7 @@ ___
 
 ▸ **verifyWebScheduleCallcode**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number, `calldata`: string): *Promise‹boolean›*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:74](https://github.com/reflexer-labs/geb.js/blob/8c78ffc/packages/geb-admin/src/geb-admin.ts#L74)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:74](https://github.com/reflexer-labs/geb.js/blob/0337d96/packages/geb-admin/src/geb-admin.ts#L74)*
 
 Verifies a transaction for scheduling proposals
 
@@ -333,7 +367,7 @@ ___
 
 ▸ **webExecuteProposal**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number): *Promise‹TransactionRequest›*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:96](https://github.com/reflexer-labs/geb.js/blob/8c78ffc/packages/geb-admin/src/geb-admin.ts#L96)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:96](https://github.com/reflexer-labs/geb.js/blob/0337d96/packages/geb-admin/src/geb-admin.ts#L96)*
 
 Encodes executing a proposal in dspause for web GUI
 
@@ -355,7 +389,7 @@ ___
 
 ▸ **webScheduleProposal**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number, `description?`: string): *Promise‹object›*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:121](https://github.com/reflexer-labs/geb.js/blob/8c78ffc/packages/geb-admin/src/geb-admin.ts#L121)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:121](https://github.com/reflexer-labs/geb.js/blob/0337d96/packages/geb-admin/src/geb-admin.ts#L121)*
 
 Encodes scheduling a proposal in dspause for web GUI
 
@@ -380,7 +414,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[getGebContract](gebadmin.md#static-getgebcontract)*
 
-Defined in packages/geb/lib/geb.d.ts:113
+Defined in packages/geb/lib/geb.d.ts:151
 
 Returns an instance of a specific geb contract given Geb contract API class constructor at a specified address
 
