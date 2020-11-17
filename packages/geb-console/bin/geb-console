@@ -99,9 +99,8 @@ repl.context.metamask = function (tx) {
                     const signer = provider.getSigner()
                     const tx = ${strTx}
                     tx.from = accounts[0]
-                    signer.sendTransaction(tx).then(p => {
-                        document.getElementById("hash").innerHTML = 'Transaction hash: ' + p.hash
-                    }).catch(err => {
+                    // Given an error tries to get the revert string
+                    const catchRevert = err => {
                         function getRequireString(error){
                             let str
                             try {
@@ -140,7 +139,15 @@ repl.context.metamask = function (tx) {
                             }
                             alert(message)
                         })
-                    })
+                    }
+                    // Gas estimate and send the transaction
+                    provider.estimateGas(tx).then(g => {
+                        // Add 10% and set the gas limit
+                        tx.gasLimit = g.mul(11).div(10)
+                        signer.sendTransaction(tx).then(p => {
+                            document.getElementById("hash").innerHTML = 'Transaction hash: ' + p.hash
+                        }).catch(catchRevert)
+                    }).catch(catchRevert)
                 }
                 main()
             </script>
