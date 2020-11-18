@@ -76,7 +76,15 @@ export const testsWithGenericGebProvider = (
                 await gebProvider.ethCall(tx)
                 assert.fail('Address 0x0 should have no balance')
             } catch (err) {
-                assert.equal(utils.getRequireString(err), null)
+                // TODO: remove the if statement after mainnet is running RAI
+                if (networkName === 'kovan') {
+                    assert.equal(
+                        utils.getRequireString(err),
+                        'SAFEEngine/sub-uint-uint-underflow'
+                    )
+                } else {
+                    assert.equal(utils.getRequireString(err), null)
+                }
             }
         })
 
