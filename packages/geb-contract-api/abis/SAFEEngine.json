@@ -36,13 +36,13 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "collateralType",
                 "type": "bytes32"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "safe",
                 "type": "address"
@@ -85,13 +85,13 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "debtDestination",
                 "type": "address"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "coinDestination",
                 "type": "address"
@@ -172,13 +172,13 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "collateralType",
                 "type": "bytes32"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "account",
                 "type": "address"
@@ -241,13 +241,13 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "collateralType",
                 "type": "bytes32"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "safe",
                 "type": "address"
@@ -315,6 +315,12 @@
         "anonymous": false,
         "inputs": [
             {
+                "indexed": true,
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            },
+            {
                 "indexed": false,
                 "internalType": "uint256",
                 "name": "rad",
@@ -352,19 +358,19 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "collateralType",
                 "type": "bytes32"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "src",
                 "type": "address"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "dst",
                 "type": "address"
@@ -383,13 +389,13 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "src",
                 "type": "address"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "dst",
                 "type": "address"
@@ -408,19 +414,19 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "collateralType",
                 "type": "bytes32"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "src",
                 "type": "address"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "dst",
                 "type": "address"
@@ -469,7 +475,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "collateralType",
                 "type": "bytes32"
@@ -802,6 +808,15 @@
         "name": "removeAuthorization",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "safeDebtCeiling",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {

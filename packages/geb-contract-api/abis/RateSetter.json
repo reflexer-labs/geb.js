@@ -14,7 +14,7 @@
             },
             {
                 "internalType": "address",
-                "name": "pidValidator_",
+                "name": "pidCalculator_",
                 "type": "address"
             },
             {
@@ -72,6 +72,25 @@
             {
                 "indexed": false,
                 "internalType": "bytes",
+                "name": "revertReason",
+                "type": "bytes"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "orcl",
+                "type": "address"
+            }
+        ],
+        "name": "FailUpdateOracle",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "bytes",
                 "name": "reason",
                 "type": "bytes"
             }
@@ -92,12 +111,6 @@
                 "indexed": false,
                 "internalType": "uint256",
                 "name": "redemptionPrice",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "seed",
                 "type": "uint256"
             },
             {
@@ -376,10 +389,10 @@
     },
     {
         "inputs": [],
-        "name": "pidValidator",
+        "name": "pidCalculator",
         "outputs": [
             {
-                "internalType": "contract PIDValidator",
+                "internalType": "contract PIDCalculator",
                 "name": "",
                 "type": "address"
             }
@@ -515,7 +528,6 @@
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "seed", "type": "uint256" },
             {
                 "internalType": "address",
                 "name": "feeReceiver",

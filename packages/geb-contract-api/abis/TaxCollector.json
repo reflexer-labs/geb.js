@@ -27,7 +27,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "collateralType",
                 "type": "bytes32"
@@ -64,7 +64,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "collateralType",
                 "type": "bytes32"
@@ -89,13 +89,13 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "collateralType",
                 "type": "bytes32"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "target",
                 "type": "address"
@@ -246,7 +246,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "collateralType",
                 "type": "bytes32"

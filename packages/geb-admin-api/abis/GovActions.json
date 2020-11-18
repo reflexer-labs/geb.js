@@ -75,6 +75,19 @@
                 "internalType": "address",
                 "name": "targetContract",
                 "type": "address"
+            }
+        ],
+        "name": "disableContract",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "targetContract",
+                "type": "address"
             },
             {
                 "internalType": "bytes32",
@@ -257,6 +270,36 @@
             },
             { "internalType": "uint256", "name": "data1", "type": "uint256" },
             { "internalType": "uint256", "name": "data2", "type": "uint256" }
+        ],
+        "name": "modifyTwoParameters",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "targetContract1",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "targetContract2",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "parameter1",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "parameter2",
+                "type": "bytes32"
+            },
+            { "internalType": "int256", "name": "data1", "type": "int256" },
+            { "internalType": "int256", "name": "data2", "type": "int256" }
         ],
         "name": "modifyTwoParameters",
         "outputs": [],
@@ -477,6 +520,16 @@
     },
     {
         "inputs": [
+            { "internalType": "address", "name": "coin", "type": "address" },
+            { "internalType": "string", "name": "name", "type": "string" }
+        ],
+        "name": "setName",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
             {
                 "internalType": "address",
                 "name": "targetContract",
@@ -500,6 +553,16 @@
             }
         ],
         "name": "setProtester",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "coin", "type": "address" },
+            { "internalType": "string", "name": "symbol", "type": "string" }
+        ],
+        "name": "setSymbol",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"

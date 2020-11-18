@@ -37,7 +37,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "uint256",
                 "name": "id",
                 "type": "uint256"
@@ -113,7 +113,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "uint256",
                 "name": "id",
                 "type": "uint256"
@@ -156,7 +156,7 @@
                 "type": "uint256"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "uint256",
                 "name": "amountToRaise",
                 "type": "uint256"
@@ -187,7 +187,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "uint256",
                 "name": "id",
                 "type": "uint256"
@@ -383,6 +383,19 @@
         "name": "forgoneCollateralReceiver",
         "outputs": [
             { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "id", "type": "uint256" },
+            { "internalType": "uint256", "name": "wad", "type": "uint256" }
+        ],
+        "name": "getAdjustedBid",
+        "outputs": [
+            { "internalType": "bool", "name": "", "type": "bool" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -638,6 +651,17 @@
                 "name": "",
                 "type": "address"
             }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "id", "type": "uint256" }
+        ],
+        "name": "raisedAmount",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"

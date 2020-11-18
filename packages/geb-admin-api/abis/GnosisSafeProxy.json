@@ -7,9 +7,8 @@
                 "type": "address"
             }
         ],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "constructor"
     },
-    { "payable": true, "stateMutability": "payable", "type": "fallback" }
+    { "stateMutability": "payable", "type": "fallback" }
 ]

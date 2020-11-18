@@ -37,7 +37,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "uint256",
                 "name": "id",
                 "type": "uint256"
@@ -62,7 +62,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "uint256",
                 "name": "id",
                 "type": "uint256"
@@ -149,7 +149,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "parameter",
                 "type": "bytes32"
@@ -168,7 +168,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "parameter",
                 "type": "bytes32"
@@ -187,7 +187,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "uint256",
                 "name": "timestamp",
                 "type": "uint256"
@@ -212,7 +212,7 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "uint256",
                 "name": "timestamp",
                 "type": "uint256"
@@ -370,6 +370,17 @@
                 "name": "",
                 "type": "address"
             }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "name": "debtPoppers",
+        "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
         ],
         "stateMutability": "view",
         "type": "function"

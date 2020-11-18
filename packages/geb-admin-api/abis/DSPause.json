@@ -130,49 +130,6 @@
         "type": "event"
     },
     {
-        "anonymous": true,
-        "inputs": [
-            {
-                "indexed": true,
-                "internalType": "bytes4",
-                "name": "sig",
-                "type": "bytes4"
-            },
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "guy",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "bytes32",
-                "name": "foo",
-                "type": "bytes32"
-            },
-            {
-                "indexed": true,
-                "internalType": "bytes32",
-                "name": "bar",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "wad",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "bytes",
-                "name": "fax",
-                "type": "bytes"
-            }
-        ],
-        "name": "LogNote",
-        "type": "event"
-    },
-    {
         "anonymous": false,
         "inputs": [
             {
@@ -381,6 +338,23 @@
                 "name": "codeHash",
                 "type": "bytes32"
             },
+            { "internalType": "bytes", "name": "parameters", "type": "bytes" }
+        ],
+        "name": "getTransactionDataHash",
+        "outputs": [
+            { "internalType": "bytes32", "name": "", "type": "bytes32" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" },
+            {
+                "internalType": "bytes32",
+                "name": "codeHash",
+                "type": "bytes32"
+            },
             { "internalType": "bytes", "name": "parameters", "type": "bytes" },
             {
                 "internalType": "uint256",
@@ -476,6 +450,15 @@
             { "internalType": "bytes32", "name": "", "type": "bytes32" }
         ],
         "name": "scheduledTransactions",
+        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "bytes32", "name": "", "type": "bytes32" }
+        ],
+        "name": "scheduledTransactionsDataHashes",
         "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
         "stateMutability": "view",
         "type": "function"

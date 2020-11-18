@@ -1,10 +1,5 @@
 [
-    {
-        "inputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
+    { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
     {
         "anonymous": false,
         "inputs": [
@@ -179,27 +174,22 @@
         "name": "SignMsg",
         "type": "event"
     },
-    { "payable": true, "stateMutability": "payable", "type": "fallback" },
+    { "stateMutability": "payable", "type": "fallback" },
     {
-        "constant": true,
         "inputs": [],
         "name": "NAME",
         "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": true,
         "inputs": [],
         "name": "VERSION",
         "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             { "internalType": "address", "name": "owner", "type": "address" },
             {
@@ -210,12 +200,10 @@
         ],
         "name": "addOwnerWithThreshold",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             {
                 "internalType": "bytes32",
@@ -225,12 +213,10 @@
         ],
         "name": "approveHash",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": true,
         "inputs": [
             { "internalType": "address", "name": "", "type": "address" },
             { "internalType": "bytes32", "name": "", "type": "bytes32" }
@@ -239,12 +225,10 @@
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             {
                 "internalType": "address",
@@ -254,12 +238,10 @@
         ],
         "name": "changeMasterCopy",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             {
                 "internalType": "uint256",
@@ -269,12 +251,10 @@
         ],
         "name": "changeThreshold",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             {
                 "internalType": "contract Module",
@@ -289,23 +269,19 @@
         ],
         "name": "disableModule",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": true,
         "inputs": [],
         "name": "domainSeparator",
         "outputs": [
             { "internalType": "bytes32", "name": "", "type": "bytes32" }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             {
                 "internalType": "contract Module",
@@ -315,12 +291,10 @@
         ],
         "name": "enableModule",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": true,
         "inputs": [
             { "internalType": "address", "name": "to", "type": "address" },
             { "internalType": "uint256", "name": "value", "type": "uint256" },
@@ -355,12 +329,10 @@
         ],
         "name": "encodeTransactionData",
         "outputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             { "internalType": "address", "name": "to", "type": "address" },
             { "internalType": "uint256", "name": "value", "type": "uint256" },
@@ -397,12 +369,10 @@
         "outputs": [
             { "internalType": "bool", "name": "success", "type": "bool" }
         ],
-        "payable": false,
-        "stateMutability": "nonpayable",
+        "stateMutability": "payable",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             { "internalType": "address", "name": "to", "type": "address" },
             { "internalType": "uint256", "name": "value", "type": "uint256" },
@@ -417,12 +387,10 @@
         "outputs": [
             { "internalType": "bool", "name": "success", "type": "bool" }
         ],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             { "internalType": "address", "name": "to", "type": "address" },
             { "internalType": "uint256", "name": "value", "type": "uint256" },
@@ -438,12 +406,10 @@
             { "internalType": "bool", "name": "success", "type": "bool" },
             { "internalType": "bytes", "name": "returnData", "type": "bytes" }
         ],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": true,
         "inputs": [
             { "internalType": "bytes", "name": "message", "type": "bytes" }
         ],
@@ -451,23 +417,19 @@
         "outputs": [
             { "internalType": "bytes32", "name": "", "type": "bytes32" }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": true,
         "inputs": [],
         "name": "getModules",
         "outputs": [
             { "internalType": "address[]", "name": "", "type": "address[]" }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": true,
         "inputs": [
             { "internalType": "address", "name": "start", "type": "address" },
             { "internalType": "uint256", "name": "pageSize", "type": "uint256" }
@@ -481,34 +443,28 @@
             },
             { "internalType": "address", "name": "next", "type": "address" }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": true,
         "inputs": [],
         "name": "getOwners",
         "outputs": [
             { "internalType": "address[]", "name": "", "type": "address[]" }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": true,
         "inputs": [],
         "name": "getThreshold",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": true,
         "inputs": [
             { "internalType": "address", "name": "to", "type": "address" },
             { "internalType": "uint256", "name": "value", "type": "uint256" },
@@ -545,46 +501,51 @@
         "outputs": [
             { "internalType": "bytes32", "name": "", "type": "bytes32" }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": true,
+        "inputs": [
+            {
+                "internalType": "contract Module",
+                "name": "module",
+                "type": "address"
+            }
+        ],
+        "name": "isModuleEnabled",
+        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             { "internalType": "address", "name": "owner", "type": "address" }
         ],
         "name": "isOwner",
         "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             { "internalType": "bytes", "name": "_data", "type": "bytes" },
             { "internalType": "bytes", "name": "_signature", "type": "bytes" }
         ],
         "name": "isValidSignature",
         "outputs": [{ "internalType": "bytes4", "name": "", "type": "bytes4" }],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": true,
         "inputs": [],
         "name": "nonce",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             {
                 "internalType": "address",
@@ -600,12 +561,10 @@
         ],
         "name": "removeOwner",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             { "internalType": "address", "name": "to", "type": "address" },
             { "internalType": "uint256", "name": "value", "type": "uint256" },
@@ -620,23 +579,19 @@
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             { "internalType": "address", "name": "handler", "type": "address" }
         ],
         "name": "setFallbackHandler",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             {
                 "internalType": "address[]",
@@ -669,23 +624,19 @@
         ],
         "name": "setup",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             { "internalType": "bytes", "name": "_data", "type": "bytes" }
         ],
         "name": "signMessage",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "constant": true,
         "inputs": [
             { "internalType": "bytes32", "name": "", "type": "bytes32" }
         ],
@@ -693,12 +644,10 @@
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
-        "constant": false,
         "inputs": [
             {
                 "internalType": "address",
@@ -714,7 +663,6 @@
         ],
         "name": "swapOwner",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
     }

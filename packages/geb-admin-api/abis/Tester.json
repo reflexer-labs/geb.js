@@ -2,8 +2,8 @@
     {
         "inputs": [
             {
-                "internalType": "contract ERC20",
-                "name": "token_",
+                "internalType": "contract ProtocolTokenAuthority",
+                "name": "authority_",
                 "type": "address"
             }
         ],
@@ -11,44 +11,75 @@
         "type": "constructor"
     },
     {
-        "inputs": [],
-        "name": "balance",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "fail",
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" }
+        ],
+        "name": "addAuthorization",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "value_", "type": "uint256" }
+            { "internalType": "uint256", "name": "wad", "type": "uint256" }
         ],
-        "name": "ok",
+        "name": "burn",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" },
+            { "internalType": "uint256", "name": "wad", "type": "uint256" }
+        ],
+        "name": "burn",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" },
+            { "internalType": "uint256", "name": "wad", "type": "uint256" }
+        ],
+        "name": "mint",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "token",
-        "outputs": [
-            { "internalType": "contract ERC20", "name": "", "type": "address" }
-        ],
-        "stateMutability": "view",
+        "name": "notMintOrBurn",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "value",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" }
         ],
-        "stateMutability": "view",
+        "name": "removeAuthorization",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" }
+        ],
+        "name": "setOwner",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" }
+        ],
+        "name": "setRoot",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     }
 ]

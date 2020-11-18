@@ -1,7 +1,8 @@
 [
     {
         "inputs": [
-            { "internalType": "bytes32", "name": "symbol_", "type": "bytes32" }
+            { "internalType": "string", "name": "name_", "type": "string" },
+            { "internalType": "string", "name": "symbol_", "type": "string" }
         ],
         "stateMutability": "nonpayable",
         "type": "constructor"
@@ -279,9 +280,7 @@
     {
         "inputs": [],
         "name": "name",
-        "outputs": [
-            { "internalType": "bytes32", "name": "", "type": "bytes32" }
-        ],
+        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
         "stateMutability": "view",
         "type": "function"
     },
@@ -329,15 +328,6 @@
     },
     {
         "inputs": [
-            { "internalType": "bytes32", "name": "name_", "type": "bytes32" }
-        ],
-        "name": "setName",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
             { "internalType": "address", "name": "owner_", "type": "address" }
         ],
         "name": "setOwner",
@@ -369,9 +359,7 @@
     {
         "inputs": [],
         "name": "symbol",
-        "outputs": [
-            { "internalType": "bytes32", "name": "", "type": "bytes32" }
-        ],
+        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
         "stateMutability": "view",
         "type": "function"
     },
