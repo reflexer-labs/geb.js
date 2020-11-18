@@ -257,6 +257,19 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         return this.getTransactionRequest(abi, [parameter, data])
     }
 
+    raisedAmount(id: BigNumberish): Promise<BigNumber>
+    raisedAmount(id: BigNumberish, multicall: true): MulticallRequest<BigNumber>
+    raisedAmount(
+        id: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"raisedAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [id], multicall)
+    }
+
     remainingAmountToSell(id: BigNumberish): Promise<BigNumber>
     remainingAmountToSell(
         id: BigNumberish,

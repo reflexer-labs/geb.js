@@ -320,12 +320,14 @@ export class RateSetter extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    pidValidator(): Promise<string>
-    pidValidator(multicall: true): MulticallRequest<string>
-    pidValidator(multicall?: true): Promise<string> | MulticallRequest<string> {
+    pidCalculator(): Promise<string>
+    pidCalculator(multicall: true): MulticallRequest<string>
+    pidCalculator(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"pidValidator","outputs":[{"internalType":"contract PIDValidator","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[],"name":"pidCalculator","outputs":[{"internalType":"contract PIDCalculator","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -500,12 +502,12 @@ export class RateSetter extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    updateRate(seed: BigNumberish, feeReceiver: string): TransactionRequest {
+    updateRate(feeReceiver: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"seed","type":"uint256"},{"internalType":"address","name":"feeReceiver","type":"address"}],"name":"updateRate","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"feeReceiver","type":"address"}],"name":"updateRate","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [seed, feeReceiver])
+        return this.getTransactionRequest(abi, [feeReceiver])
     }
 
     updateRateDelay(): Promise<BigNumber>

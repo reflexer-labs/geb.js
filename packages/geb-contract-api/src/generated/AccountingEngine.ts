@@ -93,6 +93,22 @@ export class AccountingEngine extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
+    debtPoppers(uinteger: BigNumberish): Promise<string>
+    debtPoppers(
+        uinteger: BigNumberish,
+        multicall: true
+    ): MulticallRequest<string>
+    debtPoppers(
+        uinteger: BigNumberish,
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"debtPoppers","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
+    }
+
     debtQueue(uinteger: BigNumberish): Promise<BigNumber>
     debtQueue(
         uinteger: BigNumberish,

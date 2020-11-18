@@ -312,6 +312,18 @@ export class SafeEngine extends BaseContractAPI {
         return this.getTransactionRequest(abi, [account])
     }
 
+    safeDebtCeiling(): Promise<BigNumber>
+    safeDebtCeiling(multicall: true): MulticallRequest<BigNumber>
+    safeDebtCeiling(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"safeDebtCeiling","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     safeRights(address1: string, address2: string): Promise<BigNumber>
     safeRights(
         address1: string,

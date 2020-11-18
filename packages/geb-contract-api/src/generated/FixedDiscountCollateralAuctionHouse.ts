@@ -220,6 +220,41 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
+    getAdjustedBid(
+        id: BigNumberish,
+        wad: BigNumberish
+    ): Promise<{
+        0: boolean
+        1: BigNumber
+    }>
+    getAdjustedBid(
+        id: BigNumberish,
+        wad: BigNumberish,
+        multicall: true
+    ): MulticallRequest<{
+        0: boolean
+        1: BigNumber
+    }>
+    getAdjustedBid(
+        id: BigNumberish,
+        wad: BigNumberish,
+        multicall?: true
+    ):
+        | Promise<{
+              0: boolean
+              1: BigNumber
+          }>
+        | MulticallRequest<{
+              0: boolean
+              1: BigNumber
+          }> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"getAdjustedBid","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [id, wad], multicall)
+    }
+
     getApproximateCollateralBought(
         id: BigNumberish,
         wad: BigNumberish
@@ -524,6 +559,19 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         const abi = {"inputs":[],"name":"oracleRelayer","outputs":[{"internalType":"contract OracleRelayerLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    raisedAmount(id: BigNumberish): Promise<BigNumber>
+    raisedAmount(id: BigNumberish, multicall: true): MulticallRequest<BigNumber>
+    raisedAmount(
+        id: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"raisedAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
     remainingAmountToSell(id: BigNumberish): Promise<BigNumber>

@@ -47,6 +47,14 @@ export class Setter extends BaseContractAPI {
         return this.getTransactionRequest(abi, [priceSource_])
     }
 
+    disableContract(): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"disableContract","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [])
+    }
+
     initializeCollateralType(bytes: BytesLike): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -187,6 +195,14 @@ export class Setter extends BaseContractAPI {
         return this.getTransactionRequest(abi, [address])
     }
 
+    setName(name: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"string","name":"name","type":"string"}],"name":"setName","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [name])
+    }
+
     setPerBlockAllowance(
         address: string,
         uinteger: BigNumberish
@@ -196,6 +212,14 @@ export class Setter extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"setPerBlockAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [address, uinteger])
+    }
+
+    setSymbol(symbol: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"string","name":"symbol","type":"string"}],"name":"setSymbol","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [symbol])
     }
 
     setTotalAllowance(

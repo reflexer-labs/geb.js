@@ -133,20 +133,48 @@ export class DsPause extends BaseContractAPI {
         ])
     }
 
-    getTransactionDataHash(
+    getTransactionDataHash1(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike
+    ): Promise<string>
+    getTransactionDataHash1(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        multicall: true
+    ): MulticallRequest<string>
+    getTransactionDataHash1(
+        usr: string,
+        codeHash: BytesLike,
+        parameters: BytesLike,
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"bytes32","name":"codeHash","type":"bytes32"},{"internalType":"bytes","name":"parameters","type":"bytes"}],"name":"getTransactionDataHash","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"pure","type":"function"}
+
+        return this.ethCallOrMulticall(
+            abi,
+            [usr, codeHash, parameters],
+            multicall
+        )
+    }
+
+    getTransactionDataHash2(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         earliestExecutionTime: BigNumberish
     ): Promise<string>
-    getTransactionDataHash(
+    getTransactionDataHash2(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         earliestExecutionTime: BigNumberish,
         multicall: true
     ): MulticallRequest<string>
-    getTransactionDataHash(
+    getTransactionDataHash2(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -246,6 +274,22 @@ export class DsPause extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"scheduledTransactions","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [bytes], multicall)
+    }
+
+    scheduledTransactionsDataHashes(bytes: BytesLike): Promise<boolean>
+    scheduledTransactionsDataHashes(
+        bytes: BytesLike,
+        multicall: true
+    ): MulticallRequest<boolean>
+    scheduledTransactionsDataHashes(
+        bytes: BytesLike,
+        multicall?: true
+    ): Promise<boolean> | MulticallRequest<boolean> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"scheduledTransactionsDataHashes","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [bytes], multicall)
     }

@@ -50,6 +50,14 @@ export class GovActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [fsm, priceSource])
     }
 
+    disableContract(targetContract: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"}],"name":"disableContract","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [targetContract])
+    }
+
     initializeCollateralType(
         targetContract: string,
         collateralType: BytesLike
@@ -208,6 +216,28 @@ export class GovActions extends BaseContractAPI {
     modifyTwoParameters2(
         targetContract1: string,
         targetContract2: string,
+        parameter1: BytesLike,
+        parameter2: BytesLike,
+        data1: BigNumberish,
+        data2: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract1","type":"address"},{"internalType":"address","name":"targetContract2","type":"address"},{"internalType":"bytes32","name":"parameter1","type":"bytes32"},{"internalType":"bytes32","name":"parameter2","type":"bytes32"},{"internalType":"uint256","name":"data1","type":"uint256"},{"internalType":"uint256","name":"data2","type":"uint256"}],"name":"modifyTwoParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            targetContract1,
+            targetContract2,
+            parameter1,
+            parameter2,
+            data1,
+            data2,
+        ])
+    }
+
+    modifyTwoParameters3(
+        targetContract1: string,
+        targetContract2: string,
         collateralType1: BytesLike,
         collateralType2: BytesLike,
         parameter1: BytesLike,
@@ -355,6 +385,14 @@ export class GovActions extends BaseContractAPI {
         ])
     }
 
+    setName(coin: string, name: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"coin","type":"address"},{"internalType":"string","name":"name","type":"string"}],"name":"setName","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [coin, name])
+    }
+
     setPerBlockAllowance(
         targetContract: string,
         account: string,
@@ -373,6 +411,14 @@ export class GovActions extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"protester","type":"address"}],"name":"setProtester","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [pause, protester])
+    }
+
+    setSymbol(coin: string, symbol: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"coin","type":"address"},{"internalType":"string","name":"symbol","type":"string"}],"name":"setSymbol","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [coin, symbol])
     }
 
     setTotalAllowance(

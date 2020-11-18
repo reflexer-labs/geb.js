@@ -2,53 +2,71 @@
 /* tslint:disable */
 
 import { BaseContractAPI } from '@reflexer-finance/geb-contract-base'
-import { MulticallRequest } from '@reflexer-finance/geb-contract-base'
 import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
 import { BigNumberish } from '@ethersproject/bignumber'
-import { BigNumber } from '@ethersproject/bignumber'
 
 export class Tester extends BaseContractAPI {
-    balance(): TransactionRequest {
+    addAuthorization(usr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"balance","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"addAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [usr])
+    }
+
+    burn1(wad: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [wad])
+    }
+
+    burn2(usr: string, wad: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [usr, wad])
+    }
+
+    mint(usr: string, wad: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [usr, wad])
+    }
+
+    notMintOrBurn(): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"notMintOrBurn","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [])
     }
 
-    fail(): TransactionRequest {
+    removeAuthorization(usr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"fail","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"removeAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.getTransactionRequest(abi, [usr])
     }
 
-    ok(value_: BigNumberish): TransactionRequest {
+    setOwner(usr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"value_","type":"uint256"}],"name":"ok","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"setOwner","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [value_])
+        return this.getTransactionRequest(abi, [usr])
     }
 
-    token(): Promise<string>
-    token(multicall: true): MulticallRequest<string>
-    token(multicall?: true): Promise<string> | MulticallRequest<string> {
+    setRoot(usr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"token","outputs":[{"internalType":"contract ERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"setRoot","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    value(): Promise<BigNumber>
-    value(multicall: true): MulticallRequest<BigNumber>
-    value(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"value","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
+        return this.getTransactionRequest(abi, [usr])
     }
 }
