@@ -30,8 +30,11 @@ import { DsValue } from './generated/DSValue'
 import { Osm } from './generated/OSM'
 import { Weth9 } from './generated/WETH9_'
 import { RateSetter } from './generated/RateSetter'
-import { PiRawPerSecondValidator } from './generated/PIRawPerSecondValidator'
+import { PiRawPerSecondCalculator } from './generated/PIRawPerSecondCalculator'
 import { Dsm } from './generated/DSM'
+import { GebUniswapRollingDistributionIncentives } from './generated/GebUniswapRollingDistributionIncentives'
+import { GebProxyLeverageActions } from './generated/GebProxyLeverageActions'
+import { GebProxyIncentivesActions } from './generated/GebProxyIncentivesActions'
 
 export {
     // Factory
@@ -65,9 +68,12 @@ export {
     Osm,
     Dsm,
     DsValue,
-    PiRawPerSecondValidator,
+    PiRawPerSecondCalculator,
     RateSetter,
     ChainlinkMedianEthusd,
     UniswapConsecutiveSlotsMedianRaiusd,
     Weth9,
+    GebUniswapRollingDistributionIncentives,
+    GebProxyLeverageActions,
+    GebProxyIncentivesActions,
 }

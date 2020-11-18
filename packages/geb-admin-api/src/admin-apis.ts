@@ -1,7 +1,6 @@
 import {
     GebDeploy,
     ProtocolTokenAuthority,
-    GebPollingEmitter,
     DsDelegateRoles,
     DsPauseProxy,
     GovActions,
@@ -9,7 +8,6 @@ import {
     FsmGovernanceInterface,
     DsProxyFactory,
     GebDeployPauseProxyActions,
-    TxManager,
     GnosisSafeProxy,
     DsProtestPause,
 } from '.'
@@ -28,7 +26,6 @@ export class AdminApis {
     public multisigAdminProxy: DsProxy
     public deploy : GebDeploy
     public protocolTokenAuthority: ProtocolTokenAuthority
-    public pollingEmitter: GebPollingEmitter
     public pauseAuthority: DsDelegateRoles
     public pause: DsProtestPause
     public pauseProxy: DsPauseProxy
@@ -38,7 +35,6 @@ export class AdminApis {
     public proxyFactory: DsProxyFactory
     public pauseProxyAction: GebDeployPauseProxyActions
     public proxyDeployer: DsProxy
-    public txManager: TxManager
     
 
     constructor(
@@ -53,7 +49,6 @@ export class AdminApis {
         this.multisigAdmin = new GnosisSafeProxy(addressList.GEB_MULTISIG, this.chainProvider)
         this.multisigAdminProxy = new DsProxy(addressList.GEB_MULTISIG_PROXY, this.chainProvider)
         this.deploy = new GebDeploy(addressList.GEB_DEPLOY, this.chainProvider)
-        this.pollingEmitter = new GebPollingEmitter(addressList.GEB_POLLING_EMITTER, this.chainProvider)
         this.pauseAuthority = new DsDelegateRoles(addressList.GEB_PAUSE_AUTHORITY, this.chainProvider)
         this.pause = new DsProtestPause(addressList.GEB_PAUSE, this.chainProvider)
         this.pauseProxy = new DsPauseProxy(addressList.GEB_PAUSE_PROXY, this.chainProvider)
@@ -62,6 +57,5 @@ export class AdminApis {
         this.proxyFactory = new DsProxyFactory(addressList.PROXY_FACTORY, this.chainProvider)
         this.pauseProxyAction = new GebDeployPauseProxyActions(addressList.PROXY_PAUSE_ACTIONS, this.chainProvider)
         this.proxyDeployer = new DsProxy(addressList.PROXY_DEPLOYER, this.chainProvider)
-        this.txManager = new TxManager(addressList.GEB_TX_MANAGER, this.chainProvider)
     }
 }
