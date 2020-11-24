@@ -62,7 +62,10 @@ export class GebProxyActions {
         private chainProvider: GebProviderInterface
     ) {
         this.addressList = getAddressList(network)
+
         this.proxy = new DsProxy(proxyAddress, this.chainProvider)
+
+        // Set proxy action contract addresses
         this.proxyActionCoreAddress = this.addressList.PROXY_ACTIONS
         this.proxyActionGlobalSettlementAddress = this.addressList.PROXY_ACTIONS_GLOBAL_SETTLEMENT
         this.proxyActionIncentiveAddress = this.addressList.INCENTIVE_PROXY_ACTIONS
@@ -78,11 +81,11 @@ export class GebProxyActions {
             this.chainProvider
         )
         this.proxyActionIncentive = new GebProxyIncentivesActions(
-            this.proxyActionGlobalSettlementAddress,
+            this.proxyActionIncentiveAddress,
             this.chainProvider
         )
         this.proxyActionLeverage = new GebProxyLeverageActions(
-            this.proxyActionGlobalSettlementAddress,
+            this.proxyActionLeverageAddress,
             this.chainProvider
         )
     }
