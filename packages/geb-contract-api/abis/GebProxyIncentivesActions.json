@@ -24,7 +24,11 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "obj", "type": "address" },
+            {
+                "internalType": "address",
+                "name": "safeEngine",
+                "type": "address"
+            },
             { "internalType": "address", "name": "usr", "type": "address" }
         ],
         "name": "approveSAFEModification",
@@ -49,7 +53,11 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "obj", "type": "address" },
+            {
+                "internalType": "address",
+                "name": "safeEngine",
+                "type": "address"
+            },
             { "internalType": "address", "name": "usr", "type": "address" }
         ],
         "name": "denySAFEModification",
@@ -321,11 +329,6 @@
             {
                 "internalType": "uint256",
                 "name": "campaignId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "timestamp",
                 "type": "uint256"
             }
         ],

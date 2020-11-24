@@ -33,12 +33,15 @@ export class GebProxyLeverageActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [manager, safe, usr, ok])
     }
 
-    approveSAFEModification(obj: string, usr: string): TransactionRequest {
+    approveSAFEModification(
+        safeEngine: string,
+        usr: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"obj","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"approveSAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"safeEngine","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"approveSAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [obj, usr])
+        return this.getTransactionRequest(abi, [safeEngine, usr])
     }
 
     coinJoin_join(
@@ -53,12 +56,12 @@ export class GebProxyLeverageActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [apt, safeHandler, wad])
     }
 
-    denySAFEModification(obj: string, usr: string): TransactionRequest {
+    denySAFEModification(safeEngine: string, usr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"obj","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"denySAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"safeEngine","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"denySAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [obj, usr])
+        return this.getTransactionRequest(abi, [safeEngine, usr])
     }
 
     enterSystem(
@@ -416,38 +419,6 @@ export class GebProxyLeverageActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [manager, safe, dst])
     }
 
-    repayAllDebt(
-        manager: string,
-        coinJoin: string,
-        safe: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"}],"name":"repayAllDebt","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [manager, coinJoin, safe])
-    }
-
-    repayAllDebtAndFreeETH(
-        manager: string,
-        ethJoin: string,
-        coinJoin: string,
-        safe: BigNumberish,
-        collateralWad: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"collateralWad","type":"uint256"}],"name":"repayAllDebtAndFreeETH","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [
-            manager,
-            ethJoin,
-            coinJoin,
-            safe,
-            collateralWad,
-        ])
-    }
-
     repayDebt(
         manager: string,
         coinJoin: string,
@@ -480,57 +451,6 @@ export class GebProxyLeverageActions extends BaseContractAPI {
             safe,
             collateralWad,
             deltaWad,
-        ])
-    }
-
-    safeLockETH(
-        ethValue: BigNumberish,
-        manager: string,
-        ethJoin: string,
-        safe: BigNumberish,
-        owner: string
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"address","name":"owner","type":"address"}],"name":"safeLockETH","outputs":[],"stateMutability":"payable","type":"function"}
-
-        return this.getTransactionRequest(
-            abi,
-            [manager, ethJoin, safe, owner],
-            BigNumber.from(ethValue)
-        )
-    }
-
-    safeRepayAllDebt(
-        manager: string,
-        coinJoin: string,
-        safe: BigNumberish,
-        owner: string
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"address","name":"owner","type":"address"}],"name":"safeRepayAllDebt","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [manager, coinJoin, safe, owner])
-    }
-
-    safeRepayDebt(
-        manager: string,
-        coinJoin: string,
-        safe: BigNumberish,
-        wad: BigNumberish,
-        owner: string
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"wad","type":"uint256"},{"internalType":"address","name":"owner","type":"address"}],"name":"safeRepayDebt","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [
-            manager,
-            coinJoin,
-            safe,
-            wad,
-            owner,
         ])
     }
 

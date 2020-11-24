@@ -34,12 +34,15 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [manager, safe, usr, ok])
     }
 
-    approveSAFEModification(obj: string, usr: string): TransactionRequest {
+    approveSAFEModification(
+        safeEngine: string,
+        usr: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"obj","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"approveSAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"safeEngine","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"approveSAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [obj, usr])
+        return this.getTransactionRequest(abi, [safeEngine, usr])
     }
 
     coinJoin_join(
@@ -54,12 +57,12 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [apt, safeHandler, wad])
     }
 
-    denySAFEModification(obj: string, usr: string): TransactionRequest {
+    denySAFEModification(safeEngine: string, usr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"obj","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"denySAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"safeEngine","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"denySAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [obj, usr])
+        return this.getTransactionRequest(abi, [safeEngine, usr])
     }
 
     enterSystem(
@@ -289,18 +292,13 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
 
     getLockedReward(
         incentives: string,
-        campaignId: BigNumberish,
-        timestamp: BigNumberish
+        campaignId: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"},{"internalType":"uint256","name":"campaignId","type":"uint256"},{"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"getLockedReward","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"},{"internalType":"uint256","name":"campaignId","type":"uint256"}],"name":"getLockedReward","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [
-            incentives,
-            campaignId,
-            timestamp,
-        ])
+        return this.getTransactionRequest(abi, [incentives, campaignId])
     }
 
     getWethPair(uniswapRouter: string, token: string): Promise<string>
