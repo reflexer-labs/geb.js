@@ -1,7 +1,5 @@
 import {
     GebProviderInterface,
-    AbiDefinition,
-    Inputs,
     ContractList,
     GebDeployment,
     getAddressList,
@@ -12,14 +10,18 @@ import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 import {
-    GebProxyActions as GebProxyActionsGenerated,
+    GebProxyActions as GebProxyActionsCore,
     DsProxy,
+    GebProxyActionsGlobalSettlement,
+    GebProxyLeverageActions,
+    GebProxyIncentivesActions,
 } from '@reflexer-finance/geb-contract-api'
+import { NULL_ADDRESS } from './utils'
 
 /**
  * Convenience class to call functions from [GebProxyActions](https://github.com/reflexer-labs/geb-proxy-actions/blob/master/src/GebProxyActions.sol) through a proxy contract registered in the [GebProxyRegistry](https://github.com/reflexer-labs/geb-proxy-registry/blob/master/src/GebProxyRegistry.sol). These actions bundle multiple actions in one (e.g: open a safe + lock some ETH + draw some RAI).
  */
-export class GebProxyActions extends GebProxyActionsGenerated {
+export class GebProxyActions {
     /**
      * Underlying proxy object. Can be use to make custom calls to the proxy using `proxy.execute()` function.
      * For the details of each function
@@ -27,61 +29,100 @@ export class GebProxyActions extends GebProxyActionsGenerated {
     public proxy: DsProxy
 
     /**
-     * Address of the proxy action contract.
+     * Address of the base proxy action contract.
      */
-    public proxyActionAddress: string
-    private addressList: ContractList
+    public proxyActionCoreAddress: string
 
+    /**
+     * Address of the proxy action contract for global settlement.
+     */
+    public proxyActionGlobalSettlementAddress: string
+
+    /**
+     * Address of the proxy action contract for uniswap LP share staking.
+     */
+    public proxyActionIncentiveAddress: string
+
+    /**
+     * Address of the proxy action contract for leveraged with flash loans operations.
+     */
+    public proxyActionLeverageAddress: string
+
+    private addressList: ContractList
+    private proxyActionCore: GebProxyActionsCore
+    private proxyActionGlobalSettlement: GebProxyActionsGlobalSettlement
+    private proxyActionIncentive: GebProxyIncentivesActions
+    private proxyActionLeverage: GebProxyLeverageActions
     constructor(
         /**
          * Address of the underlying proxy
          */
         public proxyAddress: string,
         network: GebDeployment,
-        chainProvider: GebProviderInterface
+        private chainProvider: GebProviderInterface
     ) {
-        super(getAddressList(network).PROXY_ACTIONS, chainProvider)
         this.addressList = getAddressList(network)
         this.proxy = new DsProxy(proxyAddress, this.chainProvider)
-        this.proxyActionAddress = this.addressList.PROXY_ACTIONS
-        this.address = proxyAddress
+        this.proxyActionCoreAddress = this.addressList.PROXY_ACTIONS
+        this.proxyActionGlobalSettlementAddress = this.addressList.PROXY_ACTIONS_GLOBAL_SETTLEMENT
+        this.proxyActionIncentiveAddress = this.addressList.INCENTIVE_PROXY_ACTIONS
+        this.proxyActionLeverageAddress = this.addressList.LEVERAGE_PROXY_ACTION
+
+        // Proxy contract APIs
+        this.proxyActionCore = new GebProxyActionsCore(
+            this.proxyActionCoreAddress,
+            this.chainProvider
+        )
+        this.proxyActionGlobalSettlement = new GebProxyActionsGlobalSettlement(
+            this.proxyActionGlobalSettlementAddress,
+            this.chainProvider
+        )
+        this.proxyActionIncentive = new GebProxyIncentivesActions(
+            this.proxyActionGlobalSettlementAddress,
+            this.chainProvider
+        )
+        this.proxyActionLeverage = new GebProxyLeverageActions(
+            this.proxyActionGlobalSettlementAddress,
+            this.chainProvider
+        )
     }
 
-    // Override getTransactionRequest to use proxy
-    protected getTransactionRequest(
-        abiFragment: AbiDefinition,
-        params: Inputs,
-        ethValue?: BigNumber
+    private getProxiedTransactionRequest(
+        tx: TransactionRequest
     ): TransactionRequest {
-        let data = this.chainProvider.encodeFunctionData(params, abiFragment)
-
+        let ethValue = tx.value
         if (!ethValue) {
             ethValue = BigNumber.from('0')
         }
 
-        return this.proxy.execute1(ethValue, this.proxyActionAddress, data)
+        if (tx.to === NULL_ADDRESS) {
+            throw Error('This proxy action is not supported on this network')
+        }
+
+        return this.proxy.execute1(ethValue, tx.to, tx.data)
     }
 
-    allowHandler(usr: string, ok: BigNumberish): TransactionRequest {
-        // prettier-ignore
-
-        return super.allowHandler(this.addressList.SAFE_MANAGER, usr, ok)
-    }
+    // ==== Proxy Action Core ====
 
     allowSAFE(
         safe: BigNumberish,
         usr: string,
         ok: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.allowSAFE(this.addressList.SAFE_MANAGER, safe, usr, ok)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.allowSAFE(
+                this.addressList.SAFE_MANAGER,
+                safe,
+                usr,
+                ok
+            )
+        )
     }
 
     approveSAFEModification(obj: string, usr: string): TransactionRequest {
-        // prettier-ignore
-
-        return super.approveSAFEModification(obj, usr)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.approveSAFEModification(obj, usr)
+        )
     }
 
     coinJoin_join(
@@ -89,21 +130,25 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safeHandler: string,
         wad: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.coinJoin_join(apt, safeHandler, wad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.coinJoin_join(apt, safeHandler, wad)
+        )
     }
 
     denySAFEModification(obj: string, usr: string): TransactionRequest {
-        // prettier-ignore
-
-        return super.denySAFEModification(obj, usr)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.denySAFEModification(obj, usr)
+        )
     }
 
     enterSystem(src: string, safe: BigNumberish): TransactionRequest {
-        // prettier-ignore
-
-        return super.enterSystem(this.addressList.SAFE_MANAGER, src, safe)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.enterSystem(
+                this.addressList.SAFE_MANAGER,
+                src,
+                safe
+            )
+        )
     }
 
     ethJoin_join(
@@ -111,15 +156,24 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         apt: string,
         safe: string
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.ethJoin_join(BigNumber.from(ethValue), apt, safe)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.ethJoin_join(
+                BigNumber.from(ethValue),
+                apt,
+                safe
+            )
+        )
     }
 
     exitETH(safe: BigNumberish, wad: BigNumberish): TransactionRequest {
-        // prettier-ignore
-
-        return super.exitETH(this.addressList.SAFE_MANAGER, this.addressList.GEB_JOIN_ETH_A, safe, wad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.exitETH(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                safe,
+                wad
+            )
+        )
     }
 
     exitTokenCollateral(
@@ -127,15 +181,25 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         amt: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.exitTokenCollateral(this.addressList.SAFE_MANAGER, collateralJoin, safe, amt)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.exitTokenCollateral(
+                this.addressList.SAFE_MANAGER,
+                collateralJoin,
+                safe,
+                amt
+            )
+        )
     }
 
     freeETH(safe: BigNumberish, wad: BigNumberish): TransactionRequest {
-        // prettier-ignore
-
-        return super.freeETH(this.addressList.SAFE_MANAGER, this.addressList.GEB_JOIN_ETH_A, safe, wad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.freeETH(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                safe,
+                wad
+            )
+        )
     }
 
     freeTokenCollateral(
@@ -143,15 +207,26 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         amt: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.freeTokenCollateral(this.addressList.SAFE_MANAGER, collateralJoin, safe, amt)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.freeTokenCollateral(
+                this.addressList.SAFE_MANAGER,
+                collateralJoin,
+                safe,
+                amt
+            )
+        )
     }
 
     generateDebt(safe: BigNumberish, wad: BigNumberish): TransactionRequest {
-        // prettier-ignore
-
-        return super.generateDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, this.addressList.GEB_COIN_JOIN, safe, wad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.generateDebt(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                wad
+            )
+        )
     }
 
     generateDebtAndProtectSAFE(
@@ -159,15 +234,28 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         wad: BigNumberish,
         saviour: string
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.generateDebtAndProtectSAFE(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, this.addressList.GEB_COIN_JOIN, safe, wad, this.addressList.GEB_LIQUIDATION_ENGINE, saviour)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.generateDebtAndProtectSAFE(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                wad,
+                this.addressList.GEB_LIQUIDATION_ENGINE,
+                saviour
+            )
+        )
     }
 
     lockETH(ethValue: BigNumberish, safe: BigNumberish): TransactionRequest {
-        // prettier-ignore
-
-        return super.lockETH(BigNumber.from(ethValue), this.addressList.SAFE_MANAGER, this.addressList.GEB_JOIN_ETH_A, safe)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.lockETH(
+                BigNumber.from(ethValue),
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                safe
+            )
+        )
     }
 
     lockETHAndGenerateDebt(
@@ -175,51 +263,85 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         deltaWad: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.lockETHAndGenerateDebt(BigNumber.from(ethValue), this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, this.addressList.GEB_JOIN_ETH_A, this.addressList.GEB_COIN_JOIN, safe, deltaWad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.lockETHAndGenerateDebt(
+                BigNumber.from(ethValue),
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                deltaWad
+            )
+        )
     }
-    // // @ts-ignore
-    // lockTokenCollateral(
-    //     collateralJoin: string,
-    //     safe: BigNumberish,
-    //     amt: BigNumberish,
-    //     transferFrom: boolean
-    // ): TransactionRequest {
-    //     // prettier-ignore
 
-    //     return super.lockTokenCollateral(this.addressList.SAFE_MANAGER, collateralJoin, safe, amt, transferFrom)
-    // }
-    // // @ts-ignore
-    // lockTokenCollateralAndGenerateDebt(
-    //     collateralJoin: string,
-    //     safe: BigNumberish,
-    //     collateralAmount: BigNumberish,
-    //     deltaWad: BigNumberish,
-    //     transferFrom: boolean
-    // ): TransactionRequest {
-    //     // prettier-ignore
+    lockTokenCollateral(
+        collateralJoin: string,
+        safe: BigNumberish,
+        amt: BigNumberish,
+        transferFrom: boolean
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.lockTokenCollateral(
+                this.addressList.SAFE_MANAGER,
+                collateralJoin,
+                safe,
+                amt,
+                transferFrom
+            )
+        )
+    }
 
-    //     return super.lockTokenCollateralAndGenerateDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, collateralJoin, this.addressList.GEB_COIN_JOIN, safe, collateralAmount, deltaWad, transferFrom)
-    // }
-    // // @ts-ignore
-    // lockTokenCollateralGenerateDebtAndProtectSAFE(
-    //     collateralJoin: string,
-    //     safe: BigNumberish,
-    //     collateralAmount: BigNumberish,
-    //     deltaWad: BigNumberish,
-    //     transferFrom: boolean,
-    //     saviour: string
-    // ): TransactionRequest {
-    //     // prettier-ignore
+    lockTokenCollateralAndGenerateDebt(
+        collateralJoin: string,
+        safe: BigNumberish,
+        collateralAmount: BigNumberish,
+        deltaWad: BigNumberish,
+        transferFrom: boolean
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.lockTokenCollateralAndGenerateDebt(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                collateralJoin,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                collateralAmount,
+                deltaWad,
+                transferFrom
+            )
+        )
+    }
 
-    //     return super.lockTokenCollateralGenerateDebtAndProtectSAFE(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, collateralJoin, this.addressList.GEB_COIN_JOIN, safe, collateralAmount, deltaWad, transferFrom, this.addressList.GEB_LIQUIDATION_ENGINE, saviour)
-    // }
+    lockTokenCollateralGenerateDebtAndProtectSAFE(
+        collateralJoin: string,
+        safe: BigNumberish,
+        collateralAmount: BigNumberish,
+        deltaWad: BigNumberish,
+        transferFrom: boolean,
+        saviour: string
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.lockTokenCollateralGenerateDebtAndProtectSAFE(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                collateralJoin,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                collateralAmount,
+                deltaWad,
+                transferFrom,
+                this.addressList.GEB_LIQUIDATION_ENGINE,
+                saviour
+            )
+        )
+    }
 
     makeCollateralBag(collateralJoin: string): TransactionRequest {
-        // prettier-ignore
-
-        return super.makeCollateralBag(collateralJoin)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.makeCollateralBag(collateralJoin)
+        )
     }
 
     modifySAFECollateralization(
@@ -227,15 +349,24 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         deltaCollateral: BigNumberish,
         deltaDebt: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.modifySAFECollateralization(this.addressList.SAFE_MANAGER, safe, deltaCollateral, deltaDebt)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.modifySAFECollateralization(
+                this.addressList.SAFE_MANAGER,
+                safe,
+                deltaCollateral,
+                deltaDebt
+            )
+        )
     }
 
     moveSAFE(safeSrc: BigNumberish, safeDst: BigNumberish): TransactionRequest {
-        // prettier-ignore
-
-        return super.moveSAFE(this.addressList.SAFE_MANAGER, safeSrc, safeDst)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.moveSAFE(
+                this.addressList.SAFE_MANAGER,
+                safeSrc,
+                safeDst
+            )
+        )
     }
 
     openLockETHAndGenerateDebt(
@@ -243,9 +374,17 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         collateralType: BytesLike,
         deltaWad: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.openLockETHAndGenerateDebt(BigNumber.from(ethValue), this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, this.addressList.GEB_JOIN_ETH_A, this.addressList.GEB_COIN_JOIN, collateralType, deltaWad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.openLockETHAndGenerateDebt(
+                BigNumber.from(ethValue),
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_COIN_JOIN,
+                collateralType,
+                deltaWad
+            )
+        )
     }
 
     openLockETHGenerateDebtAndProtectSAFE(
@@ -254,9 +393,19 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         deltaWad: BigNumberish,
         saviour: string
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.openLockETHGenerateDebtAndProtectSAFE(BigNumber.from(ethValue), this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, this.addressList.GEB_JOIN_ETH_A, this.addressList.GEB_COIN_JOIN, collateralType, deltaWad, this.addressList.GEB_LIQUIDATION_ENGINE, saviour)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.openLockETHGenerateDebtAndProtectSAFE(
+                BigNumber.from(ethValue),
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_COIN_JOIN,
+                collateralType,
+                deltaWad,
+                this.addressList.GEB_LIQUIDATION_ENGINE,
+                saviour
+            )
+        )
     }
 
     openLockGNTAndGenerateDebt(
@@ -265,9 +414,17 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         collateralAmount: BigNumberish,
         deltaWad: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.openLockGNTAndGenerateDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, gntJoin, this.addressList.GEB_COIN_JOIN, collateralType, collateralAmount, deltaWad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.openLockGNTAndGenerateDebt(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                gntJoin,
+                this.addressList.GEB_COIN_JOIN,
+                collateralType,
+                collateralAmount,
+                deltaWad
+            )
+        )
     }
 
     openLockGNTGenerateDebtAndProtectSAFE(
@@ -277,67 +434,120 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         deltaWad: BigNumberish,
         saviour: string
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.openLockGNTGenerateDebtAndProtectSAFE(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, gntJoin, this.addressList.GEB_COIN_JOIN, collateralType, collateralAmount, deltaWad, this.addressList.GEB_LIQUIDATION_ENGINE, saviour)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.openLockGNTGenerateDebtAndProtectSAFE(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                gntJoin,
+                this.addressList.GEB_COIN_JOIN,
+                collateralType,
+                collateralAmount,
+                deltaWad,
+                this.addressList.GEB_LIQUIDATION_ENGINE,
+                saviour
+            )
+        )
     }
-    // // @ts-ignore
-    // openLockTokenCollateralAndGenerateDebt(
-    //     collateralJoin: string,
-    //     collateralType: BytesLike,
-    //     collateralAmount: BigNumberish,
-    //     deltaWad: BigNumberish,
-    //     transferFrom: boolean
-    // ): TransactionRequest {
-    //     // prettier-ignore
 
-    //     return super.openLockTokenCollateralAndGenerateDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, collateralJoin, this.addressList.GEB_COIN_JOIN, collateralType, collateralAmount, deltaWad, transferFrom)
-    // }
-    // // @ts-ignore
-    // openLockTokenCollateralGenerateDebtAndProtectSAFE(
-    //     collateralJoin: string,
-    //     collateralType: BytesLike,
-    //     collateralAmount: BigNumberish,
-    //     deltaWad: BigNumberish,
-    //     transferFrom: boolean,
-    //     saviour: string
-    // ): TransactionRequest {
-    //     // prettier-ignore
+    openLockTokenCollateralAndGenerateDebt(
+        collateralJoin: string,
+        collateralType: BytesLike,
+        collateralAmount: BigNumberish,
+        deltaWad: BigNumberish,
+        transferFrom: boolean
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.openLockTokenCollateralAndGenerateDebt(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                collateralJoin,
+                this.addressList.GEB_COIN_JOIN,
+                collateralType,
+                collateralAmount,
+                deltaWad,
+                transferFrom
+            )
+        )
+    }
 
-    //     return super.openLockTokenCollateralGenerateDebtAndProtectSAFE(this.addressList.SAFE_MANAGER, this.addressList.GEB_TAX_COLLECTOR, collateralJoin, this.addressList.GEB_COIN_JOIN, collateralType, collateralAmount, deltaWad, transferFrom, this.addressList.GEB_LIQUIDATION_ENGINE, saviour)
-    // }
+    openLockTokenCollateralGenerateDebtAndProtectSAFE(
+        collateralJoin: string,
+        collateralType: BytesLike,
+        collateralAmount: BigNumberish,
+        deltaWad: BigNumberish,
+        transferFrom: boolean,
+        saviour: string
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.openLockTokenCollateralGenerateDebtAndProtectSAFE(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                collateralJoin,
+                this.addressList.GEB_COIN_JOIN,
+                collateralType,
+                collateralAmount,
+                deltaWad,
+                transferFrom,
+                this.addressList.GEB_LIQUIDATION_ENGINE,
+                saviour
+            )
+        )
+    }
 
     openSAFE(collateralType: BytesLike, usr: string): TransactionRequest {
-        // prettier-ignore
-
-        return super.openSAFE(this.addressList.SAFE_MANAGER, collateralType, usr)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.openSAFE(
+                this.addressList.SAFE_MANAGER,
+                collateralType,
+                usr
+            )
+        )
     }
 
     protectSAFE(safe: BigNumberish, saviour: string): TransactionRequest {
-        // prettier-ignore
-
-        return super.protectSAFE(this.addressList.SAFE_MANAGER, safe, this.addressList.GEB_LIQUIDATION_ENGINE, saviour)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.protectSAFE(
+                this.addressList.SAFE_MANAGER,
+                safe,
+                this.addressList.GEB_LIQUIDATION_ENGINE,
+                saviour
+            )
+        )
     }
 
     quitSystem(safe: BigNumberish, dst: string): TransactionRequest {
-        // prettier-ignore
-
-        return super.quitSystem(this.addressList.SAFE_MANAGER, safe, dst)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.quitSystem(
+                this.addressList.SAFE_MANAGER,
+                safe,
+                dst
+            )
+        )
     }
 
     repayAllDebt(safe: BigNumberish): TransactionRequest {
-        // prettier-ignore
-
-        return super.repayAllDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_COIN_JOIN, safe)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.repayAllDebt(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_COIN_JOIN,
+                safe
+            )
+        )
     }
 
     repayAllDebtAndFreeETH(
         safe: BigNumberish,
         collateralWad: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.repayAllDebtAndFreeETH(this.addressList.SAFE_MANAGER, this.addressList.GEB_JOIN_ETH_A, this.addressList.GEB_COIN_JOIN, safe, collateralWad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.repayAllDebtAndFreeETH(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                collateralWad
+            )
+        )
     }
 
     repayAllDebtAndFreeTokenCollateral(
@@ -345,15 +555,26 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         collateralAmount: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.repayAllDebtAndFreeTokenCollateral(this.addressList.SAFE_MANAGER, collateralJoin, this.addressList.GEB_COIN_JOIN, safe, collateralAmount)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.repayAllDebtAndFreeTokenCollateral(
+                this.addressList.SAFE_MANAGER,
+                collateralJoin,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                collateralAmount
+            )
+        )
     }
 
     repayDebt(safe: BigNumberish, wad: BigNumberish): TransactionRequest {
-        // prettier-ignore
-
-        return super.repayDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_COIN_JOIN, safe, wad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.repayDebt(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                wad
+            )
+        )
     }
 
     repayDebtAndFreeETH(
@@ -361,9 +582,16 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         collateralWad: BigNumberish,
         deltaWad: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.repayDebtAndFreeETH(this.addressList.SAFE_MANAGER, this.addressList.GEB_JOIN_ETH_A, this.addressList.GEB_COIN_JOIN, safe, collateralWad, deltaWad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.repayDebtAndFreeETH(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                collateralWad,
+                deltaWad
+            )
+        )
     }
 
     repayDebtAndFreeTokenCollateral(
@@ -372,9 +600,16 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         collateralAmount: BigNumberish,
         deltaWad: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.repayDebtAndFreeTokenCollateral(this.addressList.SAFE_MANAGER, collateralJoin, this.addressList.GEB_COIN_JOIN, safe, collateralAmount, deltaWad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.repayDebtAndFreeTokenCollateral(
+                this.addressList.SAFE_MANAGER,
+                collateralJoin,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                collateralAmount,
+                deltaWad
+            )
+        )
     }
 
     safeLockETH(
@@ -382,27 +617,45 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         safe: BigNumberish,
         owner: string
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.safeLockETH(BigNumber.from(ethValue), this.addressList.SAFE_MANAGER, this.addressList.GEB_JOIN_ETH_A, safe, owner)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.safeLockETH(
+                BigNumber.from(ethValue),
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                safe,
+                owner
+            )
+        )
     }
-    // // @ts-ignore
-    // safeLockTokenCollateral(
-    //     collateralJoin: string,
-    //     safe: BigNumberish,
-    //     amt: BigNumberish,
-    //     transferFrom: boolean,
-    //     owner: string
-    // ): TransactionRequest {
-    //     // prettier-ignore
 
-    //     return super.safeLockTokenCollateral(this.addressList.SAFE_MANAGER, collateralJoin, safe, amt, transferFrom, owner)
-    // }
+    safeLockTokenCollateral(
+        collateralJoin: string,
+        safe: BigNumberish,
+        amt: BigNumberish,
+        transferFrom: boolean,
+        owner: string
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.safeLockTokenCollateral(
+                this.addressList.SAFE_MANAGER,
+                collateralJoin,
+                safe,
+                amt,
+                transferFrom,
+                owner
+            )
+        )
+    }
 
     safeRepayAllDebt(safe: BigNumberish, owner: string): TransactionRequest {
-        // prettier-ignore
-
-        return super.safeRepayAllDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_COIN_JOIN, safe, owner)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.safeRepayAllDebt(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                owner
+            )
+        )
     }
 
     safeRepayDebt(
@@ -410,9 +663,15 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         wad: BigNumberish,
         owner: string
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.safeRepayDebt(this.addressList.SAFE_MANAGER, this.addressList.GEB_COIN_JOIN, safe, wad, owner)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.safeRepayDebt(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                wad,
+                owner
+            )
+        )
     }
 
     tokenCollateralJoin_join(
@@ -421,9 +680,14 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         amt: BigNumberish,
         transferFrom: boolean
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.tokenCollateralJoin_join(apt, safe, amt, transferFrom)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.tokenCollateralJoin_join(
+                apt,
+                safe,
+                amt,
+                transferFrom
+            )
+        )
     }
 
     transfer(
@@ -431,9 +695,9 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         dst: string,
         amt: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.transfer(collateral, dst, amt)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.transfer(collateral, dst, amt)
+        )
     }
 
     transferCollateral(
@@ -441,9 +705,14 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         dst: string,
         wad: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.transferCollateral(this.addressList.SAFE_MANAGER, safe, dst, wad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.transferCollateral(
+                this.addressList.SAFE_MANAGER,
+                safe,
+                dst,
+                wad
+            )
+        )
     }
 
     transferInternalCoins(
@@ -451,23 +720,549 @@ export class GebProxyActions extends GebProxyActionsGenerated {
         dst: string,
         rad: BigNumberish
     ): TransactionRequest {
-        // prettier-ignore
-
-        return super.transferInternalCoins(this.addressList.SAFE_MANAGER, safe, dst, rad)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.transferInternalCoins(
+                this.addressList.SAFE_MANAGER,
+                safe,
+                dst,
+                rad
+            )
+        )
     }
 
     transferSAFEOwnership(safe: BigNumberish, usr: string): TransactionRequest {
-        // prettier-ignore
-
-        return super.transferSAFEOwnership(this.addressList.SAFE_MANAGER, safe, usr)
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.transferSAFEOwnership(
+                this.addressList.SAFE_MANAGER,
+                safe,
+                usr
+            )
+        )
     }
 
     transferSAFEOwnershipToProxy(
         safe: BigNumberish,
         dst: string
     ): TransactionRequest {
-        // prettier-ignore
+        return this.getProxiedTransactionRequest(
+            this.proxyActionCore.transferSAFEOwnershipToProxy(
+                this.addressList.PROXY_REGISTRY,
+                this.addressList.SAFE_MANAGER,
+                safe,
+                dst
+            )
+        )
+    }
 
-        return super.transferSAFEOwnershipToProxy(this.addressList.PROXY_REGISTRY, this.addressList.SAFE_MANAGER, safe, dst)
+    // ==== Proxy Actions Global Settlement ====
+
+    prepareCoinsForRedeemingGlobalSettlement(
+        wad: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionGlobalSettlement.prepareCoinsForRedeeming(
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.GEB_GLOBAL_SETTLEMENT,
+                wad
+            )
+        )
+    }
+
+    freeTokenCollateralGlobalSettlement(
+        collateralJoin: string,
+        safe: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionGlobalSettlement.freeTokenCollateral(
+                this.addressList.SAFE_MANAGER,
+                collateralJoin,
+                this.addressList.GEB_GLOBAL_SETTLEMENT,
+                safe
+            )
+        )
+    }
+
+    redeemETHGlobalSettlement(
+        ethJoin: string,
+        collateralType: BytesLike,
+        wad: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionGlobalSettlement.redeemETH(
+                ethJoin,
+                this.addressList.GEB_GLOBAL_SETTLEMENT,
+                collateralType,
+                wad
+            )
+        )
+    }
+
+    redeemTokenCollateralGlobalSettlement(
+        collateralJoin: string,
+        collateralType: BytesLike,
+        wad: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionGlobalSettlement.redeemTokenCollateral(
+                collateralJoin,
+                this.addressList.GEB_GLOBAL_SETTLEMENT,
+                collateralType,
+                wad
+            )
+        )
+    }
+
+    // ==== Proxy Actions Incentive ====
+
+    allowHandler(usr: string, ok: BigNumberish): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.allowHandler(
+                this.addressList.SAFE_MANAGER,
+                usr,
+                ok
+            )
+        )
+    }
+
+    exitAndRemoveLiquidity(
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.exitAndRemoveLiquidity(
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.UNISWAP_ROUTER,
+                minTokenAmounts
+            )
+        )
+    }
+
+    exitMine(incentives: string): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.exitMine(incentives)
+        )
+    }
+
+    exitRemoveLiquidityRepayDebt(
+        safe: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.exitRemoveLiquidityRepayDebt(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.UNISWAP_ROUTER,
+                minTokenAmounts
+            )
+        )
+    }
+
+    exitRemoveLiquidityRepayDebtFreeETH(
+        safe: BigNumberish,
+        ethToFree: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.exitRemoveLiquidityRepayDebtFreeETH(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                ethToFree,
+                this.addressList.UNISWAP_ROUTER,
+                minTokenAmounts
+            )
+        )
+    }
+
+    generateDebtAndProvideLiquidityStake(
+        ethValue: BigNumberish,
+        safe: BigNumberish,
+        wad: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.generateDebtAndProvideLiquidityStake(
+                BigNumber.from(ethValue),
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.UNISWAP_ROUTER,
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                safe,
+                wad,
+                minTokenAmounts
+            )
+        )
+    }
+
+    generateDebtAndProvideLiquidityUniswap(
+        ethValue: BigNumberish,
+        safe: BigNumberish,
+        wad: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.generateDebtAndProvideLiquidityUniswap(
+                BigNumber.from(ethValue),
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.UNISWAP_ROUTER,
+                safe,
+                wad,
+                minTokenAmounts
+            )
+        )
+    }
+
+    getLockedReward(campaignId: BigNumberish): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.getLockedReward(
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                campaignId
+            )
+        )
+    }
+
+    harvestReward(campaignId: BigNumberish): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.harvestReward(
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                campaignId
+            )
+        )
+    }
+
+    lockETHGenerateDebtProvideLiquidityStake(
+        ethValue: BigNumberish,
+        safe: BigNumberish,
+        deltaWad: BigNumberish,
+        liquidityWad: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.lockETHGenerateDebtProvideLiquidityStake(
+                BigNumber.from(ethValue),
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.UNISWAP_ROUTER,
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                safe,
+                deltaWad,
+                liquidityWad,
+                minTokenAmounts
+            )
+        )
+    }
+
+    lockETHGenerateDebtProvideLiquidityUniswap(
+        ethValue: BigNumberish,
+        safe: BigNumberish,
+        deltaWad: BigNumberish,
+        liquidityWad: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.lockETHGenerateDebtProvideLiquidityUniswap(
+                BigNumber.from(ethValue),
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.UNISWAP_ROUTER,
+                safe,
+                deltaWad,
+                liquidityWad,
+                minTokenAmounts
+            )
+        )
+    }
+
+    openLockETHGenerateDebtProvideLiquidityStake(
+        ethValue: BigNumberish,
+        deltaWad: BigNumberish,
+        liquidityWad: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.openLockETHGenerateDebtProvideLiquidityStake(
+                BigNumber.from(ethValue),
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.UNISWAP_ROUTER,
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                deltaWad,
+                liquidityWad,
+                minTokenAmounts
+            )
+        )
+    }
+
+    openLockETHGenerateDebtProvideLiquidityUniswap(
+        ethValue: BigNumberish,
+        deltaWad: BigNumberish,
+        liquidityWad: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.openLockETHGenerateDebtProvideLiquidityUniswap(
+                BigNumber.from(ethValue),
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.UNISWAP_ROUTER,
+                deltaWad,
+                liquidityWad,
+                minTokenAmounts
+            )
+        )
+    }
+
+    provideLiquidityUniswap(
+        ethValue: BigNumberish,
+        wad: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.provideLiquidityUniswap(
+                BigNumber.from(ethValue),
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.UNISWAP_ROUTER,
+                wad,
+                minTokenAmounts
+            )
+        )
+    }
+
+    removeLiquidityUniswap(
+        systemCoin: string,
+        value: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.removeLiquidityUniswap(
+                this.addressList.UNISWAP_ROUTER,
+                systemCoin,
+                value,
+                minTokenAmounts
+            )
+        )
+    }
+
+    stakeInMine(wad: BigNumberish): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.stakeInMine(
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                wad
+            )
+        )
+    }
+
+    withdrawAndHarvest(
+        value: BigNumberish,
+        campaignId: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.withdrawAndHarvest(
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                value,
+                campaignId
+            )
+        )
+    }
+
+    withdrawAndRemoveLiquidity(
+        value: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.withdrawAndRemoveLiquidity(
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                value,
+                this.addressList.UNISWAP_ROUTER,
+                minTokenAmounts
+            )
+        )
+    }
+
+    withdrawFromMine(value: BigNumberish): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.withdrawFromMine(
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                value
+            )
+        )
+    }
+
+    withdrawRemoveLiquidityRepayDebt(
+        safe: BigNumberish,
+        value: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.withdrawRemoveLiquidityRepayDebt(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                value,
+                this.addressList.UNISWAP_ROUTER,
+                minTokenAmounts
+            )
+        )
+    }
+
+    withdrawRemoveLiquidityRepayDebtFreeETH(
+        safe: BigNumberish,
+        valueToWithdraw: BigNumberish,
+        ethToFree: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.withdrawRemoveLiquidityRepayDebtFreeETH(
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_COIN_JOIN,
+                safe,
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                valueToWithdraw,
+                ethToFree,
+                this.addressList.UNISWAP_ROUTER,
+                minTokenAmounts
+            )
+        )
+    }
+
+    // ==== Proxy Actions Leverage ====
+
+    flashDeleverage(
+        uniswapV2Pair: string,
+        callbackProxy: string,
+        safe: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionLeverage.flashDeleverage(
+                uniswapV2Pair,
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.ETH,
+                callbackProxy,
+                safe
+            )
+        )
+    }
+
+    flashDeleverageFreeETH(
+        uniswapV2Pair: string,
+        callbackProxy: string,
+        safe: BigNumberish,
+        amountToFree: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionLeverage.flashDeleverageFreeETH(
+                uniswapV2Pair,
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.ETH,
+                callbackProxy,
+                safe,
+                amountToFree
+            )
+        )
+    }
+
+    flashLeverage(
+        uniswapV2Pair: string,
+        callbackProxy: string,
+        safe: BigNumberish,
+        leverage: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionLeverage.flashLeverage(
+                uniswapV2Pair,
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.ETH,
+                callbackProxy,
+                safe,
+                leverage
+            )
+        )
+    }
+
+    lockETHLeverage(
+        ethValue: BigNumberish,
+        uniswapV2Pair: string,
+        callbackProxy: string,
+        safe: BigNumberish,
+        leverage: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionLeverage.lockETHLeverage(
+                BigNumber.from(ethValue),
+                uniswapV2Pair,
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.ETH,
+                callbackProxy,
+                safe,
+                leverage
+            )
+        )
+    }
+
+    openLockETHLeverage(
+        ethValue: BigNumberish,
+        uniswapV2Pair: string,
+        callbackProxy: string,
+        leverage: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionLeverage.openLockETHLeverage(
+                BigNumber.from(ethValue),
+                uniswapV2Pair,
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_JOIN_ETH_A,
+                this.addressList.GEB_TAX_COLLECTOR,
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.ETH,
+                callbackProxy,
+                leverage
+            )
+        )
+    }
+
+    uniswapV2Call(
+        _sender: string,
+        _amount0: BigNumberish,
+        _amount1: BigNumberish,
+        _data: BytesLike
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionLeverage.uniswapV2Call(
+                _sender,
+                _amount0,
+                _amount1,
+                _data
+            )
+        )
     }
 }
