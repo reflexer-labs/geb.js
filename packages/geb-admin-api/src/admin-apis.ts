@@ -10,6 +10,8 @@ import {
     GebDeployPauseProxyActions,
     GnosisSafeProxy,
     DsProtestPause,
+    SubsidyPool,
+    RemineScheduler,
 } from '.'
 import {
     GebProviderInterface,
@@ -35,6 +37,8 @@ export class AdminApis {
     public proxyFactory: DsProxyFactory
     public pauseProxyAction: GebDeployPauseProxyActions
     public proxyDeployer: DsProxy
+    public remineScheduler: RemineScheduler
+    public subsidyPool: SubsidyPool
     
 
     constructor(
@@ -57,5 +61,7 @@ export class AdminApis {
         this.proxyFactory = new DsProxyFactory(addressList.PROXY_FACTORY, this.chainProvider)
         this.pauseProxyAction = new GebDeployPauseProxyActions(addressList.PROXY_PAUSE_ACTIONS, this.chainProvider)
         this.proxyDeployer = new DsProxy(addressList.PROXY_DEPLOYER, this.chainProvider)
+        this.remineScheduler = new RemineScheduler(addressList.GEB_REMINE_SCHEDULER, this.chainProvider)
+        this.subsidyPool = new SubsidyPool(addressList.GEB_SUBSIDY_POOL, this.chainProvider)
     }
 }

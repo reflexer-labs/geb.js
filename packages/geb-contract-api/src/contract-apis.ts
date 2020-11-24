@@ -22,6 +22,7 @@ import {
     Osm,
     Dsm,
     StabilityFeeTreasury,
+    GebUniswapRollingDistributionIncentives,
 } from '.'
 import {
     GebProviderInterface,
@@ -58,6 +59,8 @@ export class ContractApis {
     public fsmEth: Osm 
     public fsmCoin: Dsm 
     public weth: Weth9
+    public uniswapIncentive: GebUniswapRollingDistributionIncentives
+
 
     constructor(
         network: GebDeployment,
@@ -90,5 +93,6 @@ export class ContractApis {
         this.fsmEth = new Osm(addressList.FEED_SECURITY_MODULE_ETH, this.chainProvider)
         this.fsmCoin = new Dsm(addressList.FEED_SECURITY_MODULE_RAI, this.chainProvider)
         this.weth = new Weth9(addressList.ETH, this.chainProvider)
+        this.uniswapIncentive = new GebUniswapRollingDistributionIncentives(addressList.GEB_UNISWAP_INCENTIVE, this.chainProvider)
     }
 }
