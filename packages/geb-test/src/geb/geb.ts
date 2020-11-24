@@ -78,13 +78,6 @@ export const testsGeb = (
             assert.equal(proxy.proxyAddress, addresses.PROXY_DEPLOYER)
         })
 
-        it('Get proxy action global settlement with geb', async () => {
-            const proxy = await geb.getProxyActionGlobalSettlement(
-                addresses.ETH_FROM
-            )
-            assert.equal(proxy.proxyAddress, addresses.PROXY_DEPLOYER)
-        })
-
         it('Get safe owner by manager with id', async () => {
             const safe = await geb.getSafe(1)
 

@@ -1,5 +1,6 @@
 import { exec } from 'child_process'
 import { ethers } from 'ethers'
+import { NULL_ADDRESS } from './const'
 
 /**
  * Execute simple shell command (async wrapper).
@@ -39,6 +40,11 @@ export const sethCall = async (
 // Given a contract object, verifies that it exist as expected at the given ETH address.
 // Works by verifying the presence of the 4 bytes sig of all functions in the contract's bytecode
 export const verifyContract = async (contract: any, ethNode: string) => {
+    // If the address is null it means that the contract is not deployed on the network
+    if (contract.address === NULL_ADDRESS) {
+        return
+    }
+
     // Get contract bytecode from blockchain using seth
     const cmd = `seth --rpc-host='${
         ethNode.endsWith('/') ? ethNode : ethNode + '/'

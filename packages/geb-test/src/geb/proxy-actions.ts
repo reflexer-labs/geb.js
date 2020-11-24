@@ -5,7 +5,7 @@ import {
     ContractList,
     GebProviderInterface,
 } from '@reflexer-finance/geb-contract-base'
-import { GebProxyActions, GebProxyActionsGlobalSettlement, utils } from 'geb.js'
+import { GebProxyActions, utils } from 'geb.js'
 import { NULL_ADDRESS, ETH_A, ONE_ADDRESS, WAD } from '../const'
 
 export const testsProxyActionWithGenericGebProvider = (
@@ -35,8 +35,19 @@ export const testsProxyActionWithGenericGebProvider = (
 
         it('Test basic asserts', async () => {
             assert.equal(proxy.proxyAddress, addresses.PROXY_DEPLOYER)
-            assert.equal(proxy.proxyActionAddress, addresses.PROXY_ACTIONS)
-            assert.equal(proxy.address, addresses.PROXY_DEPLOYER)
+            assert.equal(proxy.proxyActionCoreAddress, addresses.PROXY_ACTIONS)
+            assert.equal(
+                proxy.proxyActionGlobalSettlementAddress,
+                addresses.PROXY_ACTIONS_GLOBAL_SETTLEMENT
+            )
+            assert.equal(
+                proxy.proxyActionIncentiveAddress,
+                addresses.INCENTIVE_PROXY_ACTIONS
+            )
+            assert.equal(
+                proxy.proxyActionLeverageAddress,
+                addresses.LEVERAGE_PROXY_ACTION
+            )
             assert.equal(await proxy.proxy.owner(), addresses.ETH_FROM)
         })
 
@@ -97,16 +108,41 @@ export const testsProxyActionWithGenericGebProvider = (
                 }
             })
 
-            it('Global settlement proxy action', async () => {
-                const settlementProxy = new GebProxyActionsGlobalSettlement(
+            it('Test global settlement proxy action', async () => {
+                const proxy = new GebProxyActions(
                     addresses.PROXY_DEPLOYER,
                     networkName,
                     gebProvider
                 )
 
-                const tx = settlementProxy.freeTokenCollateral(
+                const tx = proxy.freeTokenCollateralGlobalSettlement(
                     addresses.GEB_JOIN_ETH_A,
                     1
+                )
+
+                try {
+                    await gebProvider.ethCall(tx)
+                    assert.fail()
+                } catch (err) {
+                    assert.equal(
+                        utils.getRequireString(err),
+                        'ds-auth-unauthorized'
+                    )
+                }
+            })
+
+            it('Test incentive proxy action', async () => {
+                const proxy = new GebProxyActions(
+                    addresses.PROXY_DEPLOYER,
+                    networkName,
+                    gebProvider
+                )
+
+                const tx = proxy.openLockETHLeverage(
+                    '1',
+                    NULL_ADDRESS,
+                    NULL_ADDRESS,
+                    2
                 )
 
                 try {
