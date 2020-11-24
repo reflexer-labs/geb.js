@@ -20,14 +20,6 @@ async function main() {
     )
 
     execSync(
-        `cp ${resolve(
-            './../docs/classes/gebproxyactionsglobalsettlement.md'
-        )} ${resolve(
-            './../docs/api-reference/gebproxyactionsglobalsettlement.md'
-        )}`
-    )
-
-    execSync(
         `cp ${resolve('./../docs/classes/safe.md')} ${resolve(
             './../docs/api-reference/safe.md'
         )}`
@@ -55,9 +47,6 @@ async function main() {
     // Some minor edit of the files
     cleanUpTypeDoc(resolve('./../docs/api-reference/geb.md'))
     cleanUpTypeDoc(resolve('./../docs/api-reference/gebproxyactions.md'))
-    cleanUpTypeDoc(
-        resolve('./../docs/api-reference/gebproxyactionsglobalsettlement.md')
-    )
     cleanUpTypeDoc(resolve('./../docs/api-reference/safe.md'))
     cleanUpTypeDoc(resolve('./../docs/api-reference/gebadmin.md'))
 }

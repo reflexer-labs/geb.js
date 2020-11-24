@@ -25,7 +25,7 @@ import { GebAdmin } from "@reflexer-finance/geb-admin"
 \+ **new GebAdmin**(`network`: GebDeployment, `provider`: GebProviderInterface | Provider): *[GebAdmin](gebadmin.md)*
 
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/0337d96/packages/geb-admin/src/geb-admin.ts#L51)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/12d498b/packages/geb-admin/src/geb-admin.ts#L51)*
 
 **Parameters:**
 
@@ -44,7 +44,7 @@ Name | Type | Description |
 
 *Inherited from [GebAdmin](gebadmin.md).[contracts](gebadmin.md#contracts)*
 
-Defined in packages/geb/lib/geb.d.ts:71
+Defined in packages/geb/lib/geb.d.ts:70
 
 Object containing all GEB core smart-contracts instances for direct level interactions. All of the
 following contracts object are one-to-one typed API to the underlying smart-contract. Read-only
@@ -107,7 +107,7 @@ ___
 
 • **contractsAdmin**: *AdminApis*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/0337d96/packages/geb-admin/src/geb-admin.ts#L51)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:51](https://github.com/reflexer-labs/geb.js/blob/12d498b/packages/geb-admin/src/geb-admin.ts#L51)*
 
 Object containing all GEB admin contracts instances for low level interactions.
 It currently has the following contracts:
@@ -137,7 +137,7 @@ It currently has the following contracts:
 
 *Inherited from [GebAdmin](gebadmin.md).[deployProxy](gebadmin.md#deployproxy)*
 
-Defined in packages/geb/lib/geb.d.ts:95
+Defined in packages/geb/lib/geb.d.ts:88
 
 Deploy a new proxy owned by the sender.
 
@@ -167,7 +167,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[getErc20Contract](gebadmin.md#geterc20contract)*
 
-Defined in packages/geb/lib/geb.d.ts:130
+Defined in packages/geb/lib/geb.d.ts:123
 
 Returns an object that can be used to interact with a ERC20 token.
 Example:
@@ -201,7 +201,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[getGebContract](gebadmin.md#static-getgebcontract)*
 
-Defined in packages/geb/lib/geb.d.ts:164
+Defined in packages/geb/lib/geb.d.ts:157
 
 Returns an instance of a specific geb contract given a Geb contract API class at a specified address
 
@@ -232,7 +232,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[getProxyAction](gebadmin.md#getproxyaction)*
 
-Defined in packages/geb/lib/geb.d.ts:85
+Defined in packages/geb/lib/geb.d.ts:84
 
 Given an address returns a GebProxyActions object to execute bundled operations.
 Important: This requires the address to have deployed a GEB proxy through the proxy registry contract. It will throw a `DOES_NOT_OWN_HAVE_PROXY` error if the address specified does not have a proxy. Use the [deployProxy](gebadmin.md#deployproxy) function to get a new proxy.
@@ -247,34 +247,13 @@ Name | Type | Description |
 
 ___
 
-###  getProxyActionGlobalSettlement
-
-▸ **getProxyActionGlobalSettlement**(`ownerAddress`: string): *Promise‹GebProxyActionsGlobalSettlement›*
-
-*Inherited from [GebAdmin](gebadmin.md).[getProxyActionGlobalSettlement](gebadmin.md#getproxyactionglobalsettlement)*
-
-Defined in packages/geb/lib/geb.d.ts:91
-
-Given an address returns a GebProxyActionsGlobalSettlement object to execute bundled operations during GlobalSettlement.
-**IMPORTANT**: Same as for `getProxyAction` you will need to deploy a proxy beforehand using the proxy registry.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`ownerAddress` | string | Externally owned user account, Ethereum address that owns a GEB proxy.  |
-
-**Returns:** *Promise‹GebProxyActionsGlobalSettlement›*
-
-___
-
 ###  getSafe
 
 ▸ **getSafe**(`idOrHandler`: string | number, `collateralType?`: string): *Promise‹Safe›*
 
 *Inherited from [GebAdmin](gebadmin.md).[getSafe](gebadmin.md#getsafe)*
 
-Defined in packages/geb/lib/geb.d.ts:100
+Defined in packages/geb/lib/geb.d.ts:93
 
 Get the SAFE object given a `safeManager` id or a `safeEngine` handler address.
 
@@ -295,7 +274,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[getSafeFromOwner](gebadmin.md#getsafefromowner)*
 
-Defined in packages/geb/lib/geb.d.ts:111
+Defined in packages/geb/lib/geb.d.ts:104
 
 Fetch the list of safes owned by an address. This function will fetch safes owned directly
 through the safeManager and safes owned through the safe manager through a proxy. Safes owned
@@ -320,7 +299,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[multiCall](gebadmin.md#multicall)*
 
-Defined in packages/geb/lib/geb.d.ts:135
+Defined in packages/geb/lib/geb.d.ts:128
 
 **Type parameters:**
 
@@ -344,7 +323,7 @@ ___
 
 ▸ **verifyWebScheduleCallcode**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number, `calldata`: string): *Promise‹boolean›*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:74](https://github.com/reflexer-labs/geb.js/blob/0337d96/packages/geb-admin/src/geb-admin.ts#L74)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:74](https://github.com/reflexer-labs/geb.js/blob/12d498b/packages/geb-admin/src/geb-admin.ts#L74)*
 
 Verifies a transaction for scheduling proposals
 
@@ -367,7 +346,7 @@ ___
 
 ▸ **webExecuteProposal**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number): *Promise‹TransactionRequest›*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:96](https://github.com/reflexer-labs/geb.js/blob/0337d96/packages/geb-admin/src/geb-admin.ts#L96)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:96](https://github.com/reflexer-labs/geb.js/blob/12d498b/packages/geb-admin/src/geb-admin.ts#L96)*
 
 Encodes executing a proposal in dspause for web GUI
 
@@ -389,7 +368,7 @@ ___
 
 ▸ **webScheduleProposal**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number, `description?`: string): *Promise‹object›*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:121](https://github.com/reflexer-labs/geb.js/blob/0337d96/packages/geb-admin/src/geb-admin.ts#L121)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:121](https://github.com/reflexer-labs/geb.js/blob/12d498b/packages/geb-admin/src/geb-admin.ts#L121)*
 
 Encodes scheduling a proposal in dspause for web GUI
 
@@ -414,7 +393,7 @@ ___
 
 *Inherited from [GebAdmin](gebadmin.md).[getGebContract](gebadmin.md#static-getgebcontract)*
 
-Defined in packages/geb/lib/geb.d.ts:151
+Defined in packages/geb/lib/geb.d.ts:144
 
 Returns an instance of a specific geb contract given Geb contract API class constructor at a specified address
 
