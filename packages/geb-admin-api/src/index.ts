@@ -74,6 +74,8 @@ import { UniswapConsecutiveSlotsPriceFeedMedianizer } from './generated/UniswapC
 import { UniswapConverterBasicAverageMedianFlxusd } from './generated/UniswapConverterBasicAverageMedianFLXUSD'
 import { UniswapConverterBasicAverageMedianRaiusd } from './generated/UniswapConverterBasicAverageMedianRAIUSD'
 import { UniswapConverterBasicAveragePriceFeedMedianizer } from './generated/UniswapConverterBasicAveragePriceFeedMedianizer'
+import { RemineScheduler } from './generated/RemineScheduler'
+import { SubsidyPool } from './generated/SubsidyPool'
 
 export {
     // Object with all instances
@@ -154,4 +156,6 @@ export {
     UniswapConverterBasicAverageMedianFlxusd,
     UniswapConverterBasicAverageMedianRaiusd,
     UniswapConverterBasicAveragePriceFeedMedianizer,
+    SubsidyPool,
+    RemineScheduler,
 }
