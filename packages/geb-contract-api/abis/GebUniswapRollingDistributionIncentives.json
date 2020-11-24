@@ -64,6 +64,50 @@
         "inputs": [
             {
                 "indexed": true,
+                "internalType": "bytes32",
+                "name": "parameter",
+                "type": "bytes32"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "data",
+                "type": "uint256"
+            }
+        ],
+        "name": "ModifyParameters",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "parameter",
+                "type": "bytes32"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "campaign",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "data",
+                "type": "uint256"
+            }
+        ],
+        "name": "ModifyParameters",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
                 "internalType": "address",
                 "name": "user",
                 "type": "address"
@@ -143,7 +187,34 @@
     },
     {
         "inputs": [],
+        "name": "DEFAULT_MAX_CAMPAIGNS",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "HUNDRED",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "THOUSAND",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "WAD",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
@@ -154,7 +225,7 @@
         "inputs": [
             { "internalType": "address", "name": "account", "type": "address" }
         ],
-        "name": "addAuthority",
+        "name": "addAuthorization",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -163,7 +234,7 @@
         "inputs": [
             { "internalType": "address", "name": "", "type": "address" }
         ],
-        "name": "authorities",
+        "name": "authorizedAccounts",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
@@ -184,6 +255,15 @@
     {
         "inputs": [],
         "name": "campaignCount",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "campaignListLength",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
@@ -212,7 +292,6 @@
                 "name": "rewardRate",
                 "type": "uint256"
             },
-            { "internalType": "uint256", "name": "finish", "type": "uint256" },
             {
                 "internalType": "uint256",
                 "name": "lastUpdateTime",
@@ -256,7 +335,7 @@
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "stateMutability": "view",
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -298,7 +377,7 @@
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "stateMutability": "view",
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -310,15 +389,34 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "account", "type": "address" },
             {
                 "internalType": "uint256",
                 "name": "campaignId",
                 "type": "uint256"
-            },
+            }
+        ],
+        "name": "finish",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "firstCampaign",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" },
             {
                 "internalType": "uint256",
-                "name": "timestamp",
+                "name": "campaignId",
                 "type": "uint256"
             }
         ],
@@ -351,7 +449,7 @@
     },
     {
         "inputs": [],
-        "name": "lastFinish",
+        "name": "lastCampaign",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
@@ -383,6 +481,15 @@
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "maxCampaigns",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "bytes32",
@@ -393,6 +500,20 @@
                 "internalType": "uint256",
                 "name": "campaignId",
                 "type": "uint256"
+            },
+            { "internalType": "uint256", "name": "val", "type": "uint256" }
+        ],
+        "name": "modifyParameters",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "parameter",
+                "type": "bytes32"
             },
             { "internalType": "uint256", "name": "val", "type": "uint256" }
         ],
@@ -426,7 +547,9 @@
             }
         ],
         "name": "newCampaign",
-        "outputs": [],
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
         "stateMutability": "nonpayable",
         "type": "function"
     },
@@ -434,7 +557,7 @@
         "inputs": [
             { "internalType": "address", "name": "account", "type": "address" }
         ],
-        "name": "removeAuthority",
+        "name": "removeAuthorization",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -451,7 +574,7 @@
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "stateMutability": "view",
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
