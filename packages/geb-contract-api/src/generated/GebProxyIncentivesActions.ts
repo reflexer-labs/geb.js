@@ -500,13 +500,14 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         coinJoin: string,
         uniswapRouter: string,
         incentives: string,
+        collateralType: BytesLike,
         deltaWad: BigNumberish,
         liquidityWad: BigNumberish,
         minTokenAmounts: [BigNumberish, BigNumberish]
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"uniswapRouter","type":"address"},{"internalType":"address","name":"incentives","type":"address"},{"internalType":"uint256","name":"deltaWad","type":"uint256"},{"internalType":"uint256","name":"liquidityWad","type":"uint256"},{"internalType":"uint256[2]","name":"minTokenAmounts","type":"uint256[2]"}],"name":"openLockETHGenerateDebtProvideLiquidityStake","outputs":[{"internalType":"uint256","name":"safe","type":"uint256"}],"stateMutability":"payable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"uniswapRouter","type":"address"},{"internalType":"address","name":"incentives","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"deltaWad","type":"uint256"},{"internalType":"uint256","name":"liquidityWad","type":"uint256"},{"internalType":"uint256[2]","name":"minTokenAmounts","type":"uint256[2]"}],"name":"openLockETHGenerateDebtProvideLiquidityStake","outputs":[{"internalType":"uint256","name":"safe","type":"uint256"}],"stateMutability":"payable","type":"function"}
 
         return this.getTransactionRequest(
             abi,
@@ -517,6 +518,7 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
                 coinJoin,
                 uniswapRouter,
                 incentives,
+                collateralType,
                 deltaWad,
                 liquidityWad,
                 minTokenAmounts,
@@ -532,13 +534,14 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         ethJoin: string,
         coinJoin: string,
         uniswapRouter: string,
+        collateralType: BytesLike,
         deltaWad: BigNumberish,
         liquidityWad: BigNumberish,
         minTokenAmounts: [BigNumberish, BigNumberish]
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"uniswapRouter","type":"address"},{"internalType":"uint256","name":"deltaWad","type":"uint256"},{"internalType":"uint256","name":"liquidityWad","type":"uint256"},{"internalType":"uint256[2]","name":"minTokenAmounts","type":"uint256[2]"}],"name":"openLockETHGenerateDebtProvideLiquidityUniswap","outputs":[{"internalType":"uint256","name":"safe","type":"uint256"}],"stateMutability":"payable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"uniswapRouter","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"deltaWad","type":"uint256"},{"internalType":"uint256","name":"liquidityWad","type":"uint256"},{"internalType":"uint256[2]","name":"minTokenAmounts","type":"uint256[2]"}],"name":"openLockETHGenerateDebtProvideLiquidityUniswap","outputs":[{"internalType":"uint256","name":"safe","type":"uint256"}],"stateMutability":"payable","type":"function"}
 
         return this.getTransactionRequest(
             abi,
@@ -548,6 +551,7 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
                 ethJoin,
                 coinJoin,
                 uniswapRouter,
+                collateralType,
                 deltaWad,
                 liquidityWad,
                 minTokenAmounts,

@@ -990,6 +990,7 @@ export class GebProxyActions {
     openLockETHGenerateDebtProvideLiquidityStake(
         ethValue: BigNumberish,
         deltaWad: BigNumberish,
+        collateralType: string,
         liquidityWad: BigNumberish,
         minTokenAmounts: [BigNumberish, BigNumberish]
     ): TransactionRequest {
@@ -1002,6 +1003,7 @@ export class GebProxyActions {
                 this.addressList.GEB_COIN_JOIN,
                 this.addressList.UNISWAP_ROUTER,
                 this.addressList.GEB_UNISWAP_INCENTIVE,
+                collateralType,
                 deltaWad,
                 liquidityWad,
                 minTokenAmounts
@@ -1012,6 +1014,7 @@ export class GebProxyActions {
     openLockETHGenerateDebtProvideLiquidityUniswap(
         ethValue: BigNumberish,
         deltaWad: BigNumberish,
+        collateralType: string,
         liquidityWad: BigNumberish,
         minTokenAmounts: [BigNumberish, BigNumberish]
     ): TransactionRequest {
@@ -1023,6 +1026,7 @@ export class GebProxyActions {
                 this.addressList.GEB_JOIN_ETH_A,
                 this.addressList.GEB_COIN_JOIN,
                 this.addressList.UNISWAP_ROUTER,
+                collateralType,
                 deltaWad,
                 liquidityWad,
                 minTokenAmounts

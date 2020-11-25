@@ -571,6 +571,11 @@
                 "type": "address"
             },
             {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
+            },
+            {
                 "internalType": "uint256",
                 "name": "deltaWad",
                 "type": "uint256"
@@ -611,6 +616,11 @@
                 "internalType": "address",
                 "name": "uniswapRouter",
                 "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
             },
             {
                 "internalType": "uint256",
