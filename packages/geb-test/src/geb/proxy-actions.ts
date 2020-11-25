@@ -141,6 +141,7 @@ export const testsProxyActionWithGenericGebProvider = (
                 const tx = proxy.openLockETHGenerateDebtProvideLiquidityStake(
                     '1',
                     '1',
+                    ETH_A,
                     '1',
                     ['0', '0']
                 )
