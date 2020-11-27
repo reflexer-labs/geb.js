@@ -102,7 +102,7 @@ export class GebProxyActions {
             throw Error('This proxy action is not supported on this network')
         }
 
-        return this.proxy.execute1(ethValue, tx.to, tx.data)
+        return this.proxy.execute__AddressBytes(ethValue, tx.to, tx.data)
     }
 
     // ==== Proxy Action Core ====

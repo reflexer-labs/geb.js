@@ -122,8 +122,15 @@ export const testsWithGenericGebProvider = (
         })
 
         it('Test overloaded function', async () => {
-            const tx1 = safeEngine.modifyParameters1(ETH_A, ETH_A, '200')
-            const tx2 = safeEngine.modifyParameters2(ETH_A, '1000')
+            const tx1 = safeEngine.modifyParameters__Bytes32Bytes32Uint256(
+                ETH_A,
+                ETH_A,
+                '200'
+            )
+            const tx2 = safeEngine.modifyParameters__Bytes32Uint256(
+                ETH_A,
+                '1000'
+            )
 
             try {
                 await gebProvider.ethCall(tx1)

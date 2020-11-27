@@ -71,8 +71,8 @@ export const verifyContract = async (contract: any, ethNode: string) => {
 
             const abi = JSON.parse(abiString[0].replace(';', ''))
 
-            // Strip trailing digits (overload suffix)
-            const functionName = fct.replace(/\d+$/, '')
+            // Strip what after "__" because it's the overload suffix
+            const functionName = fct.split('__')[0]
 
             // Readable sig i.g: safes(bytes32,address)
             const sig = `${functionName}(${abi.inputs

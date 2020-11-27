@@ -85,13 +85,28 @@ export function codegenForFunctions(
             // No overload
             flattened[name] = fns[name][0]
         } else {
-            // Function is overloaded, add a number suffix to the function name for each overload
-            let i = 1
+            // Function is overloaded, create a custom name for each overload. e.g for modifyParameters:
+            // - modifyParameters_Bytes32Address
+            // - modifyParameters_Bytes32Uint256
+
             for (let overload of fns[name]) {
-                const overloadName = name + i.toString()
+                let inputParamTypeConcat = ''
+                for (let input of overload.inputs) {
+                    // Get the type of the parameter
+                    let inputTypes = input.type.originalType
+                    // First letter of the type to upper case
+                    inputTypes =
+                        inputTypes.charAt(0).toUpperCase() + inputTypes.slice(1)
+                    // Concatenate the types
+                    inputParamTypeConcat += inputTypes
+                }
+
+                let overloadName =
+                    overload.inputs.length > 0
+                        ? overload.name + '__' + inputParamTypeConcat
+                        : overload.name
                 flattened[overloadName] = overload
                 flattened[overloadName].name = overloadName
-                i++
             }
         }
     }
@@ -110,28 +125,39 @@ function getABIFragment(
     abi: RawAbiDefinition[]
 ): RawAbiDefinition {
     for (let fragment of abi) {
-        if (!fragment.name) {
+        if (!fragment.name || fragment.type !== 'function') {
+            continue
+        }
+        // Check that the function name are the same
+        // Note that with .split("_")[0] we remove the suffix added to overloaded functions
+        if (
+            fragment.name.toLocaleLowerCase() !==
+            fn.name.split('__')[0].toLocaleLowerCase()
+        ) {
             continue
         }
 
-        // If overload, these are not equal because of the suffix
-        const isOverloaded =
-            fragment.name.length !== fn.name.length &&
-            /^-?\d+$/.test(fn.name.slice(fragment.name.length))
-        if (
-            fn.name === fragment.name ||
-            (fn.name.startsWith(fragment.name) &&
-                isOverloaded &&
-                fn.inputs.length === fragment.inputs.length &&
-                fn.inputs.map(
-                    (input, i) =>
-                        input.type.originalType === fragment.inputs[i].type
-                ))
-        ) {
+        // Make sure they have the same number of arguments
+        if (fragment.inputs.length !== fn.inputs.length) {
+            continue
+        }
+
+        // Check that the functions have the same input arguments
+        let wrongInputTypes = false
+        for (let i = 0; i < fragment.inputs.length; i++) {
+            // They need the same type
+            if (fragment.inputs[i].type !== fn.inputs[i].type.originalType) {
+                wrongInputTypes = true
+            }
+        }
+
+        if (wrongInputTypes) {
+            continue
+        } else {
             return fragment
         }
     }
-
+    console.log(fn, '\n ==== \n', abi)
     throw new Error('ABI type not matching parsed version')
 }
 function codegenForSingleFunction(

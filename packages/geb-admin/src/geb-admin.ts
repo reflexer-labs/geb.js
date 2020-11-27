@@ -131,7 +131,7 @@ export class GebAdmin extends Geb {
         let tx: TransactionRequest
 
         if (description) {
-            tx = this.contractsAdmin.pause.scheduleTransaction2(
+            tx = this.contractsAdmin.pause.scheduleTransaction__AddressBytes32BytesUint256String(
                 this.addresses.GEB_GOV_ACTIONS,
                 codeHash,
                 this.getGovCallData(govFunctionAbi, params),
@@ -139,7 +139,7 @@ export class GebAdmin extends Geb {
                 description
             )
         } else {
-            tx = this.contractsAdmin.pause.scheduleTransaction1(
+            tx = this.contractsAdmin.pause.scheduleTransaction__AddressBytes32BytesUint256(
                 this.addresses.GEB_GOV_ACTIONS,
                 codeHash,
                 this.getGovCallData(govFunctionAbi, params),
