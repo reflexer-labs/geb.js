@@ -76,7 +76,7 @@ export class GebProxyLeverageActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [manager, src, safe])
     }
 
-    ethJoin_join1(
+    ethJoin_join__AddressAddress(
         ethValue: BigNumberish,
         apt: string,
         safe: string
@@ -92,7 +92,7 @@ export class GebProxyLeverageActions extends BaseContractAPI {
         )
     }
 
-    ethJoin_join2(
+    ethJoin_join__AddressAddressUint256(
         ethValue: BigNumberish,
         apt: string,
         safe: string,

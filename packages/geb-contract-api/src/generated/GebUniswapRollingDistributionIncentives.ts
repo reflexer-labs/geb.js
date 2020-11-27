@@ -352,7 +352,7 @@ export class GebUniswapRollingDistributionIncentives extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    modifyParameters1(
+    modifyParameters__Bytes32Uint256Uint256(
         parameter: BytesLike,
         campaignId: BigNumberish,
         val: BigNumberish
@@ -364,7 +364,7 @@ export class GebUniswapRollingDistributionIncentives extends BaseContractAPI {
         return this.getTransactionRequest(abi, [parameter, campaignId, val])
     }
 
-    modifyParameters2(
+    modifyParameters__Bytes32Uint256(
         parameter: BytesLike,
         val: BigNumberish
     ): TransactionRequest {
@@ -421,7 +421,10 @@ export class GebUniswapRollingDistributionIncentives extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    stake1(amount: BigNumberish, owner: string): TransactionRequest {
+    stake__Uint256Address(
+        amount: BigNumberish,
+        owner: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"address","name":"owner","type":"address"}],"name":"stake","outputs":[],"stateMutability":"nonpayable","type":"function"}
@@ -429,7 +432,7 @@ export class GebUniswapRollingDistributionIncentives extends BaseContractAPI {
         return this.getTransactionRequest(abi, [amount, owner])
     }
 
-    stake2(amount: BigNumberish): TransactionRequest {
+    stake__Uint256(amount: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"stake","outputs":[],"stateMutability":"nonpayable","type":"function"}

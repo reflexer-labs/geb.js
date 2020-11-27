@@ -45,7 +45,7 @@ export class Esm extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    modifyParameters1(
+    modifyParameters__Bytes32Address(
         parameter: BytesLike,
         account: string
     ): TransactionRequest {
@@ -56,13 +56,13 @@ export class Esm extends BaseContractAPI {
         return this.getTransactionRequest(abi, [parameter, account])
     }
 
-    modifyParameters2(
+    modifyParameters__Bytes32Uint256(
         parameter: BytesLike,
         wad: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [parameter, wad])
     }

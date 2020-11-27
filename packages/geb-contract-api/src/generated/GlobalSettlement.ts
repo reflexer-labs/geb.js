@@ -211,7 +211,10 @@ export class GlobalSettlement extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    modifyParameters1(parameter: BytesLike, data: string): TransactionRequest {
+    modifyParameters__Bytes32Address(
+        parameter: BytesLike,
+        data: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
@@ -219,13 +222,13 @@ export class GlobalSettlement extends BaseContractAPI {
         return this.getTransactionRequest(abi, [parameter, data])
     }
 
-    modifyParameters2(
+    modifyParameters__Bytes32Uint256(
         parameter: BytesLike,
         data: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [parameter, data])
     }

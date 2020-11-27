@@ -47,7 +47,11 @@ export class DsGuard extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [src_, dst_, sig], multicall)
     }
 
-    forbid1(src: string, dst: string, sig: BytesLike): TransactionRequest {
+    forbid__AddressAddressBytes32(
+        src: string,
+        dst: string,
+        sig: BytesLike
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"bytes32","name":"sig","type":"bytes32"}],"name":"forbid","outputs":[],"stateMutability":"nonpayable","type":"function"}
@@ -55,14 +59,14 @@ export class DsGuard extends BaseContractAPI {
         return this.getTransactionRequest(abi, [src, dst, sig])
     }
 
-    forbid2(
+    forbid__Bytes32Bytes32Bytes32(
         src: BytesLike,
         dst: BytesLike,
         sig: BytesLike
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"bytes32","name":"sig","type":"bytes32"}],"name":"forbid","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"src","type":"bytes32"},{"internalType":"bytes32","name":"dst","type":"bytes32"},{"internalType":"bytes32","name":"sig","type":"bytes32"}],"name":"forbid","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [src, dst, sig])
     }
@@ -77,7 +81,11 @@ export class DsGuard extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    permit1(src: string, dst: string, sig: BytesLike): TransactionRequest {
+    permit__AddressAddressBytes32(
+        src: string,
+        dst: string,
+        sig: BytesLike
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"bytes32","name":"sig","type":"bytes32"}],"name":"permit","outputs":[],"stateMutability":"nonpayable","type":"function"}
@@ -85,14 +93,14 @@ export class DsGuard extends BaseContractAPI {
         return this.getTransactionRequest(abi, [src, dst, sig])
     }
 
-    permit2(
+    permit__Bytes32Bytes32Bytes32(
         src: BytesLike,
         dst: BytesLike,
         sig: BytesLike
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"bytes32","name":"sig","type":"bytes32"}],"name":"permit","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"src","type":"bytes32"},{"internalType":"bytes32","name":"dst","type":"bytes32"},{"internalType":"bytes32","name":"sig","type":"bytes32"}],"name":"permit","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [src, dst, sig])
     }

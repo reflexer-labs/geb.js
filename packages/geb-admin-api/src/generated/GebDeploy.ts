@@ -367,7 +367,7 @@ export class GebDeploy extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    giveControl1(usr: string): TransactionRequest {
+    giveControl__Address(usr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"giveControl","outputs":[],"stateMutability":"nonpayable","type":"function"}
@@ -375,7 +375,10 @@ export class GebDeploy extends BaseContractAPI {
         return this.getTransactionRequest(abi, [usr])
     }
 
-    giveControl2(usr: string, target: string): TransactionRequest {
+    giveControl__AddressAddress(
+        usr: string,
+        target: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"address","name":"target","type":"address"}],"name":"giveControl","outputs":[],"stateMutability":"nonpayable","type":"function"}
@@ -678,7 +681,10 @@ export class GebDeploy extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    takeControl1(usr: string, target: string): TransactionRequest {
+    takeControl__AddressAddress(
+        usr: string,
+        target: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"address","name":"target","type":"address"}],"name":"takeControl","outputs":[],"stateMutability":"nonpayable","type":"function"}
@@ -686,7 +692,7 @@ export class GebDeploy extends BaseContractAPI {
         return this.getTransactionRequest(abi, [usr, target])
     }
 
-    takeControl2(usr: string): TransactionRequest {
+    takeControl__Address(usr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"takeControl","outputs":[],"stateMutability":"nonpayable","type":"function"}

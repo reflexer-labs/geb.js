@@ -133,18 +133,18 @@ export class DsPause extends BaseContractAPI {
         ])
     }
 
-    getTransactionDataHash1(
+    getTransactionDataHash__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike
     ): Promise<string>
-    getTransactionDataHash1(
+    getTransactionDataHash__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         multicall: true
     ): MulticallRequest<string>
-    getTransactionDataHash1(
+    getTransactionDataHash__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -161,20 +161,20 @@ export class DsPause extends BaseContractAPI {
         )
     }
 
-    getTransactionDataHash2(
+    getTransactionDataHash__AddressBytes32BytesUint256(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         earliestExecutionTime: BigNumberish
     ): Promise<string>
-    getTransactionDataHash2(
+    getTransactionDataHash__AddressBytes32BytesUint256(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         earliestExecutionTime: BigNumberish,
         multicall: true
     ): MulticallRequest<string>
-    getTransactionDataHash2(
+    getTransactionDataHash__AddressBytes32BytesUint256(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -224,7 +224,7 @@ export class DsPause extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    scheduleTransaction1(
+    scheduleTransaction__AddressBytes32BytesUint256(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -242,7 +242,7 @@ export class DsPause extends BaseContractAPI {
         ])
     }
 
-    scheduleTransaction2(
+    scheduleTransaction__AddressBytes32BytesUint256String(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,

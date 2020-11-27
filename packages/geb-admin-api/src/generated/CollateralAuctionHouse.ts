@@ -7,7 +7,10 @@ import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 
 export class CollateralAuctionHouse extends BaseContractAPI {
-    modifyParameters1(bytes: BytesLike, address: string): TransactionRequest {
+    modifyParameters__Bytes32Address(
+        bytes: BytesLike,
+        address: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
@@ -15,13 +18,13 @@ export class CollateralAuctionHouse extends BaseContractAPI {
         return this.getTransactionRequest(abi, [bytes, address])
     }
 
-    modifyParameters2(
+    modifyParameters__Bytes32Uint256(
         bytes: BytesLike,
         uinteger: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [bytes, uinteger])
     }

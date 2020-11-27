@@ -69,7 +69,7 @@ export class GovActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [targetContract, collateralType])
     }
 
-    modifyParameters1(
+    modifyParameters__AddressBytes32Bytes32Uint256(
         targetContract: string,
         collateralType: BytesLike,
         parameter: BytesLike,
@@ -87,7 +87,7 @@ export class GovActions extends BaseContractAPI {
         ])
     }
 
-    modifyParameters2(
+    modifyParameters__AddressBytes32Bytes32Address(
         targetContract: string,
         collateralType: BytesLike,
         parameter: BytesLike,
@@ -95,7 +95,7 @@ export class GovActions extends BaseContractAPI {
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             targetContract,
@@ -105,7 +105,7 @@ export class GovActions extends BaseContractAPI {
         ])
     }
 
-    modifyParameters3(
+    modifyParameters__AddressBytes32Int256(
         targetContract: string,
         parameter: BytesLike,
         data: BigNumberish
@@ -121,7 +121,7 @@ export class GovActions extends BaseContractAPI {
         ])
     }
 
-    modifyParameters4(
+    modifyParameters__AddressBytes32Uint256Uint256Address(
         targetContract: string,
         collateralType: BytesLike,
         data1: BigNumberish,
@@ -141,7 +141,7 @@ export class GovActions extends BaseContractAPI {
         ])
     }
 
-    modifyParameters5(
+    modifyParameters__AddressBytes32Uint256Uint256(
         targetContract: string,
         parameter: BytesLike,
         data1: BigNumberish,
@@ -149,7 +149,7 @@ export class GovActions extends BaseContractAPI {
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data1","type":"uint256"},{"internalType":"uint256","name":"data2","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             targetContract,
@@ -159,14 +159,14 @@ export class GovActions extends BaseContractAPI {
         ])
     }
 
-    modifyParameters6(
+    modifyParameters__AddressBytes32Address(
         targetContract: string,
         parameter: BytesLike,
         data: string
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"int256","name":"data","type":"int256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             targetContract,
@@ -175,14 +175,14 @@ export class GovActions extends BaseContractAPI {
         ])
     }
 
-    modifyParameters7(
+    modifyParameters__AddressBytes32Uint256(
         targetContract: string,
         parameter: BytesLike,
         data: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"int256","name":"data","type":"int256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             targetContract,
@@ -191,7 +191,7 @@ export class GovActions extends BaseContractAPI {
         ])
     }
 
-    modifyTwoParameters1(
+    modifyTwoParameters__AddressAddressBytes32Bytes32Uint256Uint256(
         targetContract1: string,
         targetContract2: string,
         parameter1: BytesLike,
@@ -213,7 +213,7 @@ export class GovActions extends BaseContractAPI {
         ])
     }
 
-    modifyTwoParameters2(
+    modifyTwoParameters__AddressAddressBytes32Bytes32Int256Int256(
         targetContract1: string,
         targetContract2: string,
         parameter1: BytesLike,
@@ -223,7 +223,7 @@ export class GovActions extends BaseContractAPI {
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"targetContract1","type":"address"},{"internalType":"address","name":"targetContract2","type":"address"},{"internalType":"bytes32","name":"parameter1","type":"bytes32"},{"internalType":"bytes32","name":"parameter2","type":"bytes32"},{"internalType":"uint256","name":"data1","type":"uint256"},{"internalType":"uint256","name":"data2","type":"uint256"}],"name":"modifyTwoParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract1","type":"address"},{"internalType":"address","name":"targetContract2","type":"address"},{"internalType":"bytes32","name":"parameter1","type":"bytes32"},{"internalType":"bytes32","name":"parameter2","type":"bytes32"},{"internalType":"int256","name":"data1","type":"int256"},{"internalType":"int256","name":"data2","type":"int256"}],"name":"modifyTwoParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             targetContract1,
@@ -235,7 +235,7 @@ export class GovActions extends BaseContractAPI {
         ])
     }
 
-    modifyTwoParameters3(
+    modifyTwoParameters__AddressAddressBytes32Bytes32Bytes32Bytes32Uint256Uint256(
         targetContract1: string,
         targetContract2: string,
         collateralType1: BytesLike,

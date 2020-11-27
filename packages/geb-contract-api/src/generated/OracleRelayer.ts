@@ -105,7 +105,7 @@ export class OracleRelayer extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [collateralType], multicall)
     }
 
-    modifyParameters1(
+    modifyParameters__Bytes32Bytes32Address(
         collateralType: BytesLike,
         parameter: BytesLike,
         addr: string
@@ -121,14 +121,14 @@ export class OracleRelayer extends BaseContractAPI {
         ])
     }
 
-    modifyParameters2(
+    modifyParameters__Bytes32Bytes32Uint256(
         collateralType: BytesLike,
         parameter: BytesLike,
         data: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"addr","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             collateralType,
@@ -137,7 +137,7 @@ export class OracleRelayer extends BaseContractAPI {
         ])
     }
 
-    modifyParameters3(
+    modifyParameters__Bytes32Uint256(
         parameter: BytesLike,
         data: BigNumberish
     ): TransactionRequest {

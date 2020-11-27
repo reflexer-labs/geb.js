@@ -29,7 +29,7 @@ export class DsProxy extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    execute1(
+    execute__AddressBytes(
         ethValue: BigNumberish,
         _target: string,
         _data: BytesLike
@@ -45,14 +45,14 @@ export class DsProxy extends BaseContractAPI {
         )
     }
 
-    execute2(
+    execute__BytesBytes(
         ethValue: BigNumberish,
         _code: BytesLike,
         _data: BytesLike
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"_target","type":"address"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"execute","outputs":[{"internalType":"bytes","name":"response","type":"bytes"}],"stateMutability":"payable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes","name":"_code","type":"bytes"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"execute","outputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"bytes","name":"response","type":"bytes"}],"stateMutability":"payable","type":"function"}
 
         return this.getTransactionRequest(
             abi,

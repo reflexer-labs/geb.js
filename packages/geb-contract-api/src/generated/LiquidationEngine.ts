@@ -155,7 +155,7 @@ export class LiquidationEngine extends BaseContractAPI {
         return this.getTransactionRequest(abi, [collateralType, safe])
     }
 
-    modifyParameters1(
+    modifyParameters__Bytes32Bytes32Address(
         collateralType: BytesLike,
         parameter: BytesLike,
         data: string
@@ -171,7 +171,10 @@ export class LiquidationEngine extends BaseContractAPI {
         ])
     }
 
-    modifyParameters2(parameter: BytesLike, data: string): TransactionRequest {
+    modifyParameters__Bytes32Address(
+        parameter: BytesLike,
+        data: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
@@ -179,14 +182,14 @@ export class LiquidationEngine extends BaseContractAPI {
         return this.getTransactionRequest(abi, [parameter, data])
     }
 
-    modifyParameters3(
+    modifyParameters__Bytes32Bytes32Uint256(
         collateralType: BytesLike,
         parameter: BytesLike,
         data: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             collateralType,
@@ -195,13 +198,13 @@ export class LiquidationEngine extends BaseContractAPI {
         ])
     }
 
-    modifyParameters4(
+    modifyParameters__Bytes32Uint256(
         parameter: BytesLike,
         data: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [parameter, data])
     }

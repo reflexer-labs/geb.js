@@ -169,18 +169,18 @@ export class DsProtestPause extends BaseContractAPI {
         ])
     }
 
-    getTransactionDataHash1(
+    getTransactionDataHash__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike
     ): Promise<string>
-    getTransactionDataHash1(
+    getTransactionDataHash__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         multicall: true
     ): MulticallRequest<string>
-    getTransactionDataHash1(
+    getTransactionDataHash__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -197,20 +197,20 @@ export class DsProtestPause extends BaseContractAPI {
         )
     }
 
-    getTransactionDataHash2(
+    getTransactionDataHash__AddressBytes32BytesUint256(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         earliestExecutionTime: BigNumberish
     ): Promise<string>
-    getTransactionDataHash2(
+    getTransactionDataHash__AddressBytes32BytesUint256(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         earliestExecutionTime: BigNumberish,
         multicall: true
     ): MulticallRequest<string>
-    getTransactionDataHash2(
+    getTransactionDataHash__AddressBytes32BytesUint256(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -228,14 +228,14 @@ export class DsProtestPause extends BaseContractAPI {
         )
     }
 
-    getTransactionDelays1(
+    getTransactionDelays__Bytes32(
         txHash: BytesLike
     ): Promise<{
         0: boolean
         1: BigNumber
         2: BigNumber
     }>
-    getTransactionDelays1(
+    getTransactionDelays__Bytes32(
         txHash: BytesLike,
         multicall: true
     ): MulticallRequest<{
@@ -243,7 +243,7 @@ export class DsProtestPause extends BaseContractAPI {
         1: BigNumber
         2: BigNumber
     }>
-    getTransactionDelays1(
+    getTransactionDelays__Bytes32(
         txHash: BytesLike,
         multicall?: true
     ):
@@ -264,7 +264,7 @@ export class DsProtestPause extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [txHash], multicall)
     }
 
-    getTransactionDelays2(
+    getTransactionDelays__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike
@@ -273,7 +273,7 @@ export class DsProtestPause extends BaseContractAPI {
         1: BigNumber
         2: BigNumber
     }>
-    getTransactionDelays2(
+    getTransactionDelays__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -283,7 +283,7 @@ export class DsProtestPause extends BaseContractAPI {
         1: BigNumber
         2: BigNumber
     }>
-    getTransactionDelays2(
+    getTransactionDelays__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -356,18 +356,18 @@ export class DsProtestPause extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    protestWindowAvailable1(
+    protestWindowAvailable__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike
     ): Promise<boolean>
-    protestWindowAvailable1(
+    protestWindowAvailable__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         multicall: true
     ): MulticallRequest<boolean>
-    protestWindowAvailable1(
+    protestWindowAvailable__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -384,12 +384,12 @@ export class DsProtestPause extends BaseContractAPI {
         )
     }
 
-    protestWindowAvailable2(txHash: BytesLike): Promise<boolean>
-    protestWindowAvailable2(
+    protestWindowAvailable__Bytes32(txHash: BytesLike): Promise<boolean>
+    protestWindowAvailable__Bytes32(
         txHash: BytesLike,
         multicall: true
     ): MulticallRequest<boolean>
-    protestWindowAvailable2(
+    protestWindowAvailable__Bytes32(
         txHash: BytesLike,
         multicall?: true
     ): Promise<boolean> | MulticallRequest<boolean> {
@@ -432,7 +432,7 @@ export class DsProtestPause extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    scheduleTransaction1(
+    scheduleTransaction__AddressBytes32BytesUint256(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -450,7 +450,7 @@ export class DsProtestPause extends BaseContractAPI {
         ])
     }
 
-    scheduleTransaction2(
+    scheduleTransaction__AddressBytes32BytesUint256String(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
@@ -526,12 +526,14 @@ export class DsProtestPause extends BaseContractAPI {
         return this.getTransactionRequest(abi, [protester_])
     }
 
-    timeUntilProposalProtestDeadline1(txHash: BytesLike): Promise<BigNumber>
-    timeUntilProposalProtestDeadline1(
+    timeUntilProposalProtestDeadline__Bytes32(
+        txHash: BytesLike
+    ): Promise<BigNumber>
+    timeUntilProposalProtestDeadline__Bytes32(
         txHash: BytesLike,
         multicall: true
     ): MulticallRequest<BigNumber>
-    timeUntilProposalProtestDeadline1(
+    timeUntilProposalProtestDeadline__Bytes32(
         txHash: BytesLike,
         multicall?: true
     ): Promise<BigNumber> | MulticallRequest<BigNumber> {
@@ -542,18 +544,18 @@ export class DsProtestPause extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [txHash], multicall)
     }
 
-    timeUntilProposalProtestDeadline2(
+    timeUntilProposalProtestDeadline__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike
     ): Promise<BigNumber>
-    timeUntilProposalProtestDeadline2(
+    timeUntilProposalProtestDeadline__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,
         multicall: true
     ): MulticallRequest<BigNumber>
-    timeUntilProposalProtestDeadline2(
+    timeUntilProposalProtestDeadline__AddressBytes32Bytes(
         usr: string,
         codeHash: BytesLike,
         parameters: BytesLike,

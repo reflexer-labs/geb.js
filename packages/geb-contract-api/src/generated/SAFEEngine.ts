@@ -255,7 +255,7 @@ export class SafeEngine extends BaseContractAPI {
         return this.getTransactionRequest(abi, [collateralType, account, wad])
     }
 
-    modifyParameters1(
+    modifyParameters__Bytes32Bytes32Uint256(
         collateralType: BytesLike,
         parameter: BytesLike,
         data: BigNumberish
@@ -271,7 +271,7 @@ export class SafeEngine extends BaseContractAPI {
         ])
     }
 
-    modifyParameters2(
+    modifyParameters__Bytes32Uint256(
         parameter: BytesLike,
         data: BigNumberish
     ): TransactionRequest {

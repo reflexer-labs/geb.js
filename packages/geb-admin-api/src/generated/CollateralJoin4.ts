@@ -115,7 +115,7 @@ export class CollateralJoin4 extends BaseContractAPI {
         return this.getTransactionRequest(abi, [usr, wad])
     }
 
-    make1(usr: string): TransactionRequest {
+    make__Address(usr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"make","outputs":[{"internalType":"address","name":"bag","type":"address"}],"stateMutability":"nonpayable","type":"function"}
@@ -123,7 +123,7 @@ export class CollateralJoin4 extends BaseContractAPI {
         return this.getTransactionRequest(abi, [usr])
     }
 
-    make2(): TransactionRequest {
+    make(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"make","outputs":[{"internalType":"address","name":"bag","type":"address"}],"stateMutability":"nonpayable","type":"function"}

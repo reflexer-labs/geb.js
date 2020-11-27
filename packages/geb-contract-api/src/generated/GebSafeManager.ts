@@ -272,7 +272,7 @@ export class GebSafeManager extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
-    transferCollateral1(
+    transferCollateral__Uint256AddressUint256(
         safe: BigNumberish,
         dst: string,
         wad: BigNumberish
@@ -284,7 +284,7 @@ export class GebSafeManager extends BaseContractAPI {
         return this.getTransactionRequest(abi, [safe, dst, wad])
     }
 
-    transferCollateral2(
+    transferCollateral__Bytes32Uint256AddressUint256(
         collateralType: BytesLike,
         safe: BigNumberish,
         dst: string,

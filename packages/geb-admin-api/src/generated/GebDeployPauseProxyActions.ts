@@ -20,7 +20,7 @@ export class GebDeployPauseProxyActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [pause, actions, who, to])
     }
 
-    modifyParameters1(
+    modifyParameters__AddressAddressAddressBytes32Bytes32Uint256(
         pause: string,
         actions: string,
         who: string,
@@ -42,7 +42,7 @@ export class GebDeployPauseProxyActions extends BaseContractAPI {
         ])
     }
 
-    modifyParameters2(
+    modifyParameters__AddressAddressAddressBytes32Bytes32Address(
         pause: string,
         actions: string,
         who: string,
@@ -52,7 +52,7 @@ export class GebDeployPauseProxyActions extends BaseContractAPI {
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"actions","type":"address"},{"internalType":"address","name":"who","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"actions","type":"address"},{"internalType":"address","name":"who","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             pause,
@@ -64,7 +64,7 @@ export class GebDeployPauseProxyActions extends BaseContractAPI {
         ])
     }
 
-    modifyParameters3(
+    modifyParameters__AddressAddressAddressBytes32Uint256Uint256Address(
         pause: string,
         actions: string,
         who: string,
@@ -88,7 +88,7 @@ export class GebDeployPauseProxyActions extends BaseContractAPI {
         ])
     }
 
-    modifyParameters4(
+    modifyParameters__AddressAddressAddressBytes32Uint256(
         pause: string,
         actions: string,
         who: string,
@@ -108,7 +108,7 @@ export class GebDeployPauseProxyActions extends BaseContractAPI {
         ])
     }
 
-    modifyParameters5(
+    modifyParameters__AddressAddressAddressBytes32Uint256Uint256(
         pause: string,
         actions: string,
         who: string,
@@ -118,7 +118,7 @@ export class GebDeployPauseProxyActions extends BaseContractAPI {
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"actions","type":"address"},{"internalType":"address","name":"who","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"actions","type":"address"},{"internalType":"address","name":"who","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"data1","type":"uint256"},{"internalType":"uint256","name":"data2","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             pause,
@@ -130,7 +130,7 @@ export class GebDeployPauseProxyActions extends BaseContractAPI {
         ])
     }
 
-    modifyParameters6(
+    modifyParameters__AddressAddressAddressBytes32Address(
         pause: string,
         actions: string,
         who: string,
@@ -139,7 +139,7 @@ export class GebDeployPauseProxyActions extends BaseContractAPI {
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"actions","type":"address"},{"internalType":"address","name":"who","type":"address"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"actions","type":"address"},{"internalType":"address","name":"who","type":"address"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             pause,

@@ -171,7 +171,7 @@ export class TaxCollector extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    modifyParameters1(
+    modifyParameters__Bytes32Uint256Uint256Address(
         collateralType: BytesLike,
         position: BigNumberish,
         taxPercentage: BigNumberish,
@@ -189,7 +189,7 @@ export class TaxCollector extends BaseContractAPI {
         ])
     }
 
-    modifyParameters2(
+    modifyParameters__Bytes32Uint256Uint256(
         collateralType: BytesLike,
         position: BigNumberish,
         val: BigNumberish
@@ -201,7 +201,10 @@ export class TaxCollector extends BaseContractAPI {
         return this.getTransactionRequest(abi, [collateralType, position, val])
     }
 
-    modifyParameters3(parameter: BytesLike, data: string): TransactionRequest {
+    modifyParameters__Bytes32Address(
+        parameter: BytesLike,
+        data: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
@@ -209,14 +212,14 @@ export class TaxCollector extends BaseContractAPI {
         return this.getTransactionRequest(abi, [parameter, data])
     }
 
-    modifyParameters4(
+    modifyParameters__Bytes32Bytes32Uint256(
         collateralType: BytesLike,
         parameter: BytesLike,
         data: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"position","type":"uint256"},{"internalType":"uint256","name":"val","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             collateralType,
@@ -225,13 +228,13 @@ export class TaxCollector extends BaseContractAPI {
         ])
     }
 
-    modifyParameters5(
+    modifyParameters__Bytes32Uint256(
         parameter: BytesLike,
         data: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [parameter, data])
     }
