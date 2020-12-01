@@ -5,6 +5,7 @@ import {
     GebProviderInterface,
 } from '@reflexer-finance/geb-contract-base'
 import { ethers } from 'ethers'
+import { NULL_ADDRESS } from 'geb.js/lib/utils'
 
 /**
  * This class extends the core `GEB` class with additional tools and contracts that are not used as often as other SAFE management tools.
@@ -154,6 +155,33 @@ export class GebAdmin extends Geb {
             params: params,
             earliestExecutionTime: earliestExecutionTime,
         }
+    }
+    /**
+     * Submit a transaction to a gnosis safe directly executed. Works only if the threshold on the safe is 1.
+     * @param sender Proposal submitter
+     * @param to Proposal target (Usually ds-pause)
+     * @param data transaction data of the proposal
+     */
+    public gnosisSafeThreshold1SubmitTransaction(
+        sender: string,
+        to: string,
+        data: string
+    ) {
+        return this.contractsAdmin.multisigAdmin.execTransaction(
+            0,
+            to,
+            0,
+            data,
+            0,
+            0,
+            0,
+            0,
+            NULL_ADDRESS,
+            NULL_ADDRESS,
+            `0x000000000000000000000000${sender
+                .slice(2)
+                .toLowerCase()}000000000000000000000000000000000000000000000000000000000000000001`
+        )
     }
 
     private getGovCallData(govFunctionAbi: string, params: any[]) {

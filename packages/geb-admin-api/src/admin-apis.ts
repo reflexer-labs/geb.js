@@ -8,10 +8,10 @@ import {
     FsmGovernanceInterface,
     DsProxyFactory,
     GebDeployPauseProxyActions,
-    GnosisSafeProxy,
     DsProtestPause,
     SubsidyPool,
     RemineScheduler,
+    GnosisSafe,
 } from '.'
 import {
     GebProviderInterface,
@@ -24,7 +24,7 @@ import { DsProxy } from '@reflexer-finance/geb-contract-api'
 // Container class instantiate all GEB contracts
 // prettier-ignore
 export class AdminApis {
-    public multisigAdmin: GnosisSafeProxy
+    public multisigAdmin: GnosisSafe
     public multisigAdminProxy: DsProxy
     public deploy : GebDeploy
     public protocolTokenAuthority: ProtocolTokenAuthority
@@ -50,7 +50,7 @@ export class AdminApis {
         let addressList = getAddressList(network)
         
         // Additional instances only in admin package
-        this.multisigAdmin = new GnosisSafeProxy(addressList.GEB_MULTISIG, this.chainProvider)
+        this.multisigAdmin = new GnosisSafe(addressList.GEB_MULTISIG, this.chainProvider)
         this.multisigAdminProxy = new DsProxy(addressList.GEB_MULTISIG_PROXY, this.chainProvider)
         this.deploy = new GebDeploy(addressList.GEB_DEPLOY, this.chainProvider)
         this.pauseAuthority = new DsDelegateRoles(addressList.GEB_PAUSE_AUTHORITY, this.chainProvider)
