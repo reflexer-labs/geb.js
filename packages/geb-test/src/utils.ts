@@ -45,11 +45,9 @@ export const verifyContract = async (contract: any, ethNode: string) => {
         return
     }
 
-    // Get contract bytecode from blockchain using seth
-    const cmd = `seth --rpc-host='${
-        ethNode.endsWith('/') ? ethNode : ethNode + '/'
-    }' code ${contract.address}`
-    const bytecode: string = ((await sh(cmd)) as any).stdout
+    // Get contract bytecode from blockchain
+    const provider = new ethers.providers.StaticJsonRpcProvider(ethNode)
+    const bytecode = await provider.getCode(contract.address)
 
     const errors: string[] = []
 
