@@ -33,6 +33,18 @@ export class GebUniswapRollingDistributionIncentives extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
+    MILLION(): Promise<BigNumber>
+    MILLION(multicall: true): MulticallRequest<BigNumber>
+    MILLION(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"MILLION","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     THOUSAND(): Promise<BigNumber>
     THOUSAND(multicall: true): MulticallRequest<BigNumber>
     THOUSAND(
@@ -180,12 +192,28 @@ export class GebUniswapRollingDistributionIncentives extends BaseContractAPI {
         return this.getTransactionRequest(abi, [campaignId])
     }
 
-    currentCampaign(): TransactionRequest {
+    contractEnabled(): Promise<BigNumber>
+    contractEnabled(multicall: true): MulticallRequest<BigNumber>
+    contractEnabled(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"currentCampaign","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    currentCampaign(): Promise<BigNumber>
+    currentCampaign(multicall: true): MulticallRequest<BigNumber>
+    currentCampaign(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"currentCampaign","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     delayedRewards(
@@ -227,12 +255,30 @@ export class GebUniswapRollingDistributionIncentives extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [address, uinteger], multicall)
     }
 
-    earned(account: string, campaignId: BigNumberish): TransactionRequest {
+    disableContract(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"campaignId","type":"uint256"}],"name":"earned","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"disableContract","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [account, campaignId])
+        return this.getTransactionRequest(abi, [])
+    }
+
+    earned(account: string, campaignId: BigNumberish): Promise<BigNumber>
+    earned(
+        account: string,
+        campaignId: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    earned(
+        account: string,
+        campaignId: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"campaignId","type":"uint256"}],"name":"earned","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [account, campaignId], multicall)
     }
 
     exit(): TransactionRequest {
@@ -403,12 +449,20 @@ export class GebUniswapRollingDistributionIncentives extends BaseContractAPI {
         return this.getTransactionRequest(abi, [account])
     }
 
-    rewardPerToken(campaignId: BigNumberish): TransactionRequest {
+    rewardPerToken(campaignId: BigNumberish): Promise<BigNumber>
+    rewardPerToken(
+        campaignId: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    rewardPerToken(
+        campaignId: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"campaignId","type":"uint256"}],"name":"rewardPerToken","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"campaignId","type":"uint256"}],"name":"rewardPerToken","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [campaignId])
+        return this.ethCallOrMulticall(abi, [campaignId], multicall)
     }
 
     rewardToken(): Promise<string>
@@ -419,6 +473,24 @@ export class GebUniswapRollingDistributionIncentives extends BaseContractAPI {
         const abi = {"inputs":[],"name":"rewardToken","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    rewards(owner: string, campaignId: BigNumberish): Promise<BigNumber>
+    rewards(
+        owner: string,
+        campaignId: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    rewards(
+        owner: string,
+        campaignId: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"campaignId","type":"uint256"}],"name":"rewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [owner, campaignId], multicall)
     }
 
     stake__Uint256Address(
@@ -450,6 +522,27 @@ export class GebUniswapRollingDistributionIncentives extends BaseContractAPI {
         const abi = {"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    userRewardPerTokenPaid(
+        owner: string,
+        campaignId: BigNumberish
+    ): Promise<BigNumber>
+    userRewardPerTokenPaid(
+        owner: string,
+        campaignId: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    userRewardPerTokenPaid(
+        owner: string,
+        campaignId: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"campaignId","type":"uint256"}],"name":"userRewardPerTokenPaid","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [owner, campaignId], multicall)
     }
 
     withdraw(amount: BigNumberish): TransactionRequest {

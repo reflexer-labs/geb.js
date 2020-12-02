@@ -1150,6 +1150,32 @@ export class GebProxyActions {
         )
     }
 
+    getRewards(campaignId: BigNumberish): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.getRewards(
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                campaignId
+            )
+        )
+    }
+
+    provideLiquidityStake(
+        ethValue: BigNumberish,
+        wad: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.provideLiquidityStake(
+                ethValue,
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.UNISWAP_ROUTER,
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                wad,
+                minTokenAmounts
+            )
+        )
+    }
+
     // ==== Proxy Actions Leverage ====
 
     flashDeleverage(

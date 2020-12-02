@@ -301,6 +301,17 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [incentives, campaignId])
     }
 
+    getRewards(
+        incentives: string,
+        campaignId: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"},{"internalType":"uint256","name":"campaignId","type":"uint256"}],"name":"getRewards","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [incentives, campaignId])
+    }
+
     getWethPair(uniswapRouter: string, token: string): Promise<string>
     getWethPair(
         uniswapRouter: string,
@@ -570,6 +581,25 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"usr","type":"address"}],"name":"openSAFE","outputs":[{"internalType":"uint256","name":"safe","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [manager, collateralType, usr])
+    }
+
+    provideLiquidityStake(
+        ethValue: BigNumberish,
+        coinJoin: string,
+        uniswapRouter: string,
+        incentives: string,
+        wad: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"uniswapRouter","type":"address"},{"internalType":"address","name":"incentives","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"},{"internalType":"uint256[2]","name":"minTokenAmounts","type":"uint256[2]"}],"name":"provideLiquidityStake","outputs":[],"stateMutability":"payable","type":"function"}
+
+        return this.getTransactionRequest(
+            abi,
+            [coinJoin, uniswapRouter, incentives, wad, minTokenAmounts],
+            BigNumber.from(ethValue)
+        )
     }
 
     provideLiquidityUniswap(

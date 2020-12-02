@@ -64,6 +64,37 @@
         "inputs": [
             {
                 "indexed": true,
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "campaignId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "reward",
+                "type": "uint256"
+            }
+        ],
+        "name": "DelayedRewardPaid",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [],
+        "name": "DisableContract",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
                 "internalType": "bytes32",
                 "name": "parameter",
                 "type": "bytes32"
@@ -205,6 +236,15 @@
     },
     {
         "inputs": [],
+        "name": "MILLION",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "THOUSAND",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
@@ -331,11 +371,20 @@
     },
     {
         "inputs": [],
+        "name": "contractEnabled",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "currentCampaign",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -365,6 +414,13 @@
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "disableContract",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
         "inputs": [
             { "internalType": "address", "name": "account", "type": "address" },
             {
@@ -377,7 +433,7 @@
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -574,7 +630,7 @@
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -582,6 +638,22 @@
         "name": "rewardToken",
         "outputs": [
             { "internalType": "contract IERC20", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "owner", "type": "address" },
+            {
+                "internalType": "uint256",
+                "name": "campaignId",
+                "type": "uint256"
+            }
+        ],
+        "name": "rewards",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -608,6 +680,22 @@
     {
         "inputs": [],
         "name": "totalSupply",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "owner", "type": "address" },
+            {
+                "internalType": "uint256",
+                "name": "campaignId",
+                "type": "uint256"
+            }
+        ],
+        "name": "userRewardPerTokenPaid",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
