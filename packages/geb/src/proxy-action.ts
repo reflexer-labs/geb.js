@@ -817,16 +817,6 @@ export class GebProxyActions {
 
     // ==== Proxy Actions Incentive ====
 
-    allowHandler(usr: string, ok: BigNumberish): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.allowHandler(
-                this.addressList.SAFE_MANAGER,
-                usr,
-                ok
-            )
-        )
-    }
-
     exitAndRemoveLiquidity(
         minTokenAmounts: [BigNumberish, BigNumberish]
     ): TransactionRequest {
@@ -1171,6 +1161,23 @@ export class GebProxyActions {
                 this.addressList.UNISWAP_ROUTER,
                 this.addressList.GEB_UNISWAP_INCENTIVE,
                 wad,
+                minTokenAmounts
+            )
+        )
+    }
+
+    withdrawHarvestRemoveLiquidity(
+        amount: BigNumberish,
+        campaignId: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionIncentive.withdrawHarvestRemoveLiquidity(
+                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.UNISWAP_ROUTER,
+                this.addressList.GEB_COIN_JOIN,
+                amount,
+                campaignId,
                 minTokenAmounts
             )
         )

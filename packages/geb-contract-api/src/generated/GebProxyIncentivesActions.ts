@@ -9,42 +9,6 @@ import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class GebProxyIncentivesActions extends BaseContractAPI {
-    allowHandler(
-        manager: string,
-        usr: string,
-        ok: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"ok","type":"uint256"}],"name":"allowHandler","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [manager, usr, ok])
-    }
-
-    allowSAFE(
-        manager: string,
-        safe: BigNumberish,
-        usr: string,
-        ok: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"ok","type":"uint256"}],"name":"allowSAFE","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [manager, safe, usr, ok])
-    }
-
-    approveSAFEModification(
-        safeEngine: string,
-        usr: string
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"safeEngine","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"approveSAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [safeEngine, usr])
-    }
-
     coinJoin_join(
         apt: string,
         safeHandler: string,
@@ -55,26 +19,6 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"apt","type":"address"},{"internalType":"address","name":"safeHandler","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"coinJoin_join","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [apt, safeHandler, wad])
-    }
-
-    denySAFEModification(safeEngine: string, usr: string): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"safeEngine","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"denySAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [safeEngine, usr])
-    }
-
-    enterSystem(
-        manager: string,
-        src: string,
-        safe: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"src","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"}],"name":"enterSystem","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [manager, src, safe])
     }
 
     ethJoin_join__AddressAddress(
@@ -126,19 +70,6 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
             uniswapRouter,
             minTokenAmounts,
         ])
-    }
-
-    exitETH(
-        manager: string,
-        ethJoin: string,
-        safe: BigNumberish,
-        wad: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"exitETH","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [manager, ethJoin, safe, wad])
     }
 
     exitMine(incentives: string): TransactionRequest {
@@ -208,26 +139,6 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"freeETH","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [manager, ethJoin, safe, wad])
-    }
-
-    generateDebt(
-        manager: string,
-        taxCollector: string,
-        coinJoin: string,
-        safe: BigNumberish,
-        wad: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"generateDebt","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [
-            manager,
-            taxCollector,
-            coinJoin,
-            safe,
-            wad,
-        ])
     }
 
     generateDebtAndProvideLiquidityStake(
@@ -358,26 +269,6 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         )
     }
 
-    lockETHAndGenerateDebt(
-        ethValue: BigNumberish,
-        manager: string,
-        taxCollector: string,
-        ethJoin: string,
-        coinJoin: string,
-        safe: BigNumberish,
-        deltaWad: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"deltaWad","type":"uint256"}],"name":"lockETHAndGenerateDebt","outputs":[],"stateMutability":"payable","type":"function"}
-
-        return this.getTransactionRequest(
-            abi,
-            [manager, taxCollector, ethJoin, coinJoin, safe, deltaWad],
-            BigNumber.from(ethValue)
-        )
-    }
-
     lockETHGenerateDebtProvideLiquidityStake(
         ethValue: BigNumberish,
         manager: string,
@@ -462,45 +353,6 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
             deltaCollateral,
             deltaDebt,
         ])
-    }
-
-    moveSAFE(
-        manager: string,
-        safeSrc: BigNumberish,
-        safeDst: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"uint256","name":"safeSrc","type":"uint256"},{"internalType":"uint256","name":"safeDst","type":"uint256"}],"name":"moveSAFE","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [manager, safeSrc, safeDst])
-    }
-
-    openLockETHAndGenerateDebt(
-        ethValue: BigNumberish,
-        manager: string,
-        taxCollector: string,
-        ethJoin: string,
-        coinJoin: string,
-        collateralType: BytesLike,
-        deltaWad: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"deltaWad","type":"uint256"}],"name":"openLockETHAndGenerateDebt","outputs":[{"internalType":"uint256","name":"safe","type":"uint256"}],"stateMutability":"payable","type":"function"}
-
-        return this.getTransactionRequest(
-            abi,
-            [
-                manager,
-                taxCollector,
-                ethJoin,
-                coinJoin,
-                collateralType,
-                deltaWad,
-            ],
-            BigNumber.from(ethValue)
-        )
     }
 
     openLockETHGenerateDebtProvideLiquidityStake(
@@ -620,18 +472,6 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         )
     }
 
-    quitSystem(
-        manager: string,
-        safe: BigNumberish,
-        dst: string
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"address","name":"dst","type":"address"}],"name":"quitSystem","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [manager, safe, dst])
-    }
-
     removeLiquidityUniswap(
         uniswapRouter: string,
         systemCoin: string,
@@ -647,41 +487,6 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
             systemCoin,
             value,
             minTokenAmounts,
-        ])
-    }
-
-    repayDebt(
-        manager: string,
-        coinJoin: string,
-        safe: BigNumberish,
-        wad: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"repayDebt","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [manager, coinJoin, safe, wad])
-    }
-
-    repayDebtAndFreeETH(
-        manager: string,
-        ethJoin: string,
-        coinJoin: string,
-        safe: BigNumberish,
-        collateralWad: BigNumberish,
-        deltaWad: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"collateralWad","type":"uint256"},{"internalType":"uint256","name":"deltaWad","type":"uint256"}],"name":"repayDebtAndFreeETH","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [
-            manager,
-            ethJoin,
-            coinJoin,
-            safe,
-            collateralWad,
-            deltaWad,
         ])
     }
 
@@ -731,36 +536,6 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [manager, safe, dst, rad])
     }
 
-    transferSAFEOwnership(
-        manager: string,
-        safe: BigNumberish,
-        usr: string
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"manager","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"address","name":"usr","type":"address"}],"name":"transferSAFEOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [manager, safe, usr])
-    }
-
-    transferSAFEOwnershipToProxy(
-        proxyRegistry: string,
-        manager: string,
-        safe: BigNumberish,
-        dst: string
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"proxyRegistry","type":"address"},{"internalType":"address","name":"manager","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"address","name":"dst","type":"address"}],"name":"transferSAFEOwnershipToProxy","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [
-            proxyRegistry,
-            manager,
-            safe,
-            dst,
-        ])
-    }
-
     withdrawAndHarvest(
         incentives: string,
         value: BigNumberish,
@@ -802,6 +577,28 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"withdrawFromMine","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [incentives, value])
+    }
+
+    withdrawHarvestRemoveLiquidity(
+        incentives: string,
+        uniswapRouter: string,
+        systemCoin: string,
+        value: BigNumberish,
+        campaignId: BigNumberish,
+        minTokenAmounts: [BigNumberish, BigNumberish]
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"},{"internalType":"address","name":"uniswapRouter","type":"address"},{"internalType":"address","name":"systemCoin","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"},{"internalType":"uint256","name":"campaignId","type":"uint256"},{"internalType":"uint256[2]","name":"minTokenAmounts","type":"uint256[2]"}],"name":"withdrawHarvestRemoveLiquidity","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            incentives,
+            uniswapRouter,
+            systemCoin,
+            value,
+            campaignId,
+            minTokenAmounts,
+        ])
     }
 
     withdrawRemoveLiquidityRepayDebt(

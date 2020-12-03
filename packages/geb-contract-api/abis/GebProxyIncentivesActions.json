@@ -1,43 +1,6 @@
 [
     {
         "inputs": [
-            { "internalType": "address", "name": "manager", "type": "address" },
-            { "internalType": "address", "name": "usr", "type": "address" },
-            { "internalType": "uint256", "name": "ok", "type": "uint256" }
-        ],
-        "name": "allowHandler",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "manager", "type": "address" },
-            { "internalType": "uint256", "name": "safe", "type": "uint256" },
-            { "internalType": "address", "name": "usr", "type": "address" },
-            { "internalType": "uint256", "name": "ok", "type": "uint256" }
-        ],
-        "name": "allowSAFE",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "safeEngine",
-                "type": "address"
-            },
-            { "internalType": "address", "name": "usr", "type": "address" }
-        ],
-        "name": "approveSAFEModification",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
             { "internalType": "address", "name": "apt", "type": "address" },
             {
                 "internalType": "address",
@@ -47,31 +10,6 @@
             { "internalType": "uint256", "name": "wad", "type": "uint256" }
         ],
         "name": "coinJoin_join",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "safeEngine",
-                "type": "address"
-            },
-            { "internalType": "address", "name": "usr", "type": "address" }
-        ],
-        "name": "denySAFEModification",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "manager", "type": "address" },
-            { "internalType": "address", "name": "src", "type": "address" },
-            { "internalType": "uint256", "name": "safe", "type": "uint256" }
-        ],
-        "name": "enterSystem",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -125,18 +63,6 @@
             { "internalType": "uint256", "name": "amountA", "type": "uint256" },
             { "internalType": "uint256", "name": "amountB", "type": "uint256" }
         ],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "manager", "type": "address" },
-            { "internalType": "address", "name": "ethJoin", "type": "address" },
-            { "internalType": "uint256", "name": "safe", "type": "uint256" },
-            { "internalType": "uint256", "name": "wad", "type": "uint256" }
-        ],
-        "name": "exitETH",
-        "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
@@ -227,27 +153,6 @@
             { "internalType": "uint256", "name": "wad", "type": "uint256" }
         ],
         "name": "freeETH",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "manager", "type": "address" },
-            {
-                "internalType": "address",
-                "name": "taxCollector",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "coinJoin",
-                "type": "address"
-            },
-            { "internalType": "uint256", "name": "safe", "type": "uint256" },
-            { "internalType": "uint256", "name": "wad", "type": "uint256" }
-        ],
-        "name": "generateDebt",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -414,28 +319,6 @@
                 "name": "coinJoin",
                 "type": "address"
             },
-            { "internalType": "uint256", "name": "safe", "type": "uint256" },
-            { "internalType": "uint256", "name": "deltaWad", "type": "uint256" }
-        ],
-        "name": "lockETHAndGenerateDebt",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "manager", "type": "address" },
-            {
-                "internalType": "address",
-                "name": "taxCollector",
-                "type": "address"
-            },
-            { "internalType": "address", "name": "ethJoin", "type": "address" },
-            {
-                "internalType": "address",
-                "name": "coinJoin",
-                "type": "address"
-            },
             {
                 "internalType": "address",
                 "name": "uniswapRouter",
@@ -523,45 +406,6 @@
         "name": "modifySAFECollateralization",
         "outputs": [],
         "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "manager", "type": "address" },
-            { "internalType": "uint256", "name": "safeSrc", "type": "uint256" },
-            { "internalType": "uint256", "name": "safeDst", "type": "uint256" }
-        ],
-        "name": "moveSAFE",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "manager", "type": "address" },
-            {
-                "internalType": "address",
-                "name": "taxCollector",
-                "type": "address"
-            },
-            { "internalType": "address", "name": "ethJoin", "type": "address" },
-            {
-                "internalType": "address",
-                "name": "coinJoin",
-                "type": "address"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "collateralType",
-                "type": "bytes32"
-            },
-            { "internalType": "uint256", "name": "deltaWad", "type": "uint256" }
-        ],
-        "name": "openLockETHAndGenerateDebt",
-        "outputs": [
-            { "internalType": "uint256", "name": "safe", "type": "uint256" }
-        ],
-        "stateMutability": "payable",
         "type": "function"
     },
     {
@@ -735,17 +579,6 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "manager", "type": "address" },
-            { "internalType": "uint256", "name": "safe", "type": "uint256" },
-            { "internalType": "address", "name": "dst", "type": "address" }
-        ],
-        "name": "quitSystem",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
             {
                 "internalType": "address",
                 "name": "uniswapRouter",
@@ -768,44 +601,6 @@
             { "internalType": "uint256", "name": "amountA", "type": "uint256" },
             { "internalType": "uint256", "name": "amountB", "type": "uint256" }
         ],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "manager", "type": "address" },
-            {
-                "internalType": "address",
-                "name": "coinJoin",
-                "type": "address"
-            },
-            { "internalType": "uint256", "name": "safe", "type": "uint256" },
-            { "internalType": "uint256", "name": "wad", "type": "uint256" }
-        ],
-        "name": "repayDebt",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "manager", "type": "address" },
-            { "internalType": "address", "name": "ethJoin", "type": "address" },
-            {
-                "internalType": "address",
-                "name": "coinJoin",
-                "type": "address"
-            },
-            { "internalType": "uint256", "name": "safe", "type": "uint256" },
-            {
-                "internalType": "uint256",
-                "name": "collateralWad",
-                "type": "uint256"
-            },
-            { "internalType": "uint256", "name": "deltaWad", "type": "uint256" }
-        ],
-        "name": "repayDebtAndFreeETH",
-        "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
@@ -858,33 +653,6 @@
             { "internalType": "uint256", "name": "rad", "type": "uint256" }
         ],
         "name": "transferInternalCoins",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "address", "name": "manager", "type": "address" },
-            { "internalType": "uint256", "name": "safe", "type": "uint256" },
-            { "internalType": "address", "name": "usr", "type": "address" }
-        ],
-        "name": "transferSAFEOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "proxyRegistry",
-                "type": "address"
-            },
-            { "internalType": "address", "name": "manager", "type": "address" },
-            { "internalType": "uint256", "name": "safe", "type": "uint256" },
-            { "internalType": "address", "name": "dst", "type": "address" }
-        ],
-        "name": "transferSAFEOwnershipToProxy",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -951,6 +719,43 @@
         ],
         "name": "withdrawFromMine",
         "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "incentives",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "uniswapRouter",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "systemCoin",
+                "type": "address"
+            },
+            { "internalType": "uint256", "name": "value", "type": "uint256" },
+            {
+                "internalType": "uint256",
+                "name": "campaignId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[2]",
+                "name": "minTokenAmounts",
+                "type": "uint256[2]"
+            }
+        ],
+        "name": "withdrawHarvestRemoveLiquidity",
+        "outputs": [
+            { "internalType": "uint256", "name": "amountA", "type": "uint256" },
+            { "internalType": "uint256", "name": "amountB", "type": "uint256" }
+        ],
         "stateMutability": "nonpayable",
         "type": "function"
     },
