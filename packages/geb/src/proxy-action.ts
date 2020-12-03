@@ -1175,7 +1175,7 @@ export class GebProxyActions {
             this.proxyActionIncentive.withdrawHarvestRemoveLiquidity(
                 this.addressList.GEB_UNISWAP_INCENTIVE,
                 this.addressList.UNISWAP_ROUTER,
-                this.addressList.GEB_COIN_JOIN,
+                this.addressList.GEB_COIN,
                 amount,
                 campaignId,
                 minTokenAmounts
