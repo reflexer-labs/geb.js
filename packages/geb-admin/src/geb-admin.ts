@@ -76,12 +76,14 @@ export class GebAdmin extends Geb {
         govFunctionAbi: string,
         params: any[],
         earliestExecutionTime: number,
-        calldata: string
+        calldata: string,
+        description?: string
     ) {
         const encoded = await this.webScheduleProposal(
             govFunctionAbi,
             params,
-            earliestExecutionTime
+            earliestExecutionTime,
+            description
         )
         return encoded.data == calldata
     }
@@ -154,6 +156,7 @@ export class GebAdmin extends Geb {
             gov_function_abi: govFunctionAbi,
             params: params,
             earliestExecutionTime: earliestExecutionTime,
+            description,
         }
     }
     /**
