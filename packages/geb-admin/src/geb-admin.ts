@@ -5,7 +5,7 @@ import {
     GebProviderInterface,
 } from '@reflexer-finance/geb-contract-base'
 import { ethers } from 'ethers'
-import { NULL_ADDRESS } from 'geb.js/lib/utils'
+import { getRequireString, NULL_ADDRESS } from 'geb.js/lib/utils'
 
 /**
  * This class extends the core `GEB` class with additional tools and contracts that are not used as often as other SAFE management tools.
@@ -127,6 +127,8 @@ export class GebAdmin extends Geb {
         earliestExecutionTime: number,
         description?: string
     ) {
+        this.validateEarliestExecutionTime(earliestExecutionTime)
+
         const codeHash = await this.provider.extCodeHash(
             this.addresses.GEB_GOV_ACTIONS
         )
@@ -159,6 +161,39 @@ export class GebAdmin extends Geb {
             description,
         }
     }
+
+    /**
+     * Test the execution of a proposal about to be schedule in dspause with web GUI
+     *
+     * @param  {string} govFunctionAbi Human readable abi from gov actions or proxy of choice -> "setDelay(address,uint256)"
+     * @param  {any[]} params Array containing all for the above function
+     * @param  {number} earliestExecutionTime
+     * @returns Promise<TransactionRequest>
+     */
+    public async webTestScheduleProposal(
+        govFunctionAbi: string,
+        params: any[],
+        earliestExecutionTime: number,
+        description?: string
+    ) {
+        this.validateEarliestExecutionTime(earliestExecutionTime)
+
+        // Prepare a transaction like if we were pause executing the transaction through the pause proxy
+        const tx = this.contractsAdmin.pauseProxy.executeTransaction(
+            this.addresses.GEB_GOV_ACTIONS,
+            this.getGovCallData(govFunctionAbi, params)
+        )
+        tx.from = this.contractsAdmin.pause.address
+
+        try {
+            await this.provider.ethCall(tx)
+        } catch (err) {
+            throw Error(getRequireString(err) || err)
+        }
+
+        console.log('Execution emulation success!')
+    }
+
     /**
      * Submit a transaction to a gnosis safe directly executed. Works only if the threshold on the safe is 1.
      * @param sender Proposal submitter
@@ -202,5 +237,17 @@ export class GebAdmin extends Geb {
                 stateMutability: 'nonpayable',
             }
         )
+    }
+
+    private validateEarliestExecutionTime(timestamp: number) {
+        if (
+            typeof timestamp !== 'number' ||
+            timestamp !== Math.floor(timestamp) ||
+            timestamp > 2524608000 || // After than Jan 1st 2050
+            timestamp < 1577836800 || // Before Jan 1st 2020
+            timestamp <= Date.now() / 1000 // Before now
+        ) {
+            throw Error('Incorrect timestamp')
+        }
     }
 }
