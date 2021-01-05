@@ -138,6 +138,12 @@ export const testsProxyActionWithGenericGebProvider = (
                     gebProvider
                 )
 
+                if (proxy.proxyActionIncentiveAddress === NULL_ADDRESS) {
+                    // If the address is null it means that the proxy was not deploy for this network.
+                    // Therefore, skip this test
+                    return
+                }
+
                 const tx = proxy.openLockETHGenerateDebtProvideLiquidityStake(
                     '1',
                     '1',
