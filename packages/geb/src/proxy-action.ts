@@ -68,7 +68,7 @@ export class GebProxyActions {
         // Set proxy action contract addresses
         this.proxyActionCoreAddress = this.addressList.PROXY_ACTIONS
         this.proxyActionGlobalSettlementAddress = this.addressList.PROXY_ACTIONS_GLOBAL_SETTLEMENT
-        this.proxyActionIncentiveAddress = this.addressList.INCENTIVE_PROXY_ACTIONS
+        this.proxyActionIncentiveAddress = this.addressList.PROXY_ACTIONS_INCENTIVES
         this.proxyActionLeverageAddress = this.addressList.LEVERAGE_PROXY_ACTION
 
         // Proxy contract APIs
@@ -823,7 +823,7 @@ export class GebProxyActions {
         return this.getProxiedTransactionRequest(
             this.proxyActionIncentive.exitAndRemoveLiquidity(
                 this.addressList.GEB_COIN_JOIN,
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 this.addressList.UNISWAP_ROUTER,
                 minTokenAmounts
             )
@@ -845,7 +845,7 @@ export class GebProxyActions {
                 this.addressList.SAFE_MANAGER,
                 this.addressList.GEB_COIN_JOIN,
                 safe,
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 this.addressList.UNISWAP_ROUTER,
                 minTokenAmounts
             )
@@ -863,7 +863,7 @@ export class GebProxyActions {
                 this.addressList.GEB_JOIN_ETH_A,
                 this.addressList.GEB_COIN_JOIN,
                 safe,
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 ethToFree,
                 this.addressList.UNISWAP_ROUTER,
                 minTokenAmounts
@@ -884,7 +884,7 @@ export class GebProxyActions {
                 this.addressList.GEB_TAX_COLLECTOR,
                 this.addressList.GEB_COIN_JOIN,
                 this.addressList.UNISWAP_ROUTER,
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 safe,
                 wad,
                 minTokenAmounts
@@ -915,7 +915,7 @@ export class GebProxyActions {
     getLockedReward(campaignId: BigNumberish): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionIncentive.getLockedReward(
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 campaignId
             )
         )
@@ -924,7 +924,7 @@ export class GebProxyActions {
     harvestReward(campaignId: BigNumberish): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionIncentive.harvestReward(
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 campaignId
             )
         )
@@ -945,7 +945,7 @@ export class GebProxyActions {
                 this.addressList.GEB_JOIN_ETH_A,
                 this.addressList.GEB_COIN_JOIN,
                 this.addressList.UNISWAP_ROUTER,
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 safe,
                 deltaWad,
                 liquidityWad,
@@ -992,7 +992,7 @@ export class GebProxyActions {
                 this.addressList.GEB_JOIN_ETH_A,
                 this.addressList.GEB_COIN_JOIN,
                 this.addressList.UNISWAP_ROUTER,
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 collateralType,
                 deltaWad,
                 liquidityWad,
@@ -1058,7 +1058,7 @@ export class GebProxyActions {
     stakeInMine(wad: BigNumberish): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionIncentive.stakeInMine(
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 wad
             )
         )
@@ -1070,7 +1070,7 @@ export class GebProxyActions {
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionIncentive.withdrawAndHarvest(
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 value,
                 campaignId
             )
@@ -1084,7 +1084,7 @@ export class GebProxyActions {
         return this.getProxiedTransactionRequest(
             this.proxyActionIncentive.withdrawAndRemoveLiquidity(
                 this.addressList.GEB_COIN_JOIN,
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 value,
                 this.addressList.UNISWAP_ROUTER,
                 minTokenAmounts
@@ -1095,7 +1095,7 @@ export class GebProxyActions {
     withdrawFromMine(value: BigNumberish): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionIncentive.withdrawFromMine(
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 value
             )
         )
@@ -1111,7 +1111,7 @@ export class GebProxyActions {
                 this.addressList.SAFE_MANAGER,
                 this.addressList.GEB_COIN_JOIN,
                 safe,
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 value,
                 this.addressList.UNISWAP_ROUTER,
                 minTokenAmounts
@@ -1131,7 +1131,7 @@ export class GebProxyActions {
                 this.addressList.GEB_JOIN_ETH_A,
                 this.addressList.GEB_COIN_JOIN,
                 safe,
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 valueToWithdraw,
                 ethToFree,
                 this.addressList.UNISWAP_ROUTER,
@@ -1143,7 +1143,7 @@ export class GebProxyActions {
     getRewards(campaignId: BigNumberish): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionIncentive.getRewards(
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 campaignId
             )
         )
@@ -1159,7 +1159,7 @@ export class GebProxyActions {
                 ethValue,
                 this.addressList.GEB_COIN_JOIN,
                 this.addressList.UNISWAP_ROUTER,
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 wad,
                 minTokenAmounts
             )
@@ -1173,7 +1173,7 @@ export class GebProxyActions {
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionIncentive.withdrawHarvestRemoveLiquidity(
-                this.addressList.GEB_UNISWAP_INCENTIVE,
+                this.addressList.GEB_INCENTIVES_MINER,
                 this.addressList.UNISWAP_ROUTER,
                 this.addressList.GEB_COIN,
                 amount,
