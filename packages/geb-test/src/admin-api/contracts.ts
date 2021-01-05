@@ -19,7 +19,17 @@ export const testContractPresence = (
             .filter((x) => x.constructor.name !== 'GebEthersProvider')
             // Don't check gnosis safe because at the address it's just an empty proxy, implementation is
             // elsewhere and is being delegate called to.
-            .filter((x) => x.conconstructor.name !== 'GnosisSafe')
+            .filter((x) => x.constructor.name !== 'GnosisSafe')
+            .filter(
+                (x) =>
+                    !(
+                        x.constructor.name === 'GovActions' &&
+                        network == 'mainnet' &&
+                        x.address ===
+                            // Address hardcoded on purpose to make the test fail on new testnet deployment
+                            '0xfcedcaaa80b497ac0171e9c09c10448a05b00314'
+                    )
+            )
             .forEach((contract) =>
                 it(`Check ${contract.constructor.name} contract address`, async () => {
                     await verifyContract(contract, ethNode)

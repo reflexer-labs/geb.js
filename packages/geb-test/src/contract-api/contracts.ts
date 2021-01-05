@@ -24,7 +24,7 @@ export const testContractPresence = (
             .filter(
                 (x) =>
                     !(
-                        x.conconstructor.name === 'RateSetter' &&
+                        x.constructor.name === 'RateSetter' &&
                         network == 'mainnet' &&
                         x.address ===
                             '0x9262136738B9962cb8016b8421642aD65faEa055'
@@ -33,7 +33,7 @@ export const testContractPresence = (
             .filter(
                 (x) =>
                     !(
-                        x.conconstructor.name === 'PiRawPerSecondCalculator' &&
+                        x.constructor.name === 'PiRawPerSecondCalculator' &&
                         network == 'mainnet' &&
                         x.address ===
                             '0x64Ad684378770Fe3EE4b437737edF379f12A902a'
@@ -43,7 +43,7 @@ export const testContractPresence = (
             .filter(
                 (x) =>
                     !(
-                        x.conconstructor.name ===
+                        x.constructor.name ===
                             'FixedDiscountCollateralAuctionHouse' &&
                         network == 'mainnet' &&
                         x.address ===
