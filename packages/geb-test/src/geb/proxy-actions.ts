@@ -42,7 +42,7 @@ export const testsProxyActionWithGenericGebProvider = (
             )
             assert.equal(
                 proxy.proxyActionIncentiveAddress,
-                addresses.INCENTIVE_PROXY_ACTIONS
+                addresses.PROXY_ACTIONS_INCENTIVES
             )
             assert.equal(
                 proxy.proxyActionLeverageAddress,

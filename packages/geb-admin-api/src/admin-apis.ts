@@ -61,7 +61,7 @@ export class AdminApis {
         this.proxyFactory = new DsProxyFactory(addressList.PROXY_FACTORY, this.chainProvider)
         this.pauseProxyAction = new GebDeployPauseProxyActions(addressList.PROXY_PAUSE_ACTIONS, this.chainProvider)
         this.proxyDeployer = new DsProxy(addressList.PROXY_DEPLOYER, this.chainProvider)
-        this.remineScheduler = new RemineScheduler(addressList.GEB_REMINE_SCHEDULER, this.chainProvider)
-        this.subsidyPool = new SubsidyPool(addressList.GEB_SUBSIDY_POOL, this.chainProvider)
+        this.remineScheduler = new RemineScheduler(addressList.GEB_INCENTIVES_REMINER, this.chainProvider)
+        this.subsidyPool = new SubsidyPool(addressList.GEB_INCENTIVES_SUBSIDY_POOL, this.chainProvider)
     }
 }

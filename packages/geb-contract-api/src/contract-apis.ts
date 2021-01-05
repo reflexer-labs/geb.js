@@ -77,7 +77,7 @@ export class ContractApis {
         this.oracleRelayer = new OracleRelayer(addressList.GEB_ORACLE_RELAYER, this.chainProvider)
         this.globalSettlement = new GlobalSettlement(addressList.GEB_GLOBAL_SETTLEMENT, this.chainProvider)
         this.debtAuctionHouse = new DebtAuctionHouse(addressList.GEB_DEBT_AUCTION_HOUSE, this.chainProvider)
-        this.preSettlementSurplusAuctionHouse = new PreSettlementSurplusAuctionHouse(addressList.GEB_PRE_SETTLEMENT_SURPLUS_AUCTION_HOUSE, this.chainProvider)
+        this.preSettlementSurplusAuctionHouse = new PreSettlementSurplusAuctionHouse(addressList.GEB_SURPLUS_AUCTION_HOUSE, this.chainProvider)
         this.stabilityFeeTreasury = new StabilityFeeTreasury(addressList.GEB_STABILITY_FEE_TREASURY, this.chainProvider)
         this.safeManager = new GebSafeManager(addressList.SAFE_MANAGER, this.chainProvider)
         this.getSafes = new GetSafes(addressList.GET_SAFES, this.chainProvider)
@@ -93,6 +93,6 @@ export class ContractApis {
         this.fsmEth = new Osm(addressList.FEED_SECURITY_MODULE_ETH, this.chainProvider)
         this.fsmCoin = new Dsm(addressList.FEED_SECURITY_MODULE_RAI, this.chainProvider)
         this.weth = new Weth9(addressList.ETH, this.chainProvider)
-        this.uniswapIncentive = new GebUniswapRollingDistributionIncentives(addressList.GEB_UNISWAP_INCENTIVE, this.chainProvider)
+        this.uniswapIncentive = new GebUniswapRollingDistributionIncentives(addressList.GEB_INCENTIVES_MINER, this.chainProvider)
     }
 }
