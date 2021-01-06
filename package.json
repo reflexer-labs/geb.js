@@ -60,6 +60,6 @@
         "*.{js,md,json,ts}": "prettier --write"
     },
     "dependencies": {
-        "axios": "^0.20.0"
+        "axios": "^0.21.1"
     }
 }
