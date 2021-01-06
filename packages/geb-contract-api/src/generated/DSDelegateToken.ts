@@ -4,10 +4,35 @@
 import { BaseContractAPI } from '@reflexer-finance/geb-contract-base'
 import { MulticallRequest } from '@reflexer-finance/geb-contract-base'
 import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
+import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
-export class DsToken extends BaseContractAPI {
+export class DsDelegateToken extends BaseContractAPI {
+    DELEGATION_TYPEHASH(): Promise<string>
+    DELEGATION_TYPEHASH(multicall: true): MulticallRequest<string>
+    DELEGATION_TYPEHASH(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"DELEGATION_TYPEHASH","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    DOMAIN_TYPEHASH(): Promise<string>
+    DOMAIN_TYPEHASH(multicall: true): MulticallRequest<string>
+    DOMAIN_TYPEHASH(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"DOMAIN_TYPEHASH","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     allowance(src: string, guy: string): Promise<BigNumber>
     allowance(
         src: string,
@@ -84,6 +109,41 @@ export class DsToken extends BaseContractAPI {
         return this.getTransactionRequest(abi, [guy, wad])
     }
 
+    checkpoints(
+        address: string,
+        uinteger: BigNumberish
+    ): Promise<{
+        fromBlock: BigNumber
+        votes: BigNumber
+    }>
+    checkpoints(
+        address: string,
+        uinteger: BigNumberish,
+        multicall: true
+    ): MulticallRequest<{
+        fromBlock: BigNumber
+        votes: BigNumber
+    }>
+    checkpoints(
+        address: string,
+        uinteger: BigNumberish,
+        multicall?: true
+    ):
+        | Promise<{
+              fromBlock: BigNumber
+              votes: BigNumber
+          }>
+        | MulticallRequest<{
+              fromBlock: BigNumber
+              votes: BigNumber
+          }> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint32","name":"","type":"uint32"}],"name":"checkpoints","outputs":[{"internalType":"uint256","name":"fromBlock","type":"uint256"},{"internalType":"uint256","name":"votes","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [address, uinteger], multicall)
+    }
+
     decimals(): Promise<BigNumber>
     decimals(multicall: true): MulticallRequest<BigNumber>
     decimals(
@@ -94,6 +154,86 @@ export class DsToken extends BaseContractAPI {
         const abi = {"inputs":[],"name":"decimals","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    delegate(delegatee: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"delegatee","type":"address"}],"name":"delegate","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [delegatee])
+    }
+
+    delegateBySig(
+        delegatee: string,
+        nonce: BigNumberish,
+        expiry: BigNumberish,
+        v: BigNumberish,
+        r: BytesLike,
+        s: BytesLike
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"delegatee","type":"address"},{"internalType":"uint256","name":"nonce","type":"uint256"},{"internalType":"uint256","name":"expiry","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"delegateBySig","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            delegatee,
+            nonce,
+            expiry,
+            v,
+            r,
+            s,
+        ])
+    }
+
+    delegates(address: string): Promise<string>
+    delegates(address: string, multicall: true): MulticallRequest<string>
+    delegates(
+        address: string,
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"delegates","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [address], multicall)
+    }
+
+    getCurrentVotes(account: string): Promise<BigNumber>
+    getCurrentVotes(
+        account: string,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    getCurrentVotes(
+        account: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"getCurrentVotes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [account], multicall)
+    }
+
+    getPriorVotes(
+        account: string,
+        blockNumber: BigNumberish
+    ): Promise<BigNumber>
+    getPriorVotes(
+        account: string,
+        blockNumber: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    getPriorVotes(
+        account: string,
+        blockNumber: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"blockNumber","type":"uint256"}],"name":"getPriorVotes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [account, blockNumber], multicall)
     }
 
     mint__AddressUint256(guy: string, wad: BigNumberish): TransactionRequest {
@@ -128,6 +268,32 @@ export class DsToken extends BaseContractAPI {
         const abi = {"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    nonces(address: string): Promise<BigNumber>
+    nonces(address: string, multicall: true): MulticallRequest<BigNumber>
+    nonces(
+        address: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"nonces","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [address], multicall)
+    }
+
+    numCheckpoints(address: string): Promise<number>
+    numCheckpoints(address: string, multicall: true): MulticallRequest<number>
+    numCheckpoints(
+        address: string,
+        multicall?: true
+    ): Promise<number> | MulticallRequest<number> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"numCheckpoints","outputs":[{"internalType":"uint32","name":"","type":"uint32"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     owner(): Promise<string>

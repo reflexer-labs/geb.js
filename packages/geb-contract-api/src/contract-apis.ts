@@ -13,7 +13,6 @@ import {
     CoinJoin,
     GebProxyRegistry,
     FixedDiscountCollateralAuctionHouse,
-    DsToken,
     Weth9,
     SafeEngine,
     ChainlinkMedianEthusd,
@@ -22,6 +21,7 @@ import {
     Dsm,
     StabilityFeeTreasury,
     RollingDistributionIncentives,
+    DsDelegateToken,
 } from '.'
 import {
     GebProviderInterface,
@@ -50,7 +50,7 @@ export class ContractApis {
     public coin: Coin
     public proxyRegistry: GebProxyRegistry
     public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse
-    public protocolToken: DsToken
+    public protocolToken: DsDelegateToken
     public medianizerEth: ChainlinkMedianEthusd 
     public medianizerCoin: UniswapConsecutiveSlotsMedianRaiusd
     public rateSetter: RateSetter
@@ -93,5 +93,6 @@ export class ContractApis {
         this.fsmCoin = new Dsm(addressList.FEED_SECURITY_MODULE_RAI, this.chainProvider)
         this.weth = new Weth9(addressList.ETH, this.chainProvider)
         this.uniswapIncentive = new RollingDistributionIncentives(addressList.GEB_INCENTIVES_MINER, this.chainProvider)
+        this.protocolToken = new DsDelegateToken(addressList.GEB_PROT, this.chainProvider)
     }
 }

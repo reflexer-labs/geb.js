@@ -20,7 +20,6 @@ import { TaxCollector } from './generated/TaxCollector'
 import { GebProxyActions } from './generated/GebProxyActions'
 import { GebProxyActionsGlobalSettlement } from './generated/GebProxyActionsGlobalSettlement'
 import { ChainlinkMedianEthusd } from './generated/ChainlinkMedianETHUSD'
-import { DsToken } from './generated/DSToken'
 import { Erc20 } from './generated/ERC20'
 import { UniswapConsecutiveSlotsMedianRaiusd } from './generated/UniswapConsecutiveSlotsMedianRAIUSD'
 import { ContractApis } from './contract-apis'
@@ -36,6 +35,7 @@ import { GebProxyLeverageActions } from './generated/GebProxyLeverageActions'
 import { GebProxyIncentivesActions } from './generated/GebProxyIncentivesActions'
 import { BurningSurplusAuctionHouse } from './generated/BurningSurplusAuctionHouse'
 import { RecyclingSurplusAuctionHouse } from './generated/RecyclingSurplusAuctionHouse'
+import { DsDelegateToken } from './generated/DSDelegateToken'
 
 export {
     // Factory
@@ -63,7 +63,6 @@ export {
     GebProxyActions,
     GebProxyActionsGlobalSettlement,
     Multicall,
-    DsToken,
     Erc20,
     Osm,
     Dsm,
@@ -78,4 +77,5 @@ export {
     GebProxyIncentivesActions,
     BurningSurplusAuctionHouse,
     RecyclingSurplusAuctionHouse,
+    DsDelegateToken,
 }
