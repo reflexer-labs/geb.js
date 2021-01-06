@@ -24,7 +24,11 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "obj", "type": "address" },
+            {
+                "internalType": "address",
+                "name": "safeEngine",
+                "type": "address"
+            },
             { "internalType": "address", "name": "usr", "type": "address" }
         ],
         "name": "approveSAFEModification",
@@ -49,7 +53,11 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "obj", "type": "address" },
+            {
+                "internalType": "address",
+                "name": "safeEngine",
+                "type": "address"
+            },
             { "internalType": "address", "name": "usr", "type": "address" }
         ],
         "name": "denySAFEModification",
@@ -72,6 +80,17 @@
         "inputs": [
             { "internalType": "address", "name": "apt", "type": "address" },
             { "internalType": "address", "name": "safe", "type": "address" }
+        ],
+        "name": "ethJoin_join",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "apt", "type": "address" },
+            { "internalType": "address", "name": "safe", "type": "address" },
+            { "internalType": "uint256", "name": "value", "type": "uint256" }
         ],
         "name": "ethJoin_join",
         "outputs": [],

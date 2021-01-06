@@ -134,6 +134,11 @@
                 "name": "callbackProxy",
                 "type": "address"
             },
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
+            },
             { "internalType": "uint256", "name": "safe", "type": "uint256" }
         ],
         "name": "flashDeleverage",
@@ -165,6 +170,11 @@
                 "internalType": "address",
                 "name": "callbackProxy",
                 "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
             },
             { "internalType": "uint256", "name": "safe", "type": "uint256" },
             {
@@ -202,6 +212,11 @@
                 "internalType": "address",
                 "name": "callbackProxy",
                 "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
             },
             { "internalType": "uint256", "name": "safe", "type": "uint256" },
             { "internalType": "uint256", "name": "leverage", "type": "uint256" }
@@ -302,6 +317,11 @@
                 "name": "callbackProxy",
                 "type": "address"
             },
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
+            },
             { "internalType": "uint256", "name": "safe", "type": "uint256" },
             { "internalType": "uint256", "name": "leverage", "type": "uint256" }
         ],
@@ -389,6 +409,11 @@
                 "internalType": "address",
                 "name": "callbackProxy",
                 "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
             },
             { "internalType": "uint256", "name": "leverage", "type": "uint256" }
         ],
@@ -534,16 +559,8 @@
     {
         "inputs": [
             { "internalType": "address", "name": "_sender", "type": "address" },
-            {
-                "internalType": "uint256",
-                "name": "_amount0",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_amount1",
-                "type": "uint256"
-            },
+            { "internalType": "uint256", "name": "", "type": "uint256" },
+            { "internalType": "uint256", "name": "", "type": "uint256" },
             { "internalType": "bytes", "name": "_data", "type": "bytes" }
         ],
         "name": "uniswapV2Call",
