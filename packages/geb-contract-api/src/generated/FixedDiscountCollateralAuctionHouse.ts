@@ -168,18 +168,6 @@ export class FixedDiscountCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    collateralMedian(): Promise<string>
-    collateralMedian(multicall: true): MulticallRequest<string>
-    collateralMedian(
-        multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"collateralMedian","outputs":[{"internalType":"contract OracleLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     collateralType(): Promise<string>
     collateralType(multicall: true): MulticallRequest<string>
     collateralType(

@@ -49,6 +49,18 @@ export class AccountingEngine extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
+    canPrintProtocolTokens(): Promise<boolean>
+    canPrintProtocolTokens(multicall: true): MulticallRequest<boolean>
+    canPrintProtocolTokens(
+        multicall?: true
+    ): Promise<boolean> | MulticallRequest<boolean> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"canPrintProtocolTokens","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     cancelAuctionedDebtWithSurplus(rad: BigNumberish): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -157,6 +169,30 @@ export class AccountingEngine extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
+    extraSurplusIsTransferred(): Promise<BigNumber>
+    extraSurplusIsTransferred(multicall: true): MulticallRequest<BigNumber>
+    extraSurplusIsTransferred(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"extraSurplusIsTransferred","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    extraSurplusReceiver(): Promise<string>
+    extraSurplusReceiver(multicall: true): MulticallRequest<string>
+    extraSurplusReceiver(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"extraSurplusReceiver","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     initialDebtAuctionMintedTokens(): Promise<BigNumber>
     initialDebtAuctionMintedTokens(multicall: true): MulticallRequest<BigNumber>
     initialDebtAuctionMintedTokens(
@@ -177,6 +213,18 @@ export class AccountingEngine extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"lastSurplusAuctionTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    lastSurplusTransferTime(): Promise<BigNumber>
+    lastSurplusTransferTime(multicall: true): MulticallRequest<BigNumber>
+    lastSurplusTransferTime(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"lastSurplusTransferTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -329,6 +377,42 @@ export class AccountingEngine extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
+    surplusTransferAmount(): Promise<BigNumber>
+    surplusTransferAmount(multicall: true): MulticallRequest<BigNumber>
+    surplusTransferAmount(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"surplusTransferAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    surplusTransferDelay(): Promise<BigNumber>
+    surplusTransferDelay(multicall: true): MulticallRequest<BigNumber>
+    surplusTransferDelay(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"surplusTransferDelay","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    systemStakingPool(): Promise<string>
+    systemStakingPool(multicall: true): MulticallRequest<string>
+    systemStakingPool(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"systemStakingPool","outputs":[{"internalType":"contract SystemStakingPoolLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     totalOnAuctionDebt(): Promise<BigNumber>
     totalOnAuctionDebt(multicall: true): MulticallRequest<BigNumber>
     totalOnAuctionDebt(
@@ -351,6 +435,14 @@ export class AccountingEngine extends BaseContractAPI {
         const abi = {"inputs":[],"name":"totalQueuedDebt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    transferExtraSurplus(): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"transferExtraSurplus","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [])
     }
 
     transferPostSettlementSurplus(): TransactionRequest {

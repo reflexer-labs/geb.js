@@ -8,7 +8,7 @@ import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
-export class EnglishCollateralAuctionHouse extends BaseContractAPI {
+export class RecyclingSurplusAuctionHouse extends BaseContractAPI {
     AUCTION_HOUSE_TYPE(): Promise<string>
     AUCTION_HOUSE_TYPE(multicall: true): MulticallRequest<string>
     AUCTION_HOUSE_TYPE(
@@ -21,38 +21,12 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    AUCTION_TYPE(): Promise<string>
-    AUCTION_TYPE(multicall: true): MulticallRequest<string>
-    AUCTION_TYPE(multicall?: true): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"AUCTION_TYPE","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"addAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [account])
-    }
-
-    amountToRaise(id: BigNumberish): Promise<BigNumber>
-    amountToRaise(
-        id: BigNumberish,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    amountToRaise(
-        id: BigNumberish,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"amountToRaise","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
     auctionsStarted(): Promise<BigNumber>
@@ -81,19 +55,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [address], multicall)
-    }
-
-    bidAmount(id: BigNumberish): Promise<BigNumber>
-    bidAmount(id: BigNumberish, multicall: true): MulticallRequest<BigNumber>
-    bidAmount(
-        id: BigNumberish,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"bidAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [id], multicall)
     }
 
     bidDuration(): Promise<number>
@@ -126,9 +87,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         highBidder: string
         bidExpiry: number
         auctionDeadline: number
-        forgoneCollateralReceiver: string
-        auctionIncomeRecipient: string
-        amountToRaise: BigNumber
     }>
     bids(
         uinteger: BigNumberish,
@@ -139,9 +97,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         highBidder: string
         bidExpiry: number
         auctionDeadline: number
-        forgoneCollateralReceiver: string
-        auctionIncomeRecipient: string
-        amountToRaise: BigNumber
     }>
     bids(
         uinteger: BigNumberish,
@@ -153,9 +108,6 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
               highBidder: string
               bidExpiry: number
               auctionDeadline: number
-              forgoneCollateralReceiver: string
-              auctionIncomeRecipient: string
-              amountToRaise: BigNumber
           }>
         | MulticallRequest<{
               bidAmount: BigNumber
@@ -163,90 +115,55 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
               highBidder: string
               bidExpiry: number
               auctionDeadline: number
-              forgoneCollateralReceiver: string
-              auctionIncomeRecipient: string
-              amountToRaise: BigNumber
           }> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"bids","outputs":[{"internalType":"uint256","name":"bidAmount","type":"uint256"},{"internalType":"uint256","name":"amountToSell","type":"uint256"},{"internalType":"address","name":"highBidder","type":"address"},{"internalType":"uint48","name":"bidExpiry","type":"uint48"},{"internalType":"uint48","name":"auctionDeadline","type":"uint48"},{"internalType":"address","name":"forgoneCollateralReceiver","type":"address"},{"internalType":"address","name":"auctionIncomeRecipient","type":"address"},{"internalType":"uint256","name":"amountToRaise","type":"uint256"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"bids","outputs":[{"internalType":"uint256","name":"bidAmount","type":"uint256"},{"internalType":"uint256","name":"amountToSell","type":"uint256"},{"internalType":"address","name":"highBidder","type":"address"},{"internalType":"uint48","name":"bidExpiry","type":"uint48"},{"internalType":"uint48","name":"auctionDeadline","type":"uint48"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
-    collateralType(): Promise<string>
-    collateralType(multicall: true): MulticallRequest<string>
-    collateralType(
+    contractEnabled(): Promise<BigNumber>
+    contractEnabled(multicall: true): MulticallRequest<BigNumber>
+    contractEnabled(
         multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"collateralType","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    decreaseSoldAmount(
-        id: BigNumberish,
-        amountToBuy: BigNumberish,
-        rad: BigNumberish
-    ): TransactionRequest {
+    disableContract(): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"amountToBuy","type":"uint256"},{"internalType":"uint256","name":"rad","type":"uint256"}],"name":"decreaseSoldAmount","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"disableContract","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [id, amountToBuy, rad])
-    }
-
-    forgoneCollateralReceiver(id: BigNumberish): Promise<string>
-    forgoneCollateralReceiver(
-        id: BigNumberish,
-        multicall: true
-    ): MulticallRequest<string>
-    forgoneCollateralReceiver(
-        id: BigNumberish,
-        multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"forgoneCollateralReceiver","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [id], multicall)
+        return this.getTransactionRequest(abi, [])
     }
 
     increaseBidSize(
         id: BigNumberish,
         amountToBuy: BigNumberish,
-        rad: BigNumberish
+        bid: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"amountToBuy","type":"uint256"},{"internalType":"uint256","name":"rad","type":"uint256"}],"name":"increaseBidSize","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"amountToBuy","type":"uint256"},{"internalType":"uint256","name":"bid","type":"uint256"}],"name":"increaseBidSize","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [id, amountToBuy, rad])
-    }
-
-    liquidationEngine(): Promise<string>
-    liquidationEngine(multicall: true): MulticallRequest<string>
-    liquidationEngine(
-        multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"liquidationEngine","outputs":[{"internalType":"contract LiquidationEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
+        return this.getTransactionRequest(abi, [id, amountToBuy, bid])
     }
 
     modifyParameters__Bytes32Address(
         parameter: BytesLike,
-        data: string
+        addr: string
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"addr","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [parameter, data])
+        return this.getTransactionRequest(abi, [parameter, addr])
     }
 
     modifyParameters__Bytes32Uint256(
@@ -260,33 +177,28 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
         return this.getTransactionRequest(abi, [parameter, data])
     }
 
-    raisedAmount(id: BigNumberish): Promise<BigNumber>
-    raisedAmount(id: BigNumberish, multicall: true): MulticallRequest<BigNumber>
-    raisedAmount(
-        id: BigNumberish,
+    protocolToken(): Promise<string>
+    protocolToken(multicall: true): MulticallRequest<string>
+    protocolToken(
         multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"raisedAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[],"name":"protocolToken","outputs":[{"internalType":"contract TokenLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCallOrMulticall(abi, [id], multicall)
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    remainingAmountToSell(id: BigNumberish): Promise<BigNumber>
-    remainingAmountToSell(
-        id: BigNumberish,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    remainingAmountToSell(
-        id: BigNumberish,
+    protocolTokenBidReceiver(): Promise<string>
+    protocolTokenBidReceiver(multicall: true): MulticallRequest<string>
+    protocolTokenBidReceiver(
         multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"remainingAmountToSell","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[],"name":"protocolTokenBidReceiver","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCallOrMulticall(abi, [id], multicall)
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     removeAuthorization(account: string): TransactionRequest {
@@ -324,23 +236,14 @@ export class EnglishCollateralAuctionHouse extends BaseContractAPI {
     }
 
     startAuction(
-        forgoneCollateralReceiver: string,
-        auctionIncomeRecipient: string,
-        amountToRaise: BigNumberish,
         amountToSell: BigNumberish,
         initialBid: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"forgoneCollateralReceiver","type":"address"},{"internalType":"address","name":"auctionIncomeRecipient","type":"address"},{"internalType":"uint256","name":"amountToRaise","type":"uint256"},{"internalType":"uint256","name":"amountToSell","type":"uint256"},{"internalType":"uint256","name":"initialBid","type":"uint256"}],"name":"startAuction","outputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"amountToSell","type":"uint256"},{"internalType":"uint256","name":"initialBid","type":"uint256"}],"name":"startAuction","outputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [
-            forgoneCollateralReceiver,
-            auctionIncomeRecipient,
-            amountToRaise,
-            amountToSell,
-            initialBid,
-        ])
+        return this.getTransactionRequest(abi, [amountToSell, initialBid])
     }
 
     terminateAuctionPrematurely(id: BigNumberish): TransactionRequest {

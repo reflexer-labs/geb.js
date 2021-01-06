@@ -130,11 +130,12 @@ export class GebProxyLeverageActions extends BaseContractAPI {
         coinJoin: string,
         weth: string,
         callbackProxy: string,
+        collateralType: BytesLike,
         safe: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"uniswapV2Pair","type":"address"},{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"weth","type":"address"},{"internalType":"address","name":"callbackProxy","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"}],"name":"flashDeleverage","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"uniswapV2Pair","type":"address"},{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"weth","type":"address"},{"internalType":"address","name":"callbackProxy","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"safe","type":"uint256"}],"name":"flashDeleverage","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             uniswapV2Pair,
@@ -144,6 +145,7 @@ export class GebProxyLeverageActions extends BaseContractAPI {
             coinJoin,
             weth,
             callbackProxy,
+            collateralType,
             safe,
         ])
     }
@@ -156,12 +158,13 @@ export class GebProxyLeverageActions extends BaseContractAPI {
         coinJoin: string,
         weth: string,
         callbackProxy: string,
+        collateralType: BytesLike,
         safe: BigNumberish,
         amountToFree: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"uniswapV2Pair","type":"address"},{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"weth","type":"address"},{"internalType":"address","name":"callbackProxy","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"amountToFree","type":"uint256"}],"name":"flashDeleverageFreeETH","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"uniswapV2Pair","type":"address"},{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"weth","type":"address"},{"internalType":"address","name":"callbackProxy","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"amountToFree","type":"uint256"}],"name":"flashDeleverageFreeETH","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             uniswapV2Pair,
@@ -171,6 +174,7 @@ export class GebProxyLeverageActions extends BaseContractAPI {
             coinJoin,
             weth,
             callbackProxy,
+            collateralType,
             safe,
             amountToFree,
         ])
@@ -184,12 +188,13 @@ export class GebProxyLeverageActions extends BaseContractAPI {
         coinJoin: string,
         weth: string,
         callbackProxy: string,
+        collateralType: BytesLike,
         safe: BigNumberish,
         leverage: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"uniswapV2Pair","type":"address"},{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"weth","type":"address"},{"internalType":"address","name":"callbackProxy","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"leverage","type":"uint256"}],"name":"flashLeverage","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"uniswapV2Pair","type":"address"},{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"weth","type":"address"},{"internalType":"address","name":"callbackProxy","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"leverage","type":"uint256"}],"name":"flashLeverage","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             uniswapV2Pair,
@@ -199,6 +204,7 @@ export class GebProxyLeverageActions extends BaseContractAPI {
             coinJoin,
             weth,
             callbackProxy,
+            collateralType,
             safe,
             leverage,
         ])
@@ -283,12 +289,13 @@ export class GebProxyLeverageActions extends BaseContractAPI {
         coinJoin: string,
         weth: string,
         callbackProxy: string,
+        collateralType: BytesLike,
         safe: BigNumberish,
         leverage: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"uniswapV2Pair","type":"address"},{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"weth","type":"address"},{"internalType":"address","name":"callbackProxy","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"leverage","type":"uint256"}],"name":"lockETHLeverage","outputs":[],"stateMutability":"payable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"uniswapV2Pair","type":"address"},{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"weth","type":"address"},{"internalType":"address","name":"callbackProxy","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"uint256","name":"leverage","type":"uint256"}],"name":"lockETHLeverage","outputs":[],"stateMutability":"payable","type":"function"}
 
         return this.getTransactionRequest(
             abi,
@@ -300,6 +307,7 @@ export class GebProxyLeverageActions extends BaseContractAPI {
                 coinJoin,
                 weth,
                 callbackProxy,
+                collateralType,
                 safe,
                 leverage,
             ],
@@ -373,11 +381,12 @@ export class GebProxyLeverageActions extends BaseContractAPI {
         coinJoin: string,
         weth: string,
         callbackProxy: string,
+        collateralType: BytesLike,
         leverage: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"uniswapV2Pair","type":"address"},{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"weth","type":"address"},{"internalType":"address","name":"callbackProxy","type":"address"},{"internalType":"uint256","name":"leverage","type":"uint256"}],"name":"openLockETHLeverage","outputs":[{"internalType":"uint256","name":"safe","type":"uint256"}],"stateMutability":"payable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"uniswapV2Pair","type":"address"},{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"ethJoin","type":"address"},{"internalType":"address","name":"taxCollector","type":"address"},{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"address","name":"weth","type":"address"},{"internalType":"address","name":"callbackProxy","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"leverage","type":"uint256"}],"name":"openLockETHLeverage","outputs":[{"internalType":"uint256","name":"safe","type":"uint256"}],"stateMutability":"payable","type":"function"}
 
         return this.getTransactionRequest(
             abi,
@@ -389,6 +398,7 @@ export class GebProxyLeverageActions extends BaseContractAPI {
                 coinJoin,
                 weth,
                 callbackProxy,
+                collateralType,
                 leverage,
             ],
             BigNumber.from(ethValue)
@@ -524,18 +534,18 @@ export class GebProxyLeverageActions extends BaseContractAPI {
 
     uniswapV2Call(
         _sender: string,
-        _amount0: BigNumberish,
-        _amount1: BigNumberish,
+        uinteger1: BigNumberish,
+        uinteger2: BigNumberish,
         _data: BytesLike
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"_sender","type":"address"},{"internalType":"uint256","name":"_amount0","type":"uint256"},{"internalType":"uint256","name":"_amount1","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"uniswapV2Call","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"_sender","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"uniswapV2Call","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             _sender,
-            _amount0,
-            _amount1,
+            uinteger1,
+            uinteger2,
             _data,
         ])
     }

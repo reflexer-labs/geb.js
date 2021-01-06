@@ -33,12 +33,15 @@ export class GebProxyActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [manager, safe, usr, ok])
     }
 
-    approveSAFEModification(obj: string, usr: string): TransactionRequest {
+    approveSAFEModification(
+        safeEngine: string,
+        usr: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"obj","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"approveSAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"safeEngine","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"approveSAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [obj, usr])
+        return this.getTransactionRequest(abi, [safeEngine, usr])
     }
 
     coinJoin_join(
@@ -53,12 +56,12 @@ export class GebProxyActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [apt, safeHandler, wad])
     }
 
-    denySAFEModification(obj: string, usr: string): TransactionRequest {
+    denySAFEModification(safeEngine: string, usr: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"obj","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"denySAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"safeEngine","type":"address"},{"internalType":"address","name":"usr","type":"address"}],"name":"denySAFEModification","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [obj, usr])
+        return this.getTransactionRequest(abi, [safeEngine, usr])
     }
 
     enterSystem(
@@ -73,7 +76,7 @@ export class GebProxyActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [manager, src, safe])
     }
 
-    ethJoin_join(
+    ethJoin_join__AddressAddress(
         ethValue: BigNumberish,
         apt: string,
         safe: string
@@ -85,6 +88,23 @@ export class GebProxyActions extends BaseContractAPI {
         return this.getTransactionRequest(
             abi,
             [apt, safe],
+            BigNumber.from(ethValue)
+        )
+    }
+
+    ethJoin_join__AddressAddressUint256(
+        ethValue: BigNumberish,
+        apt: string,
+        safe: string,
+        value: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"apt","type":"address"},{"internalType":"address","name":"safe","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"ethJoin_join","outputs":[],"stateMutability":"payable","type":"function"}
+
+        return this.getTransactionRequest(
+            abi,
+            [apt, safe, value],
             BigNumber.from(ethValue)
         )
     }

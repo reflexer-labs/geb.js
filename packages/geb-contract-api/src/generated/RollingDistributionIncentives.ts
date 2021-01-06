@@ -8,7 +8,7 @@ import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
-export class GebUniswapRollingDistributionIncentives extends BaseContractAPI {
+export class RollingDistributionIncentives extends BaseContractAPI {
     DEFAULT_MAX_CAMPAIGNS(): Promise<BigNumber>
     DEFAULT_MAX_CAMPAIGNS(multicall: true): MulticallRequest<BigNumber>
     DEFAULT_MAX_CAMPAIGNS(
@@ -182,6 +182,18 @@ export class GebUniswapRollingDistributionIncentives extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"campaigns","outputs":[{"internalType":"uint256","name":"reward","type":"uint256"},{"internalType":"uint256","name":"startTime","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"rewardRate","type":"uint256"},{"internalType":"uint256","name":"lastUpdateTime","type":"uint256"},{"internalType":"uint256","name":"rewardPerTokenStored","type":"uint256"},{"internalType":"uint256","name":"rewardDelay","type":"uint256"},{"internalType":"uint256","name":"instantExitPercentage","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [uinteger], multicall)
+    }
+
+    canStake(): Promise<BigNumber>
+    canStake(multicall: true): MulticallRequest<BigNumber>
+    canStake(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"canStake","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     cancelCampaign(campaignId: BigNumberish): TransactionRequest {

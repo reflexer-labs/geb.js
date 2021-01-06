@@ -9,18 +9,6 @@ import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
 export class StabilityFeeTreasury extends BaseContractAPI {
-    accountingEngine(): Promise<string>
-    accountingEngine(multicall: true): MulticallRequest<string>
-    accountingEngine(
-        multicall?: true
-    ): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"accountingEngine","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     accumulatorTag(): Promise<BigNumber>
     accumulatorTag(multicall: true): MulticallRequest<BigNumber>
     accumulatorTag(
@@ -107,6 +95,18 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"expensesMultiplier","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    extraSurplusReceiver(): Promise<string>
+    extraSurplusReceiver(multicall: true): MulticallRequest<string>
+    extraSurplusReceiver(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"extraSurplusReceiver","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -209,6 +209,18 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         return this.getTransactionRequest(abi, [dstAccount, token, wad])
     }
 
+    pullFundsMinThreshold(): Promise<BigNumber>
+    pullFundsMinThreshold(multicall: true): MulticallRequest<BigNumber>
+    pullFundsMinThreshold(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"pullFundsMinThreshold","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     pulledPerBlock(address: string, uinteger: BigNumberish): Promise<BigNumber>
     pulledPerBlock(
         address: string,
@@ -262,6 +274,14 @@ export class StabilityFeeTreasury extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"rad","type":"uint256"}],"name":"setTotalAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [account, rad])
+    }
+
+    settleDebt(): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"settleDebt","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [])
     }
 
     surplusTransferDelay(): Promise<BigNumber>

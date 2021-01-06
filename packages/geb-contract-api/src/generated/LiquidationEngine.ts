@@ -147,6 +147,27 @@ export class LiquidationEngine extends BaseContractAPI {
         return this.getTransactionRequest(abi, [saviour])
     }
 
+    getLimitAdjustedDebtToCover(
+        collateralType: BytesLike,
+        safe: string
+    ): Promise<BigNumber>
+    getLimitAdjustedDebtToCover(
+        collateralType: BytesLike,
+        safe: string,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    getLimitAdjustedDebtToCover(
+        collateralType: BytesLike,
+        safe: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"safe","type":"address"}],"name":"getLimitAdjustedDebtToCover","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [collateralType, safe], multicall)
+    }
+
     liquidateSAFE(collateralType: BytesLike, safe: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
