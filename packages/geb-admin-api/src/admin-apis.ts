@@ -6,7 +6,6 @@ import {
     GovActions,
     Esm,
     FsmGovernanceInterface,
-    DsProxyFactory,
     GebDeployPauseProxyActions,
     DsProtestPause,
     SubsidyPool,
@@ -34,7 +33,6 @@ export class AdminApis {
     public govActions: GovActions
     public esm: Esm
     public fsmGovInterface: FsmGovernanceInterface
-    public proxyFactory: DsProxyFactory
     public pauseProxyAction: GebDeployPauseProxyActions
     public proxyDeployer: DsProxy
     public remineScheduler: RemineScheduler
@@ -58,7 +56,6 @@ export class AdminApis {
         this.pauseProxy = new DsPauseProxy(addressList.GEB_PAUSE_PROXY, this.chainProvider)
         this.govActions = new GovActions(addressList.GEB_GOV_ACTIONS, this.chainProvider)
         this.fsmGovInterface = new FsmGovernanceInterface(addressList.FSM_GOV_INTERFACE, this.chainProvider)
-        this.proxyFactory = new DsProxyFactory(addressList.PROXY_FACTORY, this.chainProvider)
         this.pauseProxyAction = new GebDeployPauseProxyActions(addressList.PROXY_PAUSE_ACTIONS, this.chainProvider)
         this.proxyDeployer = new DsProxy(addressList.PROXY_DEPLOYER, this.chainProvider)
         this.remineScheduler = new RemineScheduler(addressList.GEB_INCENTIVES_REMINER, this.chainProvider)

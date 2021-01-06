@@ -154,20 +154,6 @@ export class GebProxyActions {
         )
     }
 
-    ethJoin_join(
-        ethValue: BigNumberish,
-        apt: string,
-        safe: string
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionCore.ethJoin_join(
-                BigNumber.from(ethValue),
-                apt,
-                safe
-            )
-        )
-    }
-
     exitETH(safe: BigNumberish, wad: BigNumberish): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionCore.exitETH(
@@ -852,25 +838,6 @@ export class GebProxyActions {
         )
     }
 
-    exitRemoveLiquidityRepayDebtFreeETH(
-        safe: BigNumberish,
-        ethToFree: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.exitRemoveLiquidityRepayDebtFreeETH(
-                this.addressList.SAFE_MANAGER,
-                this.addressList.GEB_JOIN_ETH_A,
-                this.addressList.GEB_COIN_JOIN,
-                safe,
-                this.addressList.GEB_INCENTIVES_MINER,
-                ethToFree,
-                this.addressList.UNISWAP_ROUTER,
-                minTokenAmounts
-            )
-        )
-    }
-
     generateDebtAndProvideLiquidityStake(
         ethValue: BigNumberish,
         safe: BigNumberish,
@@ -1119,27 +1086,6 @@ export class GebProxyActions {
         )
     }
 
-    withdrawRemoveLiquidityRepayDebtFreeETH(
-        safe: BigNumberish,
-        valueToWithdraw: BigNumberish,
-        ethToFree: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.withdrawRemoveLiquidityRepayDebtFreeETH(
-                this.addressList.SAFE_MANAGER,
-                this.addressList.GEB_JOIN_ETH_A,
-                this.addressList.GEB_COIN_JOIN,
-                safe,
-                this.addressList.GEB_INCENTIVES_MINER,
-                valueToWithdraw,
-                ethToFree,
-                this.addressList.UNISWAP_ROUTER,
-                minTokenAmounts
-            )
-        )
-    }
-
     getRewards(campaignId: BigNumberish): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionIncentive.getRewards(
@@ -1188,6 +1134,7 @@ export class GebProxyActions {
     flashDeleverage(
         uniswapV2Pair: string,
         callbackProxy: string,
+        collateralType: BytesLike,
         safe: BigNumberish
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
@@ -1199,6 +1146,7 @@ export class GebProxyActions {
                 this.addressList.GEB_COIN_JOIN,
                 this.addressList.ETH,
                 callbackProxy,
+                collateralType,
                 safe
             )
         )
@@ -1207,6 +1155,7 @@ export class GebProxyActions {
     flashDeleverageFreeETH(
         uniswapV2Pair: string,
         callbackProxy: string,
+        collateralType: BytesLike,
         safe: BigNumberish,
         amountToFree: BigNumberish
     ): TransactionRequest {
@@ -1219,6 +1168,7 @@ export class GebProxyActions {
                 this.addressList.GEB_COIN_JOIN,
                 this.addressList.ETH,
                 callbackProxy,
+                collateralType,
                 safe,
                 amountToFree
             )
@@ -1228,6 +1178,7 @@ export class GebProxyActions {
     flashLeverage(
         uniswapV2Pair: string,
         callbackProxy: string,
+        collateralType: BytesLike,
         safe: BigNumberish,
         leverage: BigNumberish
     ): TransactionRequest {
@@ -1240,6 +1191,7 @@ export class GebProxyActions {
                 this.addressList.GEB_COIN_JOIN,
                 this.addressList.ETH,
                 callbackProxy,
+                collateralType,
                 safe,
                 leverage
             )
@@ -1250,6 +1202,7 @@ export class GebProxyActions {
         ethValue: BigNumberish,
         uniswapV2Pair: string,
         callbackProxy: string,
+        collateralType: BytesLike,
         safe: BigNumberish,
         leverage: BigNumberish
     ): TransactionRequest {
@@ -1263,6 +1216,7 @@ export class GebProxyActions {
                 this.addressList.GEB_COIN_JOIN,
                 this.addressList.ETH,
                 callbackProxy,
+                collateralType,
                 safe,
                 leverage
             )
@@ -1273,6 +1227,7 @@ export class GebProxyActions {
         ethValue: BigNumberish,
         uniswapV2Pair: string,
         callbackProxy: string,
+        collateralType: BytesLike,
         leverage: BigNumberish
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
@@ -1285,6 +1240,7 @@ export class GebProxyActions {
                 this.addressList.GEB_COIN_JOIN,
                 this.addressList.ETH,
                 callbackProxy,
+                collateralType,
                 leverage
             )
         )

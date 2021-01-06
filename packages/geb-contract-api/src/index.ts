@@ -5,9 +5,8 @@ import { CoinSavingsAccount } from './generated/CoinSavingsAccount'
 import { Coin } from './generated/Coin'
 import { DebtAuctionHouse } from './generated/DebtAuctionHouse'
 import { DsProxy } from './generated/DSProxy'
-import { EnglishCollateralAuctionHouse } from './generated/EnglishCollateralAuctionHouse'
-import { EthJoin } from './generated/ETHJoin'
 import { FixedDiscountCollateralAuctionHouse } from './generated/FixedDiscountCollateralAuctionHouse'
+import { EthJoin } from './generated/ETHJoin'
 import { GebProxyRegistry } from './generated/GebProxyRegistry'
 import { GebSafeManager } from './generated/GebSafeManager'
 import { GetSafes } from './generated/GetSafes'
@@ -32,9 +31,11 @@ import { Weth9 } from './generated/WETH9_'
 import { RateSetter } from './generated/RateSetter'
 import { PiRawPerSecondCalculator } from './generated/PIRawPerSecondCalculator'
 import { Dsm } from './generated/DSM'
-import { GebUniswapRollingDistributionIncentives } from './generated/GebUniswapRollingDistributionIncentives'
+import { RollingDistributionIncentives } from './generated/RollingDistributionIncentives'
 import { GebProxyLeverageActions } from './generated/GebProxyLeverageActions'
 import { GebProxyIncentivesActions } from './generated/GebProxyIncentivesActions'
+import { BurningSurplusAuctionHouse } from './generated/BurningSurplusAuctionHouse'
+import { RecyclingSurplusAuctionHouse } from './generated/RecyclingSurplusAuctionHouse'
 
 export {
     // Factory
@@ -47,7 +48,6 @@ export {
     Coin,
     DebtAuctionHouse,
     DsProxy,
-    EnglishCollateralAuctionHouse,
     EthJoin,
     FixedDiscountCollateralAuctionHouse,
     GebProxyRegistry,
@@ -73,7 +73,9 @@ export {
     ChainlinkMedianEthusd,
     UniswapConsecutiveSlotsMedianRaiusd,
     Weth9,
-    GebUniswapRollingDistributionIncentives,
+    RollingDistributionIncentives,
     GebProxyLeverageActions,
     GebProxyIncentivesActions,
+    BurningSurplusAuctionHouse,
+    RecyclingSurplusAuctionHouse,
 }

@@ -12,7 +12,6 @@ import {
     BasicCollateralJoin,
     CoinJoin,
     GebProxyRegistry,
-    EnglishCollateralAuctionHouse,
     FixedDiscountCollateralAuctionHouse,
     DsToken,
     Weth9,
@@ -22,7 +21,7 @@ import {
     Osm,
     Dsm,
     StabilityFeeTreasury,
-    GebUniswapRollingDistributionIncentives,
+    RollingDistributionIncentives,
 } from '.'
 import {
     GebProviderInterface,
@@ -50,7 +49,7 @@ export class ContractApis {
     public joinCoin: CoinJoin
     public coin: Coin
     public proxyRegistry: GebProxyRegistry
-    public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse | EnglishCollateralAuctionHouse
+    public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse
     public protocolToken: DsToken
     public medianizerEth: ChainlinkMedianEthusd 
     public medianizerCoin: UniswapConsecutiveSlotsMedianRaiusd
@@ -59,7 +58,7 @@ export class ContractApis {
     public fsmEth: Osm 
     public fsmCoin: Dsm 
     public weth: Weth9
-    public uniswapIncentive: GebUniswapRollingDistributionIncentives
+    public uniswapIncentive: RollingDistributionIncentives
 
 
     constructor(
@@ -93,6 +92,6 @@ export class ContractApis {
         this.fsmEth = new Osm(addressList.FEED_SECURITY_MODULE_ETH, this.chainProvider)
         this.fsmCoin = new Dsm(addressList.FEED_SECURITY_MODULE_RAI, this.chainProvider)
         this.weth = new Weth9(addressList.ETH, this.chainProvider)
-        this.uniswapIncentive = new GebUniswapRollingDistributionIncentives(addressList.GEB_INCENTIVES_MINER, this.chainProvider)
+        this.uniswapIncentive = new RollingDistributionIncentives(addressList.GEB_INCENTIVES_MINER, this.chainProvider)
     }
 }
