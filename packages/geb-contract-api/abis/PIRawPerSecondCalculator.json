@@ -66,15 +66,6 @@
     },
     {
         "inputs": [],
-        "name": "adi",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "ag",
         "outputs": [{ "internalType": "int256", "name": "", "type": "int256" }],
         "stateMutability": "view",
@@ -320,15 +311,6 @@
     },
     {
         "inputs": [],
-        "name": "lprad",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "lut",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
@@ -376,15 +358,6 @@
         "name": "modifyParameters",
         "outputs": [],
         "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "mrt",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -494,15 +467,6 @@
     {
         "inputs": [],
         "name": "tlv",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "uprad",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],

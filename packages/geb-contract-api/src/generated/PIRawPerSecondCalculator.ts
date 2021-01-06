@@ -35,16 +35,6 @@ export class PiRawPerSecondCalculator extends BaseContractAPI {
         return this.getTransactionRequest(abi, [account])
     }
 
-    adi(): Promise<BigNumber>
-    adi(multicall: true): MulticallRequest<BigNumber>
-    adi(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"adi","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     ag(): Promise<BigNumber>
     ag(multicall: true): MulticallRequest<BigNumber>
     ag(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
@@ -425,16 +415,6 @@ export class PiRawPerSecondCalculator extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    lprad(): Promise<BigNumber>
-    lprad(multicall: true): MulticallRequest<BigNumber>
-    lprad(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"lprad","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     lut(): Promise<BigNumber>
     lut(multicall: true): MulticallRequest<BigNumber>
     lut(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
@@ -476,16 +456,6 @@ export class PiRawPerSecondCalculator extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"val","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [parameter, val])
-    }
-
-    mrt(): Promise<BigNumber>
-    mrt(multicall: true): MulticallRequest<BigNumber>
-    mrt(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"mrt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     nb(): Promise<BigNumber>
@@ -611,16 +581,6 @@ export class PiRawPerSecondCalculator extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"tlv","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    uprad(): Promise<BigNumber>
-    uprad(multicall: true): MulticallRequest<BigNumber>
-    uprad(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"uprad","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
