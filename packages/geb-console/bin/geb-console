@@ -62,6 +62,8 @@ repl.context.ray = a => geb_admin.utils.decimalShift(a.toString(), 27)
 repl.context.parseWad = a => geb_admin.utils.wadToFixed(a).toString()
 repl.context.parseRad = a => geb_admin.utils.radToFixed(a).toString()
 repl.context.parseRay = a => geb_admin.utils.rayToFixed(a).toString()
+repl.context.now = () => Math.floor(Date.now()/1000)
+
 
 repl.context.info = function (fct) {
     if (typeof fct === 'function') {
