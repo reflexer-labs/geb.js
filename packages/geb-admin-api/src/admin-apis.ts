@@ -8,8 +8,6 @@ import {
     FsmGovernanceInterface,
     GebDeployPauseProxyActions,
     DsProtestPause,
-    SubsidyPool,
-    RemineScheduler,
     GnosisSafe,
 } from '.'
 import {
@@ -35,8 +33,6 @@ export class AdminApis {
     public fsmGovInterface: FsmGovernanceInterface
     public pauseProxyAction: GebDeployPauseProxyActions
     public proxyDeployer: DsProxy
-    public remineScheduler: RemineScheduler
-    public subsidyPool: SubsidyPool
     
 
     constructor(
@@ -58,7 +54,5 @@ export class AdminApis {
         this.fsmGovInterface = new FsmGovernanceInterface(addressList.FSM_GOV_INTERFACE, this.chainProvider)
         this.pauseProxyAction = new GebDeployPauseProxyActions(addressList.PROXY_PAUSE_ACTIONS, this.chainProvider)
         this.proxyDeployer = new DsProxy(addressList.PROXY_DEPLOYER, this.chainProvider)
-        this.remineScheduler = new RemineScheduler(addressList.GEB_INCENTIVES_REMINER, this.chainProvider)
-        this.subsidyPool = new SubsidyPool(addressList.GEB_INCENTIVES_SUBSIDY_POOL, this.chainProvider)
     }
 }

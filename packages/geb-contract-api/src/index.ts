@@ -30,12 +30,13 @@ import { Weth9 } from './generated/WETH9_'
 import { RateSetter } from './generated/RateSetter'
 import { PiRawPerSecondCalculator } from './generated/PIRawPerSecondCalculator'
 import { Dsm } from './generated/DSM'
-import { RollingDistributionIncentives } from './generated/RollingDistributionIncentives'
 import { GebProxyLeverageActions } from './generated/GebProxyLeverageActions'
 import { GebProxyIncentivesActions } from './generated/GebProxyIncentivesActions'
 import { BurningSurplusAuctionHouse } from './generated/BurningSurplusAuctionHouse'
 import { RecyclingSurplusAuctionHouse } from './generated/RecyclingSurplusAuctionHouse'
 import { DsDelegateToken } from './generated/DSDelegateToken'
+import { StakingRewardsFactory } from './generated/StakingRewardsFactory'
+import { StakingRewards } from './generated/StakingRewards'
 
 export {
     // Factory
@@ -72,10 +73,11 @@ export {
     ChainlinkMedianEthusd,
     UniswapConsecutiveSlotsMedianRaiusd,
     Weth9,
-    RollingDistributionIncentives,
     GebProxyLeverageActions,
     GebProxyIncentivesActions,
     BurningSurplusAuctionHouse,
     RecyclingSurplusAuctionHouse,
     DsDelegateToken,
+    StakingRewards,
+    StakingRewardsFactory,
 }

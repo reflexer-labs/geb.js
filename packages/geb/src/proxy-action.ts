@@ -14,7 +14,6 @@ import {
     DsProxy,
     GebProxyActionsGlobalSettlement,
     GebProxyLeverageActions,
-    GebProxyIncentivesActions,
 } from '@reflexer-finance/geb-contract-api'
 import { NULL_ADDRESS } from './utils'
 
@@ -51,7 +50,10 @@ export class GebProxyActions {
     private addressList: ContractList
     private proxyActionCore: GebProxyActionsCore
     private proxyActionGlobalSettlement: GebProxyActionsGlobalSettlement
-    private proxyActionIncentive: GebProxyIncentivesActions
+
+    // TODO: add this back
+    // private proxyActionIncentive: GebProxyIncentivesActions
+
     private proxyActionLeverage: GebProxyLeverageActions
     constructor(
         /**
@@ -80,10 +82,13 @@ export class GebProxyActions {
             this.proxyActionGlobalSettlementAddress,
             this.chainProvider
         )
-        this.proxyActionIncentive = new GebProxyIncentivesActions(
-            this.proxyActionIncentiveAddress,
-            this.chainProvider
-        )
+
+        // TODO: add this back when ready
+        // this.proxyActionIncentive = new GebProxyIncentivesActions(
+        //     this.proxyActionIncentiveAddress,
+        //     this.chainProvider
+        // )
+
         this.proxyActionLeverage = new GebProxyLeverageActions(
             this.proxyActionLeverageAddress,
             this.chainProvider
@@ -803,331 +808,7 @@ export class GebProxyActions {
 
     // ==== Proxy Actions Incentive ====
 
-    exitAndRemoveLiquidity(
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.exitAndRemoveLiquidity(
-                this.addressList.GEB_COIN_JOIN,
-                this.addressList.GEB_INCENTIVES_MINER,
-                this.addressList.UNISWAP_ROUTER,
-                minTokenAmounts
-            )
-        )
-    }
-
-    exitMine(incentives: string): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.exitMine(incentives)
-        )
-    }
-
-    exitRemoveLiquidityRepayDebt(
-        safe: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.exitRemoveLiquidityRepayDebt(
-                this.addressList.SAFE_MANAGER,
-                this.addressList.GEB_COIN_JOIN,
-                safe,
-                this.addressList.GEB_INCENTIVES_MINER,
-                this.addressList.UNISWAP_ROUTER,
-                minTokenAmounts
-            )
-        )
-    }
-
-    generateDebtAndProvideLiquidityStake(
-        ethValue: BigNumberish,
-        safe: BigNumberish,
-        wad: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.generateDebtAndProvideLiquidityStake(
-                BigNumber.from(ethValue),
-                this.addressList.SAFE_MANAGER,
-                this.addressList.GEB_TAX_COLLECTOR,
-                this.addressList.GEB_COIN_JOIN,
-                this.addressList.UNISWAP_ROUTER,
-                this.addressList.GEB_INCENTIVES_MINER,
-                safe,
-                wad,
-                minTokenAmounts
-            )
-        )
-    }
-
-    generateDebtAndProvideLiquidityUniswap(
-        ethValue: BigNumberish,
-        safe: BigNumberish,
-        wad: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.generateDebtAndProvideLiquidityUniswap(
-                BigNumber.from(ethValue),
-                this.addressList.SAFE_MANAGER,
-                this.addressList.GEB_TAX_COLLECTOR,
-                this.addressList.GEB_COIN_JOIN,
-                this.addressList.UNISWAP_ROUTER,
-                safe,
-                wad,
-                minTokenAmounts
-            )
-        )
-    }
-
-    getLockedReward(campaignId: BigNumberish): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.getLockedReward(
-                this.addressList.GEB_INCENTIVES_MINER,
-                campaignId
-            )
-        )
-    }
-
-    harvestReward(campaignId: BigNumberish): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.harvestReward(
-                this.addressList.GEB_INCENTIVES_MINER,
-                campaignId
-            )
-        )
-    }
-
-    lockETHGenerateDebtProvideLiquidityStake(
-        ethValue: BigNumberish,
-        safe: BigNumberish,
-        deltaWad: BigNumberish,
-        liquidityWad: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.lockETHGenerateDebtProvideLiquidityStake(
-                BigNumber.from(ethValue),
-                this.addressList.SAFE_MANAGER,
-                this.addressList.GEB_TAX_COLLECTOR,
-                this.addressList.GEB_JOIN_ETH_A,
-                this.addressList.GEB_COIN_JOIN,
-                this.addressList.UNISWAP_ROUTER,
-                this.addressList.GEB_INCENTIVES_MINER,
-                safe,
-                deltaWad,
-                liquidityWad,
-                minTokenAmounts
-            )
-        )
-    }
-
-    lockETHGenerateDebtProvideLiquidityUniswap(
-        ethValue: BigNumberish,
-        safe: BigNumberish,
-        deltaWad: BigNumberish,
-        liquidityWad: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.lockETHGenerateDebtProvideLiquidityUniswap(
-                BigNumber.from(ethValue),
-                this.addressList.SAFE_MANAGER,
-                this.addressList.GEB_TAX_COLLECTOR,
-                this.addressList.GEB_JOIN_ETH_A,
-                this.addressList.GEB_COIN_JOIN,
-                this.addressList.UNISWAP_ROUTER,
-                safe,
-                deltaWad,
-                liquidityWad,
-                minTokenAmounts
-            )
-        )
-    }
-
-    openLockETHGenerateDebtProvideLiquidityStake(
-        ethValue: BigNumberish,
-        deltaWad: BigNumberish,
-        collateralType: string,
-        liquidityWad: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.openLockETHGenerateDebtProvideLiquidityStake(
-                BigNumber.from(ethValue),
-                this.addressList.SAFE_MANAGER,
-                this.addressList.GEB_TAX_COLLECTOR,
-                this.addressList.GEB_JOIN_ETH_A,
-                this.addressList.GEB_COIN_JOIN,
-                this.addressList.UNISWAP_ROUTER,
-                this.addressList.GEB_INCENTIVES_MINER,
-                collateralType,
-                deltaWad,
-                liquidityWad,
-                minTokenAmounts
-            )
-        )
-    }
-
-    openLockETHGenerateDebtProvideLiquidityUniswap(
-        ethValue: BigNumberish,
-        deltaWad: BigNumberish,
-        collateralType: string,
-        liquidityWad: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.openLockETHGenerateDebtProvideLiquidityUniswap(
-                BigNumber.from(ethValue),
-                this.addressList.SAFE_MANAGER,
-                this.addressList.GEB_TAX_COLLECTOR,
-                this.addressList.GEB_JOIN_ETH_A,
-                this.addressList.GEB_COIN_JOIN,
-                this.addressList.UNISWAP_ROUTER,
-                collateralType,
-                deltaWad,
-                liquidityWad,
-                minTokenAmounts
-            )
-        )
-    }
-
-    provideLiquidityUniswap(
-        ethValue: BigNumberish,
-        wad: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.provideLiquidityUniswap(
-                BigNumber.from(ethValue),
-                this.addressList.GEB_COIN_JOIN,
-                this.addressList.UNISWAP_ROUTER,
-                wad,
-                minTokenAmounts
-            )
-        )
-    }
-
-    removeLiquidityUniswap(
-        systemCoin: string,
-        value: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.removeLiquidityUniswap(
-                this.addressList.UNISWAP_ROUTER,
-                systemCoin,
-                value,
-                minTokenAmounts
-            )
-        )
-    }
-
-    stakeInMine(wad: BigNumberish): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.stakeInMine(
-                this.addressList.GEB_INCENTIVES_MINER,
-                wad
-            )
-        )
-    }
-
-    withdrawAndHarvest(
-        value: BigNumberish,
-        campaignId: BigNumberish
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.withdrawAndHarvest(
-                this.addressList.GEB_INCENTIVES_MINER,
-                value,
-                campaignId
-            )
-        )
-    }
-
-    withdrawAndRemoveLiquidity(
-        value: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.withdrawAndRemoveLiquidity(
-                this.addressList.GEB_COIN_JOIN,
-                this.addressList.GEB_INCENTIVES_MINER,
-                value,
-                this.addressList.UNISWAP_ROUTER,
-                minTokenAmounts
-            )
-        )
-    }
-
-    withdrawFromMine(value: BigNumberish): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.withdrawFromMine(
-                this.addressList.GEB_INCENTIVES_MINER,
-                value
-            )
-        )
-    }
-
-    withdrawRemoveLiquidityRepayDebt(
-        safe: BigNumberish,
-        value: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.withdrawRemoveLiquidityRepayDebt(
-                this.addressList.SAFE_MANAGER,
-                this.addressList.GEB_COIN_JOIN,
-                safe,
-                this.addressList.GEB_INCENTIVES_MINER,
-                value,
-                this.addressList.UNISWAP_ROUTER,
-                minTokenAmounts
-            )
-        )
-    }
-
-    getRewards(campaignId: BigNumberish): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.getRewards(
-                this.addressList.GEB_INCENTIVES_MINER,
-                campaignId
-            )
-        )
-    }
-
-    provideLiquidityStake(
-        ethValue: BigNumberish,
-        wad: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.provideLiquidityStake(
-                ethValue,
-                this.addressList.GEB_COIN_JOIN,
-                this.addressList.UNISWAP_ROUTER,
-                this.addressList.GEB_INCENTIVES_MINER,
-                wad,
-                minTokenAmounts
-            )
-        )
-    }
-
-    withdrawHarvestRemoveLiquidity(
-        amount: BigNumberish,
-        campaignId: BigNumberish,
-        minTokenAmounts: [BigNumberish, BigNumberish]
-    ): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionIncentive.withdrawHarvestRemoveLiquidity(
-                this.addressList.GEB_INCENTIVES_MINER,
-                this.addressList.UNISWAP_ROUTER,
-                this.addressList.GEB_COIN,
-                amount,
-                campaignId,
-                minTokenAmounts
-            )
-        )
-    }
+    // TODO: When the contract is ready
 
     // ==== Proxy Actions Leverage ====
 

@@ -2,6 +2,7 @@ import {
     ContractApis,
     Multicall,
     Erc20,
+    StakingRewards,
 } from '@reflexer-finance/geb-contract-api'
 import {
     GebProviderInterface,
@@ -259,6 +260,25 @@ export class Geb {
      */
     public getErc20Contract(tokenAddress: string): Erc20 {
         return new Erc20(tokenAddress, this.provider)
+    }
+    /**
+     *  Help function to get the contract object of an incentive campaign given its number ID
+     *
+     * @param  {number} campaignNumber incremental ID of the campaign
+     *
+     * @returns StakingRewards
+     */
+    public async getIncentiveCampaignContract(campaignNumber: number) {
+        const address = (
+            await this.contracts.stakingRewardFactory.stakingRewardsInfo(
+                campaignNumber
+            )
+        ).stakingRewards
+
+        if (address === NULL_ADDRESS) {
+            throw new Error('Campaign does not exists')
+        }
+        return new StakingRewards(address, this.provider)
     }
 
     // Multicall overloads, typing support for up to 7 calls.

@@ -139,20 +139,23 @@ export const testsProxyActionWithGenericGebProvider = (
                     return
                 }
 
-                const tx = proxy.openLockETHGenerateDebtProvideLiquidityStake(
-                    '1',
-                    '1',
-                    ETH_A,
-                    '1',
-                    ['0', '0']
-                )
+                // TODO: Add this test back
+                console.log('TODO: Add back incentive proxy action when ready.')
 
-                try {
-                    await gebProvider.ethCall(tx)
-                    assert.fail()
-                } catch (err) {
-                    assert.ok(true)
-                }
+                // const tx = proxy.openLockETHGenerateDebtProvideLiquidityStake(
+                //     '1',
+                //     '1',
+                //     ETH_A,
+                //     '1',
+                //     ['0', '0']
+                // )
+
+                // try {
+                //     await gebProvider.ethCall(tx)
+                //     assert.fail()
+                // } catch (err) {
+                //     assert.ok(true)
+                // }
             })
         })
     })
