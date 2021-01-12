@@ -146,7 +146,7 @@ await wallet.sendTransaction(tx)
 ```
 
 ### Multicall
-Useful to bundle read-only calls in a single RPC call 
+Useful to bundle read-only calls in a single RPC call: 
 ```typescript
 const [ globalDebt, collateralInfo ] = await geb.multiCall([
     geb.contracts.safeEngine.globalDebt(true), // !! Note the last parameter set to true.
