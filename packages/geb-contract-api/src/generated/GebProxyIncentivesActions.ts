@@ -264,26 +264,12 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         )
     }
 
-    getLockedReward(
-        incentives: string,
-        campaignId: BigNumberish
-    ): TransactionRequest {
+    getRewards(incentives: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"},{"internalType":"uint256","name":"campaignId","type":"uint256"}],"name":"getLockedReward","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"}],"name":"getRewards","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [incentives, campaignId])
-    }
-
-    getRewards(
-        incentives: string,
-        campaignId: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"},{"internalType":"uint256","name":"campaignId","type":"uint256"}],"name":"getRewards","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [incentives, campaignId])
+        return this.getTransactionRequest(abi, [incentives])
     }
 
     getWethPair(uniswapRouter: string, token: string): Promise<string>
@@ -302,17 +288,6 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"uniswapRouter","type":"address"},{"internalType":"address","name":"token","type":"address"}],"name":"getWethPair","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [uniswapRouter, token], multicall)
-    }
-
-    harvestReward(
-        incentives: string,
-        campaignId: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"},{"internalType":"uint256","name":"campaignId","type":"uint256"}],"name":"harvestReward","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [incentives, campaignId])
     }
 
     lockETH(
@@ -418,6 +393,17 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
             ],
             BigNumber.from(ethValue)
         )
+    }
+
+    migrateCampaign(
+        _oldIncentives: string,
+        _newIncentives: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"_oldIncentives","type":"address"},{"internalType":"address","name":"_newIncentives","type":"address"}],"name":"migrateCampaign","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [_oldIncentives, _newIncentives])
     }
 
     modifySAFECollateralization(
@@ -737,14 +723,13 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
 
     withdrawAndHarvest(
         incentives: string,
-        value: BigNumberish,
-        campaignId: BigNumberish
+        value: BigNumberish
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"},{"internalType":"uint256","name":"campaignId","type":"uint256"}],"name":"withdrawAndHarvest","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"withdrawAndHarvest","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [incentives, value, campaignId])
+        return this.getTransactionRequest(abi, [incentives, value])
     }
 
     withdrawAndRemoveLiquidity(
@@ -783,19 +768,17 @@ export class GebProxyIncentivesActions extends BaseContractAPI {
         uniswapRouter: string,
         systemCoin: string,
         value: BigNumberish,
-        campaignId: BigNumberish,
         minTokenAmounts: [BigNumberish, BigNumberish]
     ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"},{"internalType":"address","name":"uniswapRouter","type":"address"},{"internalType":"address","name":"systemCoin","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"},{"internalType":"uint256","name":"campaignId","type":"uint256"},{"internalType":"uint256[2]","name":"minTokenAmounts","type":"uint256[2]"}],"name":"withdrawHarvestRemoveLiquidity","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"incentives","type":"address"},{"internalType":"address","name":"uniswapRouter","type":"address"},{"internalType":"address","name":"systemCoin","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"},{"internalType":"uint256[2]","name":"minTokenAmounts","type":"uint256[2]"}],"name":"withdrawHarvestRemoveLiquidity","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [
             incentives,
             uniswapRouter,
             systemCoin,
             value,
-            campaignId,
             minTokenAmounts,
         ])
     }
