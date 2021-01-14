@@ -29,7 +29,6 @@ import { Osm } from './generated/OSM'
 import { Weth9 } from './generated/WETH9_'
 import { RateSetter } from './generated/RateSetter'
 import { PiRawPerSecondCalculator } from './generated/PIRawPerSecondCalculator'
-import { Dsm } from './generated/DSM'
 import { GebProxyLeverageActions } from './generated/GebProxyLeverageActions'
 import { GebProxyIncentivesActions } from './generated/GebProxyIncentivesActions'
 import { BurningSurplusAuctionHouse } from './generated/BurningSurplusAuctionHouse'
@@ -66,7 +65,6 @@ export {
     Multicall,
     Erc20,
     Osm,
-    Dsm,
     DsValue,
     PiRawPerSecondCalculator,
     RateSetter,
