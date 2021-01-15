@@ -36,6 +36,7 @@ import { RecyclingSurplusAuctionHouse } from './generated/RecyclingSurplusAuctio
 import { DsDelegateToken } from './generated/DSDelegateToken'
 import { StakingRewardsFactory } from './generated/StakingRewardsFactory'
 import { StakingRewards } from './generated/StakingRewards'
+import { UniswapV2Pair } from './generated/UniswapV2Pair'
 
 export {
     // Factory
@@ -78,4 +79,5 @@ export {
     DsDelegateToken,
     StakingRewards,
     StakingRewardsFactory,
+    UniswapV2Pair,
 }

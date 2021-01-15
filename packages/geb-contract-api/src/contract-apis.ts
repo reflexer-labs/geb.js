@@ -21,6 +21,7 @@ import {
     StabilityFeeTreasury,
     DsDelegateToken,
     StakingRewardsFactory,
+    UniswapV2Pair,
 } from '.'
 import {
     GebProviderInterface,
@@ -57,6 +58,8 @@ export class ContractApis {
     public fsmEth: Osm 
     public weth: Weth9
     public stakingRewardFactory: StakingRewardsFactory
+    public medianizerCoinSpot: UniswapConsecutiveSlotsMedianRaiusd
+    public uniswapPairCoinEth: UniswapV2Pair
 
 
     constructor(
@@ -91,5 +94,7 @@ export class ContractApis {
         this.weth = new Weth9(addressList.ETH, this.chainProvider)
         this.protocolToken = new DsDelegateToken(addressList.GEB_PROT, this.chainProvider)
         this.stakingRewardFactory = new StakingRewardsFactory(addressList.GEB_INCENTIVES, this.chainProvider)
+        this.uniswapPairCoinEth = new UniswapV2Pair(addressList.GEB_COIN_UNISWAP_POOL, this.chainProvider)
+        this.medianizerCoinSpot = new UniswapConsecutiveSlotsMedianRaiusd(addressList.SPOT_RAI, this.chainProvider)
     }
 }
