@@ -20,7 +20,7 @@ npm install ethers
 
 ## Documentation
 
-Full API documentation is available [here](https://docs.reflexer.finance/geb-js/gettingstarted).
+Full API documentation is available [here](https://docs.reflexer.finance/geb-js/getting-started).
 
 ## Examples
 
