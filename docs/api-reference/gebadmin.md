@@ -25,7 +25,7 @@ import { GebAdmin } from "@reflexer-finance/geb-admin"
 \+ **new GebAdmin**(`network`: GebDeployment, `provider`: GebProviderInterface | Provider): *[GebAdmin](gebadmin.md)*
 
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:52](https://github.com/reflexer-labs/geb.js/blob/30c41df/packages/geb-admin/src/geb-admin.ts#L52)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:52](https://github.com/reflexer-labs/geb.js/blob/22d068f/packages/geb-admin/src/geb-admin.ts#L52)*
 
 **Parameters:**
 
@@ -107,7 +107,7 @@ ___
 
 • **contractsAdmin**: *AdminApis*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:52](https://github.com/reflexer-labs/geb.js/blob/30c41df/packages/geb-admin/src/geb-admin.ts#L52)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:52](https://github.com/reflexer-labs/geb.js/blob/22d068f/packages/geb-admin/src/geb-admin.ts#L52)*
 
 Object containing all GEB admin contracts instances for low level interactions.
 It currently has the following contracts:
@@ -319,7 +319,7 @@ ___
 
 ▸ **gnosisSafeThreshold1SubmitTransaction**(`sender`: string, `to`: string, `data`: string): *TransactionRequest*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:203](https://github.com/reflexer-labs/geb.js/blob/30c41df/packages/geb-admin/src/geb-admin.ts#L203)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:203](https://github.com/reflexer-labs/geb.js/blob/22d068f/packages/geb-admin/src/geb-admin.ts#L203)*
 
 Submit a transaction to a gnosis safe directly executed. Works only if the threshold on the safe is 1.
 
@@ -365,7 +365,7 @@ ___
 
 ▸ **verifyWebScheduleCallcode**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number, `calldata`: string, `description?`: string): *Promise‹boolean›*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:75](https://github.com/reflexer-labs/geb.js/blob/30c41df/packages/geb-admin/src/geb-admin.ts#L75)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:75](https://github.com/reflexer-labs/geb.js/blob/22d068f/packages/geb-admin/src/geb-admin.ts#L75)*
 
 Verifies a transaction for scheduling proposals
 
@@ -389,7 +389,7 @@ ___
 
 ▸ **webExecuteProposal**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number): *Promise‹TransactionRequest›*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:99](https://github.com/reflexer-labs/geb.js/blob/30c41df/packages/geb-admin/src/geb-admin.ts#L99)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:99](https://github.com/reflexer-labs/geb.js/blob/22d068f/packages/geb-admin/src/geb-admin.ts#L99)*
 
 Encodes executing a proposal in dspause for web GUI
 
@@ -411,7 +411,7 @@ ___
 
 ▸ **webScheduleProposal**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number, `description?`: string): *Promise‹object›*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:124](https://github.com/reflexer-labs/geb.js/blob/30c41df/packages/geb-admin/src/geb-admin.ts#L124)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:124](https://github.com/reflexer-labs/geb.js/blob/22d068f/packages/geb-admin/src/geb-admin.ts#L124)*
 
 Encodes scheduling a proposal in dspause for web GUI
 
@@ -434,7 +434,7 @@ ___
 
 ▸ **webTestScheduleProposal**(`govFunctionAbi`: string, `params`: any[], `earliestExecutionTime`: number, `description?`: string): *Promise‹void›*
 
-*Defined in [packages/geb-admin/src/geb-admin.ts:173](https://github.com/reflexer-labs/geb.js/blob/30c41df/packages/geb-admin/src/geb-admin.ts#L173)*
+*Defined in [packages/geb-admin/src/geb-admin.ts:173](https://github.com/reflexer-labs/geb.js/blob/22d068f/packages/geb-admin/src/geb-admin.ts#L173)*
 
 Test the execution of a proposal about to be schedule in dspause with web GUI
 
