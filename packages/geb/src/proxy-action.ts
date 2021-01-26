@@ -15,6 +15,8 @@ import {
     GebProxyActionsGlobalSettlement,
     GebProxyLeverageActions,
     GebProxyIncentivesActions,
+    GebProxyDebtAuctionActions,
+    GebProxySurplusAuctionActions,
 } from '@reflexer-finance/geb-contract-api'
 import { NULL_ADDRESS } from './utils'
 
@@ -48,13 +50,23 @@ export class GebProxyActions {
      */
     public proxyActionLeverageAddress: string
 
+    /**
+     * Address of the proxy action contract for debt auctions.
+     */
+    public proxyActionDebtAuctionAddress: string
+
+    /**
+     * Address of the proxy action contract for surplus auctions.
+     */
+    public proxyActionSurplusAuctionAddress: string
+
     private addressList: ContractList
     private proxyActionCore: GebProxyActionsCore
     private proxyActionGlobalSettlement: GebProxyActionsGlobalSettlement
-
     private proxyActionIncentive: GebProxyIncentivesActions
-
     private proxyActionLeverage: GebProxyLeverageActions
+    private proxyActionDebtAuction: GebProxyDebtAuctionActions
+    private proxyActionSurplusAuction: GebProxySurplusAuctionActions
     constructor(
         /**
          * Address of the underlying proxy
@@ -72,6 +84,8 @@ export class GebProxyActions {
         this.proxyActionGlobalSettlementAddress = this.addressList.PROXY_ACTIONS_GLOBAL_SETTLEMENT
         this.proxyActionIncentiveAddress = this.addressList.PROXY_ACTIONS_INCENTIVES
         this.proxyActionLeverageAddress = this.addressList.LEVERAGE_PROXY_ACTION
+        this.proxyActionDebtAuctionAddress = this.addressList.PROXY_DEBT_AUCTION_ACTIONS
+        this.proxyActionSurplusAuctionAddress = this.addressList.PROXY_SURPLUS_AUCTION_ACTIONS
 
         // Proxy contract APIs
         this.proxyActionCore = new GebProxyActionsCore(
@@ -90,6 +104,14 @@ export class GebProxyActions {
 
         this.proxyActionLeverage = new GebProxyLeverageActions(
             this.proxyActionLeverageAddress,
+            this.chainProvider
+        )
+        this.proxyActionDebtAuction = new GebProxyDebtAuctionActions(
+            this.proxyActionDebtAuctionAddress,
+            this.chainProvider
+        )
+        this.proxyActionSurplusAuction = new GebProxySurplusAuctionActions(
+            this.proxyActionSurplusAuctionAddress,
             this.chainProvider
         )
     }
@@ -1257,6 +1279,78 @@ export class GebProxyActions {
                 _amount0,
                 _amount1,
                 _data
+            )
+        )
+    }
+
+    // ==== Proxy Actions Debt Auctions ====
+
+    debtAuctionStartAndDecreaseSoldAmount(
+        amountToBuy: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionDebtAuction.startAndDecreaseSoldAmount(
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.GEB_ACCOUNTING_ENGINE,
+                amountToBuy
+            )
+        )
+    }
+
+    debtAuctionDecreaseSoldAmount(
+        amountToBuy: BigNumberish,
+        auctionId: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionDebtAuction.decreaseSoldAmount(
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.GEB_DEBT_AUCTION_HOUSE,
+                auctionId,
+                amountToBuy
+            )
+        )
+    }
+
+    debtAuctionSettleAuction(auctionId: BigNumberish): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionDebtAuction.settleAuction(
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.GEB_DEBT_AUCTION_HOUSE,
+                auctionId
+            )
+        )
+    }
+
+    // ==== Proxy Actions Surplus Auctions ====
+
+    surplusStartAndIncreaseBidSize(bidSize: BigNumberish): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSurplusAuction.startAndIncreaseBidSize(
+                this.addressList.GEB_ACCOUNTING_ENGINE,
+                bidSize
+            )
+        )
+    }
+
+    surplusIncreaseBidSize(
+        bidSize: BigNumberish,
+        auctionId: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSurplusAuction.increaseBidSize(
+                this.addressList.GEB_SURPLUS_AUCTION_HOUSE,
+                auctionId,
+                bidSize
+            )
+        )
+    }
+
+    surplusSettleAuction(auctionId: BigNumberish): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSurplusAuction.settleAuction(
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.GEB_SURPLUS_AUCTION_HOUSE,
+                auctionId
             )
         )
     }

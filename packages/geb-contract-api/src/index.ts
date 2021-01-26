@@ -37,6 +37,8 @@ import { DsDelegateToken } from './generated/DSDelegateToken'
 import { StakingRewardsFactory } from './generated/StakingRewardsFactory'
 import { StakingRewards } from './generated/StakingRewards'
 import { UniswapV2Pair } from './generated/UniswapV2Pair'
+import { GebProxyDebtAuctionActions } from './generated/GebProxyDebtAuctionActions'
+import { GebProxySurplusAuctionActions } from './generated/GebProxySurplusAuctionActions'
 
 export {
     // Factory
@@ -80,4 +82,6 @@ export {
     StakingRewards,
     StakingRewardsFactory,
     UniswapV2Pair,
+    GebProxyDebtAuctionActions,
+    GebProxySurplusAuctionActions,
 }
