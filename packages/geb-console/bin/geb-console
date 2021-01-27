@@ -32,8 +32,8 @@ if (process.env.RPC_URL) {
 
 console.log('\nContext objects:')
 console.log('- geb                        - ethers')
-console.log('- gebAdmin                   - now()')
-console.log('- contracts                  - provider')
+console.log('- contracts                  - now()')
+console.log('- wallet                     - provider')
 console.log('- BigNumber                  - info(func)')
 console.log('- ETH_A                      - WAD')
 console.log('- RAD                        - RAY')
@@ -45,8 +45,7 @@ console.log('- parseRad(<BN>)\n')
 var repl = repl.start({ prompt: '🗿 > ', useGlobal: true })
 
 repl.context.provider = new ethers.ethers.providers.StaticJsonRpcProvider(rpcUrl)
-repl.context.geb = new geb_admin.Geb(network, repl.context.provider)
-repl.context.gebAdmin = new geb_admin.GebAdmin(network, repl.context.provider)
+repl.context.geb = new geb_admin.GebAdmin(network, repl.context.provider)
 repl.context.ETH_A = geb_admin.utils.ETH_A
 repl.context.WAD = geb_admin.utils.WAD
 repl.context.RAD = geb_admin.utils.RAD
