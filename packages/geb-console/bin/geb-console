@@ -32,7 +32,7 @@ if (process.env.RPC_URL) {
 
 console.log('\nContext objects:')
 console.log('- geb                        - ethers')
-console.log('- gebAdmin                   - wallet')
+console.log('- gebAdmin                   - now()')
 console.log('- contracts                  - provider')
 console.log('- BigNumber                  - info(func)')
 console.log('- ETH_A                      - WAD')
