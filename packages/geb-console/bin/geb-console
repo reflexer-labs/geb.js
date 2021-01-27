@@ -142,14 +142,26 @@ repl.context.metamask = function (tx) {
                             alert(message)
                         })
                     }
-                    // Gas estimate and send the transaction
-                    provider.estimateGas(tx).then(g => {
-                        // Add 10% and set the gas limit
-                        tx.gasLimit = g.mul(11).div(10)
-                        signer.sendTransaction(tx).then(p => {
-                            document.getElementById("hash").innerHTML = 'Transaction hash: ' + p.hash
+
+                    // Set the transaction in the web page for feedback
+                    const setTxHashOnPage = (hash) => 
+                      document.getElementById("hash").innerHTML = 'Transaction hash: ' + hash
+
+                    // Send the transaction
+                    if(tx.gas || tx.gasLimit) {
+                        // Send the transaction without gas estimation
+                        tx.gasLimit = ethers.BigNumber.from(tx.gas || tx.gasLimit).toHexString()
+                        delete tx.gas
+                        console.log(tx)
+                        signer.sendTransaction(tx).then(p => setTxHashOnPage(p.hash)).catch(catchRevert)
+                    } else {
+                        // Gas estimate and then send the transaction
+                        provider.estimateGas(tx).then(g => {
+                            // Add 10% and set the gas limit
+                            tx.gasLimit = g.mul(11).div(10)
+                            signer.sendTransaction(tx).then(p => setTxHashOnPage(p.hash)).catch(catchRevert)
                         }).catch(catchRevert)
-                    }).catch(catchRevert)
+                    }
                 }
                 main()
             </script>
