@@ -55,13 +55,13 @@
             {
                 "indexed": false,
                 "internalType": "address",
-                "name": "finalFeeReceiver",
+                "name": "feeReceiver",
                 "type": "address"
             },
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "reward",
+                "name": "amount",
                 "type": "uint256"
             }
         ],
@@ -99,7 +99,7 @@
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "data",
+                "name": "val",
                 "type": "uint256"
             }
         ],
@@ -124,25 +124,6 @@
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "address",
-                "name": "feeReceiver",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "RewardCaller",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
                 "internalType": "uint256",
                 "name": "medianPrice",
                 "type": "uint256"
@@ -158,12 +139,42 @@
         "type": "event"
     },
     {
+        "inputs": [],
+        "name": "RAY",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "WAD",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             { "internalType": "address", "name": "account", "type": "address" }
         ],
         "name": "addAuthorization",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "x", "type": "uint256" },
+            { "internalType": "uint256", "name": "y", "type": "uint256" }
+        ],
+        "name": "addition",
+        "outputs": [
+            { "internalType": "uint256", "name": "z", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
         "type": "function"
     },
     {
@@ -200,7 +211,18 @@
         "type": "function"
     },
     {
-        "inputs": [],
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "timeOfLastUpdate",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "defaultDelayBetweenCalls",
+                "type": "uint256"
+            }
+        ],
         "name": "getCallerReward",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
@@ -256,6 +278,18 @@
     },
     {
         "inputs": [
+            { "internalType": "uint256", "name": "x", "type": "uint256" },
+            { "internalType": "uint256", "name": "y", "type": "uint256" }
+        ],
+        "name": "minimum",
+        "outputs": [
+            { "internalType": "uint256", "name": "z", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
             {
                 "internalType": "bytes32",
                 "name": "parameter",
@@ -290,6 +324,18 @@
         "type": "function"
     },
     {
+        "inputs": [
+            { "internalType": "uint256", "name": "x", "type": "uint256" },
+            { "internalType": "uint256", "name": "y", "type": "uint256" }
+        ],
+        "name": "multiply",
+        "outputs": [
+            { "internalType": "uint256", "name": "z", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "perSecondCallerRewardIncrease",
         "outputs": [
@@ -305,6 +351,40 @@
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "x", "type": "uint256" }
+        ],
+        "name": "rad",
+        "outputs": [
+            { "internalType": "uint256", "name": "z", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "x", "type": "uint256" }
+        ],
+        "name": "ray",
+        "outputs": [
+            { "internalType": "uint256", "name": "z", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "x", "type": "uint256" },
+            { "internalType": "uint256", "name": "y", "type": "uint256" }
+        ],
+        "name": "rdivide",
+        "outputs": [
+            { "internalType": "uint256", "name": "z", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
         "type": "function"
     },
     {
@@ -326,12 +406,49 @@
         "type": "function"
     },
     {
+        "inputs": [
+            { "internalType": "uint256", "name": "x", "type": "uint256" },
+            { "internalType": "uint256", "name": "y", "type": "uint256" }
+        ],
+        "name": "rmultiply",
+        "outputs": [
+            { "internalType": "uint256", "name": "z", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "x", "type": "uint256" },
+            { "internalType": "uint256", "name": "n", "type": "uint256" },
+            { "internalType": "uint256", "name": "base", "type": "uint256" }
+        ],
+        "name": "rpower",
+        "outputs": [
+            { "internalType": "uint256", "name": "z", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "staleThreshold",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "x", "type": "uint256" },
+            { "internalType": "uint256", "name": "y", "type": "uint256" }
+        ],
+        "name": "subtract",
+        "outputs": [
+            { "internalType": "uint256", "name": "z", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
         "type": "function"
     },
     {
@@ -376,6 +493,30 @@
         "name": "updateResult",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "x", "type": "uint256" },
+            { "internalType": "uint256", "name": "y", "type": "uint256" }
+        ],
+        "name": "wdivide",
+        "outputs": [
+            { "internalType": "uint256", "name": "z", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "x", "type": "uint256" },
+            { "internalType": "uint256", "name": "y", "type": "uint256" }
+        ],
+        "name": "wmultiply",
+        "outputs": [
+            { "internalType": "uint256", "name": "z", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
         "type": "function"
     }
 ]
