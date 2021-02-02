@@ -56,6 +56,6 @@ export class AdminApis {
         this.fsmGovInterface = new FsmGovernanceInterface(addressList.FSM_GOV_INTERFACE, this.chainProvider)
         this.pauseProxyAction = new GebDeployPauseProxyActions(addressList.PROXY_PAUSE_ACTIONS, this.chainProvider)
         this.proxyDeployer = new DsProxy(addressList.PROXY_DEPLOYER, this.chainProvider)
-        this.debtCeilingSetter = new SingleSpotDebtCeilingSetter(addressList.GEB_DEBT_CEILING_SETTER, this.chainProvider)
+        this.debtCeilingSetter = new SingleSpotDebtCeilingSetter(addressList.GEB_SINGLE_CEILING_SETTER, this.chainProvider)
     }
 }
