@@ -56,6 +56,16 @@ export class DsValue extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
+    priceSource(): Promise<string>
+    priceSource(multicall: true): MulticallRequest<string>
+    priceSource(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"priceSource","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     read(): Promise<BigNumber>
     read(multicall: true): MulticallRequest<BigNumber>
     read(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {

@@ -21,6 +21,18 @@ export class RecyclingSurplusAuctionHouse extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
+    SURPLUS_AUCTION_TYPE(): Promise<string>
+    SURPLUS_AUCTION_TYPE(multicall: true): MulticallRequest<string>
+    SURPLUS_AUCTION_TYPE(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"SURPLUS_AUCTION_TYPE","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore

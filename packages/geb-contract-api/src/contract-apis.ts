@@ -22,6 +22,7 @@ import {
     DsDelegateToken,
     StakingRewardsFactory,
     UniswapV2Pair,
+    BurningSurplusAuctionHouse,
 } from '.'
 import {
     GebProviderInterface,
@@ -41,7 +42,7 @@ export class ContractApis {
     public oracleRelayer: OracleRelayer
     public globalSettlement: GlobalSettlement
     public debtAuctionHouse: DebtAuctionHouse
-    public preSettlementSurplusAuctionHouse: PreSettlementSurplusAuctionHouse
+    public surplusAuctionHouse: PreSettlementSurplusAuctionHouse
     public stabilityFeeTreasury: StabilityFeeTreasury
     public safeManager: GebSafeManager
     public getSafes: GetSafes
@@ -77,7 +78,7 @@ export class ContractApis {
         this.oracleRelayer = new OracleRelayer(addressList.GEB_ORACLE_RELAYER, this.chainProvider)
         this.globalSettlement = new GlobalSettlement(addressList.GEB_GLOBAL_SETTLEMENT, this.chainProvider)
         this.debtAuctionHouse = new DebtAuctionHouse(addressList.GEB_DEBT_AUCTION_HOUSE, this.chainProvider)
-        this.preSettlementSurplusAuctionHouse = new PreSettlementSurplusAuctionHouse(addressList.GEB_SURPLUS_AUCTION_HOUSE, this.chainProvider)
+        this.surplusAuctionHouse = new BurningSurplusAuctionHouse(addressList.GEB_SURPLUS_AUCTION_HOUSE, this.chainProvider)
         this.stabilityFeeTreasury = new StabilityFeeTreasury(addressList.GEB_STABILITY_FEE_TREASURY, this.chainProvider)
         this.safeManager = new GebSafeManager(addressList.SAFE_MANAGER, this.chainProvider)
         this.getSafes = new GetSafes(addressList.GET_SAFES, this.chainProvider)

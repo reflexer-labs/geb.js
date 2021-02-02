@@ -116,18 +116,6 @@ export class Coin extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    changeData(): Promise<BigNumber>
-    changeData(multicall: true): MulticallRequest<BigNumber>
-    changeData(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"changeData","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     decimals(): Promise<number>
     decimals(multicall: true): MulticallRequest<number>
     decimals(multicall?: true): Promise<number> | MulticallRequest<number> {
@@ -144,17 +132,6 @@ export class Coin extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [usr, amount])
-    }
-
-    modifyParameters(
-        parameter: BytesLike,
-        data: BigNumberish
-    ): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [parameter, data])
     }
 
     move(src: string, dst: string, amount: BigNumberish): TransactionRequest {
@@ -236,22 +213,6 @@ export class Coin extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"removeAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [account])
-    }
-
-    setName(name_: string): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"string","name":"name_","type":"string"}],"name":"setName","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [name_])
-    }
-
-    setSymbol(symbol_: string): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"string","name":"symbol_","type":"string"}],"name":"setSymbol","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [symbol_])
     }
 
     symbol(): Promise<string>
