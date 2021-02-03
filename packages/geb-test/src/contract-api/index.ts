@@ -1,3 +1,4 @@
+import assert from 'assert'
 import { GebEthersProvider } from '@reflexer-finance/geb-ethers-provider'
 import { ethers } from 'ethers'
 import { MAKER_KOVAN_NODE, MAKER_MAINNET_NODE } from './../const'
@@ -28,6 +29,16 @@ describe('Test contract API', async () => {
         MAINNET_ADDRESSES,
         'mainnet'
     )
+
     testsWithEthersProvider(MAINNET_ADDRESSES, MAKER_MAINNET_NODE, 'mainnet')
-    testContractPresence('mainnet', MAKER_MAINNET_NODE)
+
+    // TODO: Add this back when RAI launches
+    // testContractPresence('mainnet', MAKER_MAINNET_NODE)
+    // This condition to make sure we don't forget
+    if (
+        MAINNET_ADDRESSES.GEB_SAFE_ENGINE !==
+        '0xf0b7808b940b78bE81ad6F9E075Ce8be4A837E2c'
+    ) {
+        assert.fail('New mainnet, add contract presence check back')
+    }
 })

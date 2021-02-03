@@ -89,8 +89,8 @@ export const testsProxyActionWithGenericGebProvider = (
 
             it('Test complex payable proxy action function', async () => {
                 if (
-                    (addresses.GEB_SAFE_ENGINE =
-                        '0xf0b7808b940b78bE81ad6F9E075Ce8be4A837E2c')
+                    addresses.GEB_SAFE_ENGINE ===
+                    '0xf0b7808b940b78bE81ad6F9E075Ce8be4A837E2c'
                 ) {
                     return
                 }

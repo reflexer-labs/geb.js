@@ -37,16 +37,13 @@ export class RateSetter extends BaseContractAPI {
         return this.getTransactionRequest(abi, [account])
     }
 
-    addition__Uint256Uint256(
-        x: BigNumberish,
-        y: BigNumberish
-    ): Promise<BigNumber>
-    addition__Uint256Uint256(
+    addition(x: BigNumberish, y: BigNumberish): Promise<BigNumber>
+    addition(
         x: BigNumberish,
         y: BigNumberish,
         multicall: true
     ): MulticallRequest<BigNumber>
-    addition__Uint256Uint256(
+    addition(
         x: BigNumberish,
         y: BigNumberish,
         multicall?: true
@@ -54,45 +51,6 @@ export class RateSetter extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"x","type":"uint256"},{"internalType":"uint256","name":"y","type":"uint256"}],"name":"addition","outputs":[{"internalType":"uint256","name":"z","type":"uint256"}],"stateMutability":"pure","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [x, y], multicall)
-    }
-
-    addition__Int256Int256(x: BigNumberish, y: BigNumberish): Promise<BigNumber>
-    addition__Int256Int256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    addition__Int256Int256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"int256","name":"x","type":"int256"},{"internalType":"int256","name":"y","type":"int256"}],"name":"addition","outputs":[{"internalType":"int256","name":"z","type":"int256"}],"stateMutability":"pure","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [x, y], multicall)
-    }
-
-    addition__Uint256Int256(
-        x: BigNumberish,
-        y: BigNumberish
-    ): Promise<BigNumber>
-    addition__Uint256Int256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    addition__Uint256Int256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"x","type":"uint256"},{"internalType":"int256","name":"y","type":"int256"}],"name":"addition","outputs":[{"internalType":"uint256","name":"z","type":"uint256"}],"stateMutability":"pure","type":"function"}
 
         return this.ethCallOrMulticall(abi, [x, y], multicall)
     }
@@ -145,14 +103,39 @@ export class RateSetter extends BaseContractAPI {
         return this.getTransactionRequest(abi, [])
     }
 
-    getCallerReward(): Promise<BigNumber>
-    getCallerReward(multicall: true): MulticallRequest<BigNumber>
     getCallerReward(
+        timeOfLastUpdate: BigNumberish,
+        defaultDelayBetweenCalls: BigNumberish
+    ): Promise<BigNumber>
+    getCallerReward(
+        timeOfLastUpdate: BigNumberish,
+        defaultDelayBetweenCalls: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    getCallerReward(
+        timeOfLastUpdate: BigNumberish,
+        defaultDelayBetweenCalls: BigNumberish,
         multicall?: true
     ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"getCallerReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"timeOfLastUpdate","type":"uint256"},{"internalType":"uint256","name":"defaultDelayBetweenCalls","type":"uint256"}],"name":"getCallerReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(
+            abi,
+            [timeOfLastUpdate, defaultDelayBetweenCalls],
+            multicall
+        )
+    }
+
+    getMarketPrice(): Promise<BigNumber>
+    getMarketPrice(multicall: true): MulticallRequest<BigNumber>
+    getMarketPrice(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"getMarketPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -185,6 +168,18 @@ export class RateSetter extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"latestMarketPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    maxRewardIncreaseDelay(): Promise<BigNumber>
+    maxRewardIncreaseDelay(multicall: true): MulticallRequest<BigNumber>
+    maxRewardIncreaseDelay(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"maxRewardIncreaseDelay","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -241,16 +236,13 @@ export class RateSetter extends BaseContractAPI {
         return this.getTransactionRequest(abi, [parameter, val])
     }
 
-    multiply__Uint256Uint256(
-        x: BigNumberish,
-        y: BigNumberish
-    ): Promise<BigNumber>
-    multiply__Uint256Uint256(
+    multiply(x: BigNumberish, y: BigNumberish): Promise<BigNumber>
+    multiply(
         x: BigNumberish,
         y: BigNumberish,
         multicall: true
     ): MulticallRequest<BigNumber>
-    multiply__Uint256Uint256(
+    multiply(
         x: BigNumberish,
         y: BigNumberish,
         multicall?: true
@@ -258,45 +250,6 @@ export class RateSetter extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"x","type":"uint256"},{"internalType":"uint256","name":"y","type":"uint256"}],"name":"multiply","outputs":[{"internalType":"uint256","name":"z","type":"uint256"}],"stateMutability":"pure","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [x, y], multicall)
-    }
-
-    multiply__Int256Int256(x: BigNumberish, y: BigNumberish): Promise<BigNumber>
-    multiply__Int256Int256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    multiply__Int256Int256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"int256","name":"x","type":"int256"},{"internalType":"int256","name":"y","type":"int256"}],"name":"multiply","outputs":[{"internalType":"int256","name":"z","type":"int256"}],"stateMutability":"pure","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [x, y], multicall)
-    }
-
-    multiply__Int256Uint256(
-        x: BigNumberish,
-        y: BigNumberish
-    ): Promise<BigNumber>
-    multiply__Int256Uint256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    multiply__Int256Uint256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"int256","name":"x","type":"int256"},{"internalType":"uint256","name":"y","type":"uint256"}],"name":"multiply","outputs":[{"internalType":"int256","name":"z","type":"int256"}],"stateMutability":"pure","type":"function"}
 
         return this.ethCallOrMulticall(abi, [x, y], multicall)
     }
@@ -399,16 +352,13 @@ export class RateSetter extends BaseContractAPI {
         return this.getTransactionRequest(abi, [account])
     }
 
-    rmultiply__Uint256Uint256(
-        x: BigNumberish,
-        y: BigNumberish
-    ): Promise<BigNumber>
-    rmultiply__Uint256Uint256(
+    rmultiply(x: BigNumberish, y: BigNumberish): Promise<BigNumber>
+    rmultiply(
         x: BigNumberish,
         y: BigNumberish,
         multicall: true
     ): MulticallRequest<BigNumber>
-    rmultiply__Uint256Uint256(
+    rmultiply(
         x: BigNumberish,
         y: BigNumberish,
         multicall?: true
@@ -416,27 +366,6 @@ export class RateSetter extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"x","type":"uint256"},{"internalType":"uint256","name":"y","type":"uint256"}],"name":"rmultiply","outputs":[{"internalType":"uint256","name":"z","type":"uint256"}],"stateMutability":"pure","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [x, y], multicall)
-    }
-
-    rmultiply__Uint256Int256(
-        x: BigNumberish,
-        y: BigNumberish
-    ): Promise<BigNumber>
-    rmultiply__Uint256Int256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    rmultiply__Uint256Int256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"x","type":"uint256"},{"internalType":"int256","name":"y","type":"int256"}],"name":"rmultiply","outputs":[{"internalType":"int256","name":"z","type":"int256"}],"stateMutability":"pure","type":"function"}
 
         return this.ethCallOrMulticall(abi, [x, y], multicall)
     }
@@ -465,16 +394,13 @@ export class RateSetter extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [x, n, base], multicall)
     }
 
-    subtract__Uint256Uint256(
-        x: BigNumberish,
-        y: BigNumberish
-    ): Promise<BigNumber>
-    subtract__Uint256Uint256(
+    subtract(x: BigNumberish, y: BigNumberish): Promise<BigNumber>
+    subtract(
         x: BigNumberish,
         y: BigNumberish,
         multicall: true
     ): MulticallRequest<BigNumber>
-    subtract__Uint256Uint256(
+    subtract(
         x: BigNumberish,
         y: BigNumberish,
         multicall?: true
@@ -482,24 +408,6 @@ export class RateSetter extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"x","type":"uint256"},{"internalType":"uint256","name":"y","type":"uint256"}],"name":"subtract","outputs":[{"internalType":"uint256","name":"z","type":"uint256"}],"stateMutability":"pure","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [x, y], multicall)
-    }
-
-    subtract__Int256Int256(x: BigNumberish, y: BigNumberish): Promise<BigNumber>
-    subtract__Int256Int256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    subtract__Int256Int256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"int256","name":"x","type":"int256"},{"internalType":"int256","name":"y","type":"int256"}],"name":"subtract","outputs":[{"internalType":"int256","name":"z","type":"int256"}],"stateMutability":"pure","type":"function"}
 
         return this.ethCallOrMulticall(abi, [x, y], multicall)
     }
@@ -564,16 +472,13 @@ export class RateSetter extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [x, y], multicall)
     }
 
-    wmultiply__Uint256Uint256(
-        x: BigNumberish,
-        y: BigNumberish
-    ): Promise<BigNumber>
-    wmultiply__Uint256Uint256(
+    wmultiply(x: BigNumberish, y: BigNumberish): Promise<BigNumber>
+    wmultiply(
         x: BigNumberish,
         y: BigNumberish,
         multicall: true
     ): MulticallRequest<BigNumber>
-    wmultiply__Uint256Uint256(
+    wmultiply(
         x: BigNumberish,
         y: BigNumberish,
         multicall?: true
@@ -581,27 +486,6 @@ export class RateSetter extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"uint256","name":"x","type":"uint256"},{"internalType":"uint256","name":"y","type":"uint256"}],"name":"wmultiply","outputs":[{"internalType":"uint256","name":"z","type":"uint256"}],"stateMutability":"pure","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [x, y], multicall)
-    }
-
-    wmultiply__Int256Uint256(
-        x: BigNumberish,
-        y: BigNumberish
-    ): Promise<BigNumber>
-    wmultiply__Int256Uint256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    wmultiply__Int256Uint256(
-        x: BigNumberish,
-        y: BigNumberish,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"int256","name":"x","type":"int256"},{"internalType":"uint256","name":"y","type":"uint256"}],"name":"wmultiply","outputs":[{"internalType":"int256","name":"z","type":"int256"}],"stateMutability":"pure","type":"function"}
 
         return this.ethCallOrMulticall(abi, [x, y], multicall)
     }
