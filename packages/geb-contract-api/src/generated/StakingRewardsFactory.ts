@@ -151,6 +151,18 @@ export class StakingRewardsFactory extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
+    totalCampaignCount(): Promise<BigNumber>
+    totalCampaignCount(multicall: true): MulticallRequest<BigNumber>
+    totalCampaignCount(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"totalCampaignCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     transferTokenOut(
         token: string,
         receiver: string,
