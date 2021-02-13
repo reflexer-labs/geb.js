@@ -26,7 +26,12 @@ export const testsProxyActionWithGenericGebProvider = (
         )
 
         it('Get proxy from registry', async () => {
-            assert.equal(await registry.proxies(NULL_ADDRESS), NULL_ADDRESS)
+            assert.equal(
+                await registry.proxies(
+                    '0x0000000000000000000000000000000000000123'
+                ),
+                NULL_ADDRESS
+            )
             assert.equal(
                 await registry.proxies(addresses.ETH_FROM),
                 addresses.PROXY_DEPLOYER
