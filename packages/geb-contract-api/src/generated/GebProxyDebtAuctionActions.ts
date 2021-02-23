@@ -44,6 +44,22 @@ export class GebProxyDebtAuctionActions extends BaseContractAPI {
         ])
     }
 
+    exitAllCoin(coinJoin: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"coinJoin","type":"address"}],"name":"exitAllCoin","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [coinJoin])
+    }
+
+    exitCoin(coinJoin: string, wad: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"coinJoin","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"exitCoin","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [coinJoin, wad])
+    }
+
     settleAuction(
         coinJoin: string,
         auctionHouse: string,
