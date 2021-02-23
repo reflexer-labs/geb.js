@@ -1321,6 +1321,23 @@ export class GebProxyActions {
         )
     }
 
+    exitAllCoin(): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionDebtAuction.exitAllCoin(
+                this.addressList.GEB_COIN_JOIN
+            )
+        )
+    }
+
+    exitCoin(amount: BigNumberish): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionDebtAuction.exitCoin(
+                this.addressList.GEB_COIN_JOIN,
+                amount
+            )
+        )
+    }
+
     // ==== Proxy Actions Surplus Auctions ====
 
     surplusStartAndIncreaseBidSize(bidSize: BigNumberish): TransactionRequest {

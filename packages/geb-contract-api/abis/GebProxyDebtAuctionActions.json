@@ -57,6 +57,29 @@
     },
     {
         "inputs": [
+            { "internalType": "address", "name": "coinJoin", "type": "address" }
+        ],
+        "name": "exitAllCoin",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "coinJoin",
+                "type": "address"
+            },
+            { "internalType": "uint256", "name": "wad", "type": "uint256" }
+        ],
+        "name": "exitCoin",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
             {
                 "internalType": "address",
                 "name": "coinJoin",
