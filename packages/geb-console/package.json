@@ -1,6 +1,6 @@
 {
     "name": "@reflexer-finance/geb-console",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "",
     "main": "./lib/index.js",
     "bin": {
@@ -9,7 +9,7 @@
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
     "license": "MIT",
     "dependencies": {
-        "@reflexer-finance/geb-admin": "^1.0.0",
+        "@reflexer-finance/geb-admin": "^1.0.1",
         "ethers": "^5.0.14",
         "open": "^7.3.0"
     }
