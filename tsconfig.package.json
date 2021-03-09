@@ -16,7 +16,6 @@
         "noUnusedLocals": true,
         "module": "commonjs",
         "sourceMap": true,
-        "target": "es5",
-        "importHelpers": true
+        "target": "es5"
     }
 }
