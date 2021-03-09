@@ -5,7 +5,6 @@ import {
     OracleRelayer,
     GlobalSettlement,
     DebtAuctionHouse,
-    PreSettlementSurplusAuctionHouse,
     Coin,
     GebSafeManager,
     GetSafes,
@@ -42,7 +41,7 @@ export class ContractApis {
     public oracleRelayer: OracleRelayer
     public globalSettlement: GlobalSettlement
     public debtAuctionHouse: DebtAuctionHouse
-    public surplusAuctionHouse: PreSettlementSurplusAuctionHouse
+    public surplusAuctionHouse: BurningSurplusAuctionHouse
     public stabilityFeeTreasury: StabilityFeeTreasury
     public safeManager: GebSafeManager
     public getSafes: GetSafes

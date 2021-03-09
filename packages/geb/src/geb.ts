@@ -68,7 +68,6 @@ export class Geb {
      * - OracleRelayer
      * - GlobalSettlement
      * - DebtAuctionHouse
-     * - PreSettlementSurplusAuctionHouse
      * - PostSettlementSurplusAuctionHouse
      * - SettlementSurplusAuctioneer
      * - GebSafeManager

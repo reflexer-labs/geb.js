@@ -18,7 +18,6 @@ import { DsRoles } from './generated/DSRoles'
 import { DsStop } from './generated/DSStop'
 import { DsTokenBase } from './generated/DSTokenBase'
 import { Esm } from './generated/ESM'
-import { EthJoin } from './generated/ETHJoin'
 import { FixedDiscountCollateralAuctionHouseFactory } from './generated/FixedDiscountCollateralAuctionHouseFactory'
 import { FsmGovernanceInterface } from './generated/FsmGovernanceInterface'
 import { FsmGovernanceInterfaceCaller } from './generated/FsmGovernanceInterfaceCaller'
@@ -68,7 +67,6 @@ export {
     DsStop,
     DsTokenBase,
     Esm,
-    EthJoin,
     FixedDiscountCollateralAuctionHouseFactory,
     FsmGovernanceInterface,
     FsmGovernanceInterfaceCaller,

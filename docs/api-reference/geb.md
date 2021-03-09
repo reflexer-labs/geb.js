@@ -69,7 +69,6 @@ Currently the following contracts ae available in this property:
 - OracleRelayer
 - GlobalSettlement
 - DebtAuctionHouse
-- PreSettlementSurplusAuctionHouse
 - PostSettlementSurplusAuctionHouse
 - SettlementSurplusAuctioneer
 - GebSafeManager
