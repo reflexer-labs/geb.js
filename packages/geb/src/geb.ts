@@ -3,6 +3,7 @@ import {
     Multicall,
     Erc20,
     StakingRewards,
+    MerkleDistributor,
 } from '@reflexer-finance/geb-contract-api'
 import {
     GebProviderInterface,
@@ -278,6 +279,64 @@ export class Geb {
             throw new Error('Campaign does not exists')
         }
         return new StakingRewards(address, this.provider)
+    }
+
+    /**
+     * Get the claim statues of Merkle distributions given a list of distributions and node
+     * The nodeIndex is the index node of the address in the merkle tree.
+     * @param  {{distributionIndex:number;nodeIndex:number}[]} nodes
+     */
+    public async getMerkleDistributorClaimStatues(
+        nodes: { distributionIndex: number; nodeIndex: number }[]
+    ) {
+        const multiCall1: MulticallRequest<string>[] = []
+        for (let i = 0; i < nodes.length; i++) {
+            multiCall1.push(
+                this.contracts.merkleDistributorFactory.distributors(
+                    nodes[i].distributionIndex,
+                    true
+                )
+            )
+        }
+
+        //@ts-ignore
+        const distributorAddresses: string[] = await this.multiCall(multiCall1)
+
+        const multiCall2: MulticallRequest<boolean>[] = []
+        for (let i = 0; i < nodes.length; i++) {
+            multiCall2.push(
+                new MerkleDistributor(
+                    distributorAddresses[i],
+                    this.provider
+                ).isClaimed(nodes[i].nodeIndex, true)
+            )
+        }
+
+        //@ts-ignore
+        const claims: boolean[] = await this.multiCall(multiCall2)
+
+        const ret: {
+            nodeIndex: number
+            distributorAddress: string
+            isClaimed: boolean
+        }[] = []
+        for (let i = 0; i < nodes.length; i++) {
+            ret.push({
+                nodeIndex: nodes[i].nodeIndex,
+                distributorAddress: distributorAddresses[i],
+                isClaimed: claims[i],
+            })
+        }
+
+        return ret
+    }
+
+    /**
+     * Get a merkle distributor contract given its address
+     * @param  {string} distributorAddress
+     */
+    public getMerkleDistributor(distributorAddress: string) {
+        return new MerkleDistributor(distributorAddress, this.provider)
     }
 
     // Multicall overloads, typing support for up to 7 calls.

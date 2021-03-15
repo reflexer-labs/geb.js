@@ -35,6 +35,8 @@ import { StakingRewards } from './generated/StakingRewards'
 import { UniswapV2Pair } from './generated/UniswapV2Pair'
 import { GebProxyDebtAuctionActions } from './generated/GebProxyDebtAuctionActions'
 import { GebProxySurplusAuctionActions } from './generated/GebProxySurplusAuctionActions'
+import { MerkleDistributor } from './generated/MerkleDistributor'
+import { MerkleDistributorFactory } from './generated/MerkleDistributorFactory'
 
 export {
     // Factory
@@ -76,4 +78,6 @@ export {
     UniswapV2Pair,
     GebProxyDebtAuctionActions,
     GebProxySurplusAuctionActions,
+    MerkleDistributorFactory,
+    MerkleDistributor,
 }

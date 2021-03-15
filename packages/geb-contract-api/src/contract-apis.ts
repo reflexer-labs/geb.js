@@ -30,6 +30,7 @@ import {
 } from '@reflexer-finance/geb-contract-base'
 import { RateSetter } from './generated/RateSetter'
 import { PiRawPerSecondCalculator } from './generated/PIRawPerSecondCalculator'
+import { MerkleDistributorFactory } from './generated/MerkleDistributorFactory'
 
 // Container class instantiate most GEB contracts
 // prettier-ignore
@@ -60,6 +61,7 @@ export class ContractApis {
     public stakingRewardFactory: StakingRewardsFactory
     public medianizerCoinSpot: UniswapConsecutiveSlotsMedianRaiusd
     public uniswapPairCoinEth: UniswapV2Pair
+    public merkleDistributorFactory: MerkleDistributorFactory
 
 
     constructor(
@@ -96,5 +98,6 @@ export class ContractApis {
         this.stakingRewardFactory = new StakingRewardsFactory(addressList.GEB_INCENTIVES_MINER, this.chainProvider)
         this.uniswapPairCoinEth = new UniswapV2Pair(addressList.GEB_COIN_UNISWAP_POOL, this.chainProvider)
         this.medianizerCoinSpot = new UniswapConsecutiveSlotsMedianRaiusd(addressList.SPOT_RAI, this.chainProvider)
+        this.merkleDistributorFactory = new MerkleDistributorFactory(addressList.MERKLE_DISTRIBUTOR_FACTORY, this.chainProvider)
     }
 }
