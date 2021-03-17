@@ -42,6 +42,7 @@ import { UniswapConverterBasicAverageMedianFlxusd } from './generated/UniswapCon
 import { UniswapConverterBasicAverageMedianRaiusd } from './generated/UniswapConverterBasicAverageMedianRAIUSD'
 import { UniswapConverterBasicAveragePriceFeedMedianizer } from './generated/UniswapConverterBasicAveragePriceFeedMedianizer'
 import { SingleSpotDebtCeilingSetter } from './generated/SingleSpotDebtCeilingSetter'
+import { CollateralAuctionThrottler } from './generated/CollateralAuctionThrottler'
 
 export {
     // Object with all instances
@@ -90,4 +91,5 @@ export {
     UniswapConverterBasicAverageMedianRaiusd,
     UniswapConverterBasicAveragePriceFeedMedianizer,
     SingleSpotDebtCeilingSetter,
+    CollateralAuctionThrottler,
 }
