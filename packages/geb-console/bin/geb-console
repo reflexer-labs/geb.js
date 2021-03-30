@@ -1,183 +1,234 @@
 #!/usr/bin/env -S node --experimental-repl-await
 
-var repl = require('repl')
+var node_repl = require('repl')
 var ethers = require('ethers')
 var geb_admin = require('@reflexer-finance/geb-admin')
 var http = require('http')
 var open = require('open')
 
-var rpcUrl
-var network
-var netId
-if (process.env.NETWORK === 'mainnet' || process.argv[2] === 'mainnet') {
-    console.log('Start geb-console on Mainnet...')
-    rpcUrl = 'https://parity0.mainnet.makerfoundation.com:8545'
-    network = 'mainnet'
-    netId = 1
-} else if (process.env.NETWORK === 'rinkeby' || process.argv[2] === 'rinkeby') {
-    console.log('Start geb-console on Rinkeby...')
-    rpcUrl = 'https://rinkeby.infura.io/v3/7a5c8172af0d41fd896a18dd1d866f87'
-    network = 'rinkeby'
-    netId = 4
-} else {
-    console.log('Start geb-console on Kovan...')
-    rpcUrl = 'https://parity0.kovan.makerfoundation.com:8545'
-    network = 'kovan'
-    netId = 42
-}
+// Load the hardhat config from the repo 
+process.env.HARDHAT_CONFIG = __dirname + "/../hardhat.config.js"
+var hre = require('hardhat')
 
-if (process.env.RPC_URL) {
-    rpcUrl = process.env.RPC_URL
-}
+async function main() {
+    var rpcUrl
+    var network
+    var netId
+    var isLocal = process.env.NETWORK === 'mainnet-fork' || process.argv[2] === 'mainnet-fork'
 
-console.log('\nContext objects:')
-console.log('- geb                        - ethers')
-console.log('- contracts                  - now()')
-console.log('- wallet                     - provider')
-console.log('- BigNumber                  - info(func)')
-console.log('- ETH_A                      - WAD')
-console.log('- RAD                        - RAY')
-console.log('- metamask(<txRequest>)      - wad(<BN|number|string>)')
-console.log('- ray(<BN|number|string>)    - rad(<BN|number|string>)')
-console.log('- parseWad(<BN>)             - parseRay(<BN>)')
-console.log('- parseRad(<BN>)\n')
-
-var repl = repl.start({ prompt: '🗿 > ', useGlobal: true })
-
-repl.context.provider = new ethers.ethers.providers.StaticJsonRpcProvider(rpcUrl)
-repl.context.geb = new geb_admin.GebAdmin(network, repl.context.provider)
-repl.context.ETH_A = geb_admin.utils.ETH_A
-repl.context.WAD = geb_admin.utils.WAD
-repl.context.RAD = geb_admin.utils.RAD
-repl.context.RAY = geb_admin.utils.RAY
-repl.context.decodeChainError = geb_admin.utils.decodeChainError
-repl.context.gebUtils = geb_admin.utils
-repl.context.BigNumber = ethers.ethers.BigNumber
-repl.context.ethers = ethers
-repl.context.geb_lib = geb_admin
-repl.context.wad = a => ethers.utils.parseEther(a.toString())
-repl.context.rad = a => geb_admin.utils.decimalShift(a.toString(), 45)
-repl.context.ray = a => geb_admin.utils.decimalShift(a.toString(), 27)
-repl.context.parseWad = a => geb_admin.utils.wadToFixed(a).toString()
-repl.context.parseRad = a => geb_admin.utils.radToFixed(a).toString()
-repl.context.parseRay = a => geb_admin.utils.rayToFixed(a).toString()
-repl.context.now = () => Math.floor(Date.now()/1000)
-
-
-repl.context.info = function (fct) {
-    if (typeof fct === 'function') {
-        return fct.toString().split('\n')[0].replace(' {', '')
-    }
-}
-
-if (process.env.PK) {
-    repl.context.wallet = new ethers.ethers.Wallet(
-        process.env.PK,
-        repl.context.provider
-    )
-}
-// Metamask signer
-repl.context.metamask = function (tx) {
-    if(ethers.BigNumber.isBigNumber(tx.value)) {
-        tx.value = tx.value.toHexString()
+    var hreRequest = async function(method, params) {
+        await hre.network.provider.request({method, params})
     }
 
-    const strTx = JSON.stringify(tx)
-    const requestListener = function (req, res) {
-        res.setHeader('Content-Type', 'text/html')
-        res.writeHead(200)
-        res.end(`<html><body>
-            <h1 style="text-align: center;">Metamask Signer</h1>
-            <h1 style="text-align: center;" id="hash"></h1>
-            <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"
-            type="application/javascript">
-            </script>
-            <script>
-                async function main() {
-                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-                    if(ethereum.networkVersion != ${netId}){alert("Metamask is on the wrong Network. Please change network and run the command again."); return}
-                    const provider = new ethers.providers.Web3Provider(window.ethereum)
-                    const signer = provider.getSigner()
-                    const tx = ${strTx}
-                    tx.from = accounts[0]
-                    // Given an error tries to get the revert string
-                    const catchRevert = err => {
-                        function getRequireString(error){
-                            let str
-                            try {
-                                str = JSON.stringify(error)
-                            } catch {
-                                return null
+    if (isLocal) {
+        const provider = await hre.run("node:get-provider", {forkUrl: "https://parity0.mainnet.makerfoundation.com:8545"})
+        const server = await hre.run("node:create-server", {hostname: "localhost", port: 8545, provider})
+        const { port, address } = await server.listen();
+        await hreRequest("hardhat_setLoggingEnabled", [false])
+        rpcUrl = 'http://localhost:8545'
+        network = 'mainnet'
+        netId = 1
+    } else if (process.env.NETWORK === 'mainnet' || process.argv[2] === 'mainnet') {
+        console.log('Start geb-console on Mainnet...')
+        rpcUrl = 'https://parity0.mainnet.makerfoundation.com:8545'
+        network = 'mainnet'
+        netId = 1
+    } else if (process.env.NETWORK === 'rinkeby' || process.argv[2] === 'rinkeby') {
+        console.log('Start geb-console on Rinkeby...')
+        rpcUrl = 'https://rinkeby.infura.io/v3/7a5c8172af0d41fd896a18dd1d866f87'
+        network = 'rinkeby'
+        netId = 4
+    } else {
+        console.log('Start geb-console on Kovan...')
+        rpcUrl = 'https://parity0.kovan.makerfoundation.com:8545'
+        network = 'kovan'
+        netId = 42
+    }
+    
+    if (process.env.RPC_URL) {
+        rpcUrl = process.env.RPC_URL
+    }
+    
+    console.log('\nContext objects:')
+    console.log('- geb                        - ethers')
+    console.log('- contracts                  - now()')
+    console.log('- wallet                     - provider')
+    console.log('- BigNumber                  - info(func)')
+    console.log('- ETH_A                      - WAD')
+    console.log('- RAD                        - RAY')
+    console.log('- metamask(<txRequest>)      - wad(<BN|number|string>)')
+    console.log('- ray(<BN|number|string>)    - rad(<BN|number|string>)')
+    console.log('- parseWad(<BN>)             - parseRay(<BN>)')
+    console.log('- parseRad(<BN>)\n')
+
+    if(isLocal) {
+        console.log('Mainnet fork mode!')
+        console.log('The following address is funded with 1k ETH:')
+        console.log("Address: 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266")
+        console.log("Private Key: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80")
+        console.log("Use this account with the wallet object e.g: `wallet.sendTransaction(...)`\n")
+    }
+    
+    var repl = node_repl.start({ prompt: '🗿 > ', useGlobal: true })
+    
+    repl.context.provider = new ethers.ethers.providers.StaticJsonRpcProvider(rpcUrl)
+    repl.context.geb = new geb_admin.GebAdmin(network, repl.context.provider)
+    repl.context.ETH_A = geb_admin.utils.ETH_A
+    repl.context.WAD = geb_admin.utils.WAD
+    repl.context.RAD = geb_admin.utils.RAD
+    repl.context.RAY = geb_admin.utils.RAY
+    repl.context.decodeChainError = geb_admin.utils.decodeChainError
+    repl.context.gebUtils = geb_admin.utils
+    repl.context.BigNumber = ethers.ethers.BigNumber
+    repl.context.ethers = ethers
+    repl.context.geb_lib = geb_admin
+    repl.context.wad = a => ethers.utils.parseEther(a.toString())
+    repl.context.rad = a => geb_admin.utils.decimalShift(a.toString(), 45)
+    repl.context.ray = a => geb_admin.utils.decimalShift(a.toString(), 27)
+    repl.context.parseWad = a => geb_admin.utils.wadToFixed(a).toString()
+    repl.context.parseRad = a => geb_admin.utils.radToFixed(a).toString()
+    repl.context.parseRay = a => geb_admin.utils.rayToFixed(a).toString()
+    repl.context.now = () => Math.floor(Date.now()/1000)
+    
+    
+    repl.context.info = function (fct) {
+        if (typeof fct === 'function') {
+            return fct.toString().split('\n')[0].replace(' {', '')
+        }
+    }
+    
+    if (process.env.PK) {
+        repl.context.wallet = new ethers.ethers.Wallet(
+            process.env.PK,
+            repl.context.provider
+        )
+    } else if(isLocal) {
+        // If local fork mode, setup the default hardhat wallet
+        repl.context.wallet = new ethers.ethers.Wallet(
+            "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80",
+            repl.context.provider
+        )
+
+        repl.context.getImpersonatingSigner = async function(address) {
+            await hreRequest("hardhat_impersonateAccount", [address])
+            const signer = hre.ethers.provider.getSigner(address);
+            signer.address = address
+            return signer
+        }
+
+        repl.context.stopImpersonate = async function(address) {
+            await hreRequest("hardhat_stopImpersonatingAccount", [address])
+        }
+
+        repl.context.mine = async function(time) {
+            await hreRequest("evm_mine", time ? [repl.context.now() + time] : [])
+        }
+    }
+
+    // Metamask signer
+    repl.context.metamask = function (tx) {
+        if(ethers.BigNumber.isBigNumber(tx.value)) {
+            tx.value = tx.value.toHexString()
+        }
+    
+        const strTx = JSON.stringify(tx)
+        const requestListener = function (req, res) {
+            res.setHeader('Content-Type', 'text/html')
+            res.writeHead(200)
+            res.end(`<html><body>
+                <h1 style="text-align: center;">Metamask Signer</h1>
+                <h1 style="text-align: center;" id="hash"></h1>
+                <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"
+                type="application/javascript">
+                </script>
+                <script>
+                    async function main() {
+                        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                        if(ethereum.networkVersion != ${netId}){alert("Metamask is on the wrong Network. Please change network and run the command again."); return}
+                        const provider = new ethers.providers.Web3Provider(window.ethereum)
+                        const signer = provider.getSigner()
+                        const tx = ${strTx}
+                        tx.from = accounts[0]
+                        // Given an error tries to get the revert string
+                        const catchRevert = err => {
+                            function getRequireString(error){
+                                let str
+                                try {
+                                    str = JSON.stringify(error)
+                                } catch {
+                                    return null
+                                }
+                                const hexerrorArray = str.match(/0x08c379a0[0-9a-fA-F]*/g)
+                                if (hexerrorArray) {
+                                    return decodeURIComponent(
+                                        hexerrorArray[0].slice(12).replace(/[0-9a-f]{2}/g, '%$&').replace(/%00/g, '')
+                                    ).slice(2)
+                                } else {
+                                    return null
+                                }
                             }
-                            const hexerrorArray = str.match(/0x08c379a0[0-9a-fA-F]*/g)
-                            if (hexerrorArray) {
-                                return decodeURIComponent(
-                                    hexerrorArray[0].slice(12).replace(/[0-9a-f]{2}/g, '%$&').replace(/%00/g, '')
-                                ).slice(2)
-                            } else {
-                                return null
-                            }
+                            provider.call(tx)
+                            .catch(x => {
+                                const req = getRequireString(x)
+                                let message
+                                if(req) {
+                                    message = 'Geb Error:  ' + req
+                                } else {
+                                    message = 'Metamask Error ' + (err.message || err)
+                                }
+                                alert(message)
+                                throw message
+                            })
+                            .then(a => {
+                                const req = getRequireString(a)
+                                let message
+                                if(req) {
+                                    message = 'Geb Error:  ' + req
+                                } else {
+                                    message = 'Metamask insufficient gas Error: ' + (err.message || err)
+                                }
+                                alert(message)
+                            })
                         }
-                        provider.call(tx)
-                        .catch(x => {
-                            const req = getRequireString(x)
-                            let message
-                            if(req) {
-                                message = 'Geb Error:  ' + req
-                            } else {
-                                message = 'Metamask Error ' + (err.message || err)
-                            }
-                            alert(message)
-                            throw message
-                        })
-                        .then(a => {
-                            const req = getRequireString(a)
-                            let message
-                            if(req) {
-                                message = 'Geb Error:  ' + req
-                            } else {
-                                message = 'Metamask insufficient gas Error: ' + (err.message || err)
-                            }
-                            alert(message)
-                        })
-                    }
-
-                    // Set the transaction in the web page for feedback
-                    const setTxHashOnPage = (hash) => 
-                      document.getElementById("hash").innerHTML = 'Transaction hash: ' + hash
-
-                    // Send the transaction
-                    if(tx.gas || tx.gasLimit) {
-                        // Send the transaction without gas estimation
-                        tx.gasLimit = ethers.BigNumber.from(tx.gas || tx.gasLimit).toHexString()
-                        delete tx.gas
-                        console.log(tx)
-                        signer.sendTransaction(tx).then(p => setTxHashOnPage(p.hash)).catch(catchRevert)
-                    } else {
-                        // Gas estimate and then send the transaction
-                        provider.estimateGas(tx).then(g => {
-                            // Add 10% and set the gas limit
-                            tx.gasLimit = g.mul(11).div(10)
+    
+                        // Set the transaction in the web page for feedback
+                        const setTxHashOnPage = (hash) => 
+                          document.getElementById("hash").innerHTML = 'Transaction hash: ' + hash
+    
+                        // Send the transaction
+                        if(tx.gas || tx.gasLimit) {
+                            // Send the transaction without gas estimation
+                            tx.gasLimit = ethers.BigNumber.from(tx.gas || tx.gasLimit).toHexString()
+                            delete tx.gas
+                            console.log(tx)
                             signer.sendTransaction(tx).then(p => setTxHashOnPage(p.hash)).catch(catchRevert)
-                        }).catch(catchRevert)
+                        } else {
+                            // Gas estimate and then send the transaction
+                            provider.estimateGas(tx).then(g => {
+                                // Add 10% and set the gas limit
+                                tx.gasLimit = g.mul(11).div(10)
+                                signer.sendTransaction(tx).then(p => setTxHashOnPage(p.hash)).catch(catchRevert)
+                            }).catch(catchRevert)
+                        }
                     }
-                }
-                main()
-            </script>
-            </body></html>`)
+                    main()
+                </script>
+                </body></html>`)
+        }
+    
+        // Start web server
+        const host = 'localhost'
+        const port = 8084
+        const server = http.createServer(requestListener)
+        server.listen(port, host, () => {
+            console.log(`Open you browser at http://${host}:${port}`)
+        })
+    
+        // Shutdown server upon first load
+        server.on('connection', () => server.close())
+    
+        // Open browser
+        open(`http://${host}:${port}`)
     }
-
-    // Start web server
-    const host = 'localhost'
-    const port = 8084
-    const server = http.createServer(requestListener)
-    server.listen(port, host, () => {
-        console.log(`Open you browser at http://${host}:${port}`)
-    })
-
-    // Shutdown server upon first load
-    server.on('connection', () => server.close())
-
-    // Open browser
-    open(`http://${host}:${port}`)
 }
+main()

@@ -9,8 +9,10 @@
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
     "license": "MIT",
     "dependencies": {
+        "@nomiclabs/hardhat-ethers": "^2.0.2",
         "@reflexer-finance/geb-admin": "^1.0.7",
-        "ethers": "^5.0.14",
+        "ethers": "^5.0.32",
+        "hardhat": "^2.1.2",
         "open": "^7.3.0"
     }
 }

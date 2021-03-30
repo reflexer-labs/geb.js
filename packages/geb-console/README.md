@@ -92,3 +92,29 @@ Open you browser at http://localhost:8084
 // Hint: access all contract of the GEB system under `geb.contracts.<contract name>`
 // Hint: See geb.js full docs at https://docs.reflexer.finance/geb-js/getting-started
 ```
+
+## Mainnet fork
+Run
+```
+geb-console mainnet-fork
+```
+This will start a Hardhat mainnet fork at the current block. 
+It exposes an RPC endpoint on port 8545 that can be used to deploy contracts.
+
+You can then use the console:
+```js
+// Make transactions with the default wallet funded with 10k ETH
+🗿 > wallet.address
+'0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'
+🗿 > await  wallet.sendTransaction({value: wad(10), to: "0x1234..."})
+
+// Impersoante any account
+🗿 > b1 = await getImpersonatingSigner("0xb1adced...")
+await b1.sendTransaction({...})
+🗿 > stopImpersonate("0xb1adced...")
+
+// Mine blocks
+🗿 > await mine()
+🗿 > await mine(3600) // Add seconds to the next block's timestamp
+
+``` 
