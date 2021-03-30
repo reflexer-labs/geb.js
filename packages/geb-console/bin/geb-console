@@ -63,7 +63,7 @@ async function main() {
 
     if(isLocal) {
         console.log('Mainnet fork mode!')
-        console.log('The following address is funded with 1k ETH:')
+        console.log('The following address is funded with 10k ETH:')
         console.log("Address: 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266")
         console.log("Private Key: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80")
         console.log("Use this account with the wallet object e.g: `wallet.sendTransaction(...)`\n")
