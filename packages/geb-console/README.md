@@ -108,7 +108,7 @@ You can then use the console:
 '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'
 🗿 > await  wallet.sendTransaction({value: wad(10), to: "0x1234..."})
 
-// Impersoante any account
+// Impersonate any account
 🗿 > b1 = await getImpersonatingSigner("0xb1adced...")
 await b1.sendTransaction({...})
 🗿 > stopImpersonate("0xb1adced...")
