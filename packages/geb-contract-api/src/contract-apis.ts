@@ -32,7 +32,7 @@ import { RateSetter } from './generated/RateSetter'
 import { PiRawPerSecondCalculator } from './generated/PIRawPerSecondCalculator'
 import { MerkleDistributorFactory } from './generated/MerkleDistributorFactory'
 
-// Container class instantiate most GEB contracts
+// Container class used to instantiate most GEB contracts
 // prettier-ignore
 export class ContractApis {
     public safeEngine: SafeEngine
@@ -52,11 +52,11 @@ export class ContractApis {
     public proxyRegistry: GebProxyRegistry
     public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse
     public protocolToken: DsDelegateToken
-    public medianizerEth: ChainlinkMedianEthusd 
+    public medianizerEth: ChainlinkMedianEthusd
     public medianizerCoin: UniswapConsecutiveSlotsMedianRaiusd
     public rateSetter: RateSetter
     public piCalculator: PiRawPerSecondCalculator
-    public fsmEth: Osm 
+    public fsmEth: Osm
     public weth: Weth9
     public stakingRewardFactory: StakingRewardsFactory
     public medianizerCoinSpot: UniswapConsecutiveSlotsMedianRaiusd
@@ -69,7 +69,7 @@ export class ContractApis {
         public chainProvider: GebProviderInterface
     )
     {
-        // Set the contract address list 
+        // Set the contract address list
         let addressList = getAddressList(network)
 
         this.safeEngine = new SafeEngine(addressList.GEB_SAFE_ENGINE, this.chainProvider)

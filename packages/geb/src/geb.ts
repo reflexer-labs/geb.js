@@ -24,14 +24,14 @@ import { BigNumber } from '@ethersproject/bignumber'
 
 /**
  * The main package used to interact with the GEB system. Includes [[deployProxy |helper functions]] for safe
- *  management and the [[contracts | contract interface object]] to directly call the smart-contracts.
+ *  management and the [[contracts | contract interface object]] to directly call smart contracts.
  */
 export class Geb {
     /**
-     * Object containing all GEB core smart-contracts instances for direct level interactions. All of the
-     * following contracts object are one-to-one typed API to the underlying smart-contract. Read-only
-     * functions that do not change the blockchain state return a promise of the return data. State modifying
-     * function will return synchronously a pre-filled transaction request object:
+     * Object containing all GEB core smart contract instances for direct level interactions. All of the
+     * following contract objects are one-to-one API typed to the underlying smart contracts. Read-only
+     * functions that do not change blockchain state return a promise of the return data. State modifying
+     * function will synchronously return a pre-filled transaction request object:
      * ```
      * {
      *   to: "0x123abc.."
@@ -39,7 +39,7 @@ export class Geb {
      * }
      * ```
      * This object follow the [[https://docs.ethers.io/v5/api/providers/types/#providers-TransactionRequest
-     * TransactionRequest model of ethers.js]] (Also similar to the
+     * TransactionRequest model of ethers.js]] (also similar to the
      * [[https://web3js.readthedocs.io/en/v1.3.0/web3-eth.html#id84 | model used by web.js]]). The object can
      * be completed with properties such as ` from `, ` gasPrice `, ` gas ` (gas limit, web3.js ony) or
      * ` gasLimit ` (gas limit, ethers.js only). The object can then be passed to the `sendTransaction` of
@@ -53,10 +53,10 @@ export class Geb {
      *  const wallet = new ethers.Wallet('<Private key>', provider)
      *  const geb = new Geb('kovan', provider)
      *
-     *  // Contract read function: Fetch the debt ceiling
+     *  // Contract read function: fetch the debt ceiling
      *  const debtCeiling = await geb.contracts.safeEngine.globalDebtCeiling()
      *
-     *  // State changing function: Manualy liquidate a SAFE
+     *  // State changing function: manualy liquidate a SAFE
      *  const tx = geb.contracts.liquidationEngine.liquidateSAFE(ETH_A, '0x1234abc...')
      *  await wallet.sendTransaction(tx) // Send the Ethereum transaction
      *  ```
@@ -75,22 +75,22 @@ export class Geb {
      * - GetSafes
      * - BasicCollateralJoin
      * - CoinJoin
-     * - Coin (RAI ERC20 contract)
+     * - Coin (System coin ERC20 contract)
      * - GebProxyRegistry
-     * - FixedDiscountCollateralAuctionHouse (For ETH-A)
+     * - FixedDiscountCollateralAuctionHouse
      * - Weth (ERC20)
      *
-     * For detailed information about the functions of each contract we recommend referring directly to the
-     * smart-contract [[https://github.com/reflexer-labs/geb | code]] and [[https://docs.reflexer.finance/ |
+     * For detailed information about the functions of each contract we recommend the smart contract
+     * [[https://github.com/reflexer-labs/geb | code]] and [[https://docs.reflexer.finance/ |
      * documentation]]
      */
     public contracts: ContractApis
     protected provider: GebProviderInterface
     protected addresses: ContractList
     /**
-     * Constructor of the main Geb.js object.
+     * Constructor for the main Geb.js object.
      * @param  {GebDeployment} network Either `'kovan'`, `'mainnet'` or an actual list of contract addresses.
-     * @param  {GebProviderInterface|ethers.providers.Provider} provider Either a Ethers.js provider or a Geb provider (Soon support for Web3 will be added)
+     * @param  {GebProviderInterface|ethers.providers.Provider} provider Either a Ethers.js provider or a Geb provider (support for Web3 will be added in the future)
      */
     constructor(
         protected network: GebDeployment,
@@ -114,9 +114,9 @@ export class Geb {
     }
 
     /**
-     * Given an address returns a GebProxyActions object to execute bundled operations.
-     * Important: This requires the address to have deployed a GEB proxy through the proxy registry contract. It will throw a `DOES_NOT_OWN_HAVE_PROXY` error if the address specified does not have a proxy. Use the [[deployProxy]] function to get a new proxy.
-     * @param ownerAddress Externally owned user account, Ethereum address that owns a GEB proxy.
+     * Given an address, it returns a GebProxyActions object used to execute bundled operations.
+     * Important: This requires that the address deployed a GEB proxy through the proxy registry contract. It will throw a `DOES_NOT_OWN_HAVE_PROXY` error if the address specified does not have a proxy. Use the [[deployProxy]] function to get a new proxy.
+     * @param ownerAddress Externally owned user account aka Ethereum address that owns a GEB proxy.
      */
     public async getProxyAction(ownerAddress: string) {
         const address = await this.contracts.proxyRegistry.proxies(ownerAddress)
@@ -196,7 +196,7 @@ export class Geb {
                 ),
             ])
 
-            // If SafeManager has right over the safe, it's a managed safe
+            // If SafeManager has rights over the safe, it's a managed safe
             isManaged = !safeRights.isZero()
             handler = idOrHandler
         }
@@ -213,16 +213,16 @@ export class Geb {
 
     /**
      * Fetch the list of safes owned by an address. This function will fetch safes owned directly
-     * through the safeManager and safes owned through the safe manager through a proxy. Safes owned
+     * through the safeManager and safes owned through the safe manager by a proxy. Safes owned
      * directly by the address at the safeEngine level won't appear here.
      *
      * Note that this function will make a lot of network calls and is therefore very slow. For
-     * front-ends we recommend using pre-indexed data such as the geb-subgraph.
+     * front-ends we recommend using pre-indexed data from a source such as the geb-subgraph.
      *
      * @param  {string} address
      */
     public async getSafeFromOwner(address: string): Promise<Safe[]> {
-        // Fetch safes from proxy
+        // Fetch safes for a proxy
         const proxy = await this.contracts.proxyRegistry.proxies(address)
         const safes: Safe[] = []
         let safeId = await this.contracts.safeManager.firstSAFEID(proxy)
@@ -231,7 +231,7 @@ export class Geb {
             safeId = (await this.contracts.safeManager.safeList(safeId)).next
         }
 
-        // Fetch safes owned directly
+        // Fetch safes that are owned directly
         safeId = await this.contracts.safeManager.firstSAFEID(address)
         while (!safeId.isZero()) {
             safes.push(await this.getSafe(safeId.toNumber()))
@@ -241,7 +241,7 @@ export class Geb {
     }
 
     /**
-     * Returns an object that can be used to interact with a ERC20 token.
+     * Returns an object that can be used to interact with an ERC20 token.
      * Example:
      * ```typescript
      * const USDCAddress = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
@@ -262,7 +262,7 @@ export class Geb {
         return new Erc20(tokenAddress, this.provider)
     }
     /**
-     *  Help function to get the contract object of an incentive campaign given its number ID
+     *  Help function to get the contract object of an incentive campaign given its ID number
      *
      * @param  {number} campaignNumber incremental ID of the campaign
      *
@@ -276,14 +276,14 @@ export class Geb {
         ).stakingRewards
 
         if (address === NULL_ADDRESS) {
-            throw new Error('Campaign does not exists')
+            throw new Error('The campaign does not exist')
         }
         return new StakingRewards(address, this.provider)
     }
 
     /**
-     * Get the claim statues of Merkle distributions given a list of distributions and node
-     * The nodeIndex is the index node of the address in the merkle tree.
+     * Get the claim statues of merkle distributions given a list of distributions and a node
+     * The nodeIndex is the index of the address in the merkle tree.
      * @param  {{distributionIndex:number;nodeIndex:number}[]} nodes
      */
     public async getMerkleDistributorClaimStatues(
@@ -363,10 +363,10 @@ export class Geb {
     public multiCall<O1, O2, O3, O4, O5, O6, O7>(calls: [MulticallRequest<O1>, MulticallRequest<O2>, MulticallRequest<O3>, MulticallRequest<O4>, MulticallRequest<O5>, MulticallRequest<O6>, MulticallRequest<O7>]): Promise<[O1, O2, O3, O4, O5, O6, O7]>
 
     /**
-     * Bundles several read only GEB contract call into 1 RPC single request. Useful for front-ends or apps that need to fetch many parameters from the contracts but want to minimize the network request and the load on the underlying Ethereum node.
+     * Bundles several read only GEB contract calls into a single RPC request. Useful for front-ends or apps that need to fetch many parameters from contracts but want to minimize network requests and the load on the underlying Ethereum node.
      * The function takes as input an Array of GEB view contract calls.
-     * **IMPORTANT**: You have to set the `multicall` parameter of the contract function to `true`, it is the always the last parameter of the function.
-     * Multicall works for all contracts in the `Geb.contracts` and can be use with any contract that inherit the `BaseContractApi`. Note that it does not support non-view calls (Calls that require to pay gas and change the state of the blockchain).
+     * **IMPORTANT**: You have to set the `multicall` parameter of the contract function to `true`. It is the always the last function parameter.
+     * Multicall works for all contracts in `Geb.contracts` and can be used with any contract that inherits `BaseContractApi`. Note that it does not support non-view calls (calls that require you pay gas and change blockchain state).
      *
      * Example:
      * ```typescript
@@ -385,7 +385,7 @@ export class Geb {
      * console.log(`Current ETH_A debt: ${collateralInfo.debtAmount}`)
      * ```
      * @param  {MulticallRequest<T>[]} calls Call a read only GEB contract function. The GEB contract object needs to be called with the parameter `multicall` set to `true` as seen in the example above.
-     * @returns Promise<T[]> Array with the result from their respective requests.
+     * @returns Promise<T[]> Array with results for the specified requests.
      */
     public async multiCall<T>(calls: MulticallRequest<T>[]): Promise<T[]> {
         const multiCall = new Multicall(this.addresses.MULTICALL, this.provider)
@@ -404,7 +404,7 @@ export class Geb {
         return (a as unknown) as T[]
     }
     /**
-     * Returns an instance of a specific geb contract given Geb contract API class constructor at a specified address
+     * Returns an instance of a specific geb contract given a Geb contract API class constructor at a specified address
      *
      * @param  {GebContractAPIConstructorInterface<T>} gebContractClass Class from contracts or adminContracts
      * @param  {string} address Contract address of the instance
@@ -431,7 +431,7 @@ export class Geb {
     }
 
     /**
-     * Returns an instance of a specific geb contract given a Geb contract API class at a specified address
+     * Returns an instance of a specific GEB contract given a Geb contract API class at a specified address
      *
      * ```typescript
      * import { contracts } from "geb.js"

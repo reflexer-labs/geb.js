@@ -17,7 +17,7 @@ import { getRequireString, NULL_ADDRESS } from 'geb.js/lib/utils'
  * npm install @reflexer-finance/geb-admin
  * ```
  *
- * And you are ready to use the admin tools similar to the GEB class:
+ * And now you are ready to use the admin tools similar to the GEB class:
  *
  * ```typescript
  * import { ethers } from 'ethers'
@@ -53,7 +53,7 @@ export class GebAdmin extends Geb {
 
     /**
      * @param  {GebDeployment} network Either `'kovan'`, `'mainnet'` or an actual list of contract addresses.
-     * @param  {GebProviderInterface|ethers.providers.Provider} provider Either a Ethers.js provider or a GEB provider. Support for Web3.js will soon be added.
+     * @param  {GebProviderInterface|ethers.providers.Provider} provider Either a Ethers.js provider or a GEB provider. Support for Web3.js will be added in the future.
      */
     constructor(
         network: GebDeployment,
@@ -64,10 +64,10 @@ export class GebAdmin extends Geb {
         this.contractsAdmin = new AdminApis(network, this.provider)
     }
     /**
-     * Verifies a transaction for scheduling proposals
+     * Verifies a transaction meant to schedule a proposal
      *
-     * @param  {string} govFunctionAbi Human readable abi from gov actions or proxy of choice -> "setDelay(address,uint256)"
-     * @param  {any[]} params Array containing all for the above function
+     * @param  {string} govFunctionAbi Human readable ABI from gov actions or proxy of choice -> "setDelay(address,uint256)"
+     * @param  {any[]} params Array containing function params
      * @param  {number} earliestExecutionTime
      * @param  {string} calldata to verify
      * @returns Promise<TransactionRequest>
@@ -89,10 +89,10 @@ export class GebAdmin extends Geb {
     }
 
     /**
-     * Encodes executing a proposal in dspause for web GUI
+     * Encodes a proposal execution in DSPause
      *
-     * @param  {string} govFunctionAbi Human readable abi from gov actions or proxy of choice -> "setDelay(address,uint256)"
-     * @param  {any[]} params Array containing all for the above function
+     * @param  {string} govFunctionAbi Human readable ABI from gov actions or proxy of choice -> "setDelay(address,uint256)"
+     * @param  {any[]} params Array containing function params
      * @param  {number} earliestExecutionTime
      * @returns Promise<TransactionRequest>
      */
@@ -114,10 +114,10 @@ export class GebAdmin extends Geb {
     }
 
     /**
-     * Encodes scheduling a proposal in dspause for web GUI
+     * Encodes a proposal scheduling tx for DSPause
      *
-     * @param  {string} govFunctionAbi Human readable abi from gov actions or proxy of choice -> "setDelay(address,uint256)"
-     * @param  {any[]} params Array containing all for the above function
+     * @param  {string} govFunctionAbi Human readable ABI from gov actions or proxy of choice -> "setDelay(address,uint256)"
+     * @param  {any[]} params Array containing function params
      * @param  {number} earliestExecutionTime
      * @returns Promise<TransactionRequest>
      */
@@ -163,10 +163,10 @@ export class GebAdmin extends Geb {
     }
 
     /**
-     * Test the execution of a proposal about to be schedule in dspause with web GUI
+     * Test the execution of a proposal that's about to be scheduled in DSPause
      *
      * @param  {string} govFunctionAbi Human readable abi from gov actions or proxy of choice -> "setDelay(address,uint256)"
-     * @param  {any[]} params Array containing all for the above function
+     * @param  {any[]} params Array containing function params
      * @param  {number} earliestExecutionTime
      * @returns Promise<TransactionRequest>
      */
@@ -178,7 +178,7 @@ export class GebAdmin extends Geb {
     ) {
         this.validateEarliestExecutionTime(earliestExecutionTime)
 
-        // Prepare a transaction like if we were pause executing the transaction through the pause proxy
+        // Prepare a transaction like if we were executing it through the pause proxy
         const tx = this.contractsAdmin.pauseProxy.executeTransaction(
             this.addresses.GEB_GOV_ACTIONS,
             this.getGovCallData(govFunctionAbi, params)
@@ -195,10 +195,10 @@ export class GebAdmin extends Geb {
     }
 
     /**
-     * Submit a transaction to a gnosis safe directly executed. Works only if the threshold on the safe is 1.
+     * Submit a transaction to a Gnosis Safe and directly execute it. Works only if the threshold on Gnosis Safe is 1.
      * @param sender Proposal submitter
      * @param to Proposal target (Usually ds-pause)
-     * @param data transaction data of the proposal
+     * @param data Transaction data of the proposal
      */
     public gnosisSafeThreshold1SubmitTransaction(
         sender: string,
@@ -243,7 +243,7 @@ export class GebAdmin extends Geb {
         if (
             typeof timestamp !== 'number' ||
             timestamp !== Math.floor(timestamp) ||
-            timestamp > 2524608000 || // After than Jan 1st 2050
+            timestamp > 2524608000 || // After Jan 1st 2050
             timestamp < 1577836800 || // Before Jan 1st 2020
             timestamp <= Date.now() / 1000 // Before now
         ) {

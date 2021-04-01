@@ -26,7 +26,7 @@ export interface Outputs extends ReadonlyArray<any> {
 
 export interface GebProviderInterface {
     /**
-     * Given a transaction request, execute it readonly through the blockchain node.
+     * Given a transaction request, execute it as read-only through the blockchain node.
      * @param  {TransactionRequest} transaction
      * @returns Promise<string> Raw hexadecimal contract output
      */

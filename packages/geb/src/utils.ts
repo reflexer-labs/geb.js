@@ -72,7 +72,7 @@ const decimalShift = (val: BigNumberish, shift: number) => {
 }
 
 /**
- * Given any kind of error object from an Ethereum RPC. Will look for an error string from a solidity require statement. Returns null if not found.
+ * Given any kind of error object from an Ethereum RPC, this Will look for an error string from a Solidity require statement. Returns null if not found.
  * @param  {any} RPC error object of any kind
  * @returns string
  */

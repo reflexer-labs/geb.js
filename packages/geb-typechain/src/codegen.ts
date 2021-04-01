@@ -14,11 +14,11 @@ import {
 } from './types'
 
 export function codegenContract(contract: Contract, abi: RawAbiDefinition[]) {
-    // Implements the ERC20 interface for the contracts that are ERC20
+    // Implements the ERC20 interface for contracts that are ERC20
 
     // prettier-ignore
     let template = `
-    
+
     export class ${contract.name} extends BaseContractAPI {
         ${codegenForFunctions(contract.functions, abi)}
     }
@@ -37,19 +37,19 @@ function addImports(template: string): string {
         template.includes('BigNumber>')
     ) {
         template =
-            `   
+            `
             import { BigNumber } from '@ethersproject/bignumber'` + template
     }
 
     if (template.includes('BigNumberish')) {
         template =
-            `   
+            `
             import { BigNumberish } from '@ethersproject/bignumber'` + template
     }
 
     if (template.includes('BytesLike')) {
         template =
-            `   
+            `
             import { BytesLike } from "@ethersproject/bytes"` + template
     }
 
@@ -119,7 +119,7 @@ export function codegenForFunctions(
         .join('\n')
 }
 
-// Given a function declaration, finds the right abi fragment in it. Take into account overload with id suffixes
+// Given a function declaration, it finds the right abi fragment in it. Takes into account the overload with id suffixes
 function getABIFragment(
     fn: FunctionDeclaration,
     abi: RawAbiDefinition[]
@@ -128,7 +128,7 @@ function getABIFragment(
         if (!fragment.name || fragment.type !== 'function') {
             continue
         }
-        // Check that the function name are the same
+        // Check that the function names are the same
         // Note that with .split("_")[0] we remove the suffix added to overloaded functions
         if (
             fragment.name.toLocaleLowerCase() !==
@@ -170,7 +170,7 @@ function codegenForSingleFunction(
     const outputType = generateOutputTypes(fn.outputs)
     const processedInputName = generateInputNames(fn.inputs)
 
-    // Example of what the template below generate for a view function:
+    // Example of what the template below generates for a view function:
     // balanceOf(address: string): Promise<BigNumber>
     // balanceOf(address: string, multicall: true): MulticallRequest<BigNumber>
     // balanceOf(address: string, multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber>{
@@ -187,11 +187,11 @@ function codegenForSingleFunction(
     ${isView ? `${fn.name}(${inputTypes}): Promise<${outputType}>`: ''}
     ${isView ? `${fn.name}(${inputTypes} multicall: true): MulticallRequest<${outputType}>`: ''}
     ${fn.name}(${inputTypes}${isView? 'multicall?: true' : ''}): ${isView ? `Promise<${outputType}> | MulticallRequest<${outputType}>`: 'TransactionRequest'} {
-        
-        // prettier-ignore 
+
+        // prettier-ignore
         // @ts-ignore
         const abi = ${JSON.stringify(abiFragment)}
-        
+
         return this.${isView ? 'ethCallOrMulticall' : 'getTransactionRequest'}(abi, [
             ${processedInputName.join(", ")}
         ]${fn.stateMutability === 'payable' ? ', BigNumber.from(ethValue)' : isView? ', multicall' : ''})
