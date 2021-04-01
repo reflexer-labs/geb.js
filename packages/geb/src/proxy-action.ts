@@ -21,7 +21,7 @@ import {
 import { NULL_ADDRESS } from './utils'
 
 /**
- * Convenience class to call functions from [GebProxyActions](https://github.com/reflexer-labs/geb-proxy-actions/blob/master/src/GebProxyActions.sol) through a proxy contract registered in the [GebProxyRegistry](https://github.com/reflexer-labs/geb-proxy-registry/blob/master/src/GebProxyRegistry.sol). These actions bundle multiple actions in one (e.g: open a safe + lock some ETH + draw some RAI).
+ * Convenience class to call functions from [GebProxyActions](https://github.com/reflexer-labs/geb-proxy-actions/blob/master/src/GebProxyActions.sol) through a proxy contract registered in the [GebProxyRegistry](https://github.com/reflexer-labs/geb-proxy-registry/blob/master/src/GebProxyRegistry.sol). These actions bundle multiple actions in one (e.g: open a safe + lock some ETH + draw some system coins).
  */
 export class GebProxyActions {
     /**
@@ -31,32 +31,32 @@ export class GebProxyActions {
     public proxy: DsProxy
 
     /**
-     * Address of the base proxy action contract.
+     * Address of the base proxy actions contract.
      */
     public proxyActionCoreAddress: string
 
     /**
-     * Address of the proxy action contract for global settlement.
+     * Address of the proxy actions contract for global settlement.
      */
     public proxyActionGlobalSettlementAddress: string
 
     /**
-     * Address of the proxy action contract for uniswap LP share staking.
+     * Address of the proxy actions contract for Uniswap LP share staking.
      */
     public proxyActionIncentiveAddress: string
 
     /**
-     * Address of the proxy action contract for leveraged with flash loans operations.
+     * Address of the proxy actions contract used for leverage with flash loans.
      */
     public proxyActionLeverageAddress: string
 
     /**
-     * Address of the proxy action contract for debt auctions.
+     * Address of the proxy actions contract for debt auctions.
      */
     public proxyActionDebtAuctionAddress: string
 
     /**
-     * Address of the proxy action contract for surplus auctions.
+     * Address of the proxy actions contract for surplus auctions.
      */
     public proxyActionSurplusAuctionAddress: string
 

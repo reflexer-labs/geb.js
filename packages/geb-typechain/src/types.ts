@@ -47,7 +47,7 @@ export function generateInputNames(input: Array<AbiParameter>): string[] {
     let findDuplicates = (arr: string[]) =>
         arr.filter((item, index) => arr.indexOf(item) != index)
 
-    // Suffixes the the variable name that are duplicated with a number
+    // Suffixes duplicated variable names with a number
     // i.g: allowance(address,address) => allowance(address1,address2)
     let duplicates = [...new Set(findDuplicates(name))]
     for (let d of duplicates) {
@@ -69,7 +69,7 @@ export function generateOutputTypes(
     if (outputs.length === 1) {
         return generateOutputType(outputs[0].type)
     } else {
-        // if multiples parameters, return an object. If the return values don't have a name, call them '0', '1', etc...
+        // If there are multiple parameters, it return an object. If the return values don't have a name, call them '0', '1', etc...
         return `{
       ${outputs
           .map(

@@ -26,7 +26,7 @@ export class Safe {
          */
         public collateralType: string,
         /**
-         * Whether the safe was opened using a SAFE manager
+         * Whether the safe was opened using a SAFE manager or not
          */
         public isManaged: boolean,
         /**

@@ -37,7 +37,7 @@ export class AdminApis {
     public proxyDeployer: DsProxy
     public debtCeilingSetter: SingleSpotDebtCeilingSetter
     public collateralAuctionThrottler: CollateralAuctionThrottler
-    
+
 
     constructor(
         network: GebDeployment,
@@ -46,8 +46,8 @@ export class AdminApis {
     {
         // Set the address list
         let addressList = getAddressList(network)
-        
-        // Additional instances only in admin package
+
+        // Additional instances only for the admin package
         this.multisigAdmin = new GnosisSafe(addressList.GEB_MULTISIG, this.chainProvider)
         this.multisigAdminProxy = new DsProxy(addressList.GEB_MULTISIG_PROXY, this.chainProvider)
         this.deploy = new GebDeploy(addressList.GEB_DEPLOY, this.chainProvider)

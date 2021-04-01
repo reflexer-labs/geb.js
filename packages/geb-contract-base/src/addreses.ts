@@ -65,7 +65,7 @@ export type ContractKey =
     | 'GEB_SINGLE_CEILING_SETTER'
     | 'MERKLE_DISTRIBUTOR_FACTORY'
     | 'COLLATERAL_AUCTION_THROTTLER'
-// This contract is not present in the changelogs contract.
+// This contract is not present in the changelogs.
 
 export type ContractList = {
     [key in ContractKey]: string
