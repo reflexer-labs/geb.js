@@ -11,6 +11,7 @@ import {
     GnosisSafe,
     SingleSpotDebtCeilingSetter,
     CollateralAuctionThrottler,
+    FsmWrapper,
 } from '.'
 import {
     GebProviderInterface,
@@ -37,6 +38,7 @@ export class AdminApis {
     public proxyDeployer: DsProxy
     public debtCeilingSetter: SingleSpotDebtCeilingSetter
     public collateralAuctionThrottler: CollateralAuctionThrottler
+    public fsmWrapper: FsmWrapper
 
 
     constructor(
@@ -60,5 +62,6 @@ export class AdminApis {
         this.proxyDeployer = new DsProxy(addressList.PROXY_DEPLOYER, this.chainProvider)
         this.debtCeilingSetter = new SingleSpotDebtCeilingSetter(addressList.GEB_SINGLE_CEILING_SETTER, this.chainProvider)
         this.collateralAuctionThrottler = new CollateralAuctionThrottler(addressList.COLLATERAL_AUCTION_THROTTLER, this.chainProvider)
+        this.fsmWrapper = new FsmWrapper(addressList.FSM_WRAPPER_ETH, this.chainProvider)
     }
 }
