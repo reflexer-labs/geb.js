@@ -216,6 +216,18 @@ export class GebDeployPauseProxyActions extends BaseContractAPI {
         ])
     }
 
+    setOwner(
+        pause: string,
+        actions: string,
+        owner: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"actions","type":"address"},{"internalType":"address","name":"owner","type":"address"}],"name":"setOwner","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [pause, actions, owner])
+    }
+
     setPerBlockAllowance(
         pause: string,
         actions: string,

@@ -31,6 +31,14 @@ export class GovActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [validator, reader])
     }
 
+    burn(token: string, guy: string, wad: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"address","name":"guy","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [token, guy, wad])
+    }
+
     changeNextPriceDeviation(
         fsm: string,
         deviation: BigNumberish
@@ -50,12 +58,114 @@ export class GovActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [fsm, priceSource])
     }
 
+    connectSAFESaviour(
+        targetContract: string,
+        saviour: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"address","name":"saviour","type":"address"}],"name":"connectSAFESaviour","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [targetContract, saviour])
+    }
+
+    deploy(
+        targetContract: string,
+        stakingToken: string,
+        rewardAmount: BigNumberish,
+        duration: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"address","name":"stakingToken","type":"address"},{"internalType":"uint256","name":"rewardAmount","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"}],"name":"deploy","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            targetContract,
+            stakingToken,
+            rewardAmount,
+            duration,
+        ])
+    }
+
+    deployAndNotifyRewardAmount(
+        targetContract: string,
+        stakingToken: string,
+        rewardAmount: BigNumberish,
+        duration: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"address","name":"stakingToken","type":"address"},{"internalType":"uint256","name":"rewardAmount","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"}],"name":"deployAndNotifyRewardAmount","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            targetContract,
+            stakingToken,
+            rewardAmount,
+            duration,
+        ])
+    }
+
+    deployDistributor(
+        target: string,
+        merkleRoot: BytesLike,
+        amount: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"bytes32","name":"merkleRoot","type":"bytes32"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"deployDistributor","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [target, merkleRoot, amount])
+    }
+
+    deployDistributorAndSendTokens(
+        target: string,
+        merkleRoot: BytesLike,
+        amount: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"bytes32","name":"merkleRoot","type":"bytes32"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"deployDistributorAndSendTokens","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [target, merkleRoot, amount])
+    }
+
     disableContract(targetContract: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"}],"name":"disableContract","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [targetContract])
+    }
+
+    disconnectSAFESaviour(
+        targetContract: string,
+        saviour: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"address","name":"saviour","type":"address"}],"name":"disconnectSAFESaviour","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [targetContract, saviour])
+    }
+
+    dropDistributorAuth(target: string, id: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"}],"name":"dropDistributorAuth","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [target, id])
+    }
+
+    getBackTokensFromDistributor(
+        target: string,
+        id: BigNumberish,
+        amount: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"getBackTokensFromDistributor","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [target, id, amount])
     }
 
     initializeCollateralType(
@@ -67,6 +177,14 @@ export class GovActions extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"initializeCollateralType","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [targetContract, collateralType])
+    }
+
+    mint(token: string, guy: string, wad: BigNumberish): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"address","name":"guy","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [token, guy, wad])
     }
 
     modifyParameters__AddressBytes32Bytes32Uint256(
@@ -156,6 +274,24 @@ export class GovActions extends BaseContractAPI {
             parameter,
             data1,
             data2,
+        ])
+    }
+
+    modifyParameters__AddressUint256Bytes32Uint256(
+        targetContract: string,
+        campaign: BigNumberish,
+        parameter: BytesLike,
+        val: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"uint256","name":"campaign","type":"uint256"},{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"val","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            targetContract,
+            campaign,
+            parameter,
+            val,
         ])
     }
 
@@ -273,6 +409,17 @@ export class GovActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [join, accounts, allowances])
     }
 
+    notifyRewardAmount(
+        targetContract: string,
+        campaignNumber: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"uint256","name":"campaignNumber","type":"uint256"}],"name":"notifyRewardAmount","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [targetContract, campaignNumber])
+    }
+
     removeAuthority(validator: string, account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -316,6 +463,29 @@ export class GovActions extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"validator","type":"address"},{"internalType":"address","name":"reader","type":"address"}],"name":"removeReader","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [validator, reader])
+    }
+
+    sendTokensToCustom(
+        target: string,
+        dst: string,
+        amount: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"sendTokensToCustom","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [target, dst, amount])
+    }
+
+    sendTokensToDistributor(
+        target: string,
+        id: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"}],"name":"sendTokensToDistributor","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [target, id])
     }
 
     setAllowance(
@@ -391,6 +561,14 @@ export class GovActions extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"address","name":"coin","type":"address"},{"internalType":"string","name":"name","type":"string"}],"name":"setName","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [coin, name])
+    }
+
+    setOwner(pause: string, owner: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"pause","type":"address"},{"internalType":"address","name":"owner","type":"address"}],"name":"setOwner","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [pause, owner])
     }
 
     setPerBlockAllowance(
@@ -498,6 +676,32 @@ export class GovActions extends BaseContractAPI {
             collateralType,
             parameter,
             data,
+        ])
+    }
+
+    toggleSaviour(targetContract: string, saviour: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"address","name":"saviour","type":"address"}],"name":"toggleSaviour","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [targetContract, saviour])
+    }
+
+    transferTokenOut(
+        targetContract: string,
+        token: string,
+        receiver: string,
+        amount: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"targetContract","type":"address"},{"internalType":"address","name":"token","type":"address"},{"internalType":"address","name":"receiver","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferTokenOut","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            targetContract,
+            token,
+            receiver,
+            amount,
         ])
     }
 
