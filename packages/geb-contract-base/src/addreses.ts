@@ -66,7 +66,7 @@ export type ContractKey =
     | 'MERKLE_DISTRIBUTOR_FACTORY'
     | 'COLLATERAL_AUCTION_THROTTLER'
     | 'FSM_WRAPPER_ETH'
-// This contract is not present in the changelogs.
+// This contract is not present in the changelogs
 
 export type ContractList = {
     [key in ContractKey]: string
