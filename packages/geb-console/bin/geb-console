@@ -21,7 +21,7 @@ async function main() {
     }
 
     if (isLocal) {
-        const provider = await hre.run("node:get-provider", {forkUrl: "https://parity0.mainnet.makerfoundation.com:8545"})
+        const provider = await hre.run("node:get-provider", {forkUrl: "https://geth0.mainnet.makerfoundation.com:8545"})
         const server = await hre.run("node:create-server", {hostname: "localhost", port: 8545, provider})
         const { port, address } = await server.listen();
         await hreRequest("hardhat_setLoggingEnabled", [false])
@@ -30,7 +30,7 @@ async function main() {
         netId = 1
     } else if (process.env.NETWORK === 'mainnet' || process.argv[2] === 'mainnet') {
         console.log('Start geb-console on Mainnet...')
-        rpcUrl = 'https://parity0.mainnet.makerfoundation.com:8545'
+        rpcUrl = 'https://geth0.mainnet.makerfoundation.com:8545'
         network = 'mainnet'
         netId = 1
     } else if (process.env.NETWORK === 'rinkeby' || process.argv[2] === 'rinkeby') {
