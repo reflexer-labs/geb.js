@@ -16,7 +16,6 @@ import { StabilityFeeTreasury } from './generated/StabilityFeeTreasury'
 import { TaxCollector } from './generated/TaxCollector'
 import { GebProxyActions } from './generated/GebProxyActions'
 import { GebProxyActionsGlobalSettlement } from './generated/GebProxyActionsGlobalSettlement'
-import { ChainlinkMedianEthusd } from './generated/ChainlinkMedianETHUSD'
 import { Erc20 } from './generated/ERC20'
 import { UniswapConsecutiveSlotsMedianRaiusd } from './generated/UniswapConsecutiveSlotsMedianRAIUSD'
 import { ContractApis } from './contract-apis'
@@ -37,6 +36,7 @@ import { GebProxyDebtAuctionActions } from './generated/GebProxyDebtAuctionActio
 import { GebProxySurplusAuctionActions } from './generated/GebProxySurplusAuctionActions'
 import { MerkleDistributor } from './generated/MerkleDistributor'
 import { MerkleDistributorFactory } from './generated/MerkleDistributorFactory'
+import { ChainlinkRelayer } from './generated/ChainlinkRelayer'
 
 export {
     // Factory
@@ -65,7 +65,6 @@ export {
     Osm,
     PiRawPerSecondCalculator,
     RateSetter,
-    ChainlinkMedianEthusd,
     UniswapConsecutiveSlotsMedianRaiusd,
     Weth9,
     GebProxyLeverageActions,
@@ -80,4 +79,5 @@ export {
     GebProxySurplusAuctionActions,
     MerkleDistributorFactory,
     MerkleDistributor,
+    ChainlinkRelayer,
 }

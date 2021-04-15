@@ -8,7 +8,7 @@ import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
-export class ChainlinkMedianEthusd extends BaseContractAPI {
+export class ChainlinkRelayer extends BaseContractAPI {
     RAY(): Promise<BigNumber>
     RAY(multicall: true): MulticallRequest<BigNumber>
     RAY(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
@@ -71,18 +71,6 @@ export class ChainlinkMedianEthusd extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
-    baseUpdateCallerReward(): Promise<BigNumber>
-    baseUpdateCallerReward(multicall: true): MulticallRequest<BigNumber>
-    baseUpdateCallerReward(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"baseUpdateCallerReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     chainlinkAggregator(): Promise<string>
     chainlinkAggregator(multicall: true): MulticallRequest<string>
     chainlinkAggregator(
@@ -93,31 +81,6 @@ export class ChainlinkMedianEthusd extends BaseContractAPI {
         const abi = {"inputs":[],"name":"chainlinkAggregator","outputs":[{"internalType":"contract AggregatorInterface","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    getCallerReward(
-        timeOfLastUpdate: BigNumberish,
-        defaultDelayBetweenCalls: BigNumberish
-    ): Promise<BigNumber>
-    getCallerReward(
-        timeOfLastUpdate: BigNumberish,
-        defaultDelayBetweenCalls: BigNumberish,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    getCallerReward(
-        timeOfLastUpdate: BigNumberish,
-        defaultDelayBetweenCalls: BigNumberish,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"timeOfLastUpdate","type":"uint256"},{"internalType":"uint256","name":"defaultDelayBetweenCalls","type":"uint256"}],"name":"getCallerReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(
-            abi,
-            [timeOfLastUpdate, defaultDelayBetweenCalls],
-            multicall
-        )
     }
 
     getResultWithValidity(): Promise<{
@@ -144,54 +107,6 @@ export class ChainlinkMedianEthusd extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"getResultWithValidity","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    lastUpdateTime(): Promise<BigNumber>
-    lastUpdateTime(multicall: true): MulticallRequest<BigNumber>
-    lastUpdateTime(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"lastUpdateTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    linkAggregatorTimestamp(): Promise<BigNumber>
-    linkAggregatorTimestamp(multicall: true): MulticallRequest<BigNumber>
-    linkAggregatorTimestamp(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"linkAggregatorTimestamp","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    maxRewardIncreaseDelay(): Promise<BigNumber>
-    maxRewardIncreaseDelay(multicall: true): MulticallRequest<BigNumber>
-    maxRewardIncreaseDelay(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"maxRewardIncreaseDelay","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    maxUpdateCallerReward(): Promise<BigNumber>
-    maxUpdateCallerReward(multicall: true): MulticallRequest<BigNumber>
-    maxUpdateCallerReward(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"maxUpdateCallerReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -262,30 +177,6 @@ export class ChainlinkMedianEthusd extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"uint256","name":"x","type":"uint256"},{"internalType":"uint256","name":"y","type":"uint256"}],"name":"multiply","outputs":[{"internalType":"uint256","name":"z","type":"uint256"}],"stateMutability":"pure","type":"function"}
 
         return this.ethCallOrMulticall(abi, [x, y], multicall)
-    }
-
-    perSecondCallerRewardIncrease(): Promise<BigNumber>
-    perSecondCallerRewardIncrease(multicall: true): MulticallRequest<BigNumber>
-    perSecondCallerRewardIncrease(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"perSecondCallerRewardIncrease","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    periodSize(): Promise<BigNumber>
-    periodSize(multicall: true): MulticallRequest<BigNumber>
-    periodSize(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"periodSize","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     rad(x: BigNumberish): Promise<BigNumber>
@@ -428,28 +319,6 @@ export class ChainlinkMedianEthusd extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"symbol","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    treasury(): Promise<string>
-    treasury(multicall: true): MulticallRequest<string>
-    treasury(multicall?: true): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"treasury","outputs":[{"internalType":"contract StabilityFeeTreasuryLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    treasuryAllowance(): Promise<BigNumber>
-    treasuryAllowance(multicall: true): MulticallRequest<BigNumber>
-    treasuryAllowance(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"treasuryAllowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }

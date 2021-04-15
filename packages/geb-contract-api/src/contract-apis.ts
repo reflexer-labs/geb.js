@@ -14,7 +14,7 @@ import {
     FixedDiscountCollateralAuctionHouse,
     Weth9,
     SafeEngine,
-    ChainlinkMedianEthusd,
+    ChainlinkRelayer,
     UniswapConsecutiveSlotsMedianRaiusd,
     Osm,
     StabilityFeeTreasury,
@@ -52,7 +52,7 @@ export class ContractApis {
     public proxyRegistry: GebProxyRegistry
     public collateralAuctionHouseETH_A: FixedDiscountCollateralAuctionHouse
     public protocolToken: DsDelegateToken
-    public medianizerEth: ChainlinkMedianEthusd
+    public medianizerEth: ChainlinkRelayer
     public medianizerCoin: UniswapConsecutiveSlotsMedianRaiusd
     public rateSetter: RateSetter
     public piCalculator: PiRawPerSecondCalculator
@@ -88,7 +88,7 @@ export class ContractApis {
         this.coin = new Coin(addressList.GEB_COIN, this.chainProvider)
         this.proxyRegistry = new GebProxyRegistry(addressList.PROXY_REGISTRY, this.chainProvider)
         this.collateralAuctionHouseETH_A = new FixedDiscountCollateralAuctionHouse(addressList.GEB_COLLATERAL_AUCTION_HOUSE_ETH_A, this.chainProvider)
-        this.medianizerEth = new ChainlinkMedianEthusd(addressList.MEDIANIZER_ETH, this.chainProvider)
+        this.medianizerEth = new ChainlinkRelayer(addressList.MEDIANIZER_ETH, this.chainProvider)
         this.medianizerCoin = new UniswapConsecutiveSlotsMedianRaiusd(addressList.MEDIANIZER_RAI, this.chainProvider)
         this.rateSetter = new RateSetter(addressList.GEB_RRFM_SETTER, this.chainProvider)
         this.piCalculator = new PiRawPerSecondCalculator(addressList.GEB_RRFM_CALCULATOR, this.chainProvider)

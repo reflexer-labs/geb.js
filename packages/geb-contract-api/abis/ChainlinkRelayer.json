@@ -8,22 +8,7 @@
             },
             {
                 "internalType": "uint256",
-                "name": "periodSize",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "baseUpdateCallerReward",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "maxUpdateCallerReward",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "perSecondCallerRewardIncrease",
+                "name": "staleThreshold_",
                 "type": "uint256"
             }
         ],
@@ -41,31 +26,6 @@
             }
         ],
         "name": "AddAuthorization",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes",
-                "name": "revertReason",
-                "type": "bytes"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "feeReceiver",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "FailRewardCaller",
         "type": "event"
     },
     {
@@ -120,25 +80,6 @@
         "type": "event"
     },
     {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "medianPrice",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "lastUpdateTime",
-                "type": "uint256"
-            }
-        ],
-        "name": "UpdateResult",
-        "type": "event"
-    },
-    {
         "inputs": [],
         "name": "RAY",
         "outputs": [
@@ -190,15 +131,6 @@
     },
     {
         "inputs": [],
-        "name": "baseUpdateCallerReward",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "chainlinkAggregator",
         "outputs": [
             {
@@ -211,67 +143,11 @@
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "timeOfLastUpdate",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "defaultDelayBetweenCalls",
-                "type": "uint256"
-            }
-        ],
-        "name": "getCallerReward",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [],
         "name": "getResultWithValidity",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" },
             { "internalType": "bool", "name": "", "type": "bool" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "lastUpdateTime",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "linkAggregatorTimestamp",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "maxRewardIncreaseDelay",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "maxUpdateCallerReward",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -333,24 +209,6 @@
             { "internalType": "uint256", "name": "z", "type": "uint256" }
         ],
         "stateMutability": "pure",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "perSecondCallerRewardIncrease",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "periodSize",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -456,28 +314,6 @@
         "name": "symbol",
         "outputs": [
             { "internalType": "bytes32", "name": "", "type": "bytes32" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "treasury",
-        "outputs": [
-            {
-                "internalType": "contract StabilityFeeTreasuryLike",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "treasuryAllowance",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
