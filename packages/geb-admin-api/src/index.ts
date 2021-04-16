@@ -44,6 +44,7 @@ import { UniswapConverterBasicAveragePriceFeedMedianizer } from './generated/Uni
 import { SingleSpotDebtCeilingSetter } from './generated/SingleSpotDebtCeilingSetter'
 import { CollateralAuctionThrottler } from './generated/CollateralAuctionThrottler'
 import { FsmWrapper } from './generated/FSMWrapper'
+import { EsmThresholdSetter } from './generated/ESMThresholdSetter'
 
 export {
     // Object with all instances
@@ -94,4 +95,5 @@ export {
     SingleSpotDebtCeilingSetter,
     CollateralAuctionThrottler,
     FsmWrapper,
+    EsmThresholdSetter,
 }
