@@ -555,6 +555,60 @@ export class GovActions extends BaseContractAPI {
         ])
     }
 
+    setFsm(
+        fsmGovInterface: string,
+        collateralType: BytesLike,
+        fsm: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"fsmGovInterface","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"fsm","type":"address"}],"name":"setFsm","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            fsmGovInterface,
+            collateralType,
+            fsm,
+        ])
+    }
+
+    setIncreasingRewardsParams(
+        target: string,
+        baseUpdateCallerReward: BigNumberish,
+        maxUpdateCallerReward: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"uint256","name":"baseUpdateCallerReward","type":"uint256"},{"internalType":"uint256","name":"maxUpdateCallerReward","type":"uint256"}],"name":"setIncreasingRewardsParams","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            target,
+            baseUpdateCallerReward,
+            maxUpdateCallerReward,
+        ])
+    }
+
+    setIncreasingRewardsParamsAndAllowances(
+        target: string,
+        treasury: string,
+        baseUpdateCallerReward: BigNumberish,
+        maxUpdateCallerReward: BigNumberish,
+        perBlockAllowance: BigNumberish,
+        totalAllowance: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"address","name":"treasury","type":"address"},{"internalType":"uint256","name":"baseUpdateCallerReward","type":"uint256"},{"internalType":"uint256","name":"maxUpdateCallerReward","type":"uint256"},{"internalType":"uint256","name":"perBlockAllowance","type":"uint256"},{"internalType":"uint256","name":"totalAllowance","type":"uint256"}],"name":"setIncreasingRewardsParamsAndAllowances","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            target,
+            treasury,
+            baseUpdateCallerReward,
+            maxUpdateCallerReward,
+            perBlockAllowance,
+            totalAllowance,
+        ])
+    }
+
     setName(coin: string, name: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
