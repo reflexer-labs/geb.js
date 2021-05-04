@@ -37,6 +37,9 @@ import { GebProxySurplusAuctionActions } from './generated/GebProxySurplusAuctio
 import { MerkleDistributor } from './generated/MerkleDistributor'
 import { MerkleDistributorFactory } from './generated/MerkleDistributorFactory'
 import { ChainlinkRelayer } from './generated/ChainlinkRelayer'
+import { NativeUnderlyingUniswapSafeSaviour } from './generated/NativeUnderlyingUniswapSafeSaviour'
+import { SaviourCRatioSetter } from './generated/SaviourCRatioSetter'
+import { UniswapLiquidityManagerLike } from './generated/UniswapLiquidityManagerLike'
 
 export {
     // Factory
@@ -80,4 +83,7 @@ export {
     MerkleDistributorFactory,
     MerkleDistributor,
     ChainlinkRelayer,
+    NativeUnderlyingUniswapSafeSaviour,
+    SaviourCRatioSetter,
+    UniswapLiquidityManagerLike,
 }
