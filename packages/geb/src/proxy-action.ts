@@ -17,6 +17,7 @@ import {
     GebProxyIncentivesActions,
     GebProxyDebtAuctionActions,
     GebProxySurplusAuctionActions,
+    GebProxySaviourActions,
 } from '@reflexer-finance/geb-contract-api'
 import { NULL_ADDRESS } from './utils'
 
@@ -60,6 +61,11 @@ export class GebProxyActions {
      */
     public proxyActionSurplusAuctionAddress: string
 
+    /**
+     * Address of the proxy actions contract for surplus auctions.
+     */
+    public proxyActionSaviourAddress: string
+
     private addressList: ContractList
     private proxyActionCore: GebProxyActionsCore
     private proxyActionGlobalSettlement: GebProxyActionsGlobalSettlement
@@ -67,6 +73,8 @@ export class GebProxyActions {
     private proxyActionLeverage: GebProxyLeverageActions
     private proxyActionDebtAuction: GebProxyDebtAuctionActions
     private proxyActionSurplusAuction: GebProxySurplusAuctionActions
+    private proxyActionSaviour: GebProxySaviourActions
+
     constructor(
         /**
          * Address of the underlying proxy
@@ -86,6 +94,7 @@ export class GebProxyActions {
         this.proxyActionLeverageAddress = this.addressList.LEVERAGE_PROXY_ACTION
         this.proxyActionDebtAuctionAddress = this.addressList.PROXY_DEBT_AUCTION_ACTIONS
         this.proxyActionSurplusAuctionAddress = this.addressList.PROXY_SURPLUS_AUCTION_ACTIONS
+        this.proxyActionSaviourAddress = this.addressList.PROXY_SAVIOUR_ACTIONS
 
         // Proxy contract APIs
         this.proxyActionCore = new GebProxyActionsCore(
@@ -112,6 +121,10 @@ export class GebProxyActions {
         )
         this.proxyActionSurplusAuction = new GebProxySurplusAuctionActions(
             this.proxyActionSurplusAuctionAddress,
+            this.chainProvider
+        )
+        this.proxyActionSaviour = new GebProxySaviourActions(
+            this.proxyActionSaviourAddress,
             this.chainProvider
         )
     }
@@ -515,17 +528,6 @@ export class GebProxyActions {
                 this.addressList.SAFE_MANAGER,
                 collateralType,
                 usr
-            )
-        )
-    }
-
-    protectSAFE(safe: BigNumberish, saviour: string): TransactionRequest {
-        return this.getProxiedTransactionRequest(
-            this.proxyActionCore.protectSAFE(
-                this.addressList.SAFE_MANAGER,
-                safe,
-                this.addressList.GEB_LIQUIDATION_ENGINE,
-                saviour
             )
         )
     }
@@ -1369,6 +1371,216 @@ export class GebProxyActions {
                 this.addressList.GEB_SURPLUS_AUCTION_HOUSE,
                 auctionId
             )
+        )
+    }
+
+    // ==== Proxy Actions Saviour ====
+
+    transferTokensToCaller(tokens: string[]): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.transferTokensToCaller(tokens)
+        )
+    }
+
+    protectSAFE(saviour: string, safe: number): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.protectSAFE(
+                saviour,
+                this.addressList.SAFE_MANAGER,
+                safe,
+                this.addressList.GEB_LIQUIDATION_ENGINE
+            )
+        )
+    }
+
+    setDesiredCollateralizationRatio(
+        collateralType: string,
+        safe: number,
+        cRatio: number
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.setDesiredCollateralizationRatio(
+                this.addressList.GEB_SAVIOUR_CRATIO_SETTER,
+                collateralType,
+                safe,
+                cRatio
+            )
+        )
+    }
+    deposit(
+        collateralSpecific: boolean,
+        saviour: string,
+        token: string,
+        safe: number,
+        tokenAmount: number
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.deposit(
+                collateralSpecific,
+                saviour,
+                this.addressList.SAFE_MANAGER,
+                token,
+                safe,
+                tokenAmount
+            )
+        )
+    }
+    setDesiredCRatioDeposit(
+        collateralSpecific: boolean,
+        saviour: string,
+        token: string,
+        safe: number,
+        tokenAmount: number,
+        cRatio: number
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.setDesiredCRatioDeposit(
+                collateralSpecific,
+                saviour,
+                this.addressList.GEB_SAVIOUR_CRATIO_SETTER,
+                this.addressList.SAFE_MANAGER,
+                token,
+                safe,
+                tokenAmount,
+                cRatio
+            )
+        )
+    }
+    withdraw(
+        collateralSpecific: boolean,
+        saviour: string,
+        safe: number,
+        tokenAmount: number,
+        dst: string
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.withdraw(
+                collateralSpecific,
+                saviour,
+                this.addressList.SAFE_MANAGER,
+                safe,
+                tokenAmount,
+                dst
+            )
+        )
+    }
+    setDesiredCRatioWithdraw(
+        collateralSpecific: boolean,
+        saviour: string,
+        safe: number,
+        tokenAmount: number,
+        cRatio: number,
+        dst: string
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.setDesiredCRatioWithdraw(
+                collateralSpecific,
+                saviour,
+                this.addressList.GEB_SAVIOUR_CRATIO_SETTER,
+                this.addressList.SAFE_MANAGER,
+                safe,
+                tokenAmount,
+                cRatio,
+                dst
+            )
+        )
+    }
+    protectSAFEDeposit(
+        collateralSpecific: boolean,
+        saviour: string,
+        token: string,
+        safe: number,
+        tokenAmount: number
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.protectSAFEDeposit(
+                collateralSpecific,
+                saviour,
+                this.addressList.SAFE_MANAGER,
+                token,
+                this.addressList.GEB_LIQUIDATION_ENGINE,
+                safe,
+                tokenAmount
+            )
+        )
+    }
+    protectSAFESetDesiredCRatioDeposit(
+        collateralSpecific: boolean,
+        saviour: string,
+        token: string,
+        safe: number,
+        tokenAmount: number,
+        cRatio: number
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.protectSAFESetDesiredCRatioDeposit(
+                collateralSpecific,
+                saviour,
+                this.addressList.GEB_SAVIOUR_CRATIO_SETTER,
+                this.addressList.SAFE_MANAGER,
+                token,
+                this.addressList.GEB_LIQUIDATION_ENGINE,
+                safe,
+                tokenAmount,
+                cRatio
+            )
+        )
+    }
+    withdrawUncoverSAFE(
+        collateralSpecific: boolean,
+        saviour: string,
+        token: string,
+        safe: number,
+        tokenAmount: number,
+        dst: string
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.withdrawUncoverSAFE(
+                collateralSpecific,
+                saviour,
+                this.addressList.SAFE_MANAGER,
+                token,
+                this.addressList.GEB_LIQUIDATION_ENGINE,
+                safe,
+                tokenAmount,
+                dst
+            )
+        )
+    }
+    withdrawProtectSAFEDeposit(
+        withdrawCollateralSpecific: boolean,
+        depositCollateralSpecific: boolean,
+        withdrawSaviour: string,
+        depositSaviour: string,
+        depositToken: string,
+        safe: number,
+        withdrawTokenAmount: number,
+        depositTokenAmount: number,
+        withdrawDst: string
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.withdrawProtectSAFEDeposit(
+                withdrawCollateralSpecific,
+                depositCollateralSpecific,
+                withdrawSaviour,
+                depositSaviour,
+                this.addressList.SAFE_MANAGER,
+                depositToken,
+                this.addressList.GEB_LIQUIDATION_ENGINE,
+                safe,
+                withdrawTokenAmount,
+                depositTokenAmount,
+                withdrawDst
+            )
+        )
+    }
+    getReserves(
+        saviour: string,
+        safe: number,
+        dst: string
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.getReserves(saviour, safe, dst)
         )
     }
 }

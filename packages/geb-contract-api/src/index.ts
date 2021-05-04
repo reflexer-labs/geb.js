@@ -40,6 +40,7 @@ import { ChainlinkRelayer } from './generated/ChainlinkRelayer'
 import { NativeUnderlyingUniswapSafeSaviour } from './generated/NativeUnderlyingUniswapSafeSaviour'
 import { SaviourCRatioSetter } from './generated/SaviourCRatioSetter'
 import { UniswapLiquidityManagerLike } from './generated/UniswapLiquidityManagerLike'
+import { GebProxySaviourActions } from './generated/GebProxySaviourActions'
 
 export {
     // Factory
@@ -86,4 +87,5 @@ export {
     NativeUnderlyingUniswapSafeSaviour,
     SaviourCRatioSetter,
     UniswapLiquidityManagerLike,
+    GebProxySaviourActions,
 }
