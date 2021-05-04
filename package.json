@@ -14,8 +14,9 @@
         "api-codegen": "npm run codegen --prefix packages/geb-contract-api && npm run codegen --prefix packages/geb-admin-api && prettier --write packages/*/*/*.json packages/*/src/generated/*.ts && git apply packages/geb-contract-api/src/patches/*.patch",
         "abi-codegen": "node ./scripts/load_abis.js && prettier --write packages/geb-contract-api/*/*.json packages/geb-contract-api/src/generated/*.ts",
         "test-node": "mocha --timeout 8000 ./packages/geb-test/lib/*/*.js --grep",
-        "test": "npm run build && npm run test-node",
-        "dev": "npm run build && npm run bootstrap",
+        "test": "npm run test-node",
+        "test-all": "npm run clean && npm run build && npm run bootstrap && npm run test-node Test",
+        "dev": "npm run clean && npm run build && npm run bootstrap",
         "docs": "rm -rf docs && typedoc --options typedoc.json && node scripts/process_docs.js",
         "docs-publish": "npm run docs && git clone git@github.com:reflexer-labs/geb-docs.git && cp -r docs/* geb-docs/geb-js && cd geb-docs && git add -A && git commit -m'Update geb.js docs...' && git push && cd .. && rm -rf geb-docs"
     },
