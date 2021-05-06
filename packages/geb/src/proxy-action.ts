@@ -1382,7 +1382,7 @@ export class GebProxyActions {
         )
     }
 
-    protectSAFE(saviour: string, safe: number): TransactionRequest {
+    protectSAFE(saviour: string, safe: BigNumberish): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionSaviour.protectSAFE(
                 saviour,
@@ -1395,8 +1395,8 @@ export class GebProxyActions {
 
     setDesiredCollateralizationRatio(
         collateralType: string,
-        safe: number,
-        cRatio: number
+        safe: BigNumberish,
+        cRatio: BigNumberish
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionSaviour.setDesiredCollateralizationRatio(
@@ -1411,8 +1411,8 @@ export class GebProxyActions {
         collateralSpecific: boolean,
         saviour: string,
         token: string,
-        safe: number,
-        tokenAmount: number
+        safe: BigNumberish,
+        tokenAmount: BigNumberish
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionSaviour.deposit(
@@ -1429,9 +1429,9 @@ export class GebProxyActions {
         collateralSpecific: boolean,
         saviour: string,
         token: string,
-        safe: number,
-        tokenAmount: number,
-        cRatio: number
+        safe: BigNumberish,
+        tokenAmount: BigNumberish,
+        cRatio: BigNumberish
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionSaviour.setDesiredCRatioDeposit(
@@ -1449,8 +1449,8 @@ export class GebProxyActions {
     withdraw(
         collateralSpecific: boolean,
         saviour: string,
-        safe: number,
-        tokenAmount: number,
+        safe: BigNumberish,
+        tokenAmount: BigNumberish,
         dst: string
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
@@ -1467,9 +1467,9 @@ export class GebProxyActions {
     setDesiredCRatioWithdraw(
         collateralSpecific: boolean,
         saviour: string,
-        safe: number,
-        tokenAmount: number,
-        cRatio: number,
+        safe: BigNumberish,
+        tokenAmount: BigNumberish,
+        cRatio: BigNumberish,
         dst: string
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
@@ -1489,8 +1489,8 @@ export class GebProxyActions {
         collateralSpecific: boolean,
         saviour: string,
         token: string,
-        safe: number,
-        tokenAmount: number
+        safe: BigNumberish,
+        tokenAmount: BigNumberish
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionSaviour.protectSAFEDeposit(
@@ -1508,9 +1508,9 @@ export class GebProxyActions {
         collateralSpecific: boolean,
         saviour: string,
         token: string,
-        safe: number,
-        tokenAmount: number,
-        cRatio: number
+        safe: BigNumberish,
+        tokenAmount: BigNumberish,
+        cRatio: BigNumberish
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
             this.proxyActionSaviour.protectSAFESetDesiredCRatioDeposit(
@@ -1530,8 +1530,8 @@ export class GebProxyActions {
         collateralSpecific: boolean,
         saviour: string,
         token: string,
-        safe: number,
-        tokenAmount: number,
+        safe: BigNumberish,
+        tokenAmount: BigNumberish,
         dst: string
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
@@ -1553,9 +1553,9 @@ export class GebProxyActions {
         withdrawSaviour: string,
         depositSaviour: string,
         depositToken: string,
-        safe: number,
-        withdrawTokenAmount: number,
-        depositTokenAmount: number,
+        safe: BigNumberish,
+        withdrawTokenAmount: BigNumberish,
+        depositTokenAmount: BigNumberish,
         withdrawDst: string
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
@@ -1576,7 +1576,7 @@ export class GebProxyActions {
     }
     getReserves(
         saviour: string,
-        safe: number,
+        safe: BigNumberish,
         dst: string
     ): TransactionRequest {
         return this.getProxiedTransactionRequest(
