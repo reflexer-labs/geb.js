@@ -1,6 +1,6 @@
 {
     "name": "@reflexer-finance/geb-admin",
-    "version": "1.0.15",
+    "version": "1.0.16",
     "description": "",
     "main": "./lib/index.js",
     "scripts": {
@@ -10,9 +10,9 @@
     "license": "MIT",
     "dependencies": {
         "@ethersproject/bignumber": "5.x",
-        "@reflexer-finance/geb-admin-api": "^1.0.15",
-        "@reflexer-finance/geb-contract-base": "^1.0.14",
-        "@reflexer-finance/geb-ethers-provider": "^1.0.14",
-        "geb.js": "^1.0.15"
+        "@reflexer-finance/geb-admin-api": "^1.0.16",
+        "@reflexer-finance/geb-contract-base": "^1.0.15",
+        "@reflexer-finance/geb-ethers-provider": "^1.0.15",
+        "geb.js": "^1.0.16"
     }
 }
