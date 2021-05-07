@@ -99,14 +99,13 @@ export class GebAdmin extends Geb {
     public async webExecuteProposal(
         govFunctionAbi: string,
         params: any[],
-        earliestExecutionTime: number
+        earliestExecutionTime: number,
+        govAction = this.addresses.GEB_GOV_ACTIONS
     ): Promise<TransactionRequest> {
-        const codeHash = await this.provider.extCodeHash(
-            this.addresses.GEB_GOV_ACTIONS
-        )
+        const codeHash = await this.provider.extCodeHash(govAction)
 
         return this.contractsAdmin.pause.executeTransaction(
-            this.addresses.GEB_GOV_ACTIONS,
+            govAction,
             codeHash,
             this.getGovCallData(govFunctionAbi, params),
             earliestExecutionTime
@@ -125,19 +124,18 @@ export class GebAdmin extends Geb {
         govFunctionAbi: string,
         params: any[],
         earliestExecutionTime: number,
-        description?: string
+        description?: string,
+        govAction = this.addresses.GEB_GOV_ACTIONS
     ) {
         this.validateEarliestExecutionTime(earliestExecutionTime)
 
-        const codeHash = await this.provider.extCodeHash(
-            this.addresses.GEB_GOV_ACTIONS
-        )
+        const codeHash = await this.provider.extCodeHash(govAction)
 
         let tx: TransactionRequest
 
         if (description) {
             tx = this.contractsAdmin.pause.scheduleTransaction__AddressBytes32BytesUint256String(
-                this.addresses.GEB_GOV_ACTIONS,
+                govAction,
                 codeHash,
                 this.getGovCallData(govFunctionAbi, params),
                 earliestExecutionTime,
@@ -145,7 +143,7 @@ export class GebAdmin extends Geb {
             )
         } else {
             tx = this.contractsAdmin.pause.scheduleTransaction__AddressBytes32BytesUint256(
-                this.addresses.GEB_GOV_ACTIONS,
+                govAction,
                 codeHash,
                 this.getGovCallData(govFunctionAbi, params),
                 earliestExecutionTime
@@ -174,13 +172,14 @@ export class GebAdmin extends Geb {
         govFunctionAbi: string,
         params: any[],
         earliestExecutionTime: number,
-        description?: string
+        description?: string,
+        govAction = this.addresses.GEB_GOV_ACTIONS
     ) {
         this.validateEarliestExecutionTime(earliestExecutionTime)
 
         // Prepare a transaction like if we were executing it through the pause proxy
         const tx = this.contractsAdmin.pauseProxy.executeTransaction(
-            this.addresses.GEB_GOV_ACTIONS,
+            govAction,
             this.getGovCallData(govFunctionAbi, params)
         )
         tx.from = this.contractsAdmin.pause.address
