@@ -105,7 +105,7 @@ export class ContractApis {
         this.uniswapPairCoinEth = new UniswapV2Pair(addressList.GEB_COIN_UNISWAP_POOL, this.chainProvider)
         this.medianizerCoinSpot = new UniswapConsecutiveSlotsMedianRaiusd(addressList.SPOT_RAI, this.chainProvider)
         this.merkleDistributorFactory = new MerkleDistributorFactory(addressList.MERKLE_DISTRIBUTOR_FACTORY, this.chainProvider)
-        this.coinNativeUniswapSaviour = new NativeUnderlyingUniswapSafeSaviour(addressList.GEB_COIN_ETH_UNISWAP_POOL_SAVIOUR, this.chainProvider)
+        this.coinNativeUniswapSaviour = new NativeUnderlyingUniswapSafeSaviour(addressList.GEB_COIN_ETH_UNISWAP_V2_POOL_SAVIOUR, this.chainProvider)
         this.saviourCRatioSetter = new SaviourCRatioSetter(addressList.GEB_SAVIOUR_CRATIO_SETTER, this.chainProvider)
         this.saviourUniswapLiquidaityManager = new UniswapLiquidityManagerLike(addressList.GEB_UNISWAP_SAVIOUR_LIQUIDITY_MANAGER, this.chainProvider)
     }
