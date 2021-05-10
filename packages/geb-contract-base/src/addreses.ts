@@ -1,3 +1,4 @@
+// All keys are mandatory
 export type ContractKey =
     | 'ETH_FROM'
     | 'STARTING_BLOCK_NUMBER'
