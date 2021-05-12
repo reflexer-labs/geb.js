@@ -66,7 +66,7 @@ export class ContractApis {
     public merkleDistributorFactory: MerkleDistributorFactory
     public coinNativeUniswapSaviour: NativeUnderlyingUniswapSafeSaviour
     public saviourCRatioSetter: SaviourCRatioSetter
-    public saviourUniswapLiquidaityManager: UniswapLiquidityManagerLike
+    public saviourUniswapLiquidityManager: UniswapLiquidityManagerLike
 
 
     constructor(
@@ -105,6 +105,6 @@ export class ContractApis {
         this.merkleDistributorFactory = new MerkleDistributorFactory(addressList.MERKLE_DISTRIBUTOR_FACTORY, this.chainProvider)
         this.coinNativeUniswapSaviour = new NativeUnderlyingUniswapSafeSaviour(addressList.GEB_COIN_ETH_UNISWAP_V2_POOL_SAVIOUR, this.chainProvider)
         this.saviourCRatioSetter = new SaviourCRatioSetter(addressList.GEB_SAVIOUR_CRATIO_SETTER, this.chainProvider)
-        this.saviourUniswapLiquidaityManager = new UniswapLiquidityManagerLike(addressList.GEB_UNISWAP_SAVIOUR_LIQUIDITY_MANAGER, this.chainProvider)
+        this.saviourUniswapLiquidityManager = new UniswapLiquidityManagerLike(addressList.GEB_UNISWAP_SAVIOUR_LIQUIDITY_MANAGER, this.chainProvider)
     }
 }
