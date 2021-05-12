@@ -8,7 +8,7 @@ import { BytesLike } from '@ethersproject/bytes'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BigNumber } from '@ethersproject/bignumber'
 
-export class RateSetter extends BaseContractAPI {
+export class PiRateSetter extends BaseContractAPI {
     RAY(): Promise<BigNumber>
     RAY(multicall: true): MulticallRequest<BigNumber>
     RAY(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
@@ -71,61 +71,16 @@ export class RateSetter extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
-    baseUpdateCallerReward(): Promise<BigNumber>
-    baseUpdateCallerReward(multicall: true): MulticallRequest<BigNumber>
-    baseUpdateCallerReward(
+    defaultLeak(): Promise<BigNumber>
+    defaultLeak(multicall: true): MulticallRequest<BigNumber>
+    defaultLeak(
         multicall?: true
     ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"baseUpdateCallerReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[],"name":"defaultLeak","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    contractEnabled(): Promise<BigNumber>
-    contractEnabled(multicall: true): MulticallRequest<BigNumber>
-    contractEnabled(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"contractEnabled","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    disableContract(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"disableContract","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    getCallerReward(
-        timeOfLastUpdate: BigNumberish,
-        defaultDelayBetweenCalls: BigNumberish
-    ): Promise<BigNumber>
-    getCallerReward(
-        timeOfLastUpdate: BigNumberish,
-        defaultDelayBetweenCalls: BigNumberish,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    getCallerReward(
-        timeOfLastUpdate: BigNumberish,
-        defaultDelayBetweenCalls: BigNumberish,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"timeOfLastUpdate","type":"uint256"},{"internalType":"uint256","name":"defaultDelayBetweenCalls","type":"uint256"}],"name":"getCallerReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(
-            abi,
-            [timeOfLastUpdate, defaultDelayBetweenCalls],
-            multicall
-        )
     }
 
     getMarketPrice(): Promise<BigNumber>
@@ -156,42 +111,6 @@ export class RateSetter extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"lastUpdateTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    latestMarketPrice(): Promise<BigNumber>
-    latestMarketPrice(multicall: true): MulticallRequest<BigNumber>
-    latestMarketPrice(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"latestMarketPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    maxRewardIncreaseDelay(): Promise<BigNumber>
-    maxRewardIncreaseDelay(multicall: true): MulticallRequest<BigNumber>
-    maxRewardIncreaseDelay(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"maxRewardIncreaseDelay","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    maxUpdateCallerReward(): Promise<BigNumber>
-    maxUpdateCallerReward(multicall: true): MulticallRequest<BigNumber>
-    maxUpdateCallerReward(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"maxUpdateCallerReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -272,18 +191,6 @@ export class RateSetter extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"orcl","outputs":[{"internalType":"contract OracleLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    perSecondCallerRewardIncrease(): Promise<BigNumber>
-    perSecondCallerRewardIncrease(multicall: true): MulticallRequest<BigNumber>
-    perSecondCallerRewardIncrease(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"perSecondCallerRewardIncrease","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -394,6 +301,18 @@ export class RateSetter extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [x, n, base], multicall)
     }
 
+    setterRelayer(): Promise<string>
+    setterRelayer(multicall: true): MulticallRequest<string>
+    setterRelayer(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"setterRelayer","outputs":[{"internalType":"contract SetterRelayer","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     subtract(x: BigNumberish, y: BigNumberish): Promise<BigNumber>
     subtract(
         x: BigNumberish,
@@ -410,28 +329,6 @@ export class RateSetter extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"uint256","name":"x","type":"uint256"},{"internalType":"uint256","name":"y","type":"uint256"}],"name":"subtract","outputs":[{"internalType":"uint256","name":"z","type":"uint256"}],"stateMutability":"pure","type":"function"}
 
         return this.ethCallOrMulticall(abi, [x, y], multicall)
-    }
-
-    treasury(): Promise<string>
-    treasury(multicall: true): MulticallRequest<string>
-    treasury(multicall?: true): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"treasury","outputs":[{"internalType":"contract StabilityFeeTreasuryLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    treasuryAllowance(): Promise<BigNumber>
-    treasuryAllowance(multicall: true): MulticallRequest<BigNumber>
-    treasuryAllowance(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"treasuryAllowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
     updateRate(feeReceiver: string): TransactionRequest {

@@ -31,8 +31,8 @@ import {
     GebDeployment,
     getAddressList,
 } from '@reflexer-finance/geb-contract-base'
-import { RateSetter } from './generated/RateSetter'
-import { PiRawPerSecondCalculator } from './generated/PIRawPerSecondCalculator'
+import { PiRateSetter } from './generated/PIRateSetter'
+import { PRawPerSecondCalculator } from './generated/PRawPerSecondCalculator'
 import { MerkleDistributorFactory } from './generated/MerkleDistributorFactory'
 
 // Container class used to instantiate most GEB contracts
@@ -57,12 +57,11 @@ export class ContractApis {
     public protocolToken: DsDelegateToken
     public medianizerEth: ChainlinkRelayer
     public medianizerCoin: UniswapConsecutiveSlotsMedianRaiusd
-    public rateSetter: RateSetter
-    public piCalculator: PiRawPerSecondCalculator
+    public rateSetter: PiRateSetter
+    public piCalculator: PRawPerSecondCalculator
     public fsmEth: Osm
     public weth: Weth9
     public stakingRewardFactory: StakingRewardsFactory
-    public medianizerCoinSpot: UniswapConsecutiveSlotsMedianRaiusd
     public uniswapPairCoinEth: UniswapV2Pair
     public merkleDistributorFactory: MerkleDistributorFactory
     public coinNativeUniswapSaviour: NativeUnderlyingUniswapSafeSaviour
@@ -96,14 +95,13 @@ export class ContractApis {
         this.collateralAuctionHouseETH_A = new FixedDiscountCollateralAuctionHouse(addressList.GEB_COLLATERAL_AUCTION_HOUSE_ETH_A, this.chainProvider)
         this.medianizerEth = new ChainlinkRelayer(addressList.MEDIANIZER_ETH, this.chainProvider)
         this.medianizerCoin = new UniswapConsecutiveSlotsMedianRaiusd(addressList.MEDIANIZER_RAI, this.chainProvider)
-        this.rateSetter = new RateSetter(addressList.GEB_RRFM_SETTER, this.chainProvider)
-        this.piCalculator = new PiRawPerSecondCalculator(addressList.GEB_RRFM_CALCULATOR, this.chainProvider)
+        this.rateSetter = new PiRateSetter(addressList.GEB_RRFM_SETTER, this.chainProvider)
+        this.piCalculator = new PRawPerSecondCalculator(addressList.GEB_RRFM_CALCULATOR, this.chainProvider)
         this.fsmEth = new Osm(addressList.FEED_SECURITY_MODULE_ETH, this.chainProvider)
         this.weth = new Weth9(addressList.ETH, this.chainProvider)
         this.protocolToken = new DsDelegateToken(addressList.GEB_PROT, this.chainProvider)
         this.stakingRewardFactory = new StakingRewardsFactory(addressList.GEB_INCENTIVES_MINER, this.chainProvider)
         this.uniswapPairCoinEth = new UniswapV2Pair(addressList.GEB_COIN_UNISWAP_POOL, this.chainProvider)
-        this.medianizerCoinSpot = new UniswapConsecutiveSlotsMedianRaiusd(addressList.SPOT_RAI, this.chainProvider)
         this.merkleDistributorFactory = new MerkleDistributorFactory(addressList.MERKLE_DISTRIBUTOR_FACTORY, this.chainProvider)
         this.coinNativeUniswapSaviour = new NativeUnderlyingUniswapSafeSaviour(addressList.GEB_COIN_ETH_UNISWAP_V2_POOL_SAVIOUR, this.chainProvider)
         this.saviourCRatioSetter = new SaviourCRatioSetter(addressList.GEB_SAVIOUR_CRATIO_SETTER, this.chainProvider)

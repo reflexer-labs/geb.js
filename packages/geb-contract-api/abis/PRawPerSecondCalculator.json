@@ -2,15 +2,9 @@
     {
         "inputs": [
             { "internalType": "int256", "name": "Kp_", "type": "int256" },
-            { "internalType": "int256", "name": "Ki_", "type": "int256" },
             {
                 "internalType": "uint256",
-                "name": "perSecondCumulativeLeak_",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "integralPeriodSize_",
+                "name": "periodSize_",
                 "type": "uint256"
             },
             {
@@ -27,15 +21,17 @@
                 "internalType": "int256",
                 "name": "feedbackOutputLowerBound_",
                 "type": "int256"
-            },
-            {
-                "internalType": "int256[]",
-                "name": "importedState",
-                "type": "int256[]"
             }
         ],
         "stateMutability": "nonpayable",
         "type": "constructor"
+    },
+    {
+        "inputs": [],
+        "name": "Kp",
+        "outputs": [{ "internalType": "int256", "name": "", "type": "int256" }],
+        "stateMutability": "view",
+        "type": "function"
     },
     {
         "inputs": [],
@@ -66,13 +62,6 @@
     },
     {
         "inputs": [],
-        "name": "ag",
-        "outputs": [{ "internalType": "int256", "name": "", "type": "int256" }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "allReaderToggle",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
@@ -93,7 +82,11 @@
     },
     {
         "inputs": [
-            { "internalType": "uint256", "name": "piSum", "type": "uint256" },
+            {
+                "internalType": "uint256",
+                "name": "proportionalResult",
+                "type": "uint256"
+            },
             {
                 "internalType": "uint256",
                 "name": "redemptionPrice",
@@ -117,11 +110,7 @@
                 "name": "redemptionPrice",
                 "type": "uint256"
             },
-            {
-                "internalType": "uint256",
-                "name": "accumulatedLeak",
-                "type": "uint256"
-            }
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "name": "computeRate",
         "outputs": [
@@ -135,19 +124,6 @@
         "name": "dgt",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "uint256", "name": "i", "type": "uint256" }
-        ],
-        "name": "dos",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" },
-            { "internalType": "int256", "name": "", "type": "int256" },
-            { "internalType": "int256", "name": "", "type": "int256" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -179,86 +155,12 @@
     },
     {
         "inputs": [
-            { "internalType": "int256", "name": "piOutput", "type": "int256" }
+            { "internalType": "int256", "name": "pOutput", "type": "int256" }
         ],
         "name": "getBoundedRedemptionRate",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" },
             { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "int256",
-                "name": "proportionalTerm",
-                "type": "int256"
-            },
-            {
-                "internalType": "int256",
-                "name": "integralTerm",
-                "type": "int256"
-            }
-        ],
-        "name": "getGainAdjustedPIOutput",
-        "outputs": [{ "internalType": "int256", "name": "", "type": "int256" }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "int256",
-                "name": "proportionalTerm",
-                "type": "int256"
-            },
-            {
-                "internalType": "int256",
-                "name": "integralTerm",
-                "type": "int256"
-            }
-        ],
-        "name": "getGainAdjustedTerms",
-        "outputs": [
-            { "internalType": "int256", "name": "", "type": "int256" },
-            { "internalType": "int256", "name": "", "type": "int256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "getLastIntegralTerm",
-        "outputs": [{ "internalType": "int256", "name": "", "type": "int256" }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "getLastProportionalTerm",
-        "outputs": [{ "internalType": "int256", "name": "", "type": "int256" }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "int256",
-                "name": "proportionalTerm",
-                "type": "int256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "accumulatedLeak",
-                "type": "uint256"
-            }
-        ],
-        "name": "getNextPriceDeviationCumulative",
-        "outputs": [
-            { "internalType": "int256", "name": "", "type": "int256" },
-            { "internalType": "int256", "name": "", "type": "int256" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -275,35 +177,12 @@
                 "name": "redemptionPrice",
                 "type": "uint256"
             },
-            {
-                "internalType": "uint256",
-                "name": "accumulatedLeak",
-                "type": "uint256"
-            }
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "name": "getNextRedemptionRate",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" },
             { "internalType": "int256", "name": "", "type": "int256" },
-            { "internalType": "int256", "name": "", "type": "int256" },
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "uint256", "name": "i", "type": "uint256" }
-        ],
-        "name": "hcd",
-        "outputs": [{ "internalType": "int256", "name": "", "type": "int256" }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "ips",
-        "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
@@ -371,17 +250,10 @@
     },
     {
         "inputs": [],
-        "name": "oll",
+        "name": "ps",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "pdc",
-        "outputs": [{ "internalType": "int256", "name": "", "type": "int256" }],
         "stateMutability": "view",
         "type": "function"
     },
@@ -435,11 +307,7 @@
                 "name": "redemptionPrice",
                 "type": "uint256"
             },
-            {
-                "internalType": "uint256",
-                "name": "accumulatedLeak",
-                "type": "uint256"
-            }
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "name": "rt",
         "outputs": [

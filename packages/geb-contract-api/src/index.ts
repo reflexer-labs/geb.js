@@ -22,8 +22,8 @@ import { ContractApis } from './contract-apis'
 import { Multicall } from './generated/Multicall'
 import { Osm } from './generated/OSM'
 import { Weth9 } from './generated/WETH9_'
-import { RateSetter } from './generated/RateSetter'
-import { PiRawPerSecondCalculator } from './generated/PIRawPerSecondCalculator'
+import { PiRateSetter } from './generated/PIRateSetter'
+import { PRawPerSecondCalculator } from './generated/PRawPerSecondCalculator'
 import { GebProxyLeverageActions } from './generated/GebProxyLeverageActions'
 import { GebProxyIncentivesActions } from './generated/GebProxyIncentivesActions'
 import { BurningSurplusAuctionHouse } from './generated/BurningSurplusAuctionHouse'
@@ -67,8 +67,8 @@ export {
     Multicall,
     Erc20,
     Osm,
-    PiRawPerSecondCalculator,
-    RateSetter,
+    PRawPerSecondCalculator,
+    PiRateSetter,
     UniswapConsecutiveSlotsMedianRaiusd,
     Weth9,
     GebProxyLeverageActions,

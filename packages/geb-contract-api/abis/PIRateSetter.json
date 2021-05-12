@@ -6,31 +6,16 @@
                 "name": "oracleRelayer_",
                 "type": "address"
             },
-            { "internalType": "address", "name": "orcl_", "type": "address" },
             {
                 "internalType": "address",
-                "name": "treasury_",
+                "name": "setterRelayer_",
                 "type": "address"
             },
+            { "internalType": "address", "name": "orcl_", "type": "address" },
             {
                 "internalType": "address",
                 "name": "pidCalculator_",
                 "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "baseUpdateCallerReward_",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "maxUpdateCallerReward_",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "perSecondCallerRewardIncrease_",
-                "type": "uint256"
             },
             {
                 "internalType": "uint256",
@@ -59,48 +44,22 @@
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "bytes",
-                "name": "revertReason",
-                "type": "bytes"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "feeReceiver",
-                "type": "address"
+                "internalType": "uint256",
+                "name": "marketPrice",
+                "type": "uint256"
             },
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "amount",
+                "name": "redemptionPrice",
                 "type": "uint256"
-            }
-        ],
-        "name": "FailRewardCaller",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes",
-                "name": "revertReason",
-                "type": "bytes"
             },
             {
                 "indexed": false,
-                "internalType": "address",
-                "name": "orcl",
-                "type": "address"
-            }
-        ],
-        "name": "FailUpdateOracle",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
+                "internalType": "uint256",
+                "name": "redemptionRate",
+                "type": "uint256"
+            },
             {
                 "indexed": false,
                 "internalType": "bytes",
@@ -239,43 +198,7 @@
     },
     {
         "inputs": [],
-        "name": "baseUpdateCallerReward",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "contractEnabled",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "disableContract",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "timeOfLastUpdate",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "defaultDelayBetweenCalls",
-                "type": "uint256"
-            }
-        ],
-        "name": "getCallerReward",
+        "name": "defaultLeak",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
@@ -312,33 +235,6 @@
     {
         "inputs": [],
         "name": "lastUpdateTime",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "latestMarketPrice",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "maxRewardIncreaseDelay",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "maxUpdateCallerReward",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
@@ -425,15 +321,6 @@
     },
     {
         "inputs": [],
-        "name": "perSecondCallerRewardIncrease",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "pidCalculator",
         "outputs": [
             {
@@ -514,6 +401,19 @@
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "setterRelayer",
+        "outputs": [
+            {
+                "internalType": "contract SetterRelayer",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             { "internalType": "uint256", "name": "x", "type": "uint256" },
             { "internalType": "uint256", "name": "y", "type": "uint256" }
@@ -523,28 +423,6 @@
             { "internalType": "uint256", "name": "z", "type": "uint256" }
         ],
         "stateMutability": "pure",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "treasury",
-        "outputs": [
-            {
-                "internalType": "contract StabilityFeeTreasuryLike",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "treasuryAllowance",
-        "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-        ],
-        "stateMutability": "view",
         "type": "function"
     },
     {
