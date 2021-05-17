@@ -1583,4 +1583,20 @@ export class GebProxyActions {
             this.proxyActionSaviour.getReserves(saviour, safe, dst)
         )
     }
+
+    getReservesAndUncover(
+        saviour: string,
+        safe: BigNumberish,
+        dst: string
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSaviour.getReservesAndUncover(
+                saviour,
+                this.addressList.SAFE_MANAGER,
+                this.addressList.GEB_LIQUIDATION_ENGINE,
+                safe,
+                dst
+            )
+        )
+    }
 }

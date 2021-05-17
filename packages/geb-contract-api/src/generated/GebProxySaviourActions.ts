@@ -41,6 +41,26 @@ export class GebProxySaviourActions extends BaseContractAPI {
         return this.getTransactionRequest(abi, [saviour, safe, dst])
     }
 
+    getReservesAndUncover(
+        saviour: string,
+        manager: string,
+        liquidationEngine: string,
+        safe: BigNumberish,
+        dst: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"saviour","type":"address"},{"internalType":"address","name":"manager","type":"address"},{"internalType":"address","name":"liquidationEngine","type":"address"},{"internalType":"uint256","name":"safe","type":"uint256"},{"internalType":"address","name":"dst","type":"address"}],"name":"getReservesAndUncover","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            saviour,
+            manager,
+            liquidationEngine,
+            safe,
+            dst,
+        ])
+    }
+
     protectSAFE(
         saviour: string,
         manager: string,
