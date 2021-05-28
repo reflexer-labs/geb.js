@@ -71,18 +71,6 @@ export class UniswapConsecutiveSlotsMedianRaiusd extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
-    baseUpdateCallerReward(): Promise<BigNumber>
-    baseUpdateCallerReward(multicall: true): MulticallRequest<BigNumber>
-    baseUpdateCallerReward(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"baseUpdateCallerReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     converterComputeAmountOut(
         timeElapsed: BigNumberish,
         amountIn: BigNumberish
@@ -208,31 +196,6 @@ export class UniswapConsecutiveSlotsMedianRaiusd extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    getCallerReward(
-        timeOfLastUpdate: BigNumberish,
-        defaultDelayBetweenCalls: BigNumberish
-    ): Promise<BigNumber>
-    getCallerReward(
-        timeOfLastUpdate: BigNumberish,
-        defaultDelayBetweenCalls: BigNumberish,
-        multicall: true
-    ): MulticallRequest<BigNumber>
-    getCallerReward(
-        timeOfLastUpdate: BigNumberish,
-        defaultDelayBetweenCalls: BigNumberish,
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"timeOfLastUpdate","type":"uint256"},{"internalType":"uint256","name":"defaultDelayBetweenCalls","type":"uint256"}],"name":"getCallerReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(
-            abi,
-            [timeOfLastUpdate, defaultDelayBetweenCalls],
-            multicall
-        )
-    }
-
     getObservationListLength(): Promise<{
         0: BigNumber
         1: BigNumber
@@ -311,30 +274,6 @@ export class UniswapConsecutiveSlotsMedianRaiusd extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    maxRewardIncreaseDelay(): Promise<BigNumber>
-    maxRewardIncreaseDelay(multicall: true): MulticallRequest<BigNumber>
-    maxRewardIncreaseDelay(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"maxRewardIncreaseDelay","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    maxUpdateCallerReward(): Promise<BigNumber>
-    maxUpdateCallerReward(multicall: true): MulticallRequest<BigNumber>
-    maxUpdateCallerReward(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"maxUpdateCallerReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     maxWindowSize(): Promise<BigNumber>
     maxWindowSize(multicall: true): MulticallRequest<BigNumber>
     maxWindowSize(
@@ -405,18 +344,6 @@ export class UniswapConsecutiveSlotsMedianRaiusd extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [x, y], multicall)
     }
 
-    perSecondCallerRewardIncrease(): Promise<BigNumber>
-    perSecondCallerRewardIncrease(multicall: true): MulticallRequest<BigNumber>
-    perSecondCallerRewardIncrease(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"perSecondCallerRewardIncrease","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     periodSize(): Promise<BigNumber>
     periodSize(multicall: true): MulticallRequest<BigNumber>
     periodSize(
@@ -479,6 +406,16 @@ export class UniswapConsecutiveSlotsMedianRaiusd extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"read","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    relayer(): Promise<string>
+    relayer(multicall: true): MulticallRequest<string>
+    relayer(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"relayer","outputs":[{"internalType":"contract IncreasingRewardRelayerLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -581,28 +518,6 @@ export class UniswapConsecutiveSlotsMedianRaiusd extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"timeElapsedSinceFirstObservation","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    treasury(): Promise<string>
-    treasury(multicall: true): MulticallRequest<string>
-    treasury(multicall?: true): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"treasury","outputs":[{"internalType":"contract StabilityFeeTreasuryLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
-    treasuryAllowance(): Promise<BigNumber>
-    treasuryAllowance(multicall: true): MulticallRequest<BigNumber>
-    treasuryAllowance(
-        multicall?: true
-    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"treasuryAllowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
