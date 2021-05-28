@@ -25,6 +25,8 @@ import {
     UniswapLiquidityManagerLike,
     NativeUnderlyingUniswapSafeSaviour,
     SaviourCRatioSetter,
+    UniswapV3Pool,
+    GebUniswapV3TwoTrancheManager,
 } from '.'
 import {
     GebProviderInterface,
@@ -67,6 +69,8 @@ export class ContractApis {
     public coinNativeUniswapSaviour: NativeUnderlyingUniswapSafeSaviour
     public saviourCRatioSetter: SaviourCRatioSetter
     public saviourUniswapLiquidityManager: UniswapLiquidityManagerLike
+    public uniswapV3PairCoinEth: UniswapV3Pool
+    public uniswapV3TwoTrancheLiquidityManager: GebUniswapV3TwoTrancheManager
 
 
     constructor(
@@ -106,5 +110,7 @@ export class ContractApis {
         this.coinNativeUniswapSaviour = new NativeUnderlyingUniswapSafeSaviour(addressList.GEB_COIN_ETH_UNISWAP_V2_POOL_SAVIOUR, this.chainProvider)
         this.saviourCRatioSetter = new SaviourCRatioSetter(addressList.GEB_SAVIOUR_CRATIO_SETTER, this.chainProvider)
         this.saviourUniswapLiquidityManager = new UniswapLiquidityManagerLike(addressList.GEB_UNISWAP_SAVIOUR_LIQUIDITY_MANAGER, this.chainProvider)
+        this.uniswapV3PairCoinEth = new UniswapV3Pool(addressList.GEB_COIN_UNISWAP_V3_POOL, this.chainProvider)
+        this.uniswapV3TwoTrancheLiquidityManager = new GebUniswapV3TwoTrancheManager(addressList.GEB_UNISWAP_TWO_TRANCHE_MANAGER, this.chainProvider)
     }
 }

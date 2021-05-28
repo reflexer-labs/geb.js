@@ -41,6 +41,8 @@ import { NativeUnderlyingUniswapSafeSaviour } from './generated/NativeUnderlying
 import { SaviourCRatioSetter } from './generated/SaviourCRatioSetter'
 import { UniswapLiquidityManagerLike } from './generated/UniswapLiquidityManagerLike'
 import { GebProxySaviourActions } from './generated/GebProxySaviourActions'
+import { GebUniswapV3TwoTrancheManager } from './generated/GebUniswapV3TwoTrancheManager'
+import { UniswapV3Pool } from './generated/UniswapV3Pool'
 
 export {
     // Factory
@@ -88,4 +90,6 @@ export {
     SaviourCRatioSetter,
     UniswapLiquidityManagerLike,
     GebProxySaviourActions,
+    UniswapV3Pool,
+    GebUniswapV3TwoTrancheManager,
 }
