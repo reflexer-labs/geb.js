@@ -35,12 +35,6 @@ import { DsProtestPause } from './generated/DSProtestPause'
 import { DsDelegateRoles } from './generated/DSDelegateRoles'
 import { GnosisSafe } from './generated/GnosisSafe'
 import { GnosisSafeProxy } from './generated/GnosisSafeProxy'
-import { UniswapConsecutiveSlotsMedianFlxusd } from './generated/UniswapConsecutiveSlotsMedianFLXUSD'
-import { UniswapConsecutiveSlotsMedianRaiusd } from './generated/UniswapConsecutiveSlotsMedianRAIUSD'
-import { UniswapConsecutiveSlotsPriceFeedMedianizer } from './generated/UniswapConsecutiveSlotsPriceFeedMedianizer'
-import { UniswapConverterBasicAverageMedianFlxusd } from './generated/UniswapConverterBasicAverageMedianFLXUSD'
-import { UniswapConverterBasicAverageMedianRaiusd } from './generated/UniswapConverterBasicAverageMedianRAIUSD'
-import { UniswapConverterBasicAveragePriceFeedMedianizer } from './generated/UniswapConverterBasicAveragePriceFeedMedianizer'
 import { SingleSpotDebtCeilingSetter } from './generated/SingleSpotDebtCeilingSetter'
 import { CollateralAuctionThrottler } from './generated/CollateralAuctionThrottler'
 import { FsmWrapper } from './generated/FSMWrapper'
@@ -86,12 +80,6 @@ export {
     DsProtestPause,
     GnosisSafeProxy,
     GnosisSafe,
-    UniswapConsecutiveSlotsMedianFlxusd,
-    UniswapConsecutiveSlotsMedianRaiusd,
-    UniswapConsecutiveSlotsPriceFeedMedianizer,
-    UniswapConverterBasicAverageMedianFlxusd,
-    UniswapConverterBasicAverageMedianRaiusd,
-    UniswapConverterBasicAveragePriceFeedMedianizer,
     SingleSpotDebtCeilingSetter,
     CollateralAuctionThrottler,
     FsmWrapper,
