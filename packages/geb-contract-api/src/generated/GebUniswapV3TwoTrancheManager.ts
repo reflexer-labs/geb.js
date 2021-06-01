@@ -29,6 +29,16 @@ export class GebUniswapV3TwoTrancheManager extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
+    WETH9(): Promise<string>
+    WETH9(multicall: true): MulticallRequest<string>
+    WETH9(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"WETH9","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     addAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
@@ -123,12 +133,22 @@ export class GebUniswapV3TwoTrancheManager extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    deposit(newLiquidity: BigNumberish, recipient: string): TransactionRequest {
+    deposit(
+        ethValue: BigNumberish,
+        newLiquidity: BigNumberish,
+        recipient: string,
+        minAm0: BigNumberish,
+        minAm1: BigNumberish
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"uint256","name":"newLiquidity","type":"uint256"},{"internalType":"address","name":"recipient","type":"address"}],"name":"deposit","outputs":[{"internalType":"uint256","name":"mintAmount","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"newLiquidity","type":"uint256"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"minAm0","type":"uint256"},{"internalType":"uint256","name":"minAm1","type":"uint256"}],"name":"deposit","outputs":[{"internalType":"uint256","name":"mintAmount","type":"uint256"}],"stateMutability":"payable","type":"function"}
 
-        return this.getTransactionRequest(abi, [newLiquidity, recipient])
+        return this.getTransactionRequest(
+            abi,
+            [newLiquidity, recipient, minAm0, minAm1],
+            BigNumber.from(ethValue)
+        )
     }
 
     fee(): Promise<number>
@@ -195,7 +215,7 @@ export class GebUniswapV3TwoTrancheManager extends BaseContractAPI {
           }> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[{"internalType":"int24","name":"targetTick","type":"int24"},{"internalType":"uint256","name":"_threshold","type":"uint256"}],"name":"getTicksWithThreshold","outputs":[{"internalType":"int24","name":"lowerTick","type":"int24"},{"internalType":"int24","name":"upperTick","type":"int24"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[{"internalType":"int24","name":"targetTick","type":"int24"},{"internalType":"uint256","name":"_threshold","type":"uint256"}],"name":"getTicksWithThreshold","outputs":[{"internalType":"int24","name":"lowerTick","type":"int24"},{"internalType":"int24","name":"upperTick","type":"int24"}],"stateMutability":"pure","type":"function"}
 
         return this.ethCallOrMulticall(abi, [targetTick, _threshold], multicall)
     }
@@ -496,6 +516,22 @@ export class GebUniswapV3TwoTrancheManager extends BaseContractAPI {
         const abi = {"inputs":[{"internalType":"uint256","name":"amount0Owed","type":"uint256"},{"internalType":"uint256","name":"amount1Owed","type":"uint256"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"uniswapV3MintCallback","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [amount0Owed, amount1Owed, data])
+    }
+
+    unwrapWETH9(
+        ethValue: BigNumberish,
+        amountMinimum: BigNumberish,
+        recipient: string
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"amountMinimum","type":"uint256"},{"internalType":"address","name":"recipient","type":"address"}],"name":"unwrapWETH9","outputs":[],"stateMutability":"payable","type":"function"}
+
+        return this.getTransactionRequest(
+            abi,
+            [amountMinimum, recipient],
+            BigNumber.from(ethValue)
+        )
     }
 
     withdraw(
