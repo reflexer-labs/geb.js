@@ -27,6 +27,8 @@ import {
     SaviourCRatioSetter,
     UniswapV3Pool,
     GebUniswapV3TwoTrancheManager,
+    GebLenderFirstResort,
+    StakedTokenAuctionHouse,
 } from '.'
 import {
     GebProviderInterface,
@@ -36,6 +38,7 @@ import {
 import { PiRateSetter } from './generated/PIRateSetter'
 import { PRawPerSecondCalculator } from './generated/PRawPerSecondCalculator'
 import { MerkleDistributorFactory } from './generated/MerkleDistributorFactory'
+import { Erc20 } from './generated/ERC20'
 
 // Container class used to instantiate most GEB contracts
 // prettier-ignore
@@ -71,7 +74,9 @@ export class ContractApis {
     public saviourUniswapLiquidityManager: UniswapLiquidityManagerLike
     public uniswapV3PairCoinEth: UniswapV3Pool
     public uniswapV3TwoTrancheLiquidityManager: GebUniswapV3TwoTrancheManager
-
+    public stakingFirstResort: GebLenderFirstResort
+    public stakingAuctionHouse: StakedTokenAuctionHouse
+    public stakingToken: Erc20
 
     constructor(
         network: GebDeployment,
@@ -112,5 +117,8 @@ export class ContractApis {
         this.saviourUniswapLiquidityManager = new UniswapLiquidityManagerLike(addressList.GEB_UNISWAP_SAVIOUR_LIQUIDITY_MANAGER, this.chainProvider)
         this.uniswapV3PairCoinEth = new UniswapV3Pool(addressList.GEB_COIN_UNISWAP_V3_POOL, this.chainProvider)
         this.uniswapV3TwoTrancheLiquidityManager = new GebUniswapV3TwoTrancheManager(addressList.GEB_UNISWAP_TWO_TRANCHE_MANAGER, this.chainProvider)
+        this.stakingFirstResort = new GebLenderFirstResort(addressList.GEB_STAKING, this.chainProvider)
+        this.stakingAuctionHouse = new StakedTokenAuctionHouse(addressList.GEB_STAKING_AUCTION_HOUSE, this.chainProvider)
+        this.stakingToken = new Erc20(addressList.GEB_STAKING_TOKEN, this.chainProvider)
     }
 }

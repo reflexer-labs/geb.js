@@ -43,6 +43,8 @@ import { UniswapLiquidityManagerLike } from './generated/UniswapLiquidityManager
 import { GebProxySaviourActions } from './generated/GebProxySaviourActions'
 import { GebUniswapV3TwoTrancheManager } from './generated/GebUniswapV3TwoTrancheManager'
 import { UniswapV3Pool } from './generated/UniswapV3Pool'
+import { StakedTokenAuctionHouse } from './generated/StakedTokenAuctionHouse'
+import { GebLenderFirstResort } from './generated/GebLenderFirstResort'
 
 export {
     // Factory
@@ -92,4 +94,6 @@ export {
     GebProxySaviourActions,
     UniswapV3Pool,
     GebUniswapV3TwoTrancheManager,
+    GebLenderFirstResort,
+    StakedTokenAuctionHouse,
 }
