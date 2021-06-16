@@ -4,16 +4,15 @@ Typescript library to interact with the GEB system.
 
 ## IMPORTANT
 
-This is the developer dev repo. 
+This is a developer repo that's being updated regularly.
 
-Library users please check: [packages/geb/README.md](packages/geb/README.md)
+Library users can check: [packages/geb/README.md](packages/geb/README.md)
 
-Or on NPM: https://www.npmjs.com/package/geb.js
+Or get the NPM package: https://www.npmjs.com/package/geb.js
 
 ## Overview
 
-Geb.js adopted a monorepo structure to allow more flexibility to use the different packages. The packages are managed by Lerna and published on NPM. 
-
+Geb.js adopted a monorepo structure to allow more flexibility to use the different packages. The packages are managed by Lerna and published on NPM.
 
 Geb.js consist of the following packages:
 
@@ -25,16 +24,16 @@ Geb.js consist of the following packages:
   Base classes for contract API, Chain interface definition, etc.. Also includes some global config such as the GEB live deployment addresses.
 - [@reflexer-finance/geb-ethers-provider](https://www.npmjs.com/package/@reflexer-finance/geb-ethers-provider)
 
-   Chain interface implementation using Ether.js
+  Chain interface implementation using Ether.js
 - [@reflexer-finance/geb-contract-api](https://www.npmjs.com/package/@reflexer-finance/geb-contract-api)
   
-  Common ABIs of the GEB system and their generated typed interface. 
+  Common ABIs for the GEB system and their generated typed interface. 
 - [@reflexer-finance/geb-admin-api](https://www.npmjs.com/package/@reflexer-finance/geb-admin-api)
   
   ABIs of non-core contracts such as governance, oracles, polling and other periphery contracts. These contracts are not included in the main `geb.js` package to avoid bloat.
 - [@reflexer-finance/geb-admin](https://www.npmjs.com/package/@reflexer-finance/geb-admin)
 
-   Admin/Advanced packages including the admin contracts.
+  Admin/Advanced packages including the admin contracts.
 - [@reflexer-finance/geb-typechain](https://www.npmjs.com/package/@reflexer-finance/geb-typechain)
    
   Class generator to create typed smart-contract interface. Dev only package that is used to generate code for geb-contract-api and geb-admin-api. 
@@ -48,7 +47,7 @@ Install npm dependencies:
 npm i -d
 ```
 
-To build Typescript run 
+To build Typescript run:
 
 ```
 npm run build
@@ -72,12 +71,12 @@ npm run docs
 npm run docs-publish
 ```
 
-
 ## Test
 
 The testsuite currently require `seth` to be installed and available.
 
-Run all test
+Run all tests:
+
 ```
 npm run test Test
 ```
