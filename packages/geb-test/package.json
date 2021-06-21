@@ -1,6 +1,6 @@
 {
     "name": "@reflexer-finance/geb-test",
-    "version": "1.1.9",
+    "version": "1.1.10",
     "description": "",
     "main": "./lib/index.js",
     "scripts": {
@@ -9,13 +9,13 @@
     "author": "Guillaume Felley <guillaume@reflexer.finance>",
     "license": "MIT",
     "dependencies": {
-        "@reflexer-finance/geb-admin": "^1.1.9",
-        "@reflexer-finance/geb-admin-api": "^1.1.9",
-        "@reflexer-finance/geb-contract-api": "^1.1.9",
-        "@reflexer-finance/geb-contract-base": "^1.1.9",
-        "@reflexer-finance/geb-ethers-provider": "^1.1.9",
+        "@reflexer-finance/geb-admin": "^1.1.10",
+        "@reflexer-finance/geb-admin-api": "^1.1.10",
+        "@reflexer-finance/geb-contract-api": "^1.1.10",
+        "@reflexer-finance/geb-contract-base": "^1.1.10",
+        "@reflexer-finance/geb-ethers-provider": "^1.1.10",
         "@types/mocha": "^8.0.3",
-        "geb.js": "^1.1.9",
+        "geb.js": "^1.1.10",
         "mocha": "^8.1.3"
     }
 }
