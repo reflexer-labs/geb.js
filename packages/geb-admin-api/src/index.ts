@@ -39,6 +39,7 @@ import { SingleSpotDebtCeilingSetter } from './generated/SingleSpotDebtCeilingSe
 import { CollateralAuctionThrottler } from './generated/CollateralAuctionThrottler'
 import { FsmWrapper } from './generated/FSMWrapper'
 import { EsmThresholdSetter } from './generated/ESMThresholdSetter'
+import { SingleDebtFloorAdjuster } from './generated/SingleDebtFloorAdjuster'
 
 export {
     // Object with all instances
@@ -84,4 +85,5 @@ export {
     CollateralAuctionThrottler,
     FsmWrapper,
     EsmThresholdSetter,
+    SingleDebtFloorAdjuster,
 }

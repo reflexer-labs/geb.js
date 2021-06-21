@@ -13,6 +13,7 @@ import {
     CollateralAuctionThrottler,
     FsmWrapper,
     EsmThresholdSetter,
+    SingleDebtFloorAdjuster,
 } from '.'
 import {
     GebProviderInterface,
@@ -41,6 +42,7 @@ export class AdminApis {
     public collateralAuctionThrottler: CollateralAuctionThrottler
     public fsmWrapper: FsmWrapper
     public esmThresholdSetter: EsmThresholdSetter
+    public singleDebtFloorAdjuster: SingleDebtFloorAdjuster
 
 
     constructor(
@@ -66,5 +68,6 @@ export class AdminApis {
         this.collateralAuctionThrottler = new CollateralAuctionThrottler(addressList.COLLATERAL_AUCTION_THROTTLER, this.chainProvider)
         this.fsmWrapper = new FsmWrapper(addressList.FSM_WRAPPER_ETH, this.chainProvider)
         this.esmThresholdSetter = new EsmThresholdSetter(addressList.ESM_THRESHOLD_SETTER, this.chainProvider)
+        this.singleDebtFloorAdjuster = new SingleDebtFloorAdjuster(addressList.GEB_DEBT_FLOOR_ADJUSTER, this.chainProvider)
     }
 }
