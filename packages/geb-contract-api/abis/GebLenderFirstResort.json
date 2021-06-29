@@ -8,7 +8,7 @@
             },
             {
                 "internalType": "address",
-                "name": "descendant_",
+                "name": "rewardToken_",
                 "type": "address"
             },
             {
@@ -26,6 +26,12 @@
                 "name": "safeEngine_",
                 "type": "address"
             },
+            {
+                "internalType": "address",
+                "name": "rewardDripper_",
+                "type": "address"
+            },
+            { "internalType": "address", "name": "escrow_", "type": "address" },
             {
                 "internalType": "uint256",
                 "name": "maxDelay_",
@@ -49,6 +55,11 @@
             {
                 "internalType": "uint256",
                 "name": "systemCoinsToRequest_",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "percentageVested_",
                 "type": "uint256"
             }
         ],
@@ -97,6 +108,31 @@
         "anonymous": false,
         "inputs": [
             {
+                "indexed": false,
+                "internalType": "address",
+                "name": "escrow",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "who",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "EscrowRewards",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
                 "indexed": true,
                 "internalType": "address",
                 "name": "account",
@@ -116,6 +152,19 @@
             }
         ],
         "name": "Exit",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "bytes",
+                "name": "revertReason",
+                "type": "bytes"
+            }
+        ],
+        "name": "FailEscrowRewards",
         "type": "event"
     },
     {
@@ -186,6 +235,25 @@
         "inputs": [
             {
                 "indexed": false,
+                "internalType": "uint256",
+                "name": "accTokensPerShare",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "stakedSupply",
+                "type": "uint256"
+            }
+        ],
+        "name": "PoolUpdated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
                 "internalType": "address",
                 "name": "account",
                 "type": "address"
@@ -206,17 +274,36 @@
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "start",
+                "name": "deadline",
                 "type": "uint256"
             },
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "end",
+                "name": "amount",
                 "type": "uint256"
             }
         ],
         "name": "RequestExit",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "RewardsPaid",
         "type": "event"
     },
     {
@@ -269,7 +356,25 @@
     },
     {
         "inputs": [],
+        "name": "RAY",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "WAD",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "accTokensPerShare",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
@@ -300,22 +405,22 @@
     },
     {
         "inputs": [],
-        "name": "ancestor",
+        "name": "ancestorPerDescendant",
         "outputs": [
-            {
-                "internalType": "contract TokenLike",
-                "name": "",
-                "type": "address"
-            }
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "ancestorPerDescendant",
+        "name": "ancestorPool",
         "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
+            {
+                "internalType": "contract TokenPool",
+                "name": "",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -389,11 +494,31 @@
         "type": "function"
     },
     {
+        "inputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "name": "descendantBalanceOf",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [],
-        "name": "descendant",
+        "name": "descendantPerAncestor",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "escrow",
         "outputs": [
             {
-                "internalType": "contract TokenLike",
+                "internalType": "contract StakingRewardsEscrowLike",
                 "name": "",
                 "type": "address"
             }
@@ -403,7 +528,7 @@
     },
     {
         "inputs": [],
-        "name": "descendantPerAncestor",
+        "name": "escrowPaused",
         "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
@@ -462,6 +587,13 @@
         "name": "forcedExit",
         "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getRewards",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -541,9 +673,25 @@
     },
     {
         "inputs": [],
+        "name": "percentageVested",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "protocolUnderwater",
         "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "pullFunds",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -566,6 +714,41 @@
     },
     {
         "inputs": [],
+        "name": "rewardDripper",
+        "outputs": [
+            {
+                "internalType": "contract RewardDripperLike",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "rewardPool",
+        "outputs": [
+            {
+                "internalType": "contract TokenPool",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "rewardsBalance",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "safeEngine",
         "outputs": [
             {
@@ -573,6 +756,15 @@
                 "name": "",
                 "type": "address"
             }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "stakedSupply",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -614,6 +806,13 @@
             { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "updatePool",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     }
 ]

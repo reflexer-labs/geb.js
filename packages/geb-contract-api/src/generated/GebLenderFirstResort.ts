@@ -21,12 +21,34 @@ export class GebLenderFirstResort extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
+    RAY(): Promise<BigNumber>
+    RAY(multicall: true): MulticallRequest<BigNumber>
+    RAY(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"RAY","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     WAD(): Promise<BigNumber>
     WAD(multicall: true): MulticallRequest<BigNumber>
     WAD(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"WAD","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    accTokensPerShare(): Promise<BigNumber>
+    accTokensPerShare(multicall: true): MulticallRequest<BigNumber>
+    accTokensPerShare(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"accTokensPerShare","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -51,16 +73,6 @@ export class GebLenderFirstResort extends BaseContractAPI {
         return this.getTransactionRequest(abi, [account])
     }
 
-    ancestor(): Promise<string>
-    ancestor(multicall: true): MulticallRequest<string>
-    ancestor(multicall?: true): Promise<string> | MulticallRequest<string> {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"ancestor","outputs":[{"internalType":"contract TokenLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
-
-        return this.ethCallOrMulticall(abi, [], multicall)
-    }
-
     ancestorPerDescendant(): Promise<BigNumber>
     ancestorPerDescendant(multicall: true): MulticallRequest<BigNumber>
     ancestorPerDescendant(
@@ -69,6 +81,16 @@ export class GebLenderFirstResort extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"ancestorPerDescendant","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    ancestorPool(): Promise<string>
+    ancestorPool(multicall: true): MulticallRequest<string>
+    ancestorPool(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"ancestorPool","outputs":[{"internalType":"contract TokenPool","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -165,14 +187,20 @@ export class GebLenderFirstResort extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    descendant(): Promise<string>
-    descendant(multicall: true): MulticallRequest<string>
-    descendant(multicall?: true): Promise<string> | MulticallRequest<string> {
+    descendantBalanceOf(address: string): Promise<BigNumber>
+    descendantBalanceOf(
+        address: string,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    descendantBalanceOf(
+        address: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"descendant","outputs":[{"internalType":"contract TokenLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"descendantBalanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.ethCallOrMulticall(abi, [], multicall)
+        return this.ethCallOrMulticall(abi, [address], multicall)
     }
 
     descendantPerAncestor(): Promise<BigNumber>
@@ -183,6 +211,28 @@ export class GebLenderFirstResort extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"descendantPerAncestor","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    escrow(): Promise<string>
+    escrow(multicall: true): MulticallRequest<string>
+    escrow(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"escrow","outputs":[{"internalType":"contract StakingRewardsEscrowLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    escrowPaused(): Promise<BigNumber>
+    escrowPaused(multicall: true): MulticallRequest<BigNumber>
+    escrowPaused(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"escrowPaused","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -260,6 +310,14 @@ export class GebLenderFirstResort extends BaseContractAPI {
         const abi = {"inputs":[],"name":"forcedExit","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    getRewards(): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"getRewards","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [])
     }
 
     join(wad: BigNumberish): TransactionRequest {
@@ -341,6 +399,18 @@ export class GebLenderFirstResort extends BaseContractAPI {
         return this.getTransactionRequest(abi, [parameter, data])
     }
 
+    percentageVested(): Promise<BigNumber>
+    percentageVested(multicall: true): MulticallRequest<BigNumber>
+    percentageVested(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"percentageVested","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     protocolUnderwater(): Promise<boolean>
     protocolUnderwater(multicall: true): MulticallRequest<boolean>
     protocolUnderwater(
@@ -351,6 +421,14 @@ export class GebLenderFirstResort extends BaseContractAPI {
         const abi = {"inputs":[],"name":"protocolUnderwater","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    pullFunds(): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"pullFunds","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [])
     }
 
     removeAuthorization(account: string): TransactionRequest {
@@ -369,12 +447,58 @@ export class GebLenderFirstResort extends BaseContractAPI {
         return this.getTransactionRequest(abi, [wad])
     }
 
+    rewardDripper(): Promise<string>
+    rewardDripper(multicall: true): MulticallRequest<string>
+    rewardDripper(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"rewardDripper","outputs":[{"internalType":"contract RewardDripperLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    rewardPool(): Promise<string>
+    rewardPool(multicall: true): MulticallRequest<string>
+    rewardPool(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"rewardPool","outputs":[{"internalType":"contract TokenPool","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    rewardsBalance(): Promise<BigNumber>
+    rewardsBalance(multicall: true): MulticallRequest<BigNumber>
+    rewardsBalance(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"rewardsBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     safeEngine(): Promise<string>
     safeEngine(multicall: true): MulticallRequest<string>
     safeEngine(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    stakedSupply(): Promise<BigNumber>
+    stakedSupply(multicall: true): MulticallRequest<BigNumber>
+    stakedSupply(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"stakedSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
@@ -425,5 +549,13 @@ export class GebLenderFirstResort extends BaseContractAPI {
         const abi = {"inputs":[],"name":"tokensToAuction","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    updatePool(): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"updatePool","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [])
     }
 }
