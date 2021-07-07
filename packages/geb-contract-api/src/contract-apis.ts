@@ -29,6 +29,7 @@ import {
     GebUniswapV3TwoTrancheManager,
     GebLenderFirstResort,
     StakedTokenAuctionHouse,
+    DsDelegateTokenNoTransfer,
 } from '.'
 import {
     GebProviderInterface,
@@ -77,6 +78,7 @@ export class ContractApis {
     public stakingFirstResort: GebLenderFirstResort
     public stakingAuctionHouse: StakedTokenAuctionHouse
     public stakingToken: Erc20
+    public stakedProt: DsDelegateTokenNoTransfer
 
     constructor(
         network: GebDeployment,
@@ -120,5 +122,6 @@ export class ContractApis {
         this.stakingFirstResort = new GebLenderFirstResort(addressList.GEB_STAKING, this.chainProvider)
         this.stakingAuctionHouse = new StakedTokenAuctionHouse(addressList.GEB_STAKING_AUCTION_HOUSE, this.chainProvider)
         this.stakingToken = new Erc20(addressList.GEB_STAKING_TOKEN, this.chainProvider)
+        this.stakedProt = new DsDelegateTokenNoTransfer(addressList.GEB_STAKED_PROT, this.chainProvider)
     }
 }

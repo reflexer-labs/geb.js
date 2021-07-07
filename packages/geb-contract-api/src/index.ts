@@ -45,6 +45,7 @@ import { GebUniswapV3TwoTrancheManager } from './generated/GebUniswapV3TwoTranch
 import { UniswapV3Pool } from './generated/UniswapV3Pool'
 import { StakedTokenAuctionHouse } from './generated/StakedTokenAuctionHouse'
 import { GebLenderFirstResort } from './generated/GebLenderFirstResort'
+import { DsDelegateTokenNoTransfer } from './generated/DSDelegateTokenNoTransfer'
 
 export {
     // Factory
@@ -96,4 +97,5 @@ export {
     GebUniswapV3TwoTrancheManager,
     GebLenderFirstResort,
     StakedTokenAuctionHouse,
+    DsDelegateTokenNoTransfer,
 }

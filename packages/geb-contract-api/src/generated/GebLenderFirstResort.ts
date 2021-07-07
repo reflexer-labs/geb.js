@@ -187,6 +187,16 @@ export class GebLenderFirstResort extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
+    descendant(): Promise<string>
+    descendant(multicall: true): MulticallRequest<string>
+    descendant(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"descendant","outputs":[{"internalType":"contract TokenLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
     descendantBalanceOf(address: string): Promise<BigNumber>
     descendantBalanceOf(
         address: string,
@@ -399,6 +409,19 @@ export class GebLenderFirstResort extends BaseContractAPI {
         return this.getTransactionRequest(abi, [parameter, data])
     }
 
+    pendingRewards(user: string): Promise<BigNumber>
+    pendingRewards(user: string, multicall: true): MulticallRequest<BigNumber>
+    pendingRewards(
+        user: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"pendingRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [user], multicall)
+    }
+
     percentageVested(): Promise<BigNumber>
     percentageVested(multicall: true): MulticallRequest<BigNumber>
     percentageVested(
@@ -465,6 +488,18 @@ export class GebLenderFirstResort extends BaseContractAPI {
         // prettier-ignore
         // @ts-ignore
         const abi = {"inputs":[],"name":"rewardPool","outputs":[{"internalType":"contract TokenPool","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    rewardRate(): Promise<BigNumber>
+    rewardRate(multicall: true): MulticallRequest<BigNumber>
+    rewardRate(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"rewardRate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
