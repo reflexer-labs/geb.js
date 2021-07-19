@@ -17,6 +17,7 @@ import {
     GebProxyIncentivesActions,
     GebProxyDebtAuctionActions,
     GebProxySurplusAuctionActions,
+    GebProxyStakedTokenAuctionActions,
     GebProxySaviourActions,
 } from '@reflexer-finance/geb-contract-api'
 import { NULL_ADDRESS } from './utils'
@@ -62,6 +63,11 @@ export class GebProxyActions {
     public proxyActionSurplusAuctionAddress: string
 
     /**
+     * Address of the proxy actions contract for staked token auctions.
+     */
+    public proxyStakedTokenAuctionAddress: string
+
+    /**
      * Address of the proxy actions contract for surplus auctions.
      */
     public proxyActionSaviourAddress: string
@@ -73,6 +79,7 @@ export class GebProxyActions {
     private proxyActionLeverage: GebProxyLeverageActions
     private proxyActionDebtAuction: GebProxyDebtAuctionActions
     private proxyActionSurplusAuction: GebProxySurplusAuctionActions
+    private proxyStakedTokenAuction: GebProxyStakedTokenAuctionActions
     private proxyActionSaviour: GebProxySaviourActions
 
     constructor(
@@ -94,6 +101,7 @@ export class GebProxyActions {
         this.proxyActionLeverageAddress = this.addressList.LEVERAGE_PROXY_ACTION
         this.proxyActionDebtAuctionAddress = this.addressList.PROXY_DEBT_AUCTION_ACTIONS
         this.proxyActionSurplusAuctionAddress = this.addressList.PROXY_SURPLUS_AUCTION_ACTIONS
+        this.proxyStakedTokenAuctionAddress = this.addressList.PROXY_STAKED_TOKEN_AUCTION_ACTION
         this.proxyActionSaviourAddress = this.addressList.PROXY_SAVIOUR_ACTIONS
 
         // Proxy contract APIs
@@ -121,6 +129,10 @@ export class GebProxyActions {
         )
         this.proxyActionSurplusAuction = new GebProxySurplusAuctionActions(
             this.proxyActionSurplusAuctionAddress,
+            this.chainProvider
+        )
+        this.proxyStakedTokenAuction = new GebProxyStakedTokenAuctionActions(
+            this.proxyStakedTokenAuctionAddress,
             this.chainProvider
         )
         this.proxyActionSaviour = new GebProxySaviourActions(
@@ -1369,6 +1381,43 @@ export class GebProxyActions {
             this.proxyActionSurplusAuction.settleAuction(
                 this.addressList.GEB_COIN_JOIN,
                 this.addressList.GEB_SURPLUS_AUCTION_HOUSE,
+                auctionId
+            )
+        )
+    }
+
+    // ==== Proxy Actions Staked Token Auctions ====
+
+    stakedTokenAuctionStartAndIncreaseBidSize(
+        bidSize: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyStakedTokenAuction.startAndIncreaseBidSize(
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.GEB_STAKING,
+                bidSize
+            )
+        )
+    }
+
+    stakedTokenAuctionIncreaseBidSize(
+        bidSize: BigNumberish,
+        auctionId: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyStakedTokenAuction.increaseBidSize(
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.GEB_STAKING_AUCTION_HOUSE,
+                auctionId,
+                bidSize
+            )
+        )
+    }
+
+    stakedTokenSettleAuction(auctionId: BigNumberish): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyStakedTokenAuction.settleAuction(
+                this.addressList.GEB_STAKING_AUCTION_HOUSE,
                 auctionId
             )
         )

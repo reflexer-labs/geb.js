@@ -46,6 +46,7 @@ import { UniswapV3Pool } from './generated/UniswapV3Pool'
 import { StakedTokenAuctionHouse } from './generated/StakedTokenAuctionHouse'
 import { GebLenderFirstResort } from './generated/GebLenderFirstResort'
 import { DsDelegateTokenNoTransfer } from './generated/DSDelegateTokenNoTransfer'
+import { GebProxyStakedTokenAuctionActions } from './generated/GebProxyStakedTokenAuctionActions'
 
 export {
     // Factory
@@ -86,6 +87,7 @@ export {
     UniswapV2Pair,
     GebProxyDebtAuctionActions,
     GebProxySurplusAuctionActions,
+    GebProxyStakedTokenAuctionActions,
     MerkleDistributorFactory,
     MerkleDistributor,
     ChainlinkRelayer,
