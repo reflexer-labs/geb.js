@@ -101,7 +101,7 @@ export class GebProxyActions {
         this.proxyActionLeverageAddress = this.addressList.LEVERAGE_PROXY_ACTION
         this.proxyActionDebtAuctionAddress = this.addressList.PROXY_DEBT_AUCTION_ACTIONS
         this.proxyActionSurplusAuctionAddress = this.addressList.PROXY_SURPLUS_AUCTION_ACTIONS
-        this.proxyStakedTokenAuctionAddress = this.addressList.PROXY_STAKED_TOKEN_AUCTION_ACTION
+        this.proxyStakedTokenAuctionAddress = this.addressList.GEB_STAKED_TOKEN_PROXY_ACTIONS
         this.proxyActionSaviourAddress = this.addressList.PROXY_SAVIOUR_ACTIONS
 
         // Proxy contract APIs

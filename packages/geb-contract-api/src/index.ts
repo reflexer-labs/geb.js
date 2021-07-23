@@ -47,6 +47,7 @@ import { StakedTokenAuctionHouse } from './generated/StakedTokenAuctionHouse'
 import { GebLenderFirstResort } from './generated/GebLenderFirstResort'
 import { DsDelegateTokenNoTransfer } from './generated/DSDelegateTokenNoTransfer'
 import { GebProxyStakedTokenAuctionActions } from './generated/GebProxyStakedTokenAuctionActions'
+import { StakingRewardsEscrow } from './generated/StakingRewardsEscrow'
 
 export {
     // Factory
@@ -100,4 +101,5 @@ export {
     GebLenderFirstResort,
     StakedTokenAuctionHouse,
     DsDelegateTokenNoTransfer,
+    StakingRewardsEscrow,
 }

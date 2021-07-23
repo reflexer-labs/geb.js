@@ -30,6 +30,7 @@ import {
     GebLenderFirstResort,
     StakedTokenAuctionHouse,
     DsDelegateTokenNoTransfer,
+    StakingRewardsEscrow,
 } from '.'
 import {
     GebProviderInterface,
@@ -79,6 +80,7 @@ export class ContractApis {
     public stakingAuctionHouse: StakedTokenAuctionHouse
     public stakingToken: Erc20
     public stakedProt: DsDelegateTokenNoTransfer
+    public stakingEscrow: StakingRewardsEscrow
 
     constructor(
         network: GebDeployment,
@@ -123,5 +125,6 @@ export class ContractApis {
         this.stakingAuctionHouse = new StakedTokenAuctionHouse(addressList.GEB_STAKING_AUCTION_HOUSE, this.chainProvider)
         this.stakingToken = new Erc20(addressList.GEB_STAKING_TOKEN, this.chainProvider)
         this.stakedProt = new DsDelegateTokenNoTransfer(addressList.GEB_STAKED_PROT, this.chainProvider)
+        this.stakingEscrow = new StakingRewardsEscrow(addressList.GEB_STAKING_REWARDS_ESCROW, this.chainProvider)
     }
 }
