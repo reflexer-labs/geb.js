@@ -200,6 +200,22 @@ export class StakingRewardsEscrow extends BaseContractAPI {
         return this.ethCallOrMulticall(abi, [who], multicall)
     }
 
+    getTokensBeingEscrowed(who: string): Promise<BigNumber>
+    getTokensBeingEscrowed(
+        who: string,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    getTokensBeingEscrowed(
+        who: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"who","type":"address"}],"name":"getTokensBeingEscrowed","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [who], multicall)
+    }
+
     modifyParameters__Bytes32Address(
         parameter: BytesLike,
         data: string
