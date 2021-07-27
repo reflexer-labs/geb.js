@@ -14,6 +14,9 @@ import {
     FsmWrapper,
     EsmThresholdSetter,
     SingleDebtFloorAdjuster,
+    AuctionedSurplusSetter,
+    AutoSurplusBufferSetter,
+    DebtAuctionInitialParameterSetter,
 } from '.'
 import {
     GebProviderInterface,
@@ -43,6 +46,9 @@ export class AdminApis {
     public fsmWrapper: FsmWrapper
     public esmThresholdSetter: EsmThresholdSetter
     public singleDebtFloorAdjuster: SingleDebtFloorAdjuster
+    public debtAuctionInitialParameterSetter: DebtAuctionInitialParameterSetter
+    public autoSurplusBufferSetter: AutoSurplusBufferSetter
+    public auctionedSurplusSetter: AuctionedSurplusSetter
 
 
     constructor(
@@ -69,5 +75,8 @@ export class AdminApis {
         this.fsmWrapper = new FsmWrapper(addressList.FSM_WRAPPER_ETH, this.chainProvider)
         this.esmThresholdSetter = new EsmThresholdSetter(addressList.ESM_THRESHOLD_SETTER, this.chainProvider)
         this.singleDebtFloorAdjuster = new SingleDebtFloorAdjuster(addressList.GEB_DEBT_FLOOR_ADJUSTER, this.chainProvider)
+        this.debtAuctionInitialParameterSetter = new DebtAuctionInitialParameterSetter(addressList.GEB_DEBT_AUCTION_INITIAL_PARAM_SETTER, this.chainProvider)
+        this.autoSurplusBufferSetter = new AutoSurplusBufferSetter(addressList.GEB_AUTO_SURPLUS_BUFFER, this.chainProvider)
+        this.auctionedSurplusSetter = new AuctionedSurplusSetter(addressList.GEB_AUTO_SURPLUS_AUCTIONED, this.chainProvider)
     }
 }

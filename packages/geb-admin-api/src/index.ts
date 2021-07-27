@@ -40,6 +40,9 @@ import { CollateralAuctionThrottler } from './generated/CollateralAuctionThrottl
 import { FsmWrapper } from './generated/FSMWrapper'
 import { EsmThresholdSetter } from './generated/ESMThresholdSetter'
 import { SingleDebtFloorAdjuster } from './generated/SingleDebtFloorAdjuster'
+import { AuctionedSurplusSetter } from './generated/AuctionedSurplusSetter'
+import { AutoSurplusBufferSetter } from './generated/AutoSurplusBufferSetter'
+import { DebtAuctionInitialParameterSetter } from './generated/DebtAuctionInitialParameterSetter'
 
 export {
     // Object with all instances
@@ -86,4 +89,7 @@ export {
     FsmWrapper,
     EsmThresholdSetter,
     SingleDebtFloorAdjuster,
+    DebtAuctionInitialParameterSetter,
+    AutoSurplusBufferSetter,
+    AuctionedSurplusSetter,
 }
