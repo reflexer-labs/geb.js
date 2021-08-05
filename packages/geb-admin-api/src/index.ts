@@ -43,6 +43,7 @@ import { SingleDebtFloorAdjuster } from './generated/SingleDebtFloorAdjuster'
 import { AuctionedSurplusSetter } from './generated/AuctionedSurplusSetter'
 import { AutoSurplusBufferSetter } from './generated/AutoSurplusBufferSetter'
 import { DebtAuctionInitialParameterSetter } from './generated/DebtAuctionInitialParameterSetter'
+import { StakedTokensToKeepSetter } from './generated/StakedTokensToKeepSetter'
 
 export {
     // Object with all instances
@@ -92,4 +93,5 @@ export {
     DebtAuctionInitialParameterSetter,
     AutoSurplusBufferSetter,
     AuctionedSurplusSetter,
+    StakedTokensToKeepSetter,
 }

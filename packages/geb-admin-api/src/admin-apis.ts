@@ -17,6 +17,7 @@ import {
     AuctionedSurplusSetter,
     AutoSurplusBufferSetter,
     DebtAuctionInitialParameterSetter,
+    StakedTokensToKeepSetter,
 } from '.'
 import {
     GebProviderInterface,
@@ -49,6 +50,7 @@ export class AdminApis {
     public debtAuctionInitialParameterSetter: DebtAuctionInitialParameterSetter
     public autoSurplusBufferSetter: AutoSurplusBufferSetter
     public auctionedSurplusSetter: AuctionedSurplusSetter
+    public stakedTokensToKeepSetter: StakedTokensToKeepSetter
 
 
     constructor(
@@ -78,5 +80,6 @@ export class AdminApis {
         this.debtAuctionInitialParameterSetter = new DebtAuctionInitialParameterSetter(addressList.GEB_DEBT_AUCTION_INITIAL_PARAM_SETTER, this.chainProvider)
         this.autoSurplusBufferSetter = new AutoSurplusBufferSetter(addressList.GEB_AUTO_SURPLUS_BUFFER, this.chainProvider)
         this.auctionedSurplusSetter = new AuctionedSurplusSetter(addressList.GEB_AUTO_SURPLUS_AUCTIONED, this.chainProvider)
+        this.stakedTokensToKeepSetter = new StakedTokensToKeepSetter(addressList.GEB_STAKED_TOKENS_TO_KEEP_SETTER, this.chainProvider)
     }
 }
