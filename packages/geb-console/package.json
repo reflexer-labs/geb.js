@@ -1,6 +1,6 @@
 {
     "name": "@reflexer-finance/geb-console",
-    "version": "1.1.21",
+    "version": "1.1.22",
     "description": "",
     "main": "./lib/index.js",
     "bin": {
@@ -10,7 +10,7 @@
     "license": "MIT",
     "dependencies": {
         "@nomiclabs/hardhat-ethers": "^2.0.2",
-        "@reflexer-finance/geb-admin": "^1.1.21",
+        "@reflexer-finance/geb-admin": "^1.1.22",
         "ethers": "^5.0.32",
         "hardhat": "^2.1.2",
         "open": "^7.3.0"
