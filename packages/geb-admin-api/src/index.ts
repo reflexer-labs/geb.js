@@ -44,6 +44,7 @@ import { AuctionedSurplusSetter } from './generated/AuctionedSurplusSetter'
 import { AutoSurplusBufferSetter } from './generated/AutoSurplusBufferSetter'
 import { DebtAuctionInitialParameterSetter } from './generated/DebtAuctionInitialParameterSetter'
 import { StakedTokensToKeepSetter } from './generated/StakedTokensToKeepSetter'
+import { StakeRewardRefill } from './generated/StakeRewardRefill'
 
 export {
     // Object with all instances
@@ -94,4 +95,5 @@ export {
     AutoSurplusBufferSetter,
     AuctionedSurplusSetter,
     StakedTokensToKeepSetter,
+    StakeRewardRefill,
 }
