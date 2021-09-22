@@ -47,7 +47,6 @@ import { StakedTokensToKeepSetter } from './generated/StakedTokensToKeepSetter'
 import { StakeRewardRefill } from './generated/StakeRewardRefill'
 
 export {
-    // Object with all instances
     AdminApis,
     // Individual contracts
     ChainlinkMedianFlxusd,
