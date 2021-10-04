@@ -1386,6 +1386,31 @@ export class GebProxyActions {
         )
     }
 
+    // ==== Proxy Recycling surplus auctions ====
+
+    recyclingSurplusIncreaseBidSize(
+        bidSize: BigNumberish,
+        auctionId: BigNumberish
+    ): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSurplusAuction.increaseBidSize(
+                this.addressList.GEB_STAKE_RECYCLING_SURPLUS_AUCTION_HOUSE,
+                auctionId,
+                bidSize
+            )
+        )
+    }
+
+    recyclingSurplusSettleAuction(auctionId: BigNumberish): TransactionRequest {
+        return this.getProxiedTransactionRequest(
+            this.proxyActionSurplusAuction.settleAuction(
+                this.addressList.GEB_COIN_JOIN,
+                this.addressList.GEB_STAKE_RECYCLING_SURPLUS_AUCTION_HOUSE,
+                auctionId
+            )
+        )
+    }
+
     // ==== Proxy Actions Staked Token Auctions ====
 
     stakedTokenAuctionStartAndIncreaseBidSize(
