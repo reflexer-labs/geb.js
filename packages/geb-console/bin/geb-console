@@ -21,7 +21,7 @@ async function main() {
     }
 
     if (isLocal) {
-        const provider = await hre.run("node:get-provider", {forkUrl: "https://parity0.mainnet.makerfoundation.com:8545"})
+        const provider = await hre.run("node:get-provider", {forkUrl: "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"})
         const server = await hre.run("node:create-server", {hostname: "localhost", port: 8545, provider})
         const { port, address } = await server.listen();
         await hreRequest("hardhat_setLoggingEnabled", [false])
@@ -30,17 +30,17 @@ async function main() {
         netId = 1
     } else if (process.env.NETWORK === 'mainnet' || process.argv[2] === 'mainnet') {
         console.log('Start geb-console on Mainnet...')
-        rpcUrl = 'https://parity0.mainnet.makerfoundation.com:8545'
+        rpcUrl = "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"
         network = 'mainnet'
         netId = 1
     } else if (process.env.NETWORK === 'rinkeby' || process.argv[2] === 'rinkeby') {
         console.log('Start geb-console on Rinkeby...')
-        rpcUrl = 'https://rinkeby.infura.io/v3/7a5c8172af0d41fd896a18dd1d866f87'
+        rpcUrl = 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
         network = 'rinkeby'
         netId = 4
     } else {
         console.log('Start geb-console on Kovan...')
-        rpcUrl = 'https://parity0.kovan.makerfoundation.com:8545'
+        rpcUrl = 'https://kovan.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
         network = 'kovan'
         netId = 42
     }
