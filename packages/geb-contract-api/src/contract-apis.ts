@@ -31,6 +31,7 @@ import {
     StakedTokenAuctionHouse,
     DsDelegateTokenNoTransfer,
     StakingRewardsEscrow,
+    CurveV1MaxSafeSaviour,
 } from '.'
 import {
     GebProviderInterface,
@@ -72,6 +73,7 @@ export class ContractApis {
     public uniswapPairCoinEth: UniswapV2Pair
     public merkleDistributorFactory: MerkleDistributorFactory
     public coinNativeUniswapSaviour: NativeUnderlyingUniswapSafeSaviour
+    public curveV1MaxSafeSaviour: CurveV1MaxSafeSaviour
     public saviourCRatioSetter: SaviourCRatioSetter
     public saviourUniswapLiquidityManager: UniswapLiquidityManagerLike
     public uniswapV3PairCoinEth: UniswapV3Pool
@@ -117,6 +119,7 @@ export class ContractApis {
         this.uniswapPairCoinEth = new UniswapV2Pair(addressList.GEB_COIN_UNISWAP_POOL, this.chainProvider)
         this.merkleDistributorFactory = new MerkleDistributorFactory(addressList.MERKLE_DISTRIBUTOR_FACTORY, this.chainProvider)
         this.coinNativeUniswapSaviour = new NativeUnderlyingUniswapSafeSaviour(addressList.GEB_COIN_ETH_UNISWAP_V2_POOL_SAVIOUR, this.chainProvider)
+        this.curveV1MaxSafeSaviour = new CurveV1MaxSafeSaviour(addressList.XXXXXX)
         this.saviourCRatioSetter = new SaviourCRatioSetter(addressList.GEB_SAVIOUR_CRATIO_SETTER, this.chainProvider)
         this.saviourUniswapLiquidityManager = new UniswapLiquidityManagerLike(addressList.GEB_UNISWAP_SAVIOUR_LIQUIDITY_MANAGER, this.chainProvider)
         this.uniswapV3PairCoinEth = new UniswapV3Pool(addressList.GEB_COIN_UNISWAP_V3_POOL, this.chainProvider)
