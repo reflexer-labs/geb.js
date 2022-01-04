@@ -14,13 +14,13 @@ async function main() {
     var rpcUrl
     var network
     var netId
-    var isLocal = process.env.NETWORK === 'mainnet-fork' || process.argv[2] === 'mainnet-fork'
+    var isMainnetFork = process.env.NETWORK === 'mainnet-fork' || process.argv[2] === 'mainnet-fork'
 
     var hreRequest = async function(method, params) {
         await hre.network.provider.request({method, params})
     }
 
-    if (isLocal) {
+    if (isMainnetFork) {
         const provider = await hre.run("node:get-provider", {forkUrl: "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"})
         const server = await hre.run("node:create-server", {hostname: "localhost", port: 8545, provider})
         const { port, address } = await server.listen();
@@ -38,11 +38,17 @@ async function main() {
         rpcUrl = 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
         network = 'rinkeby'
         netId = 4
-    } else {
-        console.log('Start geb-console on Kovan...')
+    } else if (!process.env.NETWORK === 'rinkeby' && !process.argv[2]) {
+        console.log('Start geb-console on custom RPC...')
         rpcUrl = 'https://kovan.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
         network = 'kovan'
         netId = 42
+    } else {
+        var rpc = process.env.NETWORK || process.argv[2]
+        console.log('Start geb-console on custom RPC ' + rpc)
+        rpcUrl = rpc
+        network = 'mainnet'
+        netId = 1337
     }
     
     if (process.env.RPC_URL) {
@@ -61,7 +67,7 @@ async function main() {
     console.log('- parseWad(<BN>)             - parseRay(<BN>)')
     console.log('- parseRad(<BN>)\n')
 
-    if(isLocal) {
+    if(isMainnetFork) {
         console.log('Mainnet fork mode!')
         console.log('The following address is funded with 10k ETH:')
         console.log("Address: 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266")
@@ -102,7 +108,7 @@ async function main() {
             process.env.PK,
             repl.context.provider
         )
-    } else if(isLocal) {
+    } else if(isMainnetFork) {
         // If local fork mode, setup the default hardhat wallet
         repl.context.wallet = new ethers.ethers.Wallet(
             "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80",
