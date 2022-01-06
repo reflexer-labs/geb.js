@@ -49,6 +49,7 @@ import { DsDelegateTokenNoTransfer } from './generated/DSDelegateTokenNoTransfer
 import { GebProxyStakedTokenAuctionActions } from './generated/GebProxyStakedTokenAuctionActions'
 import { StakingRewardsEscrow } from './generated/StakingRewardsEscrow'
 import { CurveV1MaxSafeSaviour } from './generated/CurveV1MaxSafeSaviour'
+import { YearnV3MaxSystemCoinSafeSaviour } from './generated/YearnV3MaxSystemCoinSafeSaviour'
 
 export {
     // Factory
@@ -104,4 +105,5 @@ export {
     DsDelegateTokenNoTransfer,
     StakingRewardsEscrow,
     CurveV1MaxSafeSaviour,
+    YearnV3MaxSystemCoinSafeSaviour,
 }
