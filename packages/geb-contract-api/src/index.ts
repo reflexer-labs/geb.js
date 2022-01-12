@@ -50,6 +50,7 @@ import { GebProxyStakedTokenAuctionActions } from './generated/GebProxyStakedTok
 import { StakingRewardsEscrow } from './generated/StakingRewardsEscrow'
 import { CurveV1MaxSafeSaviour } from './generated/CurveV1MaxSafeSaviour'
 import { YearnV3MaxSystemCoinSafeSaviour } from './generated/YearnV3MaxSystemCoinSafeSaviour'
+import { SimpleStakingRewards } from './generated/SimpleStakingRewards'
 
 export {
     // Factory
@@ -106,4 +107,5 @@ export {
     StakingRewardsEscrow,
     CurveV1MaxSafeSaviour,
     YearnV3MaxSystemCoinSafeSaviour,
+    SimpleStakingRewards,
 }
