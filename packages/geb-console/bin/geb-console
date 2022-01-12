@@ -14,13 +14,23 @@ async function main() {
     var rpcUrl
     var network
     var netId
-    var isMainnetFork = process.env.NETWORK === 'mainnet-fork' || process.argv[2] === 'mainnet-fork'
+    var isMainnetFork = false
 
     var hreRequest = async function(method, params) {
         await hre.network.provider.request({method, params})
     }
 
-    if (isMainnetFork) {
+
+    var network = process.argv.length >= 3 ? process.argv[2] : "mainnet"
+    var rpcUrl = process.argv.length >= 4 ? process.argv[3] : process.env.ETH_RPC
+
+    if(!rpcUrl) {
+        console.log(`Missing RPC start "geb-console <mainnet|kovan> <rpcurl>" or set ETH_RPC env var`)
+        return
+    }
+
+    if (network === "mainnet-fork") {
+        isMainnetFork = true
         const provider = await hre.run("node:get-provider", {forkUrl: "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"})
         const server = await hre.run("node:create-server", {hostname: "localhost", port: 8545, provider})
         const { port, address } = await server.listen();
@@ -28,33 +38,26 @@ async function main() {
         rpcUrl = 'http://localhost:8545'
         network = 'mainnet'
         netId = 1
-    } else if (process.env.NETWORK === 'mainnet' || process.argv[2] === 'mainnet') {
+    } else if (network === "mainnet") {
         console.log('Start geb-console on Mainnet...')
         rpcUrl = "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"
         network = 'mainnet'
         netId = 1
-    } else if (process.env.NETWORK === 'rinkeby' || process.argv[2] === 'rinkeby') {
+    } else if (network === "rinkeby") {
         console.log('Start geb-console on Rinkeby...')
         rpcUrl = 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
         network = 'rinkeby'
         netId = 4
-    } else if (!process.env.NETWORK === 'rinkeby' && !process.argv[2]) {
+    } else if (network === "kovan") {
         console.log('Start geb-console on custom RPC...')
         rpcUrl = 'https://kovan.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
         network = 'kovan'
         netId = 42
     } else {
-        var rpc = process.env.NETWORK || process.argv[2]
-        console.log('Start geb-console on custom RPC ' + rpc)
-        rpcUrl = rpc
-        network = 'mainnet'
-        netId = 1337
+        console.log("Unkown network please use mainnet, kovan or mainnet-fork")
+        return
     }
-    
-    if (process.env.RPC_URL) {
-        rpcUrl = process.env.RPC_URL
-    }
-    
+
     console.log('\nContext objects:')
     console.log('- geb                        - ethers')
     console.log('- contracts                  - now()')
