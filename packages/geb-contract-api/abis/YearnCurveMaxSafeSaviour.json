@@ -1,15 +1,67 @@
 [
     {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "coinJoin_",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "systemCoinOrcl_",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "liquidationEngine_",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "taxCollector_",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "oracleRelayer_",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "safeManager_",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "saviourRegistry_",
+                "type": "address"
+            },
+            { "internalType": "address", "name": "yVault_", "type": "address" },
+            {
+                "internalType": "address",
+                "name": "curvePool_",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "minKeeperPayoutValue_",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
         "anonymous": false,
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "string",
-                "name": "",
-                "type": "string"
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
             }
         ],
-        "name": "log",
+        "name": "AddAuthorization",
         "type": "event"
     },
     {
@@ -18,37 +70,48 @@
             {
                 "indexed": false,
                 "internalType": "address",
-                "name": "",
+                "name": "usr",
                 "type": "address"
             }
         ],
-        "name": "log_address",
+        "name": "AllowUser",
         "type": "event"
     },
     {
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
-                "internalType": "bytes",
-                "name": "",
-                "type": "bytes"
-            }
-        ],
-        "name": "log_bytes",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
+                "indexed": true,
+                "internalType": "address",
+                "name": "caller",
+                "type": "address"
+            },
             {
                 "indexed": false,
                 "internalType": "bytes32",
-                "name": "",
+                "name": "collateralType",
                 "type": "bytes32"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "safeHandler",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "systemCoinAmount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "yvTokenAmount",
+                "type": "uint256"
             }
         ],
-        "name": "log_bytes32",
+        "name": "Deposit",
         "type": "event"
     },
     {
@@ -56,50 +119,87 @@
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "int256",
-                "name": "",
-                "type": "int256"
+                "internalType": "address",
+                "name": "usr",
+                "type": "address"
             }
         ],
-        "name": "log_int",
+        "name": "DisallowUser",
         "type": "event"
     },
     {
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
-                "internalType": "string",
-                "name": "key",
-                "type": "string"
+                "indexed": true,
+                "internalType": "address",
+                "name": "caller",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "safeHandler",
+                "type": "address"
             },
             {
                 "indexed": false,
                 "internalType": "address",
-                "name": "val",
+                "name": "token",
                 "type": "address"
-            }
-        ],
-        "name": "log_named_address",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "key",
-                "type": "string"
             },
             {
                 "indexed": false,
-                "internalType": "bytes",
-                "name": "val",
-                "type": "bytes"
+                "internalType": "uint256",
+                "name": "tokenAmount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "dst",
+                "type": "address"
             }
         ],
-        "name": "log_named_bytes",
+        "name": "GetReserves",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "parameter",
+                "type": "bytes32"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "val",
+                "type": "uint256"
+            }
+        ],
+        "name": "ModifyParameters",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "parameter",
+                "type": "bytes32"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "data",
+                "type": "address"
+            }
+        ],
+        "name": "ModifyParameters",
         "type": "event"
     },
     {
@@ -107,458 +207,729 @@
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "string",
-                "name": "key",
-                "type": "string"
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "RemoveAuthorization",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "keeper",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "safeHandler",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "collateralAddedOrDebtRepaid",
+                "type": "uint256"
+            }
+        ],
+        "name": "SaveSAFE",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "caller",
+                "type": "address"
             },
             {
                 "indexed": false,
                 "internalType": "bytes32",
-                "name": "val",
+                "name": "collateralType",
+                "type": "bytes32"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "safeHandler",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "dst",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "systemCoinAmount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "yvTokenAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "Withdraw",
+        "type": "event"
+    },
+    { "anonymous": false, "inputs": [], "name": "dbg", "type": "event" },
+    {
+        "inputs": [],
+        "name": "HUNDRED",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "MAX_LOSS",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "MAX_UINT",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "ONE",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "RAY",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "THOUSAND",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "WAD",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "WAD_COMPLEMENT",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" }
+        ],
+        "name": "addAuthorization",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" }
+        ],
+        "name": "allowUser",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "name": "allowedUsers",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "name": "authorizedAccounts",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "bytes32", "name": "", "type": "bytes32" },
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "name": "canSave",
+        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "coinJoin",
+        "outputs": [
+            {
+                "internalType": "contract CoinJoinLike",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "curveLpToken",
+        "outputs": [
+            {
+                "internalType": "contract ERC20Like",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "curvePool",
+        "outputs": [
+            {
+                "internalType": "contract CurveV1PoolLike",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "name": "curvePoolTokens",
+        "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "uint256",
+                "name": "targetDebtAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "debtBelowFloor",
+        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "defaultMaxLoss",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "name": "defaultMinTokensToWithdraw",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
+            },
+            { "internalType": "uint256", "name": "safeID", "type": "uint256" },
+            {
+                "internalType": "uint256",
+                "name": "lpTokenAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "deposit",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "usr", "type": "address" }
+        ],
+        "name": "disallowUser",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
                 "type": "bytes32"
             }
         ],
-        "name": "log_named_bytes32",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
+        "name": "getAccumulatedRateAndLiquidationPrice",
+        "outputs": [
             {
-                "indexed": false,
-                "internalType": "string",
-                "name": "key",
-                "type": "string"
-            },
-            {
-                "indexed": false,
-                "internalType": "int256",
-                "name": "val",
-                "type": "int256"
-            },
-            {
-                "indexed": false,
                 "internalType": "uint256",
-                "name": "decimals",
-                "type": "uint256"
-            }
-        ],
-        "name": "log_named_decimal_int",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "key",
-                "type": "string"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "val",
+                "name": "accumulatedRate",
                 "type": "uint256"
             },
             {
-                "indexed": false,
                 "internalType": "uint256",
-                "name": "decimals",
+                "name": "liquidationPrice",
                 "type": "uint256"
             }
         ],
-        "name": "log_named_decimal_uint",
-        "type": "event"
+        "stateMutability": "view",
+        "type": "function"
     },
     {
-        "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
-                "internalType": "string",
-                "name": "key",
-                "type": "string"
+                "internalType": "address",
+                "name": "safeHandler",
+                "type": "address"
             },
             {
-                "indexed": false,
-                "internalType": "int256",
-                "name": "val",
-                "type": "int256"
-            }
-        ],
-        "name": "log_named_int",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "key",
-                "type": "string"
-            },
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "val",
-                "type": "string"
-            }
-        ],
-        "name": "log_named_string",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "key",
-                "type": "string"
-            },
-            {
-                "indexed": false,
                 "internalType": "uint256",
-                "name": "val",
+                "name": "sysCoinsFromLP",
                 "type": "uint256"
             }
         ],
-        "name": "log_named_uint",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
+        "name": "getKeeperPayoutTokens",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
-        "name": "log_string",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "log_uint",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes",
-                "name": "",
-                "type": "bytes"
-            }
-        ],
-        "name": "logs",
-        "type": "event"
+        "stateMutability": "view",
+        "type": "function"
     },
     {
         "inputs": [],
-        "name": "IS_TEST",
+        "name": "getKeeperPayoutValue",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "safeID", "type": "uint256" },
+            { "internalType": "address", "name": "token", "type": "address" },
+            { "internalType": "address", "name": "dst", "type": "address" }
+        ],
+        "name": "getReserves",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getSystemCoinMarketPrice",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "safeHandler",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "coinsLeft",
+                "type": "uint256"
+            }
+        ],
+        "name": "getTokensForSaving",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "keeperPayout",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "keeperPayoutExceedsMinValue",
+        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "liquidationEngine",
+        "outputs": [
+            {
+                "internalType": "contract LiquidationEngineLike",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "minKeeperPayoutValue",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "parameter",
+                "type": "bytes32"
+            },
+            { "internalType": "address", "name": "data", "type": "address" }
+        ],
+        "name": "modifyParameters",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "parameter",
+                "type": "bytes32"
+            },
+            { "internalType": "uint256", "name": "val", "type": "uint256" }
+        ],
+        "name": "modifyParameters",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "oracleRelayer",
+        "outputs": [
+            {
+                "internalType": "contract OracleRelayerLike",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "payoutToSAFESize",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" }
+        ],
+        "name": "removeAuthorization",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "name": "removedCurveCoinLiquidity",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "restrictUsage",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "safeEngine",
+        "outputs": [
+            {
+                "internalType": "contract SAFEEngineLike",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "safeHandler",
+                "type": "address"
+            }
+        ],
+        "name": "safeIsAfloat",
         "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "failed",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+        "name": "safeManager",
+        "outputs": [
+            {
+                "internalType": "contract GebSafeManagerLike",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "keeper", "type": "address" },
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "safeHandler",
+                "type": "address"
+            }
+        ],
+        "name": "saveSAFE",
+        "outputs": [
+            { "internalType": "bool", "name": "", "type": "bool" },
+            { "internalType": "uint256", "name": "", "type": "uint256" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "saviourRegistry",
+        "outputs": [
+            {
+                "internalType": "contract SAFESaviourRegistryLike",
+                "name": "",
+                "type": "address"
+            }
+        ],
         "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "setUp",
+        "name": "systemCoin",
+        "outputs": [
+            {
+                "internalType": "contract ERC20Like",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "systemCoinOrcl",
+        "outputs": [
+            {
+                "internalType": "contract PriceFeedLike",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "taxCollector",
+        "outputs": [
+            {
+                "internalType": "contract TaxCollectorLike",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "bytes32", "name": "", "type": "bytes32" },
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "name": "tokenAmountUsedToSave",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            { "internalType": "address", "name": "", "type": "address" },
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "name": "underlyingReserves",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "collateralType",
+                "type": "bytes32"
+            },
+            { "internalType": "uint256", "name": "safeID", "type": "uint256" },
+            {
+                "internalType": "uint256",
+                "name": "yvTokenAmount",
+                "type": "uint256"
+            },
+            { "internalType": "uint256", "name": "maxLoss", "type": "uint256" },
+            { "internalType": "address", "name": "dst", "type": "address" }
+        ],
+        "name": "withdraw",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "testFail_deposit_inexistent_safe",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "name": "yVault",
+        "outputs": [
+            {
+                "internalType": "contract YVault3Like",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "testFail_deposit_liq_engine_not_approved",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "testFail_deposit_null_lp_token_amount",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "testFail_modify_address_unauthed",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "testFail_modify_uint_unauthed",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "testFail_saveSAFE_and_getReserves_not_allowed",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "testFail_saveSAFE_invalid_caller",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "testFail_save_twice_without_waiting",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "testFail_withdraw_more_than_deposited",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "testFail_withdraw_null",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "testFail_withdraw_unauthorized",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_deposit_after_everything_withdrawn",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_deposit_twice",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_getSystemCoinMarketPrice",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_getSystemCoinMarketPrice_invalid",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_getSystemCoinMarketPrice_null_price",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_getTokensForSaving_coins_below_floor_and_debt",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_getTokensForSaving_coins_between_floor_and_debt",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_getTokensForSaving_coins_higher_than_debt",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_getTokensForSaving_inexistent_position",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_getTokensForSaving_no_cover",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_getTokensForSaving_no_debt",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_modify_addresses",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_modify_uints",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_saveSAFE",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_saveSAFE_2_users",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_saveSAFE_accumulate_rate",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_saveSAFE_accumulate_rate_yearn_accumulates_gains",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_saveSAFE_and_getReserves",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_saveSAFE_cannot_pay_keeper",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_saveSAFE_cannot_save_safe",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_saveSAFE_no_cover",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_saveSAFE_twice",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_saveSAFE_twice_yearn_compounds_gains",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_saveSAFE_twice_yearn_loses_gains",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_setup",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_withdraw",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_withdraw_custom_dst",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "test_withdraw_twice",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "inputs": [
+            { "internalType": "bytes32", "name": "", "type": "bytes32" },
+            { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "name": "yvTokenCover",
+        "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
         "type": "function"
     }
 ]

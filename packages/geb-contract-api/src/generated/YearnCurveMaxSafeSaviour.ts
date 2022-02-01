@@ -4,345 +4,699 @@
 import { BaseContractAPI } from '@reflexer-finance/geb-contract-base'
 import { MulticallRequest } from '@reflexer-finance/geb-contract-base'
 import { TransactionRequest } from '@reflexer-finance/geb-contract-base'
+import { BytesLike } from '@ethersproject/bytes'
+import { BigNumberish } from '@ethersproject/bignumber'
+import { BigNumber } from '@ethersproject/bignumber'
 
 export class YearnCurveMaxSafeSaviour extends BaseContractAPI {
-    IS_TEST(): Promise<boolean>
-    IS_TEST(multicall: true): MulticallRequest<boolean>
-    IS_TEST(multicall?: true): Promise<boolean> | MulticallRequest<boolean> {
+    HUNDRED(): Promise<BigNumber>
+    HUNDRED(multicall: true): MulticallRequest<BigNumber>
+    HUNDRED(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"IS_TEST","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[],"name":"HUNDRED","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    failed(): Promise<boolean>
-    failed(multicall: true): MulticallRequest<boolean>
-    failed(multicall?: true): Promise<boolean> | MulticallRequest<boolean> {
+    MAX_LOSS(): Promise<BigNumber>
+    MAX_LOSS(multicall: true): MulticallRequest<BigNumber>
+    MAX_LOSS(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"failed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
+        const abi = {"inputs":[],"name":"MAX_LOSS","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
         return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    setUp(): TransactionRequest {
+    MAX_UINT(): Promise<BigNumber>
+    MAX_UINT(multicall: true): MulticallRequest<BigNumber>
+    MAX_UINT(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"setUp","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"MAX_UINT","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    ONE(): Promise<BigNumber>
+    ONE(multicall: true): MulticallRequest<BigNumber>
+    ONE(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"ONE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    RAY(): Promise<BigNumber>
+    RAY(multicall: true): MulticallRequest<BigNumber>
+    RAY(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"RAY","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    THOUSAND(): Promise<BigNumber>
+    THOUSAND(multicall: true): MulticallRequest<BigNumber>
+    THOUSAND(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"THOUSAND","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    WAD(): Promise<BigNumber>
+    WAD(multicall: true): MulticallRequest<BigNumber>
+    WAD(multicall?: true): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"WAD","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    WAD_COMPLEMENT(): Promise<BigNumber>
+    WAD_COMPLEMENT(multicall: true): MulticallRequest<BigNumber>
+    WAD_COMPLEMENT(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"WAD_COMPLEMENT","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    addAuthorization(account: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"addAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [account])
+    }
+
+    allowUser(usr: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"allowUser","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [usr])
+    }
+
+    allowedUsers(address: string): Promise<BigNumber>
+    allowedUsers(address: string, multicall: true): MulticallRequest<BigNumber>
+    allowedUsers(
+        address: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"allowedUsers","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [address], multicall)
+    }
+
+    authorizedAccounts(address: string): Promise<BigNumber>
+    authorizedAccounts(
+        address: string,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    authorizedAccounts(
+        address: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"authorizedAccounts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [address], multicall)
+    }
+
+    canSave(bytes: BytesLike, address: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"canSave","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [bytes, address])
+    }
+
+    coinJoin(): Promise<string>
+    coinJoin(multicall: true): MulticallRequest<string>
+    coinJoin(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"coinJoin","outputs":[{"internalType":"contract CoinJoinLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    curveLpToken(): Promise<string>
+    curveLpToken(multicall: true): MulticallRequest<string>
+    curveLpToken(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"curveLpToken","outputs":[{"internalType":"contract ERC20Like","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    curvePool(): Promise<string>
+    curvePool(multicall: true): MulticallRequest<string>
+    curvePool(multicall?: true): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"curvePool","outputs":[{"internalType":"contract CurveV1PoolLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    curvePoolTokens(uinteger: BigNumberish): Promise<string>
+    curvePoolTokens(
+        uinteger: BigNumberish,
+        multicall: true
+    ): MulticallRequest<string>
+    curvePoolTokens(
+        uinteger: BigNumberish,
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"curvePoolTokens","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
+    }
+
+    debtBelowFloor(
+        collateralType: BytesLike,
+        targetDebtAmount: BigNumberish
+    ): Promise<boolean>
+    debtBelowFloor(
+        collateralType: BytesLike,
+        targetDebtAmount: BigNumberish,
+        multicall: true
+    ): MulticallRequest<boolean>
+    debtBelowFloor(
+        collateralType: BytesLike,
+        targetDebtAmount: BigNumberish,
+        multicall?: true
+    ): Promise<boolean> | MulticallRequest<boolean> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"targetDebtAmount","type":"uint256"}],"name":"debtBelowFloor","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(
+            abi,
+            [collateralType, targetDebtAmount],
+            multicall
+        )
+    }
+
+    defaultMaxLoss(): Promise<BigNumber>
+    defaultMaxLoss(multicall: true): MulticallRequest<BigNumber>
+    defaultMaxLoss(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"defaultMaxLoss","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    defaultMinTokensToWithdraw(uinteger: BigNumberish): Promise<BigNumber>
+    defaultMinTokensToWithdraw(
+        uinteger: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    defaultMinTokensToWithdraw(
+        uinteger: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"defaultMinTokensToWithdraw","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
+    }
+
+    deposit(
+        collateralType: BytesLike,
+        safeID: BigNumberish,
+        lpTokenAmount: BigNumberish
+    ): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"safeID","type":"uint256"},{"internalType":"uint256","name":"lpTokenAmount","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [
+            collateralType,
+            safeID,
+            lpTokenAmount,
+        ])
+    }
+
+    disallowUser(usr: string): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"disallowUser","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [usr])
+    }
+
+    getAccumulatedRateAndLiquidationPrice(
+        collateralType: BytesLike
+    ): Promise<{
+        accumulatedRate: BigNumber
+        liquidationPrice: BigNumber
+    }>
+    getAccumulatedRateAndLiquidationPrice(
+        collateralType: BytesLike,
+        multicall: true
+    ): MulticallRequest<{
+        accumulatedRate: BigNumber
+        liquidationPrice: BigNumber
+    }>
+    getAccumulatedRateAndLiquidationPrice(
+        collateralType: BytesLike,
+        multicall?: true
+    ):
+        | Promise<{
+              accumulatedRate: BigNumber
+              liquidationPrice: BigNumber
+          }>
+        | MulticallRequest<{
+              accumulatedRate: BigNumber
+              liquidationPrice: BigNumber
+          }> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"}],"name":"getAccumulatedRateAndLiquidationPrice","outputs":[{"internalType":"uint256","name":"accumulatedRate","type":"uint256"},{"internalType":"uint256","name":"liquidationPrice","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [collateralType], multicall)
+    }
+
+    getKeeperPayoutTokens(
+        safeHandler: string,
+        sysCoinsFromLP: BigNumberish
+    ): Promise<BigNumber>
+    getKeeperPayoutTokens(
+        safeHandler: string,
+        sysCoinsFromLP: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    getKeeperPayoutTokens(
+        safeHandler: string,
+        sysCoinsFromLP: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"address","name":"safeHandler","type":"address"},{"internalType":"uint256","name":"sysCoinsFromLP","type":"uint256"}],"name":"getKeeperPayoutTokens","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(
+            abi,
+            [safeHandler, sysCoinsFromLP],
+            multicall
+        )
+    }
+
+    getKeeperPayoutValue(): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"getKeeperPayoutValue","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [])
     }
 
-    testFail_deposit_inexistent_safe(): TransactionRequest {
+    getReserves(
+        safeID: BigNumberish,
+        token: string,
+        dst: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"testFail_deposit_inexistent_safe","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"safeID","type":"uint256"},{"internalType":"address","name":"token","type":"address"},{"internalType":"address","name":"dst","type":"address"}],"name":"getReserves","outputs":[],"stateMutability":"nonpayable","type":"function"}
+
+        return this.getTransactionRequest(abi, [safeID, token, dst])
+    }
+
+    getSystemCoinMarketPrice(): Promise<BigNumber>
+    getSystemCoinMarketPrice(multicall: true): MulticallRequest<BigNumber>
+    getSystemCoinMarketPrice(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"getSystemCoinMarketPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    getTokensForSaving(
+        collateralType: BytesLike,
+        safeHandler: string,
+        coinsLeft: BigNumberish
+    ): Promise<BigNumber>
+    getTokensForSaving(
+        collateralType: BytesLike,
+        safeHandler: string,
+        coinsLeft: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    getTokensForSaving(
+        collateralType: BytesLike,
+        safeHandler: string,
+        coinsLeft: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"safeHandler","type":"address"},{"internalType":"uint256","name":"coinsLeft","type":"uint256"}],"name":"getTokensForSaving","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(
+            abi,
+            [collateralType, safeHandler, coinsLeft],
+            multicall
+        )
+    }
+
+    keeperPayout(): Promise<BigNumber>
+    keeperPayout(multicall: true): MulticallRequest<BigNumber>
+    keeperPayout(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"keeperPayout","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+
+        return this.ethCallOrMulticall(abi, [], multicall)
+    }
+
+    keeperPayoutExceedsMinValue(): TransactionRequest {
+        // prettier-ignore
+        // @ts-ignore
+        const abi = {"inputs":[],"name":"keeperPayoutExceedsMinValue","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}
 
         return this.getTransactionRequest(abi, [])
     }
 
-    testFail_deposit_liq_engine_not_approved(): TransactionRequest {
+    liquidationEngine(): Promise<string>
+    liquidationEngine(multicall: true): MulticallRequest<string>
+    liquidationEngine(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"testFail_deposit_liq_engine_not_approved","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"liquidationEngine","outputs":[{"internalType":"contract LiquidationEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    testFail_deposit_null_lp_token_amount(): TransactionRequest {
+    minKeeperPayoutValue(): Promise<BigNumber>
+    minKeeperPayoutValue(multicall: true): MulticallRequest<BigNumber>
+    minKeeperPayoutValue(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"testFail_deposit_null_lp_token_amount","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"minKeeperPayoutValue","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    testFail_modify_address_unauthed(): TransactionRequest {
+    modifyParameters__Bytes32Address(
+        parameter: BytesLike,
+        data: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"testFail_modify_address_unauthed","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.getTransactionRequest(abi, [parameter, data])
     }
 
-    testFail_modify_uint_unauthed(): TransactionRequest {
+    modifyParameters__Bytes32Uint256(
+        parameter: BytesLike,
+        val: BigNumberish
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"testFail_modify_uint_unauthed","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"parameter","type":"bytes32"},{"internalType":"uint256","name":"val","type":"uint256"}],"name":"modifyParameters","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.getTransactionRequest(abi, [parameter, val])
     }
 
-    testFail_saveSAFE_and_getReserves_not_allowed(): TransactionRequest {
+    oracleRelayer(): Promise<string>
+    oracleRelayer(multicall: true): MulticallRequest<string>
+    oracleRelayer(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"testFail_saveSAFE_and_getReserves_not_allowed","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"oracleRelayer","outputs":[{"internalType":"contract OracleRelayerLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    testFail_saveSAFE_invalid_caller(): TransactionRequest {
+    payoutToSAFESize(): Promise<BigNumber>
+    payoutToSAFESize(multicall: true): MulticallRequest<BigNumber>
+    payoutToSAFESize(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"testFail_saveSAFE_invalid_caller","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"payoutToSAFESize","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    testFail_save_twice_without_waiting(): TransactionRequest {
+    removeAuthorization(account: string): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"testFail_save_twice_without_waiting","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"removeAuthorization","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.getTransactionRequest(abi, [account])
     }
 
-    testFail_withdraw_more_than_deposited(): TransactionRequest {
+    removedCurveCoinLiquidity(uinteger: BigNumberish): Promise<BigNumber>
+    removedCurveCoinLiquidity(
+        uinteger: BigNumberish,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    removedCurveCoinLiquidity(
+        uinteger: BigNumberish,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"testFail_withdraw_more_than_deposited","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"removedCurveCoinLiquidity","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [uinteger], multicall)
     }
 
-    testFail_withdraw_null(): TransactionRequest {
+    restrictUsage(): Promise<BigNumber>
+    restrictUsage(multicall: true): MulticallRequest<BigNumber>
+    restrictUsage(
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"testFail_withdraw_null","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"restrictUsage","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    testFail_withdraw_unauthorized(): TransactionRequest {
+    safeEngine(): Promise<string>
+    safeEngine(multicall: true): MulticallRequest<string>
+    safeEngine(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"testFail_withdraw_unauthorized","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"safeEngine","outputs":[{"internalType":"contract SAFEEngineLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    test_deposit_after_everything_withdrawn(): TransactionRequest {
+    safeIsAfloat(
+        collateralType: BytesLike,
+        safeHandler: string
+    ): Promise<boolean>
+    safeIsAfloat(
+        collateralType: BytesLike,
+        safeHandler: string,
+        multicall: true
+    ): MulticallRequest<boolean>
+    safeIsAfloat(
+        collateralType: BytesLike,
+        safeHandler: string,
+        multicall?: true
+    ): Promise<boolean> | MulticallRequest<boolean> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"test_deposit_after_everything_withdrawn","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"safeHandler","type":"address"}],"name":"safeIsAfloat","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(
+            abi,
+            [collateralType, safeHandler],
+            multicall
+        )
     }
 
-    test_deposit_twice(): TransactionRequest {
+    safeManager(): Promise<string>
+    safeManager(multicall: true): MulticallRequest<string>
+    safeManager(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"test_deposit_twice","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"safeManager","outputs":[{"internalType":"contract GebSafeManagerLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    test_getSystemCoinMarketPrice(): TransactionRequest {
+    saveSAFE(
+        keeper: string,
+        collateralType: BytesLike,
+        safeHandler: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"test_getSystemCoinMarketPrice","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"keeper","type":"address"},{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"address","name":"safeHandler","type":"address"}],"name":"saveSAFE","outputs":[{"internalType":"bool","name":"","type":"bool"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.getTransactionRequest(abi, [
+            keeper,
+            collateralType,
+            safeHandler,
+        ])
     }
 
-    test_getSystemCoinMarketPrice_invalid(): TransactionRequest {
+    saviourRegistry(): Promise<string>
+    saviourRegistry(multicall: true): MulticallRequest<string>
+    saviourRegistry(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"test_getSystemCoinMarketPrice_invalid","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"saviourRegistry","outputs":[{"internalType":"contract SAFESaviourRegistryLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    test_getSystemCoinMarketPrice_null_price(): TransactionRequest {
+    systemCoin(): Promise<string>
+    systemCoin(multicall: true): MulticallRequest<string>
+    systemCoin(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"test_getSystemCoinMarketPrice_null_price","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"systemCoin","outputs":[{"internalType":"contract ERC20Like","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    test_getTokensForSaving_coins_below_floor_and_debt(): TransactionRequest {
+    systemCoinOrcl(): Promise<string>
+    systemCoinOrcl(multicall: true): MulticallRequest<string>
+    systemCoinOrcl(
+        multicall?: true
+    ): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"test_getTokensForSaving_coins_below_floor_and_debt","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"systemCoinOrcl","outputs":[{"internalType":"contract PriceFeedLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    test_getTokensForSaving_coins_between_floor_and_debt(): TransactionRequest {
+    taxCollector(): Promise<string>
+    taxCollector(multicall: true): MulticallRequest<string>
+    taxCollector(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"test_getTokensForSaving_coins_between_floor_and_debt","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"taxCollector","outputs":[{"internalType":"contract TaxCollectorLike","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    test_getTokensForSaving_coins_higher_than_debt(): TransactionRequest {
+    tokenAmountUsedToSave(
+        bytes: BytesLike,
+        address: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"test_getTokensForSaving_coins_higher_than_debt","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"tokenAmountUsedToSave","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.getTransactionRequest(abi, [bytes, address])
     }
 
-    test_getTokensForSaving_inexistent_position(): TransactionRequest {
+    underlyingReserves(address1: string, address2: string): Promise<BigNumber>
+    underlyingReserves(
+        address1: string,
+        address2: string,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    underlyingReserves(
+        address1: string,
+        address2: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"test_getTokensForSaving_inexistent_position","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"underlyingReserves","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [address1, address2], multicall)
     }
 
-    test_getTokensForSaving_no_cover(): TransactionRequest {
+    withdraw(
+        collateralType: BytesLike,
+        safeID: BigNumberish,
+        yvTokenAmount: BigNumberish,
+        maxLoss: BigNumberish,
+        dst: string
+    ): TransactionRequest {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"test_getTokensForSaving_no_cover","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"collateralType","type":"bytes32"},{"internalType":"uint256","name":"safeID","type":"uint256"},{"internalType":"uint256","name":"yvTokenAmount","type":"uint256"},{"internalType":"uint256","name":"maxLoss","type":"uint256"},{"internalType":"address","name":"dst","type":"address"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.getTransactionRequest(abi, [
+            collateralType,
+            safeID,
+            yvTokenAmount,
+            maxLoss,
+            dst,
+        ])
     }
 
-    test_getTokensForSaving_no_debt(): TransactionRequest {
+    yVault(): Promise<string>
+    yVault(multicall: true): MulticallRequest<string>
+    yVault(multicall?: true): Promise<string> | MulticallRequest<string> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"test_getTokensForSaving_no_debt","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[],"name":"yVault","outputs":[{"internalType":"contract YVault3Like","name":"","type":"address"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [], multicall)
     }
 
-    test_modify_addresses(): TransactionRequest {
+    yvTokenCover(bytes: BytesLike, address: string): Promise<BigNumber>
+    yvTokenCover(
+        bytes: BytesLike,
+        address: string,
+        multicall: true
+    ): MulticallRequest<BigNumber>
+    yvTokenCover(
+        bytes: BytesLike,
+        address: string,
+        multicall?: true
+    ): Promise<BigNumber> | MulticallRequest<BigNumber> {
         // prettier-ignore
         // @ts-ignore
-        const abi = {"inputs":[],"name":"test_modify_addresses","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        const abi = {"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"yvTokenCover","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
 
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_modify_uints(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_modify_uints","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_saveSAFE(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_saveSAFE","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_saveSAFE_2_users(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_saveSAFE_2_users","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_saveSAFE_accumulate_rate(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_saveSAFE_accumulate_rate","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_saveSAFE_accumulate_rate_yearn_accumulates_gains(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_saveSAFE_accumulate_rate_yearn_accumulates_gains","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_saveSAFE_and_getReserves(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_saveSAFE_and_getReserves","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_saveSAFE_cannot_pay_keeper(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_saveSAFE_cannot_pay_keeper","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_saveSAFE_cannot_save_safe(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_saveSAFE_cannot_save_safe","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_saveSAFE_no_cover(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_saveSAFE_no_cover","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_saveSAFE_twice(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_saveSAFE_twice","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_saveSAFE_twice_yearn_compounds_gains(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_saveSAFE_twice_yearn_compounds_gains","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_saveSAFE_twice_yearn_loses_gains(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_saveSAFE_twice_yearn_loses_gains","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_setup(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_setup","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_withdraw(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_withdraw_custom_dst(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_withdraw_custom_dst","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
-    }
-
-    test_withdraw_twice(): TransactionRequest {
-        // prettier-ignore
-        // @ts-ignore
-        const abi = {"inputs":[],"name":"test_withdraw_twice","outputs":[],"stateMutability":"nonpayable","type":"function"}
-
-        return this.getTransactionRequest(abi, [])
+        return this.ethCallOrMulticall(abi, [bytes, address], multicall)
     }
 }
