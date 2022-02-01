@@ -48,9 +48,8 @@ import { GebLenderFirstResort } from './generated/GebLenderFirstResort'
 import { DsDelegateTokenNoTransfer } from './generated/DSDelegateTokenNoTransfer'
 import { GebProxyStakedTokenAuctionActions } from './generated/GebProxyStakedTokenAuctionActions'
 import { StakingRewardsEscrow } from './generated/StakingRewardsEscrow'
-import { CurveV1MaxSafeSaviour } from './generated/CurveV1MaxSafeSaviour'
-import { YearnV3MaxSystemCoinSafeSaviour } from './generated/YearnV3MaxSystemCoinSafeSaviour'
 import { SimpleStakingRewards } from './generated/SimpleStakingRewards'
+import { YearnCurveMaxSafeSaviour } from './generated/YearnCurveMaxSafeSaviour'
 
 export {
     // Factory
@@ -105,7 +104,6 @@ export {
     StakedTokenAuctionHouse,
     DsDelegateTokenNoTransfer,
     StakingRewardsEscrow,
-    CurveV1MaxSafeSaviour,
-    YearnV3MaxSystemCoinSafeSaviour,
     SimpleStakingRewards,
+    YearnCurveMaxSafeSaviour,
 }
