@@ -1,6 +1,6 @@
 {
     "name": "@reflexer-finance/geb-admin-api",
-    "version": "1.1.39",
+    "version": "1.1.40",
     "description": "Includes contract API from all contracts of the GEB ecosystem",
     "main": "./lib/index.js",
     "scripts": {
@@ -10,8 +10,8 @@
     "license": "MIT",
     "dependencies": {
         "@ethersproject/bignumber": "5.x",
-        "@reflexer-finance/geb-contract-api": "^1.1.37",
-        "@reflexer-finance/geb-contract-base": "^1.1.34"
+        "@reflexer-finance/geb-contract-api": "^1.1.38",
+        "@reflexer-finance/geb-contract-base": "^1.1.35"
     },
     "devDependencies": {
         "@reflexer-finance/geb-typechain": "^1.0.5",
